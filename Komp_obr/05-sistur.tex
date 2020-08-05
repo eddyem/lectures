@@ -1,0 +1,226 @@
+\documentclass[10pt,pdf,hyperref={unicode}]{beamer}
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage{ed}
+\usepackage{lect}
+
+\title[Компьютерная обработка. Лекция 5.]{Компьютерная обработка результатов 
+измерений}
+\subtitle{Лекция 5. Системы уравнений}
+\date{29 сентября 2016 года}
+
+\begin{document}
+% Титул
+\begin{frame}
+\maketitle
+\end{frame}
+% Содержание
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\section{Системы уравнений}
+\begin{frame}{Системы уравнений}
+\begin{defin}
+\ж Система линейных уравнений\н для $n$ неизвестных имеет вид:
+$$
+\left\{
+\begin{aligned}
+a_{11}x_1+a_{12}x_2&+\cdots+a_{1n}x_n&=b_1;\\
+a_{21}x_1+a_{22}x_2&+\cdots+a_{2n}x_n&=b_2;\\
+\cdots\\
+a_{n1}x_1+a_{n2}x_2&+\cdots+a_{nn}x_n&=b_n.
+\end{aligned}
+\right.
+$$
+\end{defin}
+\begin{defin}
+Если существует вектор--столбец~$\B x$, обращающий выражение~$\B{Ax=b}$ в тождество, говорят, 
+что~$\B x$ является\ж решением\н данной системы уравнений.
+$|\B A|\ne0$. 
+\end{defin}
+\end{frame}
+
+\begin{frame}{Методы решений}
+\only<1>{\begin{block}{}
+$\delta=\B{Ax-b}$.
+Приближенные методы: $\mathrm{min}(\delta)$. Точные методы: $\delta=0$.\\
+\end{block}
+\begin{block}{Метод простой итерации}
+$\B{x=Bx+c}$, $\B x_{n+1}=\B B\B x_n+\B c$.\\
+Сложностью метода простой итерации при решении матриц больших размерностей является особое свойство 
+таких матриц~--- существование\к почти собственных значений\н, $\lambda$: 
+$||\B{Ax}-\lambda\B x||\le\epsilon||\B x||$ при $||\B x||\ne0$.\\
+\end{block}
+\begin{block}{Матричный метод}
+$\B x = \B A^{-1}\B b$
+\end{block}
+}
+\only<2>{
+\begin{block}{Метод Гаусса}
+$$
+\B A_d\B{x} = \pmb\beta,\quad
+\B A_d=\begin{pmatrix}
+\alpha_{11}&\alpha_{12}&\alpha_{13}&\cdots&\alpha_{1m}\\
+0&\alpha_{22}&\alpha_{23}&\cdots&\alpha_{2m}\\
+\cdot&\cdot&\cdot&\cdots&\cdot\\
+0&0&0&\cdots&\alpha_{mm}
+\end{pmatrix}.
+$$
+Прямой ход~--- преобразование к диагональной форме:
+$$
+\left(\begin{matrix}
+\alpha_{11}&\alpha_{12}&\alpha_{13}&\cdots&\alpha_{1m}\\
+0&\alpha_{22}&\alpha_{23}&\cdots&\alpha_{2m}\\
+\cdot&\cdot&\cdot&\cdots&\cdot\\
+0&0&0&\cdots&\alpha_{mm}
+\end{matrix}\middle|
+\begin{matrix}\beta_1\\\beta_2\\\cdot\\\beta_m\end{matrix}\right).
+$$
+Обратный ход~--- последовательное нахождение $x_m$, $x_{m-1}$, \dots, $x_1$.
+
+$N\propto n^3$~--- прямой, $N\propto n^2$~--- обратный ход.
+\end{block}
+}
+\only<3>{
+\begin{block}{}
+\ж Метод Зейделя\н: \\
+$$\B{Bx}_{n+1}+\B{Cx}_n=\B b,$$
+где
+$$\B B=\begin{pmatrix}
+a_{11}&0&0&\cdots&0\\
+a_{21}&a_{22}&0&\cdots&0\\
+\cdot&\cdot&\cdot&\cdots&\cdot\\
+a_{m1}&a_{m2}&a_{m3}&\cdots&a_{mm}
+\end{pmatrix},\qquad
+\B C=\begin{pmatrix}
+0&a_{12}&a_{13}&\cdots&a_{1m}\\
+0&0&a_{23}&\cdots&a_{2m}\\
+\cdot&\cdot&\cdot&\cdots&\cdot\\
+0&0&0&\cdots&0
+\end{pmatrix}.
+$$
+Отсюда получаем
+$$\B x_{n+1}=-\B B^{-1}\B{Cx}_n +\B B^{-1}\B b.$$
+\end{block}
+}
+\only<4>{
+\begin{block}{}
+Если $\B A$ содержит~$m$ строк и~$n$ столбцов, то:
+\begin{description}
+\item[$m=n$] квадратная матрица, возможно существование точного решения;
+\item[$m<n$] недоопределенная система, решение возможно лишь в общем виде
+с по крайней мере~$n-m$ свободных коэффициентов;
+\item[$m>n$] переопределенная система, приближенное решение которой находится
+при помощи метода наименьших квадратов (в случае линейной зависимости строк
+данной системы может существовать и точное решение).
+\end{description}
+\end{block}
+\begin{block}{Приближенные решения}
+МНК ($\B{x=A\backslash b}$), псевдообратная матрица, \dots
+\end{block}
+}
+\end{frame}
+
+\section{Степенные уравнения}
+\begin{frame}{Степенные уравнения}
+\begin{defin}
+\ж Степенное уравнение\н имеет вид $p_n(x)=0$, где $p_n(x)$~-- полином~$n$~-й степени вида 
+$p_n(x)=\sum_{i=0}^n C_nx^n$.
+\end{defin}
+\begin{block}{Методы решения}
+Точные~--- до третьей степени включительно (в общем случае) и итерационные:
+\begin{description}
+\item[бисекция] деление пополам отрезка, где находится корень;
+\item[метод хорд] замена полинома хордой, проходящей через точки $(x_1, p_n(x_1)$ и $(x_2, 
+p_n(x_2)$;
+\item[метод Ньютона] имеет быструю сходимость, но требует знакопостоянства $f'(x)$ и $f''(x)$ на 
+выбранном интервале $(x_1, x_2)$.
+\end{description}
+\end{block}
+\end{frame}
+
+\begin{blueframe}{Метод Ньютона}
+\img[0.7]{Newton_iteration}
+\end{blueframe}
+
+\section{Численное интегрирование и дифференцирование}
+\begin{frame}{Численное интегрирование и дифференцирование}
+\only<1>{
+\begin{block}{Численное интегрирование}
+Для численного решения уравнения $\displaystyle I=\Int_a^b f(x)\,dx$ наиболее популярны:
+\begin{description}
+\item[метод прямоугольников] $I\approx\sum_{i=1}^n f(x_i)[x_i-x_{i-1}]$;
+\item[метод трапеций] $I\approx\sum_{i=1}^n \frac{f(x_{i-1})+f(x_i)}{2}[x_i-x_{i-1}]$;
+\item[метод Симпсона] $\Int_{-1}^1 f(x)\,dx\approx\frac13\bigl(f(-1)+4f(0)+f(1)\bigr)$ \so
+$I\approx\frac{b-a}{6n}\Bigl(f(x_0)+f(x_n)+2\sum_{i=1}^{n/2-1}
+f(x_{2i}) + 4\sum_{i=1}^{n/2}f(x_{2i-1})\Bigr)$.
+\end{description}
+и многие другие.
+\end{block}}
+\only<2>{
+\begin{block}{Численное дифференцирование}
+Аппроксимация функции интерполяционным многочленом (Ньютона, Стирлинга и т.п.), разделенные 
+разности.
+
+В нулевом приближении можно заменить производную $f^{(n)}$ разделенной разностью $n$-го порядка:
+$$f(x_0; x_1; \ldots; x_n) = \sum_{i=0}^n \frac{f(x_i)}{\displaystyle
+\prod_{j=0, j\ne i}^n\!\!(x_i - x_j)}.$$
+\end{block}}
+\end{frame}
+
+\section{Дифференциальные уравнения}
+\begin{frame}{Дифференциальные уравнения}
+\only<1>{
+\begin{defin}
+\ж Обыкновенные дифференциальные уравнения\н~(ОДУ) порядка~$n$ задаются в виде
+функции $f(x,y,y',\ldots,y^{(n)})=0$.
+\end{defin}
+\begin{block}{}
+Разделение переменных:\vspace{-2em}
+$$y'=f(x,y) \so \phi(y)\,dy=\psi(x)\,dx \so y=y_0+\Int_0^{x}\psi(x)\,dx.$$
+
+ОДУ второго порядка:
+$$Ay''+By'+Cy+Dx=0.$$
+Если $D\equiv0$, а множители $A$, $B$ и~$C$~--- константы, имеем однородное ОДУ. 
+$y=\C_1\exp(k_1x)+\C_2\exp(k_2x)$, где~$k_1$ и~$k_2$~-- корни\к
+характеристического уравнения\н $Ak^2+Bk+C=0$.
+\end{block}}
+\only<2>{
+\begin{defin}
+\ж Дифференциальные уравнения в частных производных\н~(ЧДУ) для функции
+$y=y(x_1,x_2,\cdots,x_n)$ имеют вид
+$$f(y,x_1,\ldots,x_n;\partder{y}{x_1},\ldots;\dpartder{y}{x_1},\ldots;\cdots;
+\frac{\partial^m y}{\partial x_1^m},\ldots)=0.$$
+\end{defin}
+\begin{block}{}
+Однако, наиболее часто встречаются ЧДУ первого порядка для функции двух
+переменных $z=z(x,y)$ вида
+$$f(z,x,y,\partder{z}{x},\partder{z}{y})=0.$$
+\end{block}}
+\only<3>{
+\begin{block}
+\ж Нелинейные\н дифференциальные уравнения содержат некоторые производные
+функции~$y$ не как простые множители, а как аргументы функций (чаще всего~---
+степенных), например: $(y'')^3-\sin y'=\tg(xy)$. Обычные физические задачи
+никогда не приводят к таким уравнениям, однако, и их решения вполне можно
+найти при помощи численных методов.
+\end{block}
+\begin{block}{Методы решения}
+Рунге--Кутты, Эйлера, Адамса, конечных разностей и т.п.
+
+Дифференциальные уравнения высших порядков сводят путем замены переменных к системе ОДУ первого 
+порядка.
+\end{block}
+}
+\end{frame}
+
+
+\begin{frame}{Спасибо за внимание!}
+\centering
+\begin{minipage}{5cm}
+\begin{block}{mailto}
+eddy@sao.ru\\
+edward.emelianoff@gmail.com
+\end{block}\end{minipage}
+\end{frame}
+\end{document}
