@@ -1,0 +1,309 @@
+\documentclass[10pt,pdf,hyperref={unicode}]{beamer}
+\hypersetup{pdfpagemode=FullScreen}
+%\usepackage{ed}
+\usepackage{lect}
+
+\title[Компьютерная обработка. Лекция 7.1.]{Компьютерная обработка результатов измерений}
+\subtitle{Лекция 7.1. Обработка изображений}
+\date{31 марта 2021 года}
+
+\begin{document}
+% Титул
+\begin{frame}
+\maketitle
+\end{frame}
+% Содержание
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\section{Цифровые изображения}
+\begin{frame}{Цифровые изображения}
+\begin{defin}
+\ж Изображение\н представляет собой двумерную функцию $f(x,y)$, где~$x$ и~$y$~---
+пространственные координаты, а уровень~$f$ называется\ж
+интенсивностью\н изображения в данной точке (цветное изображение является
+совокупностью по крайней мере трех функций $r(x,y)$, $g(x,y)$ и~$b(x,y)$).
+Если величины~$x$, $y$ и~$f$ принимают дискретные значения, говорят о\к цифровом
+изображении\н. Элементарная единица цифрового изображения называется\ж
+пикселем\н.
+\end{defin}
+\begin{block}{Дискретизация}
+Процедуру квантования (\bf дискретизации\н) квазинепрерывного изображения $I_0(X,Y)$  можно представить в виде:
+$$
+I(x,y)=\mathrm{round}\Bigl(\frac{2^N-1}{I_{max}}\Int_{S_{x,y}}I_0(X,Y)
+\,dXdY\Bigr)+\delta_{x,y}.
+$$
+\end{block}
+\end{frame}
+
+\begin{frame}{RGB-модель}
+\only<1>{
+\img[0.6]{RGB}
+\centering{Аддитивная RGB-модель}
+}\only<2>{
+\img[0.6]{sRGB}
+}
+\end{frame}
+
+\begin{blueframe}{CMYK-модель}
+\only<1>{
+\img[0.5]{CMYK}
+\centering{Субстрактивная CMYK-модель}
+}\only<2>{
+\img[0.6]{colormodels}
+}
+\end{blueframe}
+
+\begin{frame}{}
+\img[0.6]{Bayer_pattern}
+\centering{Маска Байера}
+\end{frame}
+
+\section{Математический аппарат}
+\begin{frame}{Математический аппарат}
+\only<1>{\img[0.7]{neighbourhoods}
+\centering{Соседство}}
+\only<2>{\img[0.6]{connregs}
+\centering{Связность}
+}
+\only<3>{\img[0.6]{msquare}
+\centering{Границы, контуры}
+}
+\end{frame}
+
+\begin{frame}{}
+\begin{block}{Расстояние}
+\begin{itemize}
+\item Евклидово: $D_{e(p,q)}=\sqrt{(x_p-x_q)^{2}+(y_{p}-y_{q})^{2}}$.
+\item Метрика $L_{1}$: $D_{4}(p,q)=|x_{p}-x_{q}|+|y_{p}-y_{q}|$.
+\item Метрика $L_{\infty}$: $D_{8}(p,q)=\max\bigl(|x_{p}-x_{q}|,|y_{p}-y_{q}|\bigr)$.
+\end{itemize}
+\end{block}
+\begin{block}{Поэлементные и матричные операции}
+$$A=\begin{bmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{bmatrix},\quad{}
+B=\begin{bmatrix}b_{11}&b_{12}\\b_{21}&b_{22}\end{bmatrix}.$$
+Поэлементное произведение:
+$$A\cdot B = \begin{bmatrix}a_{11}b_{11}&a_{12}b_{12}\\a_{21}b_{21}&a_{22}b_{22}\end{bmatrix}.$$
+Матричное произведение:
+$$A\times B = \begin{bmatrix}a_{11}b_{11}+a_{12}b_{21}&a_{11}b_{12}+a_{12}b_{22}\\
+a_{21}b_{11}+a_{22}b_{21}&a_{21}b_{12}+a_{22}b_{22}\end{bmatrix}.$$
+\end{block}
+\end{frame}
+
+\begin{frame}{}
+
+\begin{block}{Аффинные преобразования}
+$$\begin{pmatrix}x'&y'&1\end{pmatrix}=\begin{pmatrix}x&y&1\end{pmatrix}\times\B{T}.$$
+\end{block}
+\begin{columns}\column{0.5\textwidth}
+\begin{block}{}
+Тождество: $\B{T}=\begin{pmatrix}1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & 1\end{pmatrix},$\\
+Масштаб: $\B{T}=\begin{pmatrix}c_{x} & 0 & 0\\ 0 & c_{y} & 0\\ 0 & 0 & 1\end{pmatrix},$\\
+Поворот: $\B{T}=\begin{pmatrix}\cos\theta & \sin\theta & 0\\ -\sin\theta & \cos\theta & 0\\ 0 & 0 & 1\end{pmatrix},$\\
+Сдвиг: $\B{T}=\begin{pmatrix}1 & 0 & 0\\ 0 & 1 & 0\\ t_{x} & t_{y} & 1\end{pmatrix},$\\
+
+\end{block}
+\column{0.45\textwidth}
+\begin{block}{}
+Скос $y$: $\B{T}=\begin{pmatrix}1 & 0 & 0\\ s_{v} & 1 & 0\\ 0 & 0 & 1\end{pmatrix},$\\
+Скос $x$: $\B{T}=\begin{pmatrix}1 & s_{h} & 0\\ 0 & 1 & 0\\ 0 & 0 & 1\end{pmatrix},$\\
+Отражение $x$: $\B{T}=\begin{pmatrix}1 & 0 & 0\\ 0 & -1 & 0\\ 0 & 0 & 1\end{pmatrix},$\\
+Отражение $y$: $\B{T}=\begin{pmatrix}-1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & 1\end{pmatrix},$\\
+\end{block}
+\end{columns}
+\begin{block}{}Комбинация пребразований: $\B{M}=\prod_{i}\B{T_{i}}$\end{block}
+\end{frame}
+
+\section{Пространственные и градационные преобразования}
+\begin{frame}{Пространственные и градационные преобразования}
+\begin{defin}
+\ж Преобразования в пространственной области\н работают непосредственно с пикселями изображения:
+$$T(u,v)=\Sum_{x=0}^{M-1}\Sum_{y=0}^{N-1}f(x,y)r(x,y,u,v),\qquad\text{где $r$~-- ядро
+преобразования.}$$
+\end{defin}
+\begin{block}{Градационные преобразования ($I\in[0, L-1]$, $I'=r(I)$)}
+\begin{itemize}
+ \item негатив: $r = L-1 -I$;
+ \item логарифмическое: $r=\C\ln(1+I)$;
+ \item гамма-коррекция: $r=\C(L-1)\cdot i^\gamma$, $i=\dfrac{I}{L-1}$;
+ \item кусочно-линейные преобразования (усиление контраста).
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{}
+\only<1>{
+\img[0.8]{bitplanes}
+\centering{Битовые плоскости}
+}\only<2>{
+\img[0.4]{graycode}
+\centering{Битовые плоскости в кодах Грея}
+}
+\end{frame}
+
+\begin{frame}{Гистограмма}
+\img[0.9]{histogram}
+\end{frame}
+\begin{frame}{}
+\only<1>{
+\begin{block}{Эквализация гистограммы}
+$$s_k=(L-1)\Sum_{j=0}^{k}p_j=\frac{L-1}{MN}\Sum_{j=0}^{k}n_j.$$
+\end{block}
+\img[0.7]{histeq}
+}
+\only<2>{
+\begin{block}{Приведение гистограммы $p_r\arr p_z$}
+\begin{enumerate}
+ \item Получение эквализованной гистограммы, $s_k$.
+ \item Вычисление функции преобразования $G(z_q)=(L-1)\Sum_{j=0}^{q}p_z(z_j)$.
+ \item Нахождение для каждого $s_k$ соответствующего значения $z_q$, для которого $G(z_q)$ наиболее
+близко		к~$s_k$.
+ \item Формирование приведенного изображения.
+\end{enumerate}
+\end{block}
+}
+\only<3,4>{
+\begin{block}{Локальная гистограммная обработка}
+\only<3>{\img[0.8]{h1}}
+\only<4>{\img[0.8]{h2}}
+\end{block}
+}
+\end{frame}
+
+\begin{frame}{Эквализация гистограммы}
+\only<1>{M13: без и с эквализацией:\\
+\smimg[0.48]{M13_nohisteq}\hfil\smimg[0.48]{M13_histeq}
+}
+\only<2>{M29: без и с эквализацией:\\
+    \smimg[0.48]{M29_nohisteq}\hfil\smimg[0.48]{M29_histeq}
+}
+\end{frame}
+
+\def\svec#1{\begin{smallmatrix}#1\end{smallmatrix}}
+\def\smat#1{\begin{pmatrix}#1\end{pmatrix}}
+\def\pb#1#2{\parbox{0.4\textwidth}{\centering{#1}\par\noindent\centering{\includegraphics{#2}}}}
+\begin{frame}{Пространственная фильтрация}
+\only<1>{
+\begin{block}{}
+$$f=\svec{0&0&0&1&0&0&0&0},\qquad w=\svec{1&2&3&4&5}.$$
+\end{block}
+\begin{columns}
+\column{0.48\textwidth}
+\begin{block}{Корреляция, $v=f\star w$}
+$$0:\qquad\svec{0&0&0&0&0&0&0&1&0&0&0&0&0&0&0&0\\1&2&3&4&5\\}$$
+$$3:\qquad\svec{0&0&0&0&0&0&0&1&0&0&0&0&0&0&0&0\\0&0&0&1&2&3&4&5\\}$$
+$$7:\qquad\svec{0&0&0&0&0&0&0&1&0&0&0&0&0&0&0&0\\0&0&0&0&0&0&0&1&2&3&4&5\\}$$
+$$a:\qquad\svec{0&0&0&5&4&3&2&1&0&0&0&0}$$
+$$v:\qquad\svec{0&5&4&3&2&1&0&0}$$
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{Свертка, $v=f*w$}
+$$0:\qquad\svec{0&0&0&0&0&0&0&1&0&0&0&0&0&0&0&0\\5&4&3&2&1\\}$$
+$$3:\qquad\svec{0&0&0&0&0&0&0&1&0&0&0&0&0&0&0&0\\0&0&0&5&4&3&2&1\\}$$
+$$7:\qquad\svec{0&0&0&0&0&0&0&1&0&0&0&0&0&0&0&0\\0&0&0&0&0&0&0&5&4&3&2&1\\}$$
+$$a:\qquad\svec{0&0&0&1&2&3&4&5&0&0&0&0}$$
+$$v:\qquad\svec{0&1&2&3&4&5&0&0}$$
+\end{block}
+\end{columns}
+}\only<2>{
+\begin{columns}
+\column{0.48\textwidth}
+\begin{block}{}
+\pb{Идентичность}{Vd-Orig} $\smat{0&0&0\\0&1&0\\0&0&0}$\\[2pt]
+\pb{$f'(x,y)$}{Vd-Edge1} $\smat{1&0&-1\\0&0&0\\-1&0&1}$\\[2pt]
+\pb{Лапласиан}{Vd-Edge2} $\smat{0&1&0\\1&-4&1\\0&1&0}$\\[2pt]
+\pb{Лапласиан}{Vd-Edge3} $\smat{1&1&1\\1&-8&1\\1&1&1}$
+\end{block}
+\column{0.48\textwidth}
+\begin{block}{}
+\pb{Резкость}{Vd-Sharp} $\smat{0&-1&0\\-1&5&-1\\0&-1&0}$\\[2pt]
+\pb{Размытие}{Vd-Blur2} $\dfrac{1}{9}\smat{1&1&1\\1&1&1\\1&1&1}$\\[2pt]
+\pb{Гаусс}{Vd-Blur1} $\dfrac{1}{16}\smat{1&2&1\\2&4&2\\1&2&1}$\\[2pt]
+\pb{LoG}{Vd-LOG} $\dfrac{1}{64}\smat{11&27&11\\27&-202&27\\11&27&11}$
+\end{block}
+\end{columns}
+}
+\end{frame}
+
+\begin{frame}{Пространственная фильтрация FITS}
+\only<1>{Оригинал:\\
+    \smimg[0.5]{objFull}\;\smimg[0.5]{objCrop}
+}
+\only<2>{Фильтр Гаусса $1\times1$ пиксель:\\
+    \smimg[0.5]{gaussFull}\;\smimg[0.5]{gaussCrop}
+}
+\only<3>{Фильтр лапласиана гауссианы $1\times1$ пиксель:\\
+    \smimg[0.5]{lapgaussFull}\;\smimg[0.5]{lapgaussCrop}
+}
+\only<4>{Фильтр Прюитта (горизонтальный):\\
+    \smimg[0.5]{prewitthFull}\;\smimg[0.5]{prewitthCrop}
+}
+\only<5>{Фильтр Прюитта (вертикальный):\\
+    \smimg[0.5]{prewittvFull}\;\smimg[0.5]{prewittvCrop}
+}
+\only<6>{Простой градиент (через фильтры Прюитта):\\
+    \smimg[0.5]{gradientFull}\;\smimg[0.5]{gradientCrop}
+}
+\end{frame}
+
+\begin{frame}{}
+\only<1>{
+\begin{block}{Медианная фильтрация}
+\centering{\includegraphics[width=0.4\textwidth]{image020} \hspace{3em}
+\includegraphics[width=0.4\textwidth]{image021}}
+\end{block}
+}\only<2>{
+\begin{block}{Адаптивный медианный фильтр}
+Зона $K\times K$ пикселей, $I_{min}$, $I_{max}$, $I_{med}$, $I_{xy}$ (интенсивность в данной
+точке), $K_{max}$~-- максимальный размер зоны.
+\begin{enumerate}
+\item $A_1=I_{med}-I_{min}$, $A_2=I_{med}-I_{max}$; если $A_1>0$ и $A_2<0$ переход на 2, иначе
+$++K$; если $K<K_{max}$, повторить, иначе вернуть $I_{xy}$.
+\item $B_1=I_{xy}-I_{min}$, $B_2=I_{xy}-I_{max}$; если $B_1>0$ и $B_2<0$, вернуть $I_{xy}$, иначе
+вернуть $I_{med}$.
+\end{enumerate}
+
+\end{block}
+}\only<3>{
+\centering{\includegraphics[width=0.35\textwidth]{imf_ori} \hspace{3em}
+\includegraphics[width=0.377\textwidth]{imf_mean}}
+\centering{\includegraphics[width=0.377\textwidth]{imf_median} \hspace{3em}
+\includegraphics[width=0.35\textwidth]{imf_adpmed}}
+}
+\only<4>{Медианная фильтрация $r=1$\,пиксель и $r=5$\,пикселей:\\
+    \smimg[0.5]{median1}\;\smimg[0.5]{median5}
+}
+\only<5>{Оригинал, адаптивная медиана ($r=1$) и медиана ($r=1$):\\
+    \img{oriadpmed}
+}
+\end{frame}
+
+
+\section{Частотные преобразования}
+\begin{frame}{Частотные преобразования}
+\begin{block}{Двумерное ДПФ}
+$$F(u,v)=\Sum_{x=0}^{M-1}\Sum_{y=0}^{N-1} f(x,y) \exp\Bigl(-2\pi
+i\bigl(\frc{ux}{M}+\frc{vy}{N}\bigr)\Bigr).$$
+$$f(x,y)=\frac{1}{MN}\Sum_{u=0}^{M-1}\Sum_{v=0}^{N-1} F(u,v) \exp\Bigl(2\pi
+i\bigl(\frc{ux}{M}+\frc{vy}{N}\bigr)\Bigr).$$
+
+\end{block}
+\centering{\includegraphics[width=0.4\textwidth]{Vd-Fpwr} \hspace{3em}
+\includegraphics[width=0.4\textwidth]{Vd-phase}}
+\end{frame}
+
+\begin{frame}{}
+\img{fft}
+\end{frame}
+
+
+\begin{frame}{Спасибо за внимание!}
+\centering
+\begin{minipage}{5cm}
+\begin{block}{mailto}
+eddy@sao.ru\\
+edward.emelianoff@gmail.com
+\end{block}\end{minipage}
+\end{frame}
+\end{document}

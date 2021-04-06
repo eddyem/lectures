@@ -3,10 +3,10 @@
 \usepackage{ed}
 \usepackage{lect}
 
-\title[Компьютерная обработка. Лекция 5.]{Компьютерная обработка результатов 
+\title[Компьютерная обработка. Лекция 5.]{Компьютерная обработка результатов
 измерений}
 \subtitle{Лекция 5. Системы уравнений}
-\date{29 сентября 2016 года}
+\date{22 марта 2021 года}
 
 \begin{document}
 % Титул
@@ -34,9 +34,9 @@ a_{n1}x_1+a_{n2}x_2&+\cdots+a_{nn}x_n&=b_n.
 $$
 \end{defin}
 \begin{defin}
-Если существует вектор--столбец~$\B x$, обращающий выражение~$\B{Ax=b}$ в тождество, говорят, 
+Если существует вектор--столбец~$\B x$, обращающий выражение~$\B{Ax=b}$ в тождество, говорят,
 что~$\B x$ является\ж решением\н данной системы уравнений.
-$|\B A|\ne0$. 
+$\mathrm{det}\,A\equiv |\B A|\ne0$.
 \end{defin}
 \end{frame}
 
@@ -45,14 +45,19 @@ $|\B A|\ne0$.
 $\delta=\B{Ax-b}$.
 Приближенные методы: $\mathrm{min}(\delta)$. Точные методы: $\delta=0$.\\
 \end{block}
-\begin{block}{Метод простой итерации}
-$\B{x=Bx+c}$, $\B x_{n+1}=\B B\B x_n+\B c$.\\
-Сложностью метода простой итерации при решении матриц больших размерностей является особое свойство 
-таких матриц~--- существование\к почти собственных значений\н, $\lambda$: 
-$||\B{Ax}-\lambda\B x||\le\epsilon||\B x||$ при $||\B x||\ne0$.\\
-\end{block}
 \begin{block}{Матричный метод}
-$\B x = \B A^{-1}\B b$
+$\B x = \B A^{-1}\B b$\\
+$\B A \cdot \B A^{-1} = \B A^{-1} \cdot \B A = \B E$.
+Нахождение обратной матрицы:
+\begin{itemize}
+\item с помощью присоединенной: $(\B A | \B E )$ \so $(\B E | \B A^{-1})$;
+\item $\B A^{-1} = \dfrac{\mathrm{adj\,}\B A}{|\B A|}$, присоединенная матрица $\mathrm{adj\,}\B A$
+является транспонированной матрицей алгебраических дополнений ($(-1)^{i+j}M_{ij}$, $M_ij$~--
+соответствующий дополнительный минор~--- определитель матрицы с вычеркнутыми $i$-й строкой и $j$-м
+столбцом).
+\item и т.д., и т.п.
+\end{itemize}
+Формулы Крамера: $x_j = |A_j|/|A|$, $A_j$ получается из $A$ заменой $j$-го столбца на $\B b$.
 \end{block}
 }
 \only<2>{
@@ -82,20 +87,19 @@ $N\propto n^3$~--- прямой, $N\propto n^2$~--- обратный ход.
 \end{block}
 }
 \only<3>{
-\begin{block}{}
-\ж Метод Зейделя\н: \\
+\begin{block}{Метод Зейделя}
 $$\B{Bx}_{n+1}+\B{Cx}_n=\B b,$$
 где
 $$\B B=\begin{pmatrix}
 a_{11}&0&0&\cdots&0\\
 a_{21}&a_{22}&0&\cdots&0\\
-\cdot&\cdot&\cdot&\cdots&\cdot\\
+\vdots&\vdots&\vdots&\ddots&\vdots\\
 a_{m1}&a_{m2}&a_{m3}&\cdots&a_{mm}
 \end{pmatrix},\qquad
 \B C=\begin{pmatrix}
 0&a_{12}&a_{13}&\cdots&a_{1m}\\
 0&0&a_{23}&\cdots&a_{2m}\\
-\cdot&\cdot&\cdot&\cdots&\cdot\\
+\vdots&\vdots&\vdots&\ddots&\vdots\\
 0&0&0&\cdots&0
 \end{pmatrix}.
 $$
@@ -104,6 +108,49 @@ $$\B x_{n+1}=-\B B^{-1}\B{Cx}_n +\B B^{-1}\B b.$$
 \end{block}
 }
 \only<4>{
+\begin{block}{LU-метод}
+$$\B A=\B L\cdot \B U,$$
+где
+$$\B L=\begin{pmatrix}
+l_{11}&0&0&\cdots&0\\
+l_{21}&l_{22}&0&\cdots&0\\
+\vdots&\vdots&\vdots&\ddots&\vdots\\
+l_{m1}&l_{m2}&l_{m3}&\cdots&l_{mm}
+\end{pmatrix},\qquad
+\B U=\begin{pmatrix}
+1&u_{12}&u_{13}&\cdots&u_{1m}\\
+0&1&u_{23}&\cdots&u_{2m}\\
+\vdots&\vdots&\vdots&\ddots&\vdots\\
+0&0&0&\cdots&1
+\end{pmatrix}.
+$$
+Прямой ход:  $\B L\cdot \B U\cdot \B x \equiv \B L\cdot\B y= \B b$, находим $\B y$,
+из $\B U\cdot \B x =\B y$ находим $\B x$.
+$$\begin{cases}
+l_{ij}=a_{ij}-\Sum_{s=1}^{j-1}l_{is}u_{sj},& i\ge j;\\
+u_{ij}=\frac1{l_{ii}}\Bigl(a_{ij}-\Sum_{s=1}^{j-1}l_{is}u_{sj}\Bigr), & i < j.
+\end{cases}
+$$
+LU-разложение возможно для матриц с преобладанием диагональных элементов
+\end{block}
+}
+\only<5>{
+\begin{block}{Разложение Холецкого}
+$\B A=\B L\cdot \B L^T$, либо $\B A=\B U^T\cdot \B U$, где $\B L$~-- нижняя треугольная матрица
+со строго положительными элементами на диагонали, $\B U$~-- верхняя треугольная матрица.
+Разложение Холецкого всегда существует и единственно для любой симметричной (относительно главной
+диагонали) положительно-определенной матрицы (все диагональные миноры положительны).
+
+$$\begin{cases}
+l_{ii}=\sqrt{a_{ii} - \Sum_{s=1}^{i-1}l^2_{is}}; \\
+l_{ij} = \frac1{l_{ii}}\Bigl( a_{ij} - \Sum_{s=1}^{j-1}l_{is}l_{js}\Bigr), & j < i.
+\end{cases}
+$$
+
+Прямой и обратный ходы аналогичны LU-разложению.
+\end{block}
+}
+\only<6>{
 \begin{block}{}
 Если $\B A$ содержит~$m$ строк и~$n$ столбцов, то:
 \begin{description}
@@ -115,38 +162,80 @@ $$\B x_{n+1}=-\B B^{-1}\B{Cx}_n +\B B^{-1}\B b.$$
 данной системы может существовать и точное решение).
 \end{description}
 \end{block}
-\begin{block}{Приближенные решения}
-МНК ($\B{x=A\backslash b}$), псевдообратная матрица, \dots
+}
+\only<7>{
+\begin{block}{Метод наименьших квадратов ($m > n$)}
+$\B{x=A\backslash b}$, %), псевдообратная матрица, \dots
+$S=\sum_i(\sum_j a_{ij}x_j - b_i)$, $\partder{S}{x_j}=0$ \so
+$\B C\B x = \B d$, где
+$c_{kj} = \sum_i a_{ik}a_{ij}$, $k,j=\overline{1,n}$, $d_k = \sum_i a_{ik}b_i$.
+Т.о. $\B C = \B A^T\cdot \B A$, $\B d=\B A^T\B b$.
+\end{block}
+\begin{block}{Метод простой итерации}
+$\B{x=Bx+c}$, $\B x_{n+1}=\B B\B x_n+\B c$.\\
+Сложностью метода простой итерации при решении матриц больших размерностей является особое свойство
+таких матриц~--- существование\к почти собственных значений\н, $\lambda$:
+$||\B{Ax}-\lambda\B x||\le\epsilon||\B x||$ при $||\B x||\ne0$.\\
 \end{block}
 }
+\end{frame}
+
+\begin{frame}{Число обусловленности матрицы}
+\begin{block}{Оценка ошибки решения}
+Пусть $\B x'$~-- приближенное решение. Абсолютная и относительная ошибки: $||\B x-\B x'||$
+и $\frc{||\B x-\B x'||}{||\B x||}$. Нам известна невязка $\B r=\B b-A\B x'$:
+$$\B r=A\B x-A\B x'=A(\B x-\B x')\so ||\B x-\B x'||=||A^{-1}\B r||\le ||A^{-1}||\,||\B r||,$$
+а т.к. $||\B b||\le||A||\,||\B x||$, $\frc{1}{||\B x||}\le\frc{||A||}{||\B b||}$:
+$$\frac{||\B x-\B x'||}{||\B x||}\le||A^{-1}||\,||\B r||\,\frac{||A||}{||\B b||}=k(A)\frac{||\B
+r||}{||\B b||}.$$
+\ж Число обусловленности\н: $k(A)=||A||\,||A^{-1}||$. Чем оно больше, тем больше флуктуации $\B x$
+влияют на общее решение. У хорошо обусловленных матриц $K(A)\equiv1$ (напр., ортогональные матрицы,
+у которых $A^T=A^{-1}$).
+\end{block}
 \end{frame}
 
 \section{Степенные уравнения}
 \begin{frame}{Степенные уравнения}
 \begin{defin}
-\ж Степенное уравнение\н имеет вид $p_n(x)=0$, где $p_n(x)$~-- полином~$n$~-й степени вида 
+\ж Степенное уравнение\н имеет вид $p_n(x)=0$, где $p_n(x)$~-- полином~$n$~-й степени вида
 $p_n(x)=\sum_{i=0}^n C_nx^n$.
 \end{defin}
 \begin{block}{Методы решения}
 Точные~--- до третьей степени включительно (в общем случае) и итерационные:
 \begin{description}
 \item[бисекция] деление пополам отрезка, где находится корень;
-\item[метод хорд] замена полинома хордой, проходящей через точки $(x_1, p_n(x_1)$ и $(x_2, 
+\item[метод хорд] замена полинома хордой, проходящей через точки $(x_1, p_n(x_1)$ и $(x_2,
 p_n(x_2)$;
-\item[метод Ньютона] имеет быструю сходимость, но требует знакопостоянства $f'(x)$ и $f''(x)$ на 
+\item[метод Ньютона] имеет быструю сходимость, но требует знакопостоянства $f'(x)$ и $f''(x)$ на
 выбранном интервале $(x_1, x_2)$.
 \end{description}
 \end{block}
 \end{frame}
 
+\begin{frame}{Бисекция (дихотомия)}
+\img{bisect}
+Отрезок делится вплоть до заданной точности $b_n-a_n\le\epsilon$, корень $x\approx(b_n+a_n)/2$.
+
+Применяется и для поиска значений в упорядоченном ряду.
+\end{frame}
+
+\begin{frame}{Метод хорд (секущих)}
+\begin{block}{}
+$$x_{i+1}=x_{i-1}+\frac{y_{i-1}\cdot(x_i-x_{i-1})}{y_i-y_{i-1}}.$$
+\end{block}
+\begin{pict}\smimg[0.5]{chords1}\,\smimg[0.5]{chords2}\end{pict}
+\end{frame}
+
 \begin{blueframe}{Метод Ньютона}
-\img[0.7]{Newton_iteration}
+\begin{block}{}
+$$x_{i+1}=x_i+\frac{y_i}{y'_i}.$$
+\end{block}
+\begin{pict}\smimg[0.5]{newton1}\,\smimg[0.5]{newton2}\end{pict}
 \end{blueframe}
 
 \section{Численное интегрирование и дифференцирование}
-\begin{frame}{Численное интегрирование и дифференцирование}
-\only<1>{
-\begin{block}{Численное интегрирование}
+\begin{frame}{Численное интегрирование}
+\begin{block}{}
 Для численного решения уравнения $\displaystyle I=\Int_a^b f(x)\,dx$ наиболее популярны:
 \begin{description}
 \item[метод прямоугольников] $I\approx\sum_{i=1}^n f(x_i)[x_i-x_{i-1}]$;
@@ -156,17 +245,90 @@ $I\approx\frac{b-a}{6n}\Bigl(f(x_0)+f(x_n)+2\sum_{i=1}^{n/2-1}
 f(x_{2i}) + 4\sum_{i=1}^{n/2}f(x_{2i-1})\Bigr)$.
 \end{description}
 и многие другие.
-\end{block}}
-\only<2>{
-\begin{block}{Численное дифференцирование}
-Аппроксимация функции интерполяционным многочленом (Ньютона, Стирлинга и т.п.), разделенные 
-разности.
-
-В нулевом приближении можно заменить производную $f^{(n)}$ разделенной разностью $n$-го порядка:
-$$f(x_0; x_1; \ldots; x_n) = \sum_{i=0}^n \frac{f(x_i)}{\displaystyle
-\prod_{j=0, j\ne i}^n\!\!(x_i - x_j)}.$$
-\end{block}}
+\end{block}
 \end{frame}
+
+\begin{frame}{Метод прямоугольников}
+\begin{columns}
+\column{0.45\textwidth}
+\begin{block}{}
+$$\int_a^b f(x)\,dx\approx$$
+\begin{list}{}{}
+\item $\displaystyle\sum_{i=0}^{n-1}f(x_{i})(x_{i+1}-x_{i})$;
+\item $\displaystyle\sum_{i=1}^{n}f(x_{i})(x_i-x_{i-1})$;
+\item $\displaystyle\sum_{i=0}^{n-1}f\bigl(\frac{x_{i}+x_{i+1}}{2}\bigr)(x_{i+1}-x_{i})$.
+\end{list}
+Для равномерных сеток:
+
+$\displaystyle h\sum_{i=0}^{n-1} f_i$;
+$\displaystyle h\sum_{i=1}^{n} f_i$;
+$\displaystyle h\bigl(\sum_{i=1}^{n-1} f_i + \frac{f_0+f_n}{2}\bigr)$.
+
+\end{block}
+\column{0.45\textwidth}
+\img{rectangmeth}
+\end{columns}
+\end{frame}
+
+\begin{lightframe}{Метод трапеций}
+\begin{columns}
+\column{0.6\textwidth}
+\begin{block}{}
+$$\int_a^b f(x)\,dx\approx
+\sum_{i=0}^{n-1}\frac{f(x_i)+f(x_{i+1})}{2}(x_{i+1}-x_i).$$
+
+Для равномерных сеток~--- формула Котеса:
+$$\int_a^b f(x)\,dx =
+h\left(\frac{f_0+f_n}{2}+\sum_{i=1}^{n-1}f_i\right) + E_n(f),$$
+$$E_n(f)=-\frac{f''(\xi)}{12}(b-a)h^2, \xi\in[a,b].$$
+\end{block}
+\column{0.4\textwidth}
+\img{trapezmeth}
+\end{columns}
+\end{lightframe}
+
+\begin{blueframe}{Метод Симпсона}
+\begin{columns}
+\column{0.6\textwidth}
+\begin{block}{}
+$$\int_a^b f(x)\,dx\approx \frac{b-a}{6}\left(f(a)+4f\bigl(\frac{a+b}{2}\bigr)\right)$$
+\end{block}
+\column{0.4\textwidth}
+\img{Simpsons_method_illustration}
+\end{columns}
+\begin{block}{}
+Формула Котеса:
+$$I\approx \frac{h}{3}\Bigl(f(x_0)+
+2\sum_{i=1}^{N/2-1}f(x_{2i}) + 4\sum_{i=1}^{N/2}f(x_{2i-1} + f(x_N)\Bigr).$$
+
+\end{block}
+\end{blueframe}
+
+
+\begin{frame}{Численное дифференцирование}
+\begin{block}{}
+Аппроксимация функции интерполяционным многочленом (Ньютона, Стирлинга и т.п.), разделенные
+разности.
+\end{block}
+\begin{block}{Аппроксимация многочленом}
+$$f(x)\approx P_N(x)\quad\Arr\quad f^{(r)}(x)\approx P_N^{(r)}(x).$$
+Полином Ньютона:
+$$P_N(x)=\sum_{m=0}^{N}C_x^m\sum _{k=0}^{m}(-1)^{m-k}\,C_m^k\,f(k).$$
+Полином Лагранжа:
+$$P_N(x) = \sum_{k=0}^N y_k \frac {(x-x_0)(x-x_1) \ldots (x-x_{k-1})(x-x_{k+1}) \ldots  (x-x_n)} {(x_k-x_0)(x_k-x_1) \ldots
+(x_k-x_{k-1})(x_k-x_{k+1}) \ldots  (x_k-x_n)}.$$
+А также: интерполяция кубическими сплайнами, разложение по базису тригонометрических функций и т.п.
+\end{block}
+\end{frame}
+
+\begin{block}{Разделенные разности}
+ В нулевом приближении можно заменить производную $f^{(n)}$ разделенной разностью $n$-го порядка.
+$$f(x_{0};\;x_{1};\;\ldots ;\;x_{n})=\sum _{j=0}^{n}{\frac {f(x_j)}{\prod \limits _{i=0 \atop i\neq j}^{n}(x_{j}-x_{i})}}.$$
+В частности:
+$$f(x_0;\;x_1)={\frac {f(x_1)}{x_1-x_0}}+{\frac {f(x_0)}{x_0-x_1}},$$
+$$f(x_0;\;x_1;\;x_2)={\frac {f(x_2)}{(x_2-x_1)(x_2-x_0)}}+{\frac {f(x_1)}{(x_1-x_2)(x_1-x_0)}}+{\frac
+{f(x_0)}{(x_0-x_2)(x_0-x_1)}}\ldots$$
+\end{block}
 
 \section{Дифференциальные уравнения}
 \begin{frame}{Дифференциальные уравнения}
@@ -181,7 +343,7 @@ $$y'=f(x,y) \so \phi(y)\,dy=\psi(x)\,dx \so y=y_0+\Int_0^{x}\psi(x)\,dx.$$
 
 ОДУ второго порядка:
 $$Ay''+By'+Cy+Dx=0.$$
-Если $D\equiv0$, а множители $A$, $B$ и~$C$~--- константы, имеем однородное ОДУ. 
+Если $D\equiv0$, а множители $A$, $B$ и~$C$~--- константы, имеем однородное ОДУ.
 $y=\C_1\exp(k_1x)+\C_2\exp(k_2x)$, где~$k_1$ и~$k_2$~-- корни\к
 характеристического уравнения\н $Ak^2+Bk+C=0$.
 \end{block}}
@@ -208,10 +370,29 @@ $$f(z,x,y,\partder{z}{x},\partder{z}{y})=0.$$
 \begin{block}{Методы решения}
 Рунге--Кутты, Эйлера, Адамса, конечных разностей и т.п.
 
-Дифференциальные уравнения высших порядков сводят путем замены переменных к системе ОДУ первого 
+Дифференциальные уравнения высших порядков сводят путем замены переменных к системе ОДУ первого
 порядка.
 \end{block}
 }
+\end{frame}
+
+\begin{blueframe}{}
+\begin{block}{Метод Эйлера}
+Аппроксимация интегральной кривой кусочно-линейной функцией. Задача Коши в простейшем виде:
+$\frac{dy}{dx}=f(x,y)$, $y|_{x=x_0}=y_0$. Решение ищется на интервале $(x_0, b]$.
+$$y_i=y_{i-1}+(x_i-x_{i-1})f(x_{i-1},y_{i-1}),\qquad i=\overline{1,n}.$$
+\end{block}
+\img[0.5]{Euler_method}
+\end{blueframe}
+
+\begin{frame}{}
+\begin{block}{Метод Рунге-Кутты}
+$$y_{n+1}=y_n+\frac{h}{6}\bigl(k_1+2k_2+2k_3+k_4\bigr),\qquad \text{где}$$
+$k_1=f(x_n,y_n)$, $k_2=f\bigl(x_n+\frc{h}2, y_n+\frc{h}2 k_1\bigr)$,
+$k_3=f\bigl(x_n+\frc{h}2, y_n+\frc{h}2 k_2\bigr)$,
+$k_4=f(x_n+h,y_n+hk_3)$ ($h$~-- шаг сетки по $x$).
+\end{block}
+\img[0.5]{Runge-Kutta}
 \end{frame}
 
 

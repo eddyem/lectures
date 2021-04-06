@@ -1,0 +1,287 @@
+\documentclass[10pt,pdf,hyperref={unicode}]{beamer}
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage{lect}
+
+\title[Компьютерная обработка. Лекция 7.3.]{Компьютерная обработка результатов измерений}
+\subtitle{Лекция 7.3. Обработка астрономических изображений}
+\date{5 апреля 2021 года}
+
+\begin{document}
+% Титул
+\begin{frame}
+\maketitle
+\end{frame}
+% Содержание
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\section{Сигнал--шум}
+\begin{blueframe}{}
+\only<1>{
+\begin{block}{SNR}
+$$\SNR = \frac{N}{\sqrt{N}}= \sqrt{N},\qquad N=N_{star}+N_{sky}\quad\Arr$$
+$$\SNR\approx\frac{N_{star}}{\sqrt{N_{star}+2N_{sky}}},\qquad N=t_{exp}\cdot R\quad\Arr$$
+$$\SNR\approx\frac{R_{star}\sqrt{t_{exp}}}{\sqrt{R_{star}+2R_{sky}}}\quad\Arr\quad
+	\SNR\propto\sqrt{t_{exp}}$$
+$$R=R_0\cdot S_{mirror}\propto D_{mirror}^2\quad\Arr\quad \SNR\propto D_{mirror}$$
+$$N_{meas}\text{ коротких экспозиций вместо
+одной:}\quad\sigma_{mean}=\frac{\sigma_{individ}}{\sqrt{N_{meas}}}\propto\frac{\sqrt{S}}{N_{meas}}$$
+$$\SNR_{mean}=\frac{S/N_{meas}}{\sigma_{mean}}\propto\sqrt{S}=\SNR_{long}\quad\text{только если }
+\sigma\approx\sigma_{phot}!!!$$
+\end{block}
+}
+\only<2>{
+    \begin{block}{Коррекция апертуры} % CCDPhotometryBook.pdf
+        Почему изображение яркой звезды шире: несмотря на совершенно одинаковую PSF у обеих звезд, при сечении
+        одинаковым порогом яркая звезда всегда <<больше>>. Увеличение апертуры \Arr увеличение шумов, необходимо
+        использовать как можно меньшую апертуру.
+        $$\Delta_N^{bright} = m(N\cdot \FWHM) - m(1\cdot\FWHM)\quad\Arr\quad
+        m^{faint} = m(1\cdot\FWHM) + \Delta_N^{bright},$$
+        $m(x)$~-- звездная величина на апертуре~$x$.
+    \end{block}\vspace*{-1em}
+    \img[0.6]{fwhm}
+}
+\end{blueframe}
+
+\section{Деконволюция}
+\begin{frame}{Деконволюция}
+\only<1>{
+\begin{block}{}
+$$I(x,y) = P(x,y)*O(x,y)+N(x,y),\quad\text{$P$~-- PSF}\quad\text{или}$$
+$$\FT{I}=\FT{O}\cdot\FT{P}+\FT{N}\quad\Arr\quad
+\FT{O}=\frac{\FT{I} - \FT{N}}{\FT{P}}$$
+$$\text{Наименьшие квадраты:}\quad
+\FT{O}=\frac{\FT{P}^*\FT{I}}{|\FT{P}|^2}$$
+$$\text{Регуляризация Тихонова, $\min(J_T)$ ($H$~-- HPF):}\quad
+\quad J_T=||I-P*O|| - \lambda||H*O||,$$
+$$\FT{O}=\frac{\FT{P}^*\FT{I}}{|\FT{P}|^2+\lambda|\FT{H}|^2}$$
+\end{block}
+}\only<2>{
+\begin{block}{Регуляризация по Байесу}
+$$p(O|I)=\frac{p(I|O)\cdot p(O)}{p(I)}$$
+$$\text{Maximum likelihood:}\quad \mathrm{ML}(O)=\max_O p(I|O)$$
+$$\text{Maximum-a-posteriori solution:}\quad
+\mathrm{MAP}(O)=\max_O p(I|O)\cdot p(O)$$
+\end{block}
+\begin{block}{}
+\begin{itemize}
+\item Итерационная регуляризация
+\item Вейвлет-регуляризация
+\item \dots
+\end{itemize}
+\end{block}
+}
+\end{frame}
+
+\begin{frame}{Функция рассеяния точки}
+\only<1>{\img[0.6]{moffat}}
+\only<2>{\begin{block}{}
+\begin{itemize}
+\item Гаусс: $f(x) = f_0\exp\Bigl(\dfrac{-(x-x_0)^2}{2\sigma^2}\Bigr)$, $\FWHM\approx2.355\sigma$
+\item Моффат: $f(x) = f_0\Bigl(1+\dfrac{(x-x_0)^2}{\alpha^2}\Bigr)^{-\beta}$,
+$\FWHM\approx2\alpha\sqrt{2^{1/\beta}-1}$
+\item Фрид: $\FT{f} \propto \exp\Bigl[-(bu)^{5/3}\Bigr]$,
+$\FWHM\approx 2.921 b$ (Моффат с $\beta=4.765$, типичные же $\beta=2.5\cdots4.5$).
+\end{itemize}
+\end{block}
+}
+\end{frame}
+
+\section{Обнаружение}
+\begin{frame}{Обнаружение}
+\begin{block}{Простейший алгоритм}
+\begin{enumerate}
+\item Вычисление и вычитание фона
+\item Свертка с маской и бинаризация
+\item Обнаружение связных областей
+\item Уточнение фона, goto 1
+\item Классификация, фотометрия и т.п.
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{blueframe}{}
+\img{objdet}
+\end{blueframe}
+
+\begin{blueframe}{Изофоты}
+\only<1>{\begin{block}{Метод шагающих квадратов}
+Бинаризуем изображение по заданному порогу. По соседям каждого пикселя вычисляем битовую маску
+($0\div15$). От точки $1\div14$ строим изолинию, соответственно меняя значения в пикселях маски. Каждый узел
+изолинии~--- линейная или другая интерполяция интенсивности в пикселях оригинала.
+\end{block}
+\img[0.5]{isophotes}
+}
+\only<2>{\img{Marching_squares_algorithm}}
+\end{blueframe}
+
+\begin{frame}{WCS-привязка}
+\only<1>{
+\img[0.6]{WCS_triangles}
+\centerline{A.~P\'al, G.\'A.~Bakos. PASP {\bf 118}: 1474--1483, 2006. }}
+\only<2>{
+\img[0.65]{WCS_quad}
+\centerline{\url{astrometry.net}}}
+\only<3>{\begin{block}{}
+\begin{itemize}
+\item Положение нескольких звезд характеризуется параметром, инвариантным к зеркалированию, масштабированию,
+вращению и переносу. Устойчивым к шуму.
+\item Квадрату ABCD соответствует четырехмерный код в относительных координатах точек C и D.
+\item Проблема вырождения: при смене порядка A, B или C, D код <<отражается>>.
+\item На небе строится сетка с масштабируемым шагом, по каталожным данным в ее ячейках определяются квадраты
+с ниспадающей яркостью звезд.
+\item Полученный набор кодов позволяет идентифицировать участки неба вплоть до самых мелких масштабов (нужны
+хотя бы четыре звезды в кадре).
+\item Чем больше звезд на кадре, тем надежней будет идентификация.
+\end{itemize}
+\end{block}
+}
+\end{frame}
+
+\begin{blueframe}{Триангуляция Делоне}
+\img[0.6]{delaunay}
+\end{blueframe}
+
+\begin{blueframe}{Диаграммы Вороного}
+\only<1>{\img[0.6]{voronoi}}
+\only<2>{\img[0.6]{delvor}}
+\end{blueframe}
+
+\begin{frame}{Свойства триангуляции Делоне}
+\begin{block}{}
+\begin{itemize}
+\item ТД взаимно однозначно соответствует диаграмме Вороного для того же множества точек.
+Как следствие: если никакие четыре точки не лежат на одной окружности, ТД единственна.
+\item ТД максимизирует минимальный угол среди всех углов всех построенных треугольников, тем
+самым избегаются <<тонкие>> треугольники.
+\item ТД максимизирует сумму радиусов вписанных окружностей.
+\item ТД минимизирует максимальный радиус минимального объемлющего шара.
+\item ТД  на плоскости обладает минимальной суммой радиусов окружностей, описанных около
+треугольников, среди всех возможных триангуляций.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{blueframe}{K-nearest}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{block}{}
+Классификация объекта по $k$~ближайшим соседям. В случае первой выборки~--- треугольник, в случае второй~---
+квадрат.
+
+$k$ может быть дробным, если применять взвешенные расстояния.
+\end{block}
+\column{0.5\textwidth}
+\img{knearest}
+\end{columns}
+\end{blueframe}
+
+\section{Анализ разреженных данных}
+\begin{frame}{Анализ разреженных данных}
+\only<1>{
+\begin{block}{Корреляция}
+$$C(\tau)=\frac{[a(t)-\aver{a}][b(t+\tau)-\aver{b}]}{\sigma_a\sigma_b}$$
+$$\text{Unbinned: } U_{ij}=\frac{(a_i-\aver{a})(b_j-\aver{b})}{
+\sqrt{(\sigma_a^2-e^2_a)(\sigma_b^2-e^2_b)}},\qquad \Delta t_{ij}=t_j-t_i\qquad$$
+$$C(\tau)=\frac1{N_\tau}U_{ij,\tau},\qquad
+\tau-\Delta\tau/2\le\Delta t_{ij}\le\tau+\Delta\tau/2$$
+Не нужна интерполяция!
+\end{block}
+}\only<2>{
+\img[0.8]{scatter_corr}\centerline{Пунктир~--- корреляция через интерполяцию}}
+\end{frame}
+
+\begin{frame}{}
+\only<1>{
+\begin{block}{Периодограмма Ломба--Скаргла (Lomb--Scargle)}
+$$P_{x}(\omega )={\frac  {1}{2}}\left({\frac  {\left[\sum _{j}X_{j}\cos \omega (t_{j}-\tau
+)\right]^{2}}{\sum _{j}\cos ^{2}\omega (t_{j}-\tau )}}+{\frac  {\left[\sum _{j}X_{j}\sin \omega
+(t_{j}-\tau )\right]^{2}}{\sum _{j}\sin ^{2}\omega (t_{j}-\tau )}}\right)$$
+$$\tg{2\omega \tau }={\frac  {\sum _{j}\sin 2\omega t_{j}}{\sum _{j}\cos 2\omega t_{j}}}$$
+\end{block}
+\img{lombscargle}
+}\only<2>{
+\begin{block}{Преобразование Фурье}
+$$ P_m=\Sum_{n=1}^N p_n\e^{-i\frac{2\pi}{N}mn}\quad\Arr\quad
+P_m=\Sum_{n=1}^N p_n\e^{-i\frac{2\pi}{T}mt_n},\quad T=t_N-t_1$$
+В octave: \tt{irsa\_dft(X,Y,freq)}:
+$\displaystyle P(\nu)=\Sum_{n=1}^N p_n\e^{-i \nu_n\cdot t_n}$
+\end{block}}
+\only<3>{\img[0.8]{scat01}}
+\only<4>{\img[0.8]{scatFFT}}
+\only<3,4>{\centerline{$T=111.5\quad\Arr\quad \nu\approx0.00897$}}
+\end{frame}
+
+% \begin{frame}{}
+% \only<1>{
+% \begin{block}{}
+% \end{block}
+% }\only<2>{
+% \img[0.8]{}
+% }
+% \end{frame}
+
+
+
+\section{Робастные методы}
+\begin{frame}{Робастные методы}
+\begin{block}{}
+Робастная надежность МНК~--- 0!
+
+Простейшая робастная оценка~--- медиана (можно <<засорить>> до 50\% данных!).
+Оценка <<плохости>>: $MAD=\med(x_i-\med(x))$.
+
+Группировка данных и метод усеченных квадратов.
+
+Метод наименьших медиан квадратов: $\min\bigl(\med(x^2)\bigr)$.
+
+Оценка дисперсии: $\med(|x_i-\med(x)|)\approx0.67\sigma$.
+
+M-, R-, S-, Q- оценки.
+
+
+\end{block}
+\end{frame}
+
+
+
+
+\begin{frame}{Программное обеспечение}
+\begin{block}{\url{http://heasarc.gsfc.nasa.gov/docs/heasarc/astro-update/}}
+\begin{itemize}
+\item ASTROPY: A single core package for Astronomy in Python
+\item Aladin: An interactive software sky atlas
+\item CFITSIO: FITS file access subroutine library
+\item GSL: GNU Scientific Library
+\item IDLAUL: IDL Astronomical Users Library
+\item IRAF: Image Reduction and Analysis Facility
+\item MIDAS: Munich Image Data Analysis System
+\item PyRAF: Run IRAF tasks in Python
+\item SAOImage ds9: FITS image viewer and analyzer
+\item SEXTRACTOR: Builds catalogue of objects from an astronomical image
+\item WCSLIB: World Coordinate System software library
+\item \dots~\url{http://tdc-www.harvard.edu/astro.software.html}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Литература}
+\begin{itemize}
+\item W. Romanishin. An Introduction to Astronomical Photometry Using CCDs.
+\item Jean-Luc Starck and Fionn Murtagh. Handbook of Astronomical Data Analysis.
+\item E.D.~Feigelson, G.J.~Babu. Modern Statistical Methods for Astronomy With R Applications.
+\item R.A.~Edelson, J.H.~Krolik. The discrete correlation function --- A new method for analyzing
+unevenly sampled variability data. ApJ, {\bf 333},1988, 646--659.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Спасибо за внимание!}
+\centering
+\begin{minipage}{5cm}
+\begin{block}{mailto}
+eddy@sao.ru\\
+edward.emelianoff@gmail.com
+\end{block}\end{minipage}
+\end{frame}
+\end{document}

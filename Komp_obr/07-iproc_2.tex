@@ -1,0 +1,273 @@
+\documentclass[10pt,pdf,hyperref={unicode}]{beamer}
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage{lect}
+
+\title[Компьютерная обработка. Лекция 7.2.]{Компьютерная обработка результатов измерений}
+\subtitle{Лекция 7.2. Обработка изображений}
+\date{1 апреля 2021 года}
+
+\begin{document}
+% Титул
+\begin{frame}
+\maketitle
+\end{frame}
+% Содержание
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\section{Вейвлеты}
+\begin{frame}{Вейвлеты}
+\only<1>{\img[0.6]{pyramid}
+\begin{block}{Пирамида изображений}
+Пирамида приближений (аппроксимирующие коэффициенты), пирамида ошибок (детализирующие коэффициенты).
+Пирамида Лапласа (только пирамида ошибок, компрессия); гауссова пирамида (только приближения, синтез
+текстур).\end{block}}
+\only<2>{\img[0.7]{lappyramid}}
+\only<3>{\img[0.5]{orapple}\centerline{
+Объединение пирамид Лапласа.}}
+\end{frame}
+
+\begin{frame}{Вейвлеты}
+\only<1>{\img[0.6]{2d-haar-basis}}
+\only<2>{\img[0.8]{wvpyramid01}}
+\only<3>{\img[0.8]{wvpyramid02}}
+\only<4>{\img[0.8]{wvpyramid}}
+\only<5>{\img[0.8]{wvpyramid03}}
+\end{frame}
+
+\begin{frame}{Пакеты вейвлетов}
+\only<1>{\img[0.95]{wpack01}}
+\only<2>{\img[0.95]{wpack02}}
+\only<3>{\img[0.7]{wpack03}}
+\only<4>{\img[0.8]{wpack04}\tiny (a) normal brain; (b) 2-level DWT of normal brain; (c) 2-level
+DWPT of normal brain; (d) AD brain; (e) 2-level DWT of AD brain; (f) 2-level DWPT of AD brain.}
+\end{frame}
+
+\section{Морфологические операции}
+\begin{frame}{Морфологические операции}
+\only<1>{
+\begin{block}{Основные понятия}
+\begin{itemize}
+\item Пусть $A$~-- некоторая область на бинарном изображении, $a=(a_1,a_2)\in A$~-- точка, ей
+принадлежащая; интенсивность в точке $a$ обозначим как $v(a)$.
+\item {\bf Объект}: $A=\{a\;|\;v(a)==1, \forall a \text{ 4/8-connected}\}$.
+\item {\bf Фон}: $B=\{b\;|\;b==0 \cup b\text{ not connected}\}$.
+\item {\bf Сдвиг}: $A_x=\{c\;|\;c=a+x, \forall a\in A\}$.
+\item {\bf Отражение}: $\hat A=\{c \;|\; c=-a, \forall a\in A\}$.
+\item {\bf Дополнение}: $A^C=\{c \;|\; c\notin A\}$.
+\item {\bf Сумма}: $A+B=\{c \;|\; c\in (A\cup B)\}=A\cup B$.
+\item {\bf Разность}: $A-B=\{c \;|\; c\in A, c\notin B\}=A \cap B^C$.
+\end{itemize}
+\end{block}}
+\only<2>{\img[0.8]{baseimop}}
+\end{frame}
+
+\begin{frame}{Эрозия (усечение)}
+\begin{block}{}
+$$A\ominus B=\{x \;|\; B_x\subseteq A\}\text{ или }
+A\ominus B=\{x \;|\; B_x\cap A^C=\varnothing\}\text{ или }
+A\ominus B=\bigcap_{b\in B}A_b
+$$
+\end{block}
+\only<1>{\img[0.7]{erosion}}
+\only<2>{\img[0.7]{erosion01}}
+\only<3>{\img{erosion02}}
+\end{frame}
+
+\begin{frame}{Дилатация (наращивание)}
+\begin{block}{}
+$$A\oplus B = \{x \;|\; \hat B_z\cap A \ne\varnothing\} \text{ или }
+A\oplus B = \bigcup_{b\in B}A_b=\bigcup_{a\in A}B_a
+$$
+\end{block}
+\only<1>{\img[0.7]{dilation}}
+\only<2>{\img{dilation01}}
+\end{frame}
+
+\begin{frame}{Свойства}
+\begin{block}{}
+\centerline{Коммутативность:}
+$$A\oplus B = B\oplus A\qquad A\ominus B \ne B\ominus A$$
+\centerline{Ассоциативность:}
+$$A\oplus (B\cup C)=(A\oplus B)\cup(A\oplus C)\qquad A\ominus (B\cup C)=(A\ominus B)\cap(A\ominus
+C)$$
+$$(A\ominus B)\ominus C = A\ominus(B\oplus C)$$
+\centerline{Двойственность:}
+$$(A\ominus B)^C=A^C\oplus\hat B\qquad
+(A\oplus B)^C =A^C\ominus\hat B$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Открытие (размыкание)}
+\begin{block}{}$$A\circ B = (A\ominus B)\oplus B$$\end{block}
+\img{opening01}
+\end{frame}
+
+\begin{frame}{Закрытие (замыкание)}
+\begin{block}{}
+$$A\bullet B = (A\oplus B)\ominus B$$
+\img{closing01}
+\end{block}
+\end{frame}
+
+\begin{frame}{}
+\img{morph01}
+\end{frame}
+
+\begin{frame}{<<Top hat>> и <<Bottom hat>>}
+\begin{block}{}
+$$A\hat\circ B = A\backslash (A\circ B), \qquad
+A\hat\bullet B = (A\bullet B)\backslash A$$
+\end{block}
+\only<1>{\img[0.8]{tophat}}
+\only<2>{\img[0.8]{bottomhat}}
+\end{frame}
+
+\begin{frame}{Hit-and-miss}
+\only<1,2>{\begin{block}{}$$A \circledast B = (A\ominus B_1)\cap(A^C\ominus B_2),\quad\text{где}$$
+$$B_1=\{b \;|\; b\in B, b=1\},\; B_2=\{\tilde b \;|\; b\in B, b=0\}$$
+\end{block}}
+\only<1>{\img[0.8]{hitamiss01}}
+\only<2>{\img[0.8]{hitamiss02}}
+\only<3>{\img[0.8]{hit_and_miss_skel}$$S=A\backslash \bigcup_{i}(A\circledast B_i)$$}
+\only<4>{\img{skel01}}
+\only<5>{\img{skel02}}
+\end{frame}
+
+\section{Сегментация изображений}
+\begin{frame}{Сегментация изображений}
+\begin{block}{Основы}
+\begin{itemize}
+\item Сегментация: $\cup_{i=1}^n R_i \,\cup\, \cup_{i=1}^n B_i= R$, все $R_i$ связные, $B_i$~--
+фон.
+\item $R_i\cap R_j=\varnothing$ $\forall i\ne j$.
+\item $Q(R_i) = 1$, $i=\overline{1,n}$, $Q$~-- логический предикат.
+\item $Q(R_i\cup R_j)=0$ $\forall i\ne j$.
+\end{itemize}
+\end{block}
+\begin{block}{Производные}
+\begin{itemize}
+\item $\partder{f}{x}\equiv f'_x=f(x+1)-f(x)$
+\item $\dpartder{f}{x}\equiv f''_x = f'_x(x+1)-f'_x(x)=f(x+2)+f(x)-2f(x+1)$
+\item $\nabla^2f(x,y) = f''_x(x,y)+f''_y(x,y) \Arr$
+ $\nabla^2 f(x,y)=f(x+1,y)+f(x-1,y)+f(x,y+1)+f(x,y-1)-4f(x,y)$
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Примеры (M13)}
+\only<1>{Оригинал:\\
+    \smimg[0.5]{origFull}\;\smimg[0.5]{origCrop}
+}
+\only<2>{Бинаризация по постоянному порогу:\\
+    \smimg[0.5]{binFull}\;\smimg[0.5]{binCrop}
+}
+\only<3>{Четырехкратная эрозия:\\
+    \smimg[0.5]{erosion4Full}\;\smimg[0.5]{erosion4Crop}
+}
+\only<4>{Четырехкратное размыкание:\\
+    \smimg[0.5]{opening4Full}\;\smimg[0.5]{opening4Crop}
+}
+\only<5>{Оригинал с предыдущей маской:\\
+    \smimg[0.5]{objE4D4Full}\;\smimg[0.5]{objE4D4Crop}
+}
+\only<6>{Двадцатипятикратная эрозия:\\
+    \smimg[0.5]{erosion25Full}\;\smimg[0.5]{erosion25Crop}
+}
+\only<7>{Маска (25 эрозий и 200 дилатаций):\\
+    \smimg[0.5]{opE25D200Full}\;\smimg[0.5]{opE25D200Crop}
+}
+\only<8>{Оригинал с предыдущей маской:\\
+    \smimg[0.5]{objE25D200Full}\;\smimg[0.5]{objE25D200Crop}
+}
+\only<9>{Выделенные объекты (размыкание х4 и х10; 237 и 9 объектов в поле соответственно):\\
+    \smimg[0.5]{count4}\;\smimg[0.5]{count10}
+}
+\end{frame}
+
+\begin{frame}{Обнаружение линий, точек и перепадов}
+\only<1>{\centerline{Точки --- лапласиан, линии, перепады --- градиент}\img[0.8]{prewitt}
+\centerline{Prewitt}}
+\only<2>{\img[0.7]{compmask}}
+\only<3>{\begin{block}{Градиент}
+$$\nabla \vec f = (f'_x, f'_y) = \bigl(f(x+1,y)-f(x,y), f(x,y+1)-f(x,y)\bigr)$$
+\end{block}\img[0.8]{imgrad}}
+\end{frame}
+
+\begin{frame}{Выделение границ}
+\only<1>{\begin{block}{Морфологический градиент}
+$$\beta(A)=A\backslash(A\ominus B)\qquad
+\beta'(A)=(A\oplus B)\backslash A\qquad
+\beta''(A)=(A\oplus B)\backslash(A\ominus B)$$
+\end{block}\img{morphgrad}}
+\only<2>{\begin{block}{Canny}
+\begin{enumerate}
+\item Размывание изображения гауссовым фильтром.
+\item Вычисление частных производных $I'_x$ и $I'_y$ (Робертс, Собель, Прюитт, LoG, DoG\dots) и
+компонентов градиента: $M=\sqrt{(I'_x)^2+(I'_y)^2}$, $\theta=\arctg\frc{I'_y}{I'_x}$.
+\item Пороговое преобразование $M$: $M_T = M$, если $M>T$, иначе $M_T=0$.
+\item Обнуление немаксимальных $M_T$ по направлению $\theta$ (по двум соседям).
+\item Получение двух пороговых значений: $M_{T_1}$ и $M_{T_2}$; $T_1<T_2$.
+\item Заполнение пропусков в $M_{T_2}$ по соседним значениям в $M_{T_1}$.
+\end{enumerate}
+\end{block}}
+\only<3>{\img[0.6]{canny01}\centerline{Образец}}
+\only<4>{\img[0.6]{canny02}\centerline{Sobel}}
+\only<5>{\img[0.6]{canny03}\centerline{Prewitt}}
+\only<6>{\img[0.6]{canny04}\centerline{DoG}}
+\only<7>{\img[0.6]{canny05}\centerline{Canny, $\sigma=5$, $T_1=0.8$, $T_2=0.95$}}
+\end{frame}
+
+\begin{frame}{Обнаружение прямых и окружностей}
+\only<1>{\begin{block}{Преобразование Хафа}
+$$r = x\cos\theta + y\sin\theta$$
+\end{block}
+\img[0.5]{R_theta_line}}
+\only<2>{\img{htdiagram}}
+\only<3>{\img[0.7]{htexample}}
+\only<4>{\img{htEx}}
+\only<5>{\includegraphics[width=0.48\textwidth]{h01}\hfil
+	\includegraphics[width=0.48\textwidth]{h02}}
+\only<6>{\begin{block}{Преобразование Хафа для поиска окружностей}
+$$(x-x_c)^2+(y-y_c)^2=r^2$$
+\end{block}\img{htcirc01}}
+\only<7>{\img{htcirc02}\centerline{Трехмерный массив в случае неизвестных центра и радиуса.}}
+\end{frame}
+
+\begin{frame}{Пример: датчик волнового фронта}
+\img{Hough_ex}
+\end{frame}
+
+\begin{frame}{Сегментация по морфологическим водоразделам}
+\only<1>{\begin{block}{}
+Бинарные изображения: итеративные дилатации с построением перегородок в местах
+образовавшихся пересечений.
+\end{block}}
+\only<2,3>{\begin{block}{}Бинарные изображения: преобразования расстояний\end{block}}
+\only<1>{\img[0.5]{watershed}}
+\only<2>{\img[0.4]{wat01}}
+\only<3>{\img[0.75]{wat02}}
+\only<4>{\begin{block}{}
+В общем случае: различные алгоритмы заполнения.
+\end{block}
+\img[0.7]{watershed01}}
+\end{frame}
+
+\begin{frame}{Спасибо за внимание!}
+\centering
+\begin{minipage}{5cm}
+\begin{block}{mailto}
+eddy@sao.ru\\
+edward.emelianoff@gmail.com
+\end{block}\end{minipage}
+\begin{block}{Литература}
+\begin{itemize}
+\item Gonzalez \& Woods. Digital Image Processing, 3rd edition. 2008.
+\item Gonzalez \& Woods \& Eddins. Digital Image Processing Using MATLAB, 2nd edition. 2009.
+\item \url{http://www.imageprocessingplace.com/root_files_V3/tutorials.htm}
+\end{itemize}
+\end{block}
+
+\end{frame}
+\end{document}

@@ -1,0 +1,566 @@
+\documentclass[10pt,pdf,hyperref={unicode}]{beamer}
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage{lect}
+
+\title[Компьютерная обработка. Лекции 1, 2.]{Компьютерная обработка результатов измерений}
+\subtitle{Лекция 1. Общие сведения об измерениях. Виды сигналов и методы их анализа.\\
+Лекция 2. Статистика и вероятность. Случайные величины и распределения}
+\date{18~марта 2021~года}
+
+\begin{document}
+% Титул
+\begin{frame}{}
+\maketitle
+\end{frame}
+% Содержание
+\begin{frame}{}
+\tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{Физические измерения}
+\begin{frame}{Физические измерения}
+\begin{defin}
+Экспериментальное определение значения измеряемой величины с применением средств
+измерений называется {\bf измерением}.
+\end{defin}
+\begin{block}{}
+Важнейшей особенностью измерений является {\it принципиальная невозможность
+получения результатов измерения, в точности равных истинному значению
+измеряемой величины} (особенно эта особенность проявляется в микромире, где
+господствует принцип неопределенности).
+
+Эта особенность приводит к необходимости оценки степени близости результата
+измерения к истинному значению измеряемой величины, т.е. вычислять
+{\bf погрешность измерения}.
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Виды измерений}
+\begin{block}{}
+\ж Статическими\н называют такие измерения, при
+которых зависимость погрешности измерения от скорости измерения пренебрежимо
+мала и ее можно не учитывать.\ж Динамические\н
+измерения противоположны статическим.
+
+Результаты\ж прямых\н измерений находят непосредственно из опыта,\ж косвенных\н же измерений~---
+путем расчета по известной зависимости измеряемой величины от величин, находимых
+прямыми измерениями (например, измерение мощности).
+
+\ж Совместное измерение\н --- одновременное измерение нескольких неодноименных величин для
+нахождения зависимости между ними (например, ВАХ диода).
+
+\ж Совокупное измерение\н~--- это проведение ряда измерений нескольких величин одинаковой
+размерности в различных сочетаниях с нахождением искомых величин из решения системы уравнений
+(например, измерение $R$ включенных треугольником резисторов).
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Представление результатов}
+\only<1>{
+\begin{block}{Табличное}
+Позволяет избежать многократной записи единиц измерения, обозначений измеряемой величины,
+используемых множителей. В таблицы, помимо основных измерений, могут быть включены и результаты
+промежуточных измерений.
+
+Для удобства импортирования данных и одновременно наглядности чтения удобно хранить в формате TSV
+(tab separated values) или CSV (comma separated values).
+SED позволит легко преобразовать TSV/CSV в таблицу \LaTeX.
+\end{block}
+
+\begin{block}{Графическое}
+На основе графика легко можно сделать вывод о соответствии
+теоретических представлений данным эксперимента, определить вид функциональной
+зависимости измеряемой величины.
+\end{block}
+}
+\only<2>{\img{table1}}
+\only<3>{\vspace*{-1em}\img[0.9]{table2}}
+\only<4>{\vspace*{-2em}\img{graph1}}
+\only<5>{\vspace*{-2em}\img{graph2}}
+\end{frame}
+
+\section{Сигналы и их виды}
+\begin{frame}{Сигналы и их виды}
+\only<1>{
+\begin{defin}
+Если некоторая изменяющаяся величина измеряется непрерывно (или квазинепрерывно), мы
+имеем дело с потоком информации, или\ж сообщением\н.
+В теории информации физический процесс, значения параметров которого отображают
+передаваемое сообщение, называется\ж сигналом\н.
+\end{defin}
+\begin{block}{}
+Модуляция--демодуляция. Зашумление.
+{\bf Помехи}: аддитивные, мультипликативные, фазовые.
+\end{block}
+}
+\only<2>{\img[0.7]{Ampl_modulation}}
+\only<3>{\img{Freq_modulation}}
+\only<4>{\begin{light}\img[0.7]{Phase_modulation}\end{light}}
+\only<5>{Add/mult\img[0.7]{add_mult_noise}}
+\end{frame}
+
+
+\begin{frame}{Виды сигналов}
+\only<1>{
+\begin{block}{Аналоговый}
+Описывается непрерывной (или кусочно--непрерывной) функцией $x(t)$: $t\in[t_0,t_1]$,
+$x\in[x_0,x_1]$. Аудиосигналы, телевизионные сигналы и т.п.
+\end{block}
+\img[0.4]{oscill}
+}
+\only<2>{
+\begin{block}{Дискретный}
+Описывается решетчатой функцией (последовательностью, временн\'ым рядом) $x(nT)$: $x\in[x_0,x_1]$,
+$n=\overline{1,N}$, $T$~--\к интервал дискретизации\н. Величину $f=1/T$
+называют\к частотой дискретизации\н. Если интервал дискретизации является
+постоянной величиной, дискретный сигнал можно задать в виде ряда $\{x_1,\ldots, x_N\}$.
+\end{block}
+\img[0.6]{disc_sig}
+}
+\only<3>{
+\begin{block}{Цифровой}
+Описывается квантованной решетчатой функцией и отличается от обычного дискретного сигнала тем, что
+каждый уровень квантования кодируется двоичным кодом. Таким образом, если
+величина $x\in[x_0,x_1]$ квантуется $N$~разрядным кодом, для
+обратного представления из кода $K_x$ в значение $x$ применяется
+преобразование: $x=x_0+K_x\cdot (x_1-x_0)/2^{N}$. К цифровым сигналам относятся
+сигналы, используемые в системах связи с импульсно--кодовой модуляцией.
+\end{block}
+\img[0.4]{digital_signal}
+}
+\only<4>{\img{Analog_signal}}
+\end{frame}
+
+
+\begin{frame}{Дискретизация}
+\begin{block}{}
+Дискретизация строит по заданному аналоговому сигналу $x(t)$ дискретный сигнал $x_n(nT)$, причем
+$x_n(nT)=x(nT)$. Операция\ж восстановления\н состоит в том, что по заданному дискретному сигналу
+строится аналоговый сигнал.
+\end{block}
+\begin{block}{Теорема Котельникова--Найквиста}
+\begin{itemize}
+\item  любой аналоговый сигнал может быть восстановлен с какой угодно точностью по своим дискретным
+отсчётам, взятым с частотой $f > 2f_c$, где $f_c$~-- максимальная частота, которой ограничен спектр
+реального сигнала;
+\item если максимальная частота в сигнале равна или превышает половину частоты дискретизации
+(наложение спектра), то способа восстановить сигнал из дискретного в аналоговый без искажений не
+существует.
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Теорема Котельникова--Найквиста}
+\begin{block}{}
+$$\text{Фурье: }X_{s}(f)\ {\stackrel {\mathrm {def} }{=}}\sum  _{n=-\infty }^{\infty }T\cdot x(nT)\
+e^{-i2\pi
+nTf}$$
+$$\text{В окне: }X(f) = \sum _{n=-\infty }^{\infty }x(nT)\cdot \underbrace {T\cdot \mathrm {rect}
+(Tf)\cdot
+e^{-i2\pi nTf}} _{{\mathcal {F}}\left\{\mathrm{sinc}\left[\frac{\pi}{T}(t-nT)\right]\right\}}$$
+\end{block}
+\begin{columns}\column{0.5\textwidth}
+\img{ReconstructFilter}
+\column{0.5\textwidth}
+\begin{block}{Формула Уиттекера--Шеннона}
+Восстановить непрерывную функцию из дискретной:
+$$x(t)=\sum _{n=-\infty }^{\infty }x(nT)\cdot \mathrm{sinc}\left[\frac{\pi}{T}(t-nT)\right]$$
+\end{block}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Квантование}
+\begin{defin}
+Для преобразования дискретного сигнала в цифровой вид применяется операция\ж квантования\н или\ж
+аналогово--цифрового преобразования\н~(АЦП), которая по заданному дискретному сигналу $x_n(nT)$
+строит цифровой кодированный сигнал $x_d(nT)$, причем $x_n(nT)\approx x_d(nT)$. Обратная квантованию
+операция называется операцией\ж цифро--аналогового преобразования\н~(ЦАП).
+\end{defin}
+\only<1>{\img[0.7]{ADC}}
+\only<2>{\img{DAC}}
+\end{frame}
+
+\section{Литература}
+\begin{frame}{Основная литература}
+\begin{itemize}
+\item Интернет--энциклопедия: http:/\!/wikipedia.org (Википедия).
+\item Гонсалес~Р., Вудс~Р. Цифровая обработка изображений.~--- М.: Техносфера, 2012.~---
+1104~с.
+\item Витязев~В.В. Вейвлет-анализ временных рядов: Учеб. пособие.~---
+СПб.: Изд-во С.-Петерб. ун-та., 2001.~--- 58~с.
+\item Гонсалес~Р., Вудс~Р., Эддинс~С. Цифровая обработка изображений
+в среде MATLAB.~--- М.: Техносфера, 2006~--- 616~с.
+\item Гмурман~В.\,Е. Теория вероятностей и математическая статистика.
+Учеб. пособие для вузов.~--- Изд. 7-е, стер.~--- М.: Высш. шк., 2001.~--- 479~с.
+\item Говорухин~В., Цибулин~В. Компьютер в математическом исследовании.
+Учебный курс.~--- СПб.: Питер, 2001.~--- 624~с.
+\item Сергиенко~А.\,Б. Цифровая обработка сигналов.~--- СПб.: Питер, 2005.~---
+604~с.
+\item Чен~К., Джиблин~П., Ирвинг~А. MATLAB в математических исследованиях:
+Пер. с англ.~--- М.: Мир, 2001.~--- 346~с.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Дополнительная литература}
+\begin{itemize}
+\item Бахвалов~Н.\,С., Жидков~Н.\,П., Кобельков~Г.\,М. Численные методы.~---
+М.: Высш. шк., 1987.~--- 630~с.
+\item Кнут~Д.\,Э. Все про \TeX./ Пер. с англ. М.\,В.~Лисиной.~---
+Протвино: АО~RD\TeX, 1993.~--- 592~с.: ил.
+\item Львовский~С.\,М. Набор и верстка в системе \LaTeX.~--- 3-е изд.,
+исрп. и доп.~--- М.: МЦНМО, 2003.~--- 448~с.
+\item Физическая энциклопедия/ Гл. ред. А.М.~Прохоров.~--- М.: Сов.
+энциклопедия. Тт. I~--~V. 1988.
+\item Цифровая обработка сигналов: Справочник/ Л.М.~Гольденберг,
+Б.Д.~Матюшкин, М.Н.~Поляк.~--- М.: Радио и связь, 1985.~--- 312~с., ил.
+\item \url{http://www.imageprocessingplace.com/}
+\item Pan~G.\,W. Wavelets in electromagnetic and device modeling.~---
+John~Wiley \& Sons, Inc., Hobocen, New Jersey, 2003.~--- 531~p.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Лекция 2.}
+\end{frame}
+
+
+\section{Случайные величины, вероятность}
+\begin{frame}{Случайные величины, вероятность}
+    \begin{defin}
+        \ж Случайной величиной\н называется величина~$X$, если все ее возможные значения образуют
+        конечную
+        или бесконечную последовательность чисел~$x_1,\ldots$, $x_N$, и если принятие ею каждого из
+        этих
+        значений есть случайное событие.
+    \end{defin}
+    \begin{defin}\begin{columns}\column{0.75\textwidth}
+            \ж Вероятностью\н наступления события называют предел относительной частоты
+            наступления  данного события~$n_k/N$:\column{0.25\textwidth}
+            $$P(x_k)=\lim_{N\to\infty}\frac{n_k}{N}.$$
+        \end{columns}
+    \end{defin}
+    \begin{block}{}
+        Совместные и несовместные события, полная группа, свойства вероятности.
+        Для непрерывных случайных величин вводят понятие\ж плотности вероятности\н:
+        $$\rho(x)=\lim_{\Delta x\to 0}\frac{P(x<X<x+\Delta x)}{\Delta
+            x}=\frac{dP}{dx}.$$
+        $$P(x_1<X<x_2)=\Int_{x_1}^{x_2}\rho(x)\,dx.$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Свойства вероятности}
+\begin{block}{}\def\arraystretch{1.5}
+\centering\begin{tabular}{>{\centering}p{0.45\textwidth}l}
+$P(\emptyset) = 0$ &\\
+$\forall A\subset B \quad P(A) \le P(B)$ & $B$ включает в себя $A$\\
+$0\le P(A) \le 1$ & \\
+$\forall A\subset B\quad P(B \setminus A) = P(B) - P(A)$ & $B$ наступит без $A$\\
+$P(\overline{A}) =1 - P(A)$ &\\
+$P(A+B) = P(A) + P(B) - P(AB)$ & вероятность одного из событий\\
+$P(A\vert B) = \frc{P(AB)}{P(B)}$ & условная вероятность ($A$ при $B$) $\Longrightarrow$\\
+$P(AB) = P(B)\cdot P(A\vert B)$ & или $P(AB) = P(A)\cdot P(B\vert A)$  $\Longrightarrow$\\
+$P(A\vert B)=\dfrac{P(A)\cdot P(B\vert A)}{P(B)}$ & (теорема Байеса)\\[1em]
+$P(AB) = P(A)\cdot P(B)$ & для независимых событий\\
+\end{tabular}
+\end{block}
+\end{frame}
+
+\section{Характеристики случайных величин}
+\begin{frame}{Характеристики случайных величин}
+\begin{block}{Среднее арифметическое и математическое ожидание}
+    $$\aver{X}=\frc1{N}\sum_{n=1}^N x_n,$$
+    $$M(X)\equiv\mean{X}=\lim_{N\to\infty}\frac1{N}\sum_{n=1}^N x_n\quad\text{и}\quad
+    M(X)=\Infint x\phi(x)\,dx.$$
+\end{block}
+\begin{block}{Свойства математического ожидания}
+    \begin{itemize}\setlength{\itemsep}{2pt}
+        \item $\mean\const=\const$;
+        \item $\mean{\sum\C_n\cdot X_n}=\sum\C_n\cdot \mean{X_n}$,
+        где $\C_n$~-- постоянная величина;
+        \item $\mean{\prod X_n}=\prod \mean{X_n}$ (для независимых случайных величин);
+        \item $\mean{f(x)}=\Infint f(x)\phi(x)\,dx$ (для непрерывных случайных величин).
+    \end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{}
+    \begin{block}{Моменты}
+        Если $f(x)=(x-x_0)^n$, то $\mean{f(x)}$~--- момент порядка~$n$. Если $x_0=0$~---
+        начальный
+        момент, если $x_0=\mean{X}$--- центральный момент.
+
+        Центральный момент второго порядка называют\ж дисперсией\н:
+        $D(X)=\mean{(x-\mean{x})^2}\equiv
+        \mean{x^2}-\mean{x}^2$,  $\sigma=\sqrt{D}$.
+
+        \smallskip
+
+        Свойства дисперсии:
+        \begin{itemize}
+            \item $D(\C)=0$;
+            \item $D(\C X)=\C^2 D(X)$, где $\C$~-- постоянная величина;
+            \item $D(\sum X_n)=\sum D(X_n)$ (для независимых величин).
+        \end{itemize}
+    \end{block}
+    \begin{block}{$\mean{X}\Leftrightarrow\aver{X}$? Закон больших чисел}
+        Неравенство Чебыш\"ева: $P(|X-\mean{X}|\ge\epsilon)\le
+        \frc{D(X)}{\epsilon^2}\quad\Rightarrow$
+        $P(|X-\mean{X}|<\epsilon)=1-P(|X-\mean{X}|\ge\epsilon)\ge1-\frc{D(X)}{\epsilon^2}$.
+        $$\lim_{n\to\infty} P\Bigl(\Bigl|\frac{\sum
+            X_n}{n}-\frac{\sum\mean{X_n}}{n}\Bigr|<\epsilon\Bigr)=1,\;\text{ т.к. }\;
+            D(\frc{\sum X_n}{n})=\frc{D(X)}{n}
+        $$
+        Теорема Бернулли: $\lim\limits_{n\to\infty} P(m/n-p|<\epsilon)=1$ ($m$ событий в $n$
+        испытаний).
+    \end{block}
+\end{frame}
+
+\begin{frame}{Характеристические значения распределений}
+\begin{block}{Медиана и мода}
+    {\ж Мода}~--- наиболее часто встречающееся значение (но вполне могут быть
+    мультимодальные
+    распределения). {\ж Медиана} делит площадь распределения пополам.
+\end{block}
+\img[0.6]{mode_median}
+\begin{block}{Поиск медианы}
+Самый медленный~--- сортировкой ряда данных, $O(n\ln n)$. Quick Select, $O(n)$. Гистограмма (в т.ч.
+дерево гистограмм), $O(n)$. Для фиксированных $n$~--- opt\_med (,,Numerical Recipes in C``), $O(n)$.
+\end{block}
+\end{frame}
+
+\section{Законы распределения}
+\begin{frame}{Законы распределения}
+    \begin{defin}
+        \ж Закон распределения\н \к дискретной\н случайной величины~--- соответствие между
+        возможными значениями и их вероятностями.
+    \end{defin}
+    \begin{block}{Функция распределения}
+        $$F(x)\equiv P(X\le x)=\Int_{-\infty}^x\phi(x)\,dx, \qquad
+        \Infint\phi(x)\,dx=1.$$
+        $$P(a\le X\le b)=F(b)-F(a).$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Равномерное распределение}
+    \begin{columns}\column{0.45\textwidth}
+        \begin{block}{}
+            $$
+            \phi(x)=\begin{cases}\frac1{b-a}, & x\in [a,b] \\ 0, & x\not\in [a,b]
+            \end{cases}.
+            $$
+            $$F(x)= \begin{cases} 0, & x < a \\ \frac{x-a}{b-a}, & a \le x < b \\ 1, & x \ge
+                b \end{cases}.
+            $$
+        \end{block}\column{0.45\textwidth}
+        \begin{block}{}
+            $\mean{X}=\med(X)=(a+b)/2$, $\moda(X)=\forall x\in[a,b]$,
+            $\displaystyle\sigma^2_X = \frac{(b-a)^2}{12}$.
+        \end{block}
+    \end{columns}
+
+    \smimg[0.45]{Uniform_distribution_PDF}\hspace{3pt}
+    \smimg[0.45]{Uniform_distribution_CDF}
+\end{frame}
+
+\begin{lightframe}{Биномиальное распределение}
+    \vspace*{-0.8em}\begin{block}{}
+        \ж Формула Бернулли\н:
+        $\displaystyle P_n(k)=C_n^k p^k q^{n-k},\quad C_n^k=\frac{n!}{k!(n-k)!},\quad
+        q=1-p.$
+        $$(p+q)^n=C_n^n p^n+\cdots+C_n^k p^k q^{n-k}+\cdots+C_n^0 q^k.$$
+        Описывает вероятность наступления события~$k$
+        раз в~$n$ независимых испытаниях
+    \end{block}\vspace*{-1em}
+    \begin{columns}
+        \column{0.45\textwidth}
+        \img{Binomial_Distribution}
+        \column{0.55\textwidth}
+        \begin{block}{}
+            $$
+            F(k;n,p)=P(X\leq k)=\sum_{i=0}^\floor{k} C_n^i p^i(1-p)^{n-i}.$$
+            $\mean{X}=np$, $\moda(X)=\floor{(n+1)p}$, $\floor{np}\le\med(X)\le\ceil{np}$,
+            $\sigma^2_X = npq$.
+        \end{block}
+    \end{columns}
+\end{lightframe}
+
+\begin{frame}{Распределение Пуассона}
+    \vspace*{-2em}\begin{block}{}
+        При $n\to\infty$ распределение Бернулли преобразуется в распределение Пуассона
+        ($\lambda=np$):
+        $$P_n(k)=\frac{\lambda^k}{k!}\exp(-\lambda).$$
+    \end{block}
+    \begin{columns}\column{0.48\textwidth}
+        \begin{block}{}
+            $F(k, \lambda) = \displaystyle\frac{\Gamma(k+1,\lambda)}{k!}$,
+            $\mean{X} = \lambda$, $\moda(X) = \floor{\lambda}$,
+            $\med{X}\approx\floor{\lambda+1/3-0.02/\lambda}$,
+            $\sigma^2_X = \lambda$.
+
+            С ростом $\lambda$ распределение Пуассона стремится к распределению Гаусса.
+        \end{block}
+        \column{0.48\textwidth}
+        \img{poissonpdf}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Распределение Гаусса}
+    \vspace*{-2em}\begin{block}{}
+        $
+        \phi (x) = \dfrac 1 {\sigma \sqrt {2 \pi}} \exp \left( -\frac {(x -\mean{x})^2}{2
+            \sigma^2} \right)
+        $,
+        $F(x) = \displaystyle\frac 1{\sigma \sqrt {2 \pi}} \Int_{-\infty}^x \exp \left( -\frac{(t
+            -\mean{x})^2}{2 \sigma^2} \right)\, dt$,
+        $\moda(X) = \med{X} = \mean{X}$.
+        $P(\alpha < X < \beta) = \Phi\left(\frac{\beta - \mean{x}}{\sigma}\right) -
+            \Phi\left(\frac{\alpha - \mean{x}}{\sigma}\right)  $,\\
+        функция Лапласа $\Phi(x)=\frac{1}{\sqrt{2\pi}}\int_0^x \exp\left(-\frc{t^2}{2}\right)$.
+    \end{block}
+    \img[0.6]{normpdf}
+\end{frame}
+
+\begin{frame}{Показательное (экспоненциальное) распределение}
+    \vspace*{-1em}\begin{block}{}
+        Время между двумя последовательными свершениями события
+        $$f(x)=\begin{cases}
+            0,& x<0,\\
+            \lambda\exp(-\lambda x),& x\ge0;
+        \end{cases}\qquad
+        F(x)=\begin{cases}
+            0,& x<0,\\
+            1-\exp(-\lambda x),& x\ge0,
+        \end{cases}
+        $$
+    \end{block}
+    \vspace*{-1em}\begin{block}{}
+        $\mean{X} = \lambda^{-1}$,
+        $\moda(X) = 0$, $\med{X} = \ln(2)/\lambda$,
+        $\sigma^2_X = \lambda^{-2}$.
+    \end{block}
+    \vspace*{-1em}\img[0.5]{exppdf}
+\end{frame}
+
+\section{Корреляция и ковариация}
+\begin{frame}{Корреляция и ковариация}
+    \begin{defin}
+        \ж{}Ковариация\н является мерой линейной зависимости случайных величин и определяется
+        формулой:
+        $\mathrm{cov}(X,Y)=\mean{(X-\mean{X})(Y-\mean{Y})}$ $\Longrightarrow$ $\mathrm{cov}(X,X) =
+        \sigma^2_X$.
+        \к Ковариация независимых случайных величин равна нулю\н, обратное неверно.
+    \end{defin}
+    \begin{block}{}
+        Если ковариация положительна, то с ростом значений одной случайной величины, значения
+        второй имеют
+        тенденцию возрастать, а если знак отрицательный~--- убывать.
+
+        Масштаб зависимости величин пропорционален их дисперсиям $\Longrightarrow$ масштаб можно
+        отнормировать (\ж{}коэффициент корреляции\н Пирсона):
+        $$\rho_{X,Y}=\frac{\mathrm{cov}(X,Y)}{\sigma X\sigma Y}, \qquad \mathbf{r}\in[-1,1].$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{}
+    \begin{block}{}
+        Коэффициент корреляции равен~$\pm1$ тогда и только тогда, когда~$X$ и~$Y$ линейно зависимы.
+        Если
+        они независимы, $\rho_{X,Y}=0$ (\ж{}обратное неверно!\н). Промежуточные значения
+        коэффициента
+        корреляции не позволяют однозначно судить о зависимости случайных величин, но позволяет
+        предполагать
+        степень их зависимости.
+    \end{block}
+    \begin{block}{Корреляционная функция}
+        Одна из разновидностей~---\ж автокорреляционная функция\н:
+        $$
+        \Psi(\tau) = \Int f(t) f(t-\tau)\, dt\equiv
+        \Int f(t+\tau) f(t)\,dt.
+        $$
+        Для дискретных случайных величин автокорреляционная функция имеет вид
+        $$
+        \Psi(\tau) = \aver{X(t)X(t-\tau)}\equiv\aver{X(t+\tau)X(t)}.
+        $$
+    \end{block}
+\end{frame}
+
+\begin{blueframe}{}
+    \begin{block}{Взаимно корреляционная функция}
+        Другая разновидность~---\ж кросс--корреляционная функция\н:
+        $$(f\star g)(t)\stackrel{\mathrm{def}}{=}\Infint f^{*}(\tau)g(t+\tau)\,d\tau$$
+        свертка:
+        $$ (f*g)(x)\stackrel{\mathrm{def}}{=}\Infint f(y)\,g(x-y)\,dy = \Infint f(x-y)\,g(y)\, dy.$$
+
+    \end{block}
+    \img[0.5]{convcorr}
+\end{blueframe}
+
+\begin{frame}{}
+    \begin{block}{}
+        Если $X$ и $Y$~--- две независимых случайных величины с функциями распределения вероятностей
+        $f$ и $g$, то $f\star g$ соответствует распределению вероятностей выражения $-X+Y$, а
+        $f*g$~---
+        распределению вероятностей суммы $X + Y$.
+
+        ВКФ часто используется для поиска в длинной последовательности более короткой заранее
+        известной,
+        определения сдвига (см.~рис).
+
+        Связь со сверткой: $f(t)\star g(t) = f^*(-t) * g(t)$, если $f$ и $g$ четны, то
+        $f(t)\star g(t) = f(t) * g(t)$. Через преобразование Фурье:
+        $\FT{f \star g} = \FT{f}^*\cdot\FT{g}$.
+    \end{block}\img[0.6]{autocorr}
+\end{frame}
+
+\section{Шум}
+\begin{frame}{Шум}
+    \begin{defin}
+        \ж Шум\н~--- беспорядочные колебания различной физической природы, отличающиеся сложной
+        временной и
+        спектральной структурой.
+    \end{defin}
+    \begin{block}{}
+        \ж Белый шум\н, $\xi(t)$, имеет время корреляции много меньше всех характерных времен
+        физической
+        системы;  $\mean{\xi(t)}=0$,
+        $\Psi(t,\tau)=\aver{\xi(t+\tau)\xi(t)}=\sigma^2(t)\delta(\tau)$.
+        Разновидность~--- AWGN.
+
+        \ж Дробовой шум\н имеет пуассонову статистику~\so $\sigma_X\propto\sqrt{x}$ и
+        $\SNR(N)\propto\sqrt{N}$. Суточные и вековые корреляции.
+
+        Шум вида \ж<<соль--перец>>\н обычно характерен для изображений, считываемых с ПЗС.
+    \end{block}
+\end{frame}
+\begin{frame}{SNR}
+    \begin{defin}
+        \ж SNR\н~--- безразмерная величина, равная отношению мощности полезного сигнала к мощности
+        шума.
+    \end{defin}
+    \begin{block}{}
+        $$\SNR = {P_\mathrm{signal} \over P_\mathrm{noise}} = \left ({A_\mathrm{signal} \over
+            A_\mathrm{noise} } \right )^2, \quad
+        \SNR(dB) = 10 \lg \left ( {P_\mathrm{signal} \over P_\mathrm{noise}}
+        \right )
+        = 20 \lg \left ( {A_\mathrm{signal} \over A_\mathrm{noise}} \right ).
+        $$
+    \end{block}
+
+    \img[0.6]{SNR}
+    \centerline{\tiny (10, 0, -10~дБ.)}
+\end{frame}
+
+
+\begin{frame}{Спасибо за внимание!}
+\centering
+\begin{minipage}{5cm}
+\begin{block}{mailto}
+eddy@sao.ru\\
+edward.emelianoff@gmail.com
+\end{block}\end{minipage}
+\end{frame}
+\end{document}
