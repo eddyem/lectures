@@ -1,0 +1,265 @@
+\documentclass[10pt,pdf,hyperref={unicode}]{beamer}
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage{astrocrafts}
+
+\title[Оборудование. 3. Наше время]{Астрофизическое оборудование}
+\subtitle{3. Наше время}
+\author[Емельянов Э.В.]{Емельянов Эдуард Владимирович}
+\institute[САО РАН]{Специальная астрофизическая обсерватория РАН\\
+	{\tiny Лаборатория обеспечения наблюдений}\\
+}
+\date{23 мая 2016 года}
+\begin{document}
+% Титул
+\begin{frame}
+\maketitle
+\end{frame}
+% Содержание
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\section{Наземная астрофизика}
+\subsection{Большие телескопы}
+\begin{frame}{}
+\img[0.85]{optelcomp}
+\end{frame}
+
+\begin{frame}{Зачем такие большие?}
+\begin{block}{Задачи, требующие построения гигантских телескопов}
+\begin{itemize}
+\item   происхождение Вселенной;
+\item   механизмы образования и эволюции звезд, галактик и планетных систем;
+\item   физические свойства материи в экстремальных астрофизических условиях;
+\item   астрофизические аспекты зарождения и существования жизни во Вселенной.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{}
+\begin{columns}
+\column{0.5\textwidth}\vspace*{-1em}
+\only<1>{\img{KeckTel}}
+\only<2>{\img{gtc_cleaning}}
+\column{0.5\textwidth}
+\only<1>{\begin{block}{Телескопы Кека}
+1993 "--- Кек-1 (Мауна Кеа), 10~м, 36 сегментов из церодура, площадь рабочей поверхности 
+$75.76\,$м${}^2$ "--- крупнейшие в мире!
+\end{block}}
+\only<2>{\begin{block}{Большой Канарский}
+2007 (2009), ла Пальма, 10.4~м, 36 сегментов из церодура, площадь рабочей поверхности 
+$74.14\,$м${}^2$.
+\end{block}}
+\end{columns}
+\end{frame}
+
+\subsection{Детекторы изображений}
+\begin{frame}{Детекторы изображений}
+\vspace*{-2em}\begin{block}{ФЭУ}
+1940-е годы. Счет фотонов. Большие "--- потому одноканальные.
+\end{block}
+\img{PhotoMultiplierTubeAndScintillator}
+\end{frame}
+
+{\setbeamercolor{normal text}{bg=blue!50!white,fg=cyan!70!white}
+\begin{frame}{}
+\vspace*{-2em}\begin{block}{ЭЛТ}
+1964, E. Luedicke, A. D. Cope, and L. E. Flory. Astronomical Image-Integration System Using a 
+Television Camera Tube.
+
+На $3^m\div4^m$ чувствительнее фотопластинок.
+\end{block}
+\img{Orthicon}
+\end{frame}}
+
+\begin{frame}{}
+\begin{block}{МКП + КПА}
+Конец 1970-х "--- микроканальные пластины.
+
+1983, Siegmund, O.H.W. et al. "Application of the wedge and strip anode to position sensing with 
+microchannel plates and  proportional counters".
+
+1986, Siegmund, O.H.W. et al. "Wedge and strip image readout systems for photon-counting detectors 
+in space astronomy".
+\end{block}
+\begin{columns}
+\column{0.5\textwidth}
+\img{MCP}
+\column{0.4\textwidth}
+\img[0.8]{WSA}
+\end{columns}
+\end{frame}
+
+\begin{frame}{}
+\begin{columns}
+\column{0.5\textwidth}
+\img{ccdintro}
+\column{0.5\textwidth}
+\begin{block}{ПЗС}
+1969, Уиллард Бойл и Джордж Смит, лаборатории Белла.
+
+1975 "--- первая ПЗС 100x100 (Steven Sasson, Kodak).
+
+1976 "--- запуск спутника--шпиона с ПЗС 800x800.
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{}
+\begin{columns}
+\column{0.5\textwidth}
+\only<1>{\img{SDSSFaceplate}}
+\only<2>{\img{frame_transfer_CCD}}
+\column{0.5\textwidth}
+\begin{block}{}
+\only<1>{Слоановский обзор SDSS, 30 ПЗС 2048x2048 в сканирующем режиме.}
+\only<2>{ПЗС с переносом заряда позволяют уменьшить воздействие посторонней засветки во время 
+экспозиции.}
+\end{block}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{}
+\begin{columns}
+\column{0.7\textwidth}
+\only<1>{\img{CCD-VS-CMOS}}
+\only<2>{\img{HgCdTe_ULBcam}}
+\column{0.3\textwidth}
+\begin{block}{КМОП}
+Конец 1980-х "--- <<активно-пиксельные датчики>>. Недеструктивное считывание, произвольный доступ. 
+Но низкая квантовая эффективность.
+
+\onslide<2>{ИК-детекторы на HgCdTe}
+\end{block}
+\end{columns}
+\end{frame}
+
+{\setbeamercolor{normal text}{bg=blue!50!white,fg=cyan!70!white}
+\begin{frame}{КМОП}
+\img[0.7]{Aps_pd_pixel_schematic}
+\end{frame}}
+
+\begin{frame}
+\begin{block}{СТП}
+Два сверхпроводника, разделенных тонким изолятором.
+
+Алюминий (1.2К), ниобий (4.2К).
+
+100..1000ГГц "--- радиоастрономия. Счетчик фотонов в широком диапазоне.
+\end{block}
+\img[0.6]{Josephson}
+\end{frame}
+
+\section{Космическая астрофизика}
+\begin{frame}{Космическая астрофизика}
+\begin{columns}
+\column{0.6\textwidth}
+\img{Hipparcos-testing-estec}
+\column{0.4\textwidth}
+\begin{block}{}
+1989, Hipparcos "--- High Precision Parallax Collecting Satellite.
+
+1mas. Каталоги Hipparcos и Tycho.
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{}
+\vspace*{-1em}
+\img[0.6]{HST-SM4}\vspace*{-1em}
+\begin{block}{Телескоп им.~Хаббла}
+2.4~м зеркало. 
+
+1978 "--- стартовое финансирование, 36~млн.длр.
+
+1986 "--- общий бюджет проекта вырос до 1.175~млрд.длр.
+
+25 апреля 1990~г. "--- 2.5~млрд.длр.
+
+1999 "--- около 6~млрд.длр. + 593~млн.евр. от ЕКА.
+
+Четыре экспедиции.
+\end{block}
+\end{frame}
+
+\begin{frame}{}
+\img{Hubble_Probes_the_Early_Universe}
+\end{frame}
+
+\begin{frame}{}
+\only<1>{\begin{columns}
+\column{0.6\textwidth}\vspace*{-2em}
+\img{Kepler_Space_Telescope}
+\column{0.4\textwidth}
+\begin{block}{Телескоп Кеплера}
+2009, поиск экзопланет. 0.95~м апертура, зеркало 1.4~м.
+
+42 ПЗС 2200x1024.
+
+$\sim0.5$~млрд.длр.
+\end{block}
+\end{columns}}
+\only<2>{\img[0.85]{Kepler_CCD_matrix}}
+\end{frame}
+
+\section{Современные направления}
+\subsection{Активная оптика}
+\begin{frame}{Активная оптика}
+\begin{columns}
+\column{0.5\textwidth}\only<1>{\img{VLT-active}}
+\only<2>{\img{GTC_Active_Optics_Acutators}}
+\column{0.4\textwidth}\only<1>{\begin{block}{VLT}
+VLT: 150 актуаторов на зеркале, управляемое вторичное зеркало. 1 сет "--- 30 секунд (для 
+избавления от атмосферных эффектов). В случае отсутствия опорной звезды в кадре сигналы вычисляются 
+по модели (учитывающей наклон оси и температуры).\end{block}}
+\only<2>{\begin{block}{GTC}
+Зеркало "--- 17т. 
+\end{block}}
+\end{columns}
+\end{frame}
+
+\subsection{Спекл--интерферометрия}
+\begin{frame}{Спекл--интерферометрия}
+\only<1>{\img{speckles}}
+\only<2>{\img[0.6]{WR_speckle_restored}}
+\end{frame}
+
+\subsection{Адаптивная оптика}
+\begin{frame}{Адаптивная оптика}
+\only<1>{\vspace*{-1em}\begin{block}{}
+$30\div60\,$mas. Искусственные звезды: звезды Рэлея (ближний ИК, $15\div25$~км) и 
+натриевые ($80\div100$~км, 589~нм).
+\end{block}\vspace*{-1em}
+\img{cfht_adaptive_optics}}
+\only<2>{\img{wavefront_SHA}}
+\only<3>{\img[0.85]{VLT_artif_star}}
+\end{frame}
+
+\subsection{Lucky-imaging, Superresolution}
+\begin{frame}{Lucky-imaging, Superresolution}
+\smimg[0.33]{Lucky_Single_Exposure_Strehl_16Percent}\hfil
+\smimg[0.33]{Lucky_sum_all}\hfil
+\smimg[0.33]{Lucky_best_1percent_averaging}
+\begin{block}{}
+Куб данных с экспозициями $10\div50\,$мс.
+
+Совмещение снимков с наименьшим числом Штреля.
+
+Усреднение.
+
+Итог: было 900\,mas, стало 40!
+
+Для малых телескопов ($<r_0$) это Superresolution.
+\end{block}
+\end{frame}
+
+\begin{frame}{Спасибо за внимание!}
+\centering
+\begin{minipage}{5cm}
+\begin{block}{mailto}
+eddy@sao.ru\\
+edward.emelianoff@gmail.com
+\end{block}\end{minipage}
+\end{frame}
+\end{document}
