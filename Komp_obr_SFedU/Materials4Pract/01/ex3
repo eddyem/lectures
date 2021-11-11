@@ -1,0 +1,8 @@
+#!/bin/sh
+OUT=1000strings
+
+./ex2 1000 > $OUT
+for ((i = 2; i < 5; ++i)); do
+	sort -n -k $i $OUT > ${OUT}_$i
+done
+

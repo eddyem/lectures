@@ -1,0 +1,384 @@
+\documentclass[10pt,pdf,hyperref={unicode}]{beamer}
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage{lect}
+\usepackage{listings}
+\lstloadlanguages{Octave,C,bash}
+\lstset{language=bash}
+
+\title[Компьютерная обработка. Практикум 1.]{Компьютерная обработка результатов измерений}
+\subtitle{Практикум 1. Работа с файлами в bash.}
+\date{}
+
+\begin{document}
+% Титул
+\begin{frame}{}
+\maketitle
+\end{frame}
+
+\begin{frame}{Linux}
+\begin{block}{}
+Ядро. GNU is not UNIX. <<Бритва Оккама>>: UNIX-way и KISS. <<Трубы>>.
+
+Файловые системы: транзакции, права доступа и аттрибуты файлов, <<все есть файл>>~--- псевдофайлы.
+Монтирование ФС. Команды \t{mount}, \t{df}, \t{du}. Ссылки на файлы: \t{ln}.
+
+Структура файловой системы: базовые директории.
+
+Терминалы и псевдотерминалы. Командные оболочки. Команды \t{man} и \t{apropos}. Приглашение
+командной строки: \t{\$PS1}.
+
+Рабочая директория: \t{pwd} и \t{\$PWD}. Команда \t{env}. Команда \t{alias}.
+\end{block}
+\end{frame}
+
+\begin{frame}{Базовые файловые операции}
+\only<1>{
+\begin{block}{}
+\t{ls}~-- отображение содержимого каталога.
+
+\t{cd}~-- переход в другой каталог.
+
+\t{mkdir}~-- создать каталог, \t{rmdir}~-- удалить.
+
+\t{rm}~-- удалить файлы, каталоги.
+
+\t{find}~-- поиск файла; \t{locate}~-- быстрый поиск с использованием базы данных.
+
+\t{touch}~-- создать файл либо изменить атрибуты существующего.
+
+\t{echo}~-- вывод в терминал данных.
+
+\t{reset}~-- сброс настроек терминала.
+\end{block}
+}\only<2>{
+\begin{block}{Специальные устройства}
+\t{/dev/zero} при чтении возвращает нули.\\
+\t{/dev/null} уничтожает все данные, которые в него пишут.\\
+\t{/dev/random} случайные числа (требует <<энтропии>>).\\
+\t{/dev/urandom} псевдослучайные числа.
+\end{block}
+}
+\end{frame}
+
+\begin{frame}{Переменные, скобки, возвращаемое значение}
+\begin{block}{}
+    \t{x="text"; echo "\$x"; echo "\$\{x\}"}. \t{echo "{}'\$x'=\$x"}.
+    \t{echo "\bsl\$x=\$x"}. \t{unset x}. \t{set}. \t{env}.
+    \t{echo `ls`} и \t{echo \$(ls)}. \t{let a=25+3}.
+
+    \t{\$\{VAR-default\}}, \t{\$\{VAR=default\}}~-- значение по умолчанию.
+
+    \t{\$\{VAR?err message\}}~-- выдача сообщения.
+
+    \t{\$\{VAR:pos[:len]\}}~-- подстрока с \t{pos} длины \t{len}.
+
+    Математика: \t{var1=\$((5 + 5))}, \t{var2=\$((\$var1 * 2))}.
+
+    \ж Возвращаемое значение\н: \t{\$?}. Если возвращается не 0, то это обычно~--- код ошибки.
+    Например: \t{команда1 \&\& команда2 || команда3}.\\
+    Команды можно объединять: \t{(команда1; команда2; команда3)} (скобка вернет код возврата
+    последней команды).
+    \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Скрипты}
+\begin{block}{Шебанг}
+    \t{\#!/bin/bash} или \t{\#!/bin/sh}. Шебанг необязателен, если скрипт можно вызывать в том
+    же сеансе bash (однако, в случае проблемы сеанс может <<упасть>>).
+\end{block}
+\begin{block}{Аргументы}
+    \t{\$N}~-- N-й аргумент (\t{\$0}~-- имя скрипта). \t{\$\#}~-- количество аргументов.
+
+    \t{\$*} и \t{\$@}:
+\begin{lstlisting}
+function chkargs(){
+    echo "you give $# arguments:"
+    for arg in "$@"; do
+    echo -e "\t$arg"
+    done
+}
+chkargs "$@"
+chkargs "$*"
+chkargs $*
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}{Вывод\slash вывод файлов, перенаправление вывода}
+\only<1>{
+\begin{block}{Команда \t{man}}
+    Выводит справку по флагам различных утилит. \t{man man}.
+\end{block}
+\begin{block}{}
+    Вывод содержимого файла: \t{cat file}. Перенаправление в другой файл: \t{cat file1 >
+        file2}.
+
+    Номера стандартных дескрипторов: 0~-- stdin, 1~-- stdout, 2~-- stderr:
+
+    \t{cat \$file 2>/dev/null}.
+
+    \t{tail -n N}~-- отображение $N$ строк с конца файла. Чаще с флагом \t{-f} (для
+    непрерывного
+    перечитывания файла в процессе добавления новых строк).
+
+    \t{head -n N}~-- отображение $N$ строк с начала файла. Часто~--- в комбинации с \t{tail}.
+
+    Команды \t{less} и \t{more} позволяют интерактивно перемещаться по тексту (доступен также
+    поиск, переход на $N$-ю строку и т.д.).
+\end{block}
+}\only<2>{
+\begin{block}{}
+    \ж Каналы\н помогают перенаправить вывод одной команды на ввод другой. Например: \t{ls -l |
+        less}.\\
+    \t{read}~-- считать данные со стандартного ввода\\
+    \t{>>} позволяет дописывать файл. Например:\\
+    \t{> filelist; while read x; do ls \$x >> filelist; done}\\
+    \t{exec 1 > myfile}~-- перенаправить stdout в файл\\
+    \t{exec 2 > errfile}~-- перенаправить stderr\\
+    \t{exec 2 > \&1}~-- перенаправить stderr в stdout\\
+    \t{exec 0 < file}~-- читать данные не с stdin, а из файла\\
+    Временное: \t{exec 4 < \&0; exec 0 < myfile; \ldots ; exec 0 < \&4}
+\end{block}
+}
+\end{frame}
+
+
+\begin{frame}[fragile]{Условия}
+\begin{block}{}
+    \t{if [ условие ]; then true; else false; fi}
+
+    \t{[ условие ] \&\& true || false}.
+\end{block}
+\begin{lstlisting}
+echo "Enter value"
+read val
+if [ $val -gt 100 ]; then
+  echo "value $val greater than 100";
+else
+  echo "value $val less than 100";
+fi
+\end{lstlisting}
+
+\begin{lstlisting}
+    echo "Enter filename"
+    read f
+    [ -d $f ] && echo "$f is a directory"
+    [ -f $f ] && echo "$f is a file"
+    [ ! -e $f ] && echo "Not exists"
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{\t{case}}
+\begin{lstlisting}
+while [ -n "$1" ];do
+case "$1" in
+-a) echo "Found the -a option" ;;
+-b) echo "Found the -b option" ;;
+-c) echo "Found the -c option" ;;
+*) echo "$1 is not an option" ;;
+esac
+shift
+done
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Цикл \t{for}}
+\begin{lstlisting}
+echo -e "\t1."
+
+for (( a = 1; a < 11; ++a )); do
+  echo "a=$a"
+done
+
+echo -e "\n\t2."
+
+for a in $(seq 1 10); do
+  echo "a=$a"
+done
+
+echo -e "\n\t3."
+
+for a in one "two args" three; do
+echo "a=$a"
+done
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Цикл \t{while}}
+\begin{lstlisting}
+#!/bin/bash
+
+while read X; do
+  echo "You entered: $X"
+done
+
+echo "End"
+\end{lstlisting}
+\begin{lstlisting}
+./w
+Hello
+You entered: Hello
+More words
+You entered: More words
+^D
+End
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Массивы}
+\small
+\begin{lstlisting}
+array=(1 2 3 4 [5]=next [10]=last)
+echo -n "array with size ${#array[*]} and indexes"
+echo " ${!array[*]}: ${array[*]}"
+echo "array[4]=${array[4]}, array[10] len=${#array[10]}"
+\end{lstlisting}
+Результат:
+\begin{lstlisting}
+array with size 6 and indexes 0 1 2 3 5 10: 1 2 3 4 next last
+array[4]=, array[10] len=4
+\end{lstlisting}
++ скрипт \t{takeexp}.
+\end{frame}
+
+\begin{frame}{Поиск и редактирование в файлах}
+\only<1>{
+\begin{block}{\t{grep}}
+\t{grep take takeexp}\\
+\t{echo -e "first line\bsl nsecond line\bsl nafirst line" \vl grep first}\\
+\t{echo -e "first line\bsl nsecond line\bsl nafirst line" \vl grep -w first}\\
+Отобразить N линий до, после или вокруг: \t{-BN}, \t{-AN}, \t{-CN}.\\
+Рекурсивный поиск: \t{-R}.\\
+Инверсия поиска: \t{-v}.\\
+Вывод номера строки: \t{-n}, имени файла: \t{-H}.\\
+Поиск нескольких фраз: \t{-e фраза}.\\
+Регулярные выражения: \t{grep [0-9] file};\\
+IP-адрес: \t{grep -E "[0-9]\{,3\}\bsl.[0-9]\{,3\}\bsl.[0-9]\{,3\}\bsl.[0-9]\{,3\}".\\
+Конструкция \t{\{min,max\}}.
+}
+\end{block}
+}\only<2>{
+\begin{block}{\t{sed}}
+\t{sed 's/test/another test/g' ./myfile}\\
+\t{sed -e 's/This/That/' -e 's/test/another test/' ./myfile}\\
+Применение результатов к самому файлу: \t{-i}\\
+Удаление строк: \t{sed '2,3d' myfile} и по шаблону: \t{sed '/test/d' file}\\
+Удаление диапазона по шаблону: \t{sed '/first/,/last/d' file}\\
+Добавить строку до заданной: \t{sed '5i newline' file}\\
+Добавить после заданной: \t{sed '5a newline' file}\\
+Заменить строку: \t{sed '2c newline' file}\\
+Замена отдельных символов: \t{sed 'y/oldset/newset'}\\
+Вставка файла: \t{sed '4r file2' file1}\\
+\end{block}
+}\only<3>{
+\begin{block}{\t{awk}}
+Вывод полей с номерами: \t{awk -F: '\{print \$1 \$4\}' file} (\t{-F}~-- разделитель)\\
+\t{echo "My name is Tom" | awk '\{\$4="Adam"; print \$0\}'}\\
+Выполнение команд в начале: \t{awk 'BEGIN \{print "Hello World!"\}'}\\
+Команды в конце: \t{awk 'END \{print "End of File"\}'}\\
+Использование скриптов в файле: \t{awk -f awkscript1 /etc/passwd}\\
+Условный оператор: \t{awk '\{if (\$1 > 20) print \$1\}' file}\\
+\t{echo -e "10\bsl n20\bsl n30\bsl n40\bsl n50" | awk -f awkscript2}\\
+Математика: \t{awk 'BEGIN\{x=exp(5); print x\}'}
+\end{block}
+}
+\end{frame}
+
+\begin{frame}[fragile]{Регулярные выражения}
+Спецсимволы: \verb'.*[]^${}\+?|()' (нуждаются в экранировании).\\
+\verb'^'~-- начало строки, \verb'$'~-- конце строки.\\
+Спецклассы: \verb'[[:alpha:]]', \verb'[[:alnum:]]', \verb'[[:blank:]]', \verb'[[:digit:]]',
+\verb'[[:upper:]]', \verb'[[:lower:]]', \verb'[[:print:]]', \verb'[[:punct:]]',
+\verb'[[:space:]]'.\\
+Символ <<или>>: \t{\vl}. \verb'echo -e "one\ntwo\nthree" | grep -P "one|three"'.\\
+Количество включений: \verb'{{min,max}}'.\\
+Группировка в скобках: \verb'echo -e "testtest\na test\ntesttesttest" | grep -P "(test){3}"'.\\
+\t{grep -G} (базовые регулярные) и \t{grep -P} (расширенные регулярные).
+
+Проверка адреса электронной почты:
+\verb'^([a-zA-Z0-9_\-\.\+]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$'
+\end{frame}
+
+
+\begin{frame}[fragile]{}
+\begin{block}{Нестандартные баш-скрипты}
+    \lstset{language=C}
+    \begin{lstlisting}
+//usr/bin/gcc $0 && exec ./a.out "$@"
+
+#include <stdio.h>
+
+int main(int argc, char **argv){
+  for(int x = 1; x < argc; ++x)
+  printf("arg %d is %s\n", x, argv[x]);
+  printf("Done\n");
+  return 0;
+}
+    \end{lstlisting}
+    \lstset{language=bash}
+    Запуск:
+    \begin{lstlisting}
+./a.c some "amount of" data
+arg 1 is some
+arg 2 is amount of
+arg 3 is data
+Done
+    \end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}{Примеры}
+\begin{block}{}
+\begin{enumerate}
+\item Получить псевдослучайное число длиной $N$ символов из \t{/dev/urandom}.
+\item Заполнить таблицу в 100~строк с шаблоном: столбец~1~--- номер строки, столбец~2~---
+псевдослучайное число от~0 до~1000, столбец~3~--- псевдослучайное число от~-20 до~20, столбец~4~---
+псевдослучайное число с фиксированной точкой от~0 до~100 с~3 знаками после запятой.
+\item Отсортировать таблицу из предыдущего примера по 2, 3 и 4 столбцу.
+\item В цикле сгенерировать из \t{/dev/urandom} последовательности латинских букв длиной до 100.
+Если в  последовательности есть искомая (введенная с клавиатуры), отобразить ее на экране.
+Продолжать до нахождения 5 вхождений или же до достижения 10000 проверок. Вывести на экран
+количество <<попаданий>> и <<промахов>>, а также процентную долю <<попаданий>> по отношению ко всем
+испытаниям.
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{Задания}
+\begin{block}{}
+\only<1>{
+\begin{enumerate}
+\item Прочитайте \t{man column}. При помощи этой утилиты отформатируйте в читабельном виде вывод
+скрипта скрипта из третьего примера. Попробуйте несколько разных видов оформления.
+\item Модифицируйте скрипт \t{takeexp} так, чтобы он брал данные из файла, в котором они хранятся в
+табличном виде (построчно): номер позиции, время экспозиции в миллисекундах, фокусное расстояние в
+условных отсчетах.
+\item Напишите скрипт, проверяющий, являются ли данные в таблице членами <<магического квадрата>>
+$4\times 4$ (сумма по строкам, столбцам и диагоналям должна быть одинаковой).
+\item Сгенерируйте 999 случайных целых чисел от~0 до~1000. При помощи \t{sort}, \t{head} и \t{tail}
+найдите медиану полученного ряда.
+\savei
+\end{enumerate}
+}\only<2>{
+\begin{enumerate}
+\conti
+\item Сгенерируйте 10000 случайных целых чисел от~0 до~99. Создайте файл, в который занесите
+гистограмму распределения чисел (первая колонка~--- числа, вторая~--- количество их в ряду данных).
+Отформатируйте таблицу при помощи утилиты \t{column}.
+\item Нарисуйте в \t{bash} горизонтальную гистограмму по данным из предыдущего задания (значение
+фиксированной длины, за которым следует поле из символов \t{*} в нужном количестве). Используйте
+форматированный вывод (например, \t{printf "\%-4d\%.5s\bsl n"\,  123
+"*******************************"}.
+Попробуйте другой способ нарисовать такую гистограмму.
+Учтите, что ширина вывода должна должна быть ограничена заданным числом (80 или 100 символов).
+\item Используя циклы и массивы, нарисуйте вертикальную гистограмму. Учтите, что рисовать придется
+сверху-вниз.
+\item Почитайте об escape-символах. Попробуйте вывести горизонтальную гистограмму в четырех
+градациях цвета ($0\div25\%$ максимума~--- одним цветом, $25\div50\%$~--- другим и т.д.).
+\end{enumerate}
+}
+\end{block}
+\end{frame}
+
+\end{document}

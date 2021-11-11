@@ -1,0 +1,15 @@
+BEGIN {
+	print "List of users and shells"
+	print " UserName \t HomePath"
+	print "-----------------------"
+	FS=":"
+}
+{
+	print $1 " \t " $6
+}
+END {
+	home=ENVIRON["HOME"]
+	name=ENVIRON["USER"]
+	print "-----------------------"
+	print "Your name is " name " and home is " home
+}

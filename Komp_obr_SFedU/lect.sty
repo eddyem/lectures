@@ -1,0 +1,140 @@
+\usepackage[T2A]{fontenc}       %поддержка кириллицы
+\usepackage[koi8-r]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{array}
+\usepackage{xspace}
+%\usepackage[intlimits]{amsmath}
+
+
+\def\No{\textnumero}
+
+\graphicspath{{./pic/}}
+\usetheme{Boadilla}
+\usefonttheme{structurebold}
+\usefonttheme[onlymath]{serif}
+\setbeamercovered{transparent}
+
+\newenvironment{pict}%
+    {\begin{figure}[!h]\begin{center}\noindent}%
+    {\end{center}\end{figure}}
+
+\setbeamercolor{color1}{bg=blue!50!black,fg=white}
+\setbeamercolor{light1}{bg=blue!20!white,fg=black}
+\setbeamercolor{normal text}{bg=blue!20!black,fg=cyan!70!white}
+\setbeamercolor{frametitle}{fg=red,bg=blue!40!black}
+\setbeamercolor{title}{fg=red,bg=blue!40!black}
+\setbeamercolor{block title}{fg=cyan,bg=blue!40!black}
+\newenvironment{defin}{\begin{beamercolorbox}[shadow=true, rounded=true]{color1}}%
+{\end{beamercolorbox}}
+\newenvironment{light}{\begin{beamercolorbox}[shadow=false,rounded=false]{light1}}%
+    {\end{beamercolorbox}}
+\newcommand{\img}[2][]{\begin{pict}\includegraphics[width=#1\columnwidth]{#2}\end{pict}}
+\newcommand{\smimg}[2][]{\includegraphics[width=#1\columnwidth]{#2}}
+\logo{\includegraphics[width=1cm,height=1cm,keepaspectratio]{saologo.jpg}}
+
+\def\daterussian{ % fix for iюня and iюля
+  \def\today{\number\day~\ifcase\month\or
+   \cyrya\cyrn\cyrv\cyra\cyrr\cyrya\or
+   \cyrf\cyre\cyrv\cyrr\cyra\cyrl\cyrya\or
+   \cyrm\cyra\cyrr\cyrt\cyra\or
+   \cyra\cyrp\cyrr\cyre\cyrl\cyrya\or
+   \cyrm\cyra\cyrya\or
+   \cyri\cyryu\cyrn\cyrya\or
+   \cyri\cyryu\cyrl\cyrya\or
+   \cyra\cyrv\cyrg\cyru\cyrs\cyrt\cyra\or
+   \cyrs\cyre\cyrn\cyrt\cyrya\cyrb\cyrr\cyrya\or
+   \cyro\cyrk\cyrt\cyrya\cyrb\cyrr\cyrya\or
+   \cyrn\cyro\cyrya\cyrb\cyrr\cyrya\or
+   \cyrd\cyre\cyrk\cyra\cyrb\cyrr\cyrya\fi
+   \space \number\year~\cyrg.}}
+
+\author[Емельянов Э.В.]{Емельянов Эдуард Владимирович}
+\institute[САО РАН]{Специальная астрофизическая обсерватория РАН\\
+	{\tiny Лаборатория физики оптических транзиентов}\\
+}
+
+\def\ж{\bf}
+\def\т{\tt}
+\def\н{\normalfont}
+\def\к{\it}
+\def\t#1{\texttt{#1}}
+\def\bi{\bfseries\itshape} % Жирный курсив
+\def\red#1{\textcolor{red}{#1}}
+\def\green#1{\textcolor{green}{#1}}
+\def\blue#1{\textcolor{blue}{#1}}
+
+\newenvironment{lightframe}{\bgroup\setbeamercolor{normal text}%
+{bg=blue}\begin{frame}}{\end{frame}\egroup}
+\newenvironment{blueframe}{\bgroup\setbeamercolor{normal text}%
+{bg=cyan!70!white}\begin{frame}}{\end{frame}\egroup}
+
+% save & continue counters in different frames
+\newcounter{saveenumi}
+\newcommand{\savei}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+%\resetcounteronoverlays{saveenumi}
+
+\newsavebox{\hght} % for ddotvec
+\newlength{\lngth}
+
+\def\arr{\ensuremath{\,\rightarrow\,}}	% Стрелка вправо
+\def\Arr{\ensuremath{\,\Rightarrow\,}}	% жирная -//-
+\def\aver#1{\bgroup\mathopen{<}#1\mathclose{>}\egroup}
+\def\Ang{\mbox{\rm\AA}}	% Ангстрем
+\def\B#1{\ensuremath{\mathbf{#1}}}
+\def\bsl{\textbackslash}
+\def\ceil#1{\bgroup\lceil #1\rceil\egroup}
+\def\const{\ensuremath{\mathfrak{const}}}
+\def\C{\ensuremath{\mathfrak{C}}}
+\def\degr{\ensuremath{^\circ}}		% Градус
+\def\ddotvec#1{	% вторая производная вектора по времени
+    \savebox{\hght}{$\vec{#1}$}\ddot{\raisebox{0pt}[.8\ht\hght]{$\vec{#1}$}}}
+\def\dotvec#1{ % Производная вектора по времени
+    \savebox{\hght}{$\vec{#1}$}\dot{\raisebox{0pt}[.8\ht\hght]{$\vec{#1}$}}}
+\def\dpartder#1#2{\dfrac{\partial^2 #1}{\partial #2^2}}	% вторая частная производная
+\def\e{\mathop{\mathrm e}\nolimits}
+\renewcommand{\epsilon}{\varepsilon}		% Красивый эпсилон
+\def\frc#1#2{\raisebox{2pt}{$#1$}\big/\raisebox{-3pt}{$#2$}}	% a/b, a выше, b ниже
+\def\floor#1{\bgroup\lfloor #1\rfloor\egroup}
+\def\frc#1#2{\bgroup\raisebox{2pt}{$#1$}\big/\raisebox{-3pt}{$#2$}\egroup}
+\def\F{\ensuremath{\mathop{\mathfrak F}}\nolimits}	% Красивая Ф
+\def\FT#1{\mathcal{F}\left(#1\right)}
+\def\FWHM{\mathrm{FWHM}}
+\renewcommand{\ge}{\geqslant}
+\def\grad{\mathop{\mathrm{grad}}\nolimits} % Градиент
+\def\ind#1{_{\text{\scriptsize #1}}}	% Нижний индекс русс. буквами
+\def\indfrac#1#2{\raisebox{2pt}{$\frac{\mbox{\small $#1$}}{\mbox{\small $#2$}}$}}
+\def\I{\ensuremath{\mathfrak{I}}}	% Интеграл
+\def\IFT#1{\mathcal{F}^{-1}\left(#1\right)} 	% Обратное ФП
+\def\IInt{\mathop{{\int\!\!\!\int}}\limits}	% Двойной большой интеграл
+\def\ILT#1{\mathop{\mathfrak{L}}\nolimits^{-1}\left(#1\right)} % Обратное преобр. Лапласа
+\def\Int{\int\limits}
+\def\Infint{\int\limits_{-\infty}^\infty}
+\def\IZT#1{\mathop{\mathcal{Z}}\nolimits^{-1}\left(#1\right)} % Обратное Z-преобразование
+\renewcommand{\kappa}{\varkappa}		% Красивая каппа
+\renewcommand{\le}{\leqslant}			% Меньше или равно
+\def\ltextarrow#1{\ensuremath{\stackrel{#1}\leftarrow}} % Стрелка влево с подписью сверху
+\def\lvec{\overrightarrow}		% Длинный вектор
+\def\LT#1{\mathop{\mathfrak{L}}\nolimits\left(#1\right)} % Преобразование Лапласа
+\def\mean#1{\overline{#1}}
+\def\med{\mathop{\mathrm{med}}\nolimits}
+\def\moda{\mathop{\mathrm{Mo}}\nolimits}
+\def\Oint{\oint\limits}		% Большой интеграл
+\def\partder#1#2{\dfrac{\partial #1}{\partial #2}}
+\renewcommand{\phi}{\varphi}			% Красивая фи
+\def\rev#1{\frac{1}{#1}}		% Обратная величина
+\def\rot{\mathop{\mathrm{rot}}\nolimits} % Ротор
+\def\rtextarrow#1{\ensuremath{\stackrel{#1}\rightarrow}} % Стрелка вправо с подписью
+\def\R{\ensuremath{\mathbb{R}}} % рациональные числа
+\def\so{\ensuremath{\Longrightarrow}\xspace} % следовательно
+\def\sinc{\mathop{\mathrm{sinc}}\nolimits} % Интегральный синус
+\def\SNR{\mathop{\mathrm{SNR}}\nolimits}
+\def\Sum{\sum\limits}
+\def\Tr{\mathop{\mathrm{Tr}}\nolimits}	% След матрицы
+\def\veci{{\vec\imath}}		% i-орт
+\def\vecj{{\vec\jmath}}		% j-орт
+\def\veck{{\vec{k}}}			% k-орт
+\def\vl{\xspace\textbar\xspace}
+\def\when#1{\ensuremath{\Bigr|_{#1}}} % Верт. линия с нижним индексом
+\def\WT#1{\ensuremath{\mathop{\mathrm{WT}\left(#1\strut\right)}}} % вейвлет-преобразование
+\def\ZT#1{\mathop{\mathcal{Z}}\nolimits\left(#1\right)} % Z-преобразование

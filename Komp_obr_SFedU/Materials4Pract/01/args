@@ -1,0 +1,12 @@
+#!/bin/bash
+
+function chkargs(){
+	echo "you give $# arguments:"
+	for arg in "$@"; do
+		echo -e "\t$arg"
+	done
+}
+
+chkargs "$@"
+chkargs "$*"
+chkargs $*

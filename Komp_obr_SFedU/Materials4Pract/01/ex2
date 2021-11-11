@@ -1,0 +1,10 @@
+#!/bin/sh
+
+for ((nl = 1; nl < 1001; ++nl)); do
+	one=$((RANDOM % 1001))
+	two=$((RANDOM % 41 - 20))
+	#three=$(echo "scale=3; $((SRANDOM % 100001)) / 1000" | bc -l)
+	R=$((SRANDOM % 100001))
+	three=$(echo "$R" | awk '{printf "%.3f", $1/1000}')
+	echo -e "$nl\t$one\t$two\t$three"
+done

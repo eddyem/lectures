@@ -1,0 +1,43 @@
+#!/bin/bash
+# array with filter positions (0 - hole, 1 - B, 2 - V, 3 - R, 4 - r')
+POSITIONS=( 1 2 3 )
+# array with expositions (in milliseconds!!!) for each position from POSITIONS
+EXPTIME=( 600000 300000 400000 )
+# array with focus (mm*10000) for each position
+FOCUS=( 45000 45500 45300 )
+
+# array size
+len=${#POSITIONS[*]}
+
+__x=0
+function chkweather(){
+  local y=$__x
+  __x=$((__x+1))
+  return $y
+}
+
+function move_focuser(){
+  echo "move focuser to $1"
+}
+
+function move_turret(){
+  echo "move turret to $1"
+}
+
+function capture_frame(){
+  echo "capture frame with exposition $1 to file prefix $2"
+}
+
+function take_image(){
+  for (( i=0; i<$len; i++ )); do
+    move_focuser ${FOCUS[i]}
+    move_turret ${POSITIONS[i]}
+    capture_frame ${EXPTIME[i]} filename
+  done
+}
+
+while chkweather; do
+  take_image
+done
+
+echo "stop_observations"

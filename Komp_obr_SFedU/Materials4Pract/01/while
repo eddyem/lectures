@@ -1,0 +1,7 @@
+#!/bin/bash
+
+while read X; do
+	echo "You entered: $X"
+done
+
+echo "End"

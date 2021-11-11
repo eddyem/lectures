@@ -1,0 +1,53 @@
+#!/bin/bash
+#
+# run it like
+#   ./plot 19.12.25/11\:20_T0.dat
+#
+OUT=tmpfile.txt
+awk '{print $2 "\t" $3 "\t" $4}' $1 > $OUT
+DATE=$(echo $1 | sed -e 's|/| |' -e 's|_.*||')
+TX=$(echo $1 | sed 's|.*_\(.*\).dat|\1|')
+if [ $TX = "T0" ]; then Tname="TOP side"
+else Tname="BOTTOM side"
+fi
+VAL=$(head -n1 $1 | awk '{print $4}')
+echo -e "30\t30\t$VAL\n-30\t-30\t$VAL" >> $OUT
+cat << EOF > gnutplt
+#!/usr/bin/gnuplot
+set contour
+unset surface
+set cntrparam order 4
+set cntrparam bspline
+#set cntrparam levels auto 6
+#set cntrparam levels incremental -30,0.1,30
+set view map
+set size square
+set xrange [-40:40]
+set yrange [-40:40]
+set dgrid3d 100,100,4
+set table "contour.txt"
+splot '$OUT' u 1:2:3
+unset table
+unset contour
+set surface
+set table "dgrid.txt"
+splot '$OUT' u 1:2:3
+unset table
+reset
+set terminal jpeg enhanced size 1024,768
+set output "$TX.jpg"
+set size square
+set xrange [-30:30]
+set yrange [-30:30]
+set xlabel "X, dm"
+set ylabel "Y, dm"
+set title "Mirror temperature $TX for $DATE ($Tname)"
+set pm3d map
+unset key
+circle(x,y,z) = x**2+y**2 > 900 ? NaN : z
+splot 'dgrid.txt' u 1:2:(circle(\$1,\$2,\$3)) w pm3d, 'contour.txt' u 1:2:(circle(\$1,\$2,\$3)) w l lc rgb "black", '$OUT' u 1:2:(circle(\$1,\$2,\$3)):3 with labels font ",8"
+EOF
+
+chmod 755 gnutplt
+./gnutplt
+rm -f gnutplt $OUT contour.txt dgrid.txt

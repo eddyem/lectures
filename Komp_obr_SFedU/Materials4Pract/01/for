@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo -e "\t1."
+
+for (( a = 1; a < 11; ++a )); do
+	echo "a=$a"
+done
+
+echo -e "\n\t2."
+
+for a in $(seq 1 10); do
+	echo "a=$a"
+done
+
+echo -e "\n\t3."
+
+for a in one "two args" three; do
+	echo "a=$a"
+done

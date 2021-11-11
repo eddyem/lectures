@@ -1,0 +1,6 @@
+#!/bin/bash
+
+array=(1 2 3 4 [5]=next [10]=last)
+echo "array with size ${#array[*]} and indexes ${!array[*]}: ${array[*]}"
+echo "array[4]=${array[4]}, array[10] len=${#array[10]}"
+

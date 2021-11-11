@@ -1,0 +1,82 @@
+% lstlistings for bash & octave
+
+\usepackage{listings}
+\lstset{basicstyle=\small,breaklines=true,language=Octave,
+    extendedchars=true,aboveskip=1em,belowcaptionskip=5pt,
+    prebreak =
+    \hbox{\normalfont\small\hfill\green{\ensuremath{\hookleftarrow}}},
+    postbreak = \hbox to 0pt{%
+        \hss\normalfont\small\green{\ensuremath{\hookrightarrow}}\hspace{1ex}},
+    commentstyle=\color{blue},showspaces=false,
+    showstringspaces=false,stringstyle=\bfseries\color[rgb]{0.6,0,1},
+    numbers=left,numberstyle=\tiny,stepnumber=2,
+    keywordstyle=\bfseries\color[rgb]{0,0.1,0.5},
+    frameround=tttt,frame=trBL,tabsize=4,backgroundcolor=\color[rgb]{.9,.9,1}}
+\lstloadlanguages{bash}
+\def\lstlistingname{Листинг}
+\def\lstref#1{(см.~листинг~\ref{#1})}
+
+%\lstinputlisting[caption={{\tt prepare\_all.m} --- моделирование получения
+%    пред-- и зафокальной гартманнограммы на
+%    БТА},label=prepareall]{diff/prepare_all.m}
+
+
+%\lstdefinelanguage{pseudo}{
+%    morekeywords={если, иначе, для, в, от, до, вариант, выполнить, истина, ложь, функция,
+%        вернуть, по, модулю, значение, и, или, не},
+%    sensitive=true,%
+%    morecomment=[l]\#%
+%}
+%\lstset{language=pseudo}
+%\lstset{literate=
+%    {<=} {$\le$}{2} {!=} {$\neq$}{2} {=} {$\leftarrow$}{2} {==} {=}{2} {&&} {$\cap$}{2} {||}
+%    {$\cup$}{2} }
+%\lstset{extendedchars=true,escapechar=`,commentstyle=\footnotesize\itshape,
+%    stringstyle=\bfseries,numbers=left,frame=tbrL,rulesepcolor=\color{gray},
+%    basicstyle=\small,breaklines=true,frameround=tttt}
+%\begin{document}
+%    \begin{lstlisting}
+%        функция полуоткрытая_пирамида(v, u){
+%            u' = спроектировать u на плоскость yz
+%            для i от 0 до 3{
+%                v[i] = v[i] - u
+%                v'[i] = спроектировать v[i] на плоскость yz
+%            }
+%            Nc = 0
+%            для i от 0 до 3{
+%                v1 = v' \ v'[i] # формируем очередной треугольник
+%                n = полуоткрытый_треугольник(v1, u')
+%                если n > 0{
+%                    f0 = значение функции в (0,0)
+%                    f1 = значение функции в (1,0)
+%                    если f0 * f1 < 0
+%                    Nc = Nc + 1
+%                    иначе если |f0| > |f1|
+%                    Nc = Nc + 1
+%                }
+%            }
+%            вернуть Nc по модулю 2
+%        }
+%    \end{lstlisting}
+%
+%    \begin{lstlisting}
+%        функция полуоткрытый_треугольник(v, u){
+%            для i от 0 до 2
+%            v[i] = v[i] - u
+%            Nc = 0
+%            для i от 0 до 2{
+%                j = (i+1) по модулю 3
+%                если v[i] и v[j] пересекают ось Х{
+%                    f0 = значение функции в (0,0)
+%                    f1 = значение функции в (1,0)
+%                    если f0 * f1 < 0
+%                    Nc = Nc + 1
+%                    иначе если |f0| > |f1|
+%                    Nc = Nc + 1
+%                }
+%            }
+%            вернуть Nc по модулю 2
+%        }
+%    \end{lstlisting}
+%
+%\end{document}

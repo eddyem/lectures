@@ -1,0 +1,555 @@
+\documentclass[10pt,pdf,hyperref={unicode}]{beamer}
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage{ed}
+\usepackage{lect}
+
+\title[Компьютерная обработка. Лекция 3.]{Компьютерная обработка результатов измерений}
+\subtitle{Лекция 3. Систематические и случайные погрешности. Теория оценок.}
+\date{22 марта 2021 года}
+
+\begin{document}
+% Титул
+\begin{frame}
+\maketitle
+\end{frame}
+% Содержание
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\section{Погрешность}
+\begin{frame}{Погрешность}
+\only<1>{
+\begin{defin}
+\ж Погрешность\н --- отклонение измеренного значения величины от её истинного (действительного)
+значения.
+\end{defin}
+\begin{block}{}
+Абсолютная погрешность, $\Delta x$ (напр., RMS); относительная погрешность, $\delta x=\Delta
+x/\mean{x}$; приведенная погрешность $\gamma x=\Delta x/N_x$ (нормировочный коэффициент).
+\end{block}
+\begin{block}{По причине возникновения}
+\begin{description}
+\item[Инструментальные] определяются погрешностями применяемых средств измерений.
+\item[Методические] обусловлены  несовершенством метода, а также упрощениями, положенными в основу
+методики.
+\item[Субъективные] обусловлены качествами экспериментатора.
+\end{description}
+\end{block}}
+\only<2>{
+\begin{block}{По характеру проявления}
+\begin{description}
+\item[Случайные] обусловлены совокупностью внешних факторов, влияющих на результат эксперимента.
+\item[Систематические] связаны с влиянием прибора на измеряемую величину или методическими
+ошибками, выявляются лишь сменой прибора\slash метода\slash экспериментатора.
+\item[Промахи] наиболее сильно себя проявляют и связаны с неисправностью прибора или
+экспериментатора.
+\end{description}
+\end{block}
+\begin{block}{Средняя квадратическая погрешность среднего арифметического}
+$$
+\sigma_{\aver{x}}=\frac{\sigma_x}{\sqrt{n}}=
+\sqrt{\frac{\sum\limits_{i=1}^n(\mean{x_i}-\aver{x})^2}{n(n-1)}}.
+$$
+\end{block}
+}\only<3>{
+\img{pogr}
+Примеры погрешностей: а) случайная, б) случайная и систематическая, в) случайная и промахи.
+}
+\end{frame}
+
+\begin{frame}{Правила вычисления погрешностей}
+    \begin{block}{}
+        \begin{enumerate}
+            \item
+            $$\Delta\bigl(\sum a_n\bigr)=\sum\Delta a_n.$$
+            \item
+            $$\prod(a_i\pm\Delta a_i)=\prod a_i\prod(1\pm\delta a_i)\approx
+            \prod a_i(1\pm\sum\delta a_i),$$
+            $$\bigl(a[1\pm\delta a]\bigr)^n\approx a^n(1\pm n\delta a).$$
+            \item\ж В сложных функциях\н вида $y=f(x_1,\ldots,x_n)$ можно оценить
+            погрешность, воспользовавшись приближением:
+            $$
+            \delta y\approx\Bigl|\frac{dy}{y}\Bigr|=\Bigl|
+            \frac{d f(x_1,\ldots,x_n)}{f(x_1,\ldots,x_n)}\Bigr|,
+            $$
+            в котором следует заменить $\frc{dx_i}{x_i}=\delta x_i$~-- относительная
+            погрешность
+            измерения величины~$x_i$, $d x_i=\Delta x_i$~-- абсолютная погрешность. Все
+            слагаемые необходимо суммировать по абсолютной величине.
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\section{Теория оценок}
+\begin{frame}{Правило <<трех сигм>>}
+    \begin{block}{}
+        При гауссовом распределении случайной величины вероятность
+        $$P(|x-\mean{x}|<3\sigma)=2\Phi(3)=0.9973.$$
+        ($\Phi$~-- нормальное интегральное распределение).
+    \end{block}
+    \begin{defin}
+        \ж Правило трех сигм\н: если случайная величина распределена нормально, то абсолютная величина ее
+        отклонения от математического ожидания не превосходит утроенного среднего квадратичного отклонения.
+    \end{defin}
+    \begin{defin}
+        \ж Теорема Ляпунова\н: случайная величина, являющаяся суммой большого числа взаимно независимых
+        случайных величин, имеет нормальное распределение.
+    \end{defin}
+\end{frame}
+
+\begin{frame}{Распределение $\chi^2$}
+\only<1>{
+\begin{block}{}
+Распределение суммы квадратов~$n$  нормальных независимых случайных величин ($x_i$, $i=\overline{1,n}$,
+$\mean{x}=0$, $\sigma_x=1$): $\chi^2=\sum_{i=1}^n x_i^2\;$  с~$k=n$ степенями свободы.
+Каждое линейное соотношение уменьшает количество степеней свободы на единицу.
+Плотность распределения <<хи квадрат>>:
+$$
+f(x)=\begin{cases}
+    0,& x\le0,\\
+    \dfrac{\e^{-x/2}x^{k/2-1}}{2^{k/2}\Gamma(k/2)},& x>0,\\
+\end{cases}
+$$
+где $\Gamma(x)=\Int_0^\infty t^{x-1} e^{-t}dt$~-- гамма-функция, в частности,
+$\Gamma(n+1)=n!$. $\mean{\chi^2}=k$, $\sigma^2_{\chi^2}=2k$.
+Из закона больших чисел при $k\to\infty$ это распределение приближается к нормальному.
+\end{block}
+}\only<2>{
+\begin{block}{}
+В общем случае для любых нормальных независимых случайных величин
+$$\chi^2=\sum \left(\frac{x_i-\mean{x}}{\sigma_x}\right)^2.$$
+При $k=2$ распределение совпадает с экспоненциальным.
+
+\ж Квантили\н распределения $\chi^2$ вычисляются при помощи функции \t{chi2inv} пакета \t{statistics}. Например:
+
+{\texttt chi2inv([0.990:0.001:0.999], 10)\\
+ans =\\
+23.209   23.514   23.853   24.235   24.673   25.188   25.813   26.611   27.722   29.588}
+
+Само распределение можно отобразить при помощи \t{chi2pdf(x, N)}. \t{chi2cdf}~-- интегральное распределение.
+\end{block}
+}
+\end{frame}
+
+\begin{frame}{Распределение Стьюдента (t-распределение)}
+\only<1>{
+\begin{block}{}
+Строится наподобие $\chi^2$ для $n+1$ независимой нормальной величины $Y_i$:
+$$t=\frac{Y_0}{\sqrt{\frac{1}{n}\sum_{i=1}^n Y_i^2}}.$$
+Плотность  распределения:
+$$
+f(x)=\frac{\Gamma(\frac{n+1}{2})}{\sqrt{n\pi}\, \Gamma(\frac{n}{2})}
+\left(1+\frac{x^2}{n}\right)^{-\frac{n+1}{2}}.
+$$
+Распределение симметрично. $\mean{t}=0$ при $n>1$, $\sigma^2_t=\frc{n}{(n-2)}$ при $n>2$.
+
+\end{block}
+}\only<2>{
+\begin{block}{}
+Можно представить $T$ с $k$ степенями свободы через нормальное и $\chi^2$: если $Z$ распределено нормально, а
+$V$~-- по закону $chi^2$, то
+$$T=Z\sqrt{\dfrac{k}{V}}.$$
+
+Распределение возникает из распределения выборочных среднего, $\aver{X}$ и дисперсии, $S$:
+$$\frac{\aver{X}-\mean{X}}{S/\sqrt{n}}\propto t(n-1).$$
+
+Аналогичные функции из пакета \t{statistics}: \t{tinv}, \t{tpdf}, \t{tcdf}:
+
+{\texttt
+    tinv([0.990:0.001:0.999], 100)\\
+    ans =\\
+    2.3642   2.4052   2.4506   2.5012   2.5589   2.6259   2.7064   2.8077   2.9464   3.1737}
+\end{block}
+}
+\end{frame}
+
+\section{Ковариационная матрица}
+\def\cov#1{\ensuremath{\mathrm{cov}(#1)}}
+\begin{frame}{Ковариационная матрица}
+\only<1>{
+\begin{block}{}
+\ж Ковариация\н, $\sigma_{xx}=\sigma_x^2=D(x)=\mean{(x-\mean{x})^2}$:
+$$\cov{x,y}=\sigma_{xy}=\sigma_{yx}=\lim_{N\to\infty}\frac{1}{N}\sum_{k=1}^N (x-\mean{x})(y-\mean{y})=
+\mean{(x-\mean{x})(y-\mean{y})}.$$
+
+\ж Ковариационная матрица\н для двух и $M$~одинаковых величин ($\cov{X}$):
+$$C_{xy}=\begin{pmatrix}\sigma_x^2 & \sigma_{xy} \\ \sigma_{yx} & \sigma_y^2 \\ \end{pmatrix},\quad
+C_{x_M} = \begin{pmatrix}
+\sigma_1^2 & \sigma_{12} & \sigma_{13} & \dots & \sigma_{1M} \\
+\sigma_{21} & \sigma_{2}^2 & \sigma_{23} & \dots & \sigma_{2M} \\
+\hdotsfor{5}\\
+\sigma_{M1} & \sigma_{M2} & \sigma_{M3} & \dots & \sigma_{M}^2 \\
+\end{pmatrix},\quad
+C=C^{T}.
+$$
+\end{block}}\only<2>{
+\begin{block}{}
+Пусть $\Delta x=\mean{x-\mean{x}}$, тогда $C$ можно определить как $C=\mean{\Delta x\cdot\Delta x^T}$,
+где $\Delta x$~-- вектор-столбец.  В общем случае $C_{xy}=\mean{\Delta x\Delta y^T}$ для векторов~$X$ и~$Y$ любой
+длины.\ж  Свойства\н:
+\begin{itemize}
+\item для независимых $X$ и $Y$, $C_{XY}=C_X+C_Y$;
+\item $\cov{AX + B}= A\cov{X}A^T$ ($A$~-- произвольная квадратная матрица);
+\item $\cov{X,Y} = \cov{Y,X}^T$;
+\item $\cov{\sum X_i, Y}=\sum\cov{X_i, Y}$, $\cov{X, \sum Y_i}=\sum\cov{X, Y_i}$;
+\item для независимых $X$ и $Y$ $\cov{X,Y}=0$.
+\end{itemize}
+\end{block}
+}\only<3>{
+\begin{columns}
+\column{0.45\textwidth}\begin{block}{}
+Вектор данных: $X=\binom{x_i}{y_i}$; $\Sigma=C_{xy}$. $\sigma_x$ и~$\sigma_y$ характеризуют разброс данных по осям.
+$\sigma_{xy}$ отражает линейную зависимость $y(x)$. В данном случае удобней было бы использовать\ж
+корреляционную матрицу\н, где $\rho_{xy}=\frc{\mean{(x-\mean{x})(y-\mean{y})}}{\sigma_x\sigma_y}$. При $\rho_{xy}=0$
+эллиптичное облако точек, при $\rho_{xy}=1$ расположение точек вдоль отрезка.
+\end{block}
+\column{0.55\textwidth}\img{covarianceXY}
+\end{columns}
+}
+\end{frame}
+
+\begin{frame}[fragile]{}
+\begin{block}{}
+        \ж Собственные значения\н ковариационной матрицы характеризуют дисперсию вдоль направления, заданного ее\ж
+        собственными векторами\н. $C_{xy}v=\lambda v$.
+        \begin{verbatim}
+            [v, lambda]=eig([3 2; 2 3], "vector")
+        \end{verbatim}
+        Получили два собственных значения:~1 и~5, которым соответствуют вектора
+        $v(1)=\binom{-\sqrt{2}/2}{\sqrt{2}/2}$ и
+        $v(5)=\binom{\sqrt{2}/2}{\sqrt{2}/2}$.
+    \end{block}
+\img[0.8]{covarmatr}
+\end{frame}
+
+
+\section{Доверительные интервалы}
+\begin{frame}{Доверительный интервал}
+\only<1>{
+\begin{block}{Доверительная вероятность}
+$p = P(X_0 \le x \le X_1)$
+\end{block}
+\begin{block}{Математическое ожидание}
+Если известен закон распределения (мат. ожидание и дисперсия: $\mu$ и $\sigma$), то
+$$P\Bigl(\aver{X}-z_{1-\frac{\alpha}2}\frac{\sigma}{\sqrt{n}} \le \mu \le
+	\aver{X}+z_{1-\frac{\alpha}2}\frac{\sigma}{\sqrt{n}}\Bigr) = 1 - \alpha,$$
+где $z_\alpha$~-- $\alpha$--квантиль нормального распределения
+
+В Octave: \t{norminv(x)}. Например, для $1-\alpha=0.95$, $1-\frac{\alpha}{2}=0.975$.
+\end{block}
+}
+\only<2>{
+    \begin{defin}\ж $\alpha$--квантилем\н называется число $x_\alpha$:
+        $P(X\le x_\alpha)\ge\alpha$ и $P(X\ge x_\alpha)\ge1-\alpha$. Т.е. по интегральной функции распределения
+        $F(x_\alpha)=\alpha$. А т.к. $P(a\le X\le b)=F(b)-F(a)$, получаем:
+        $$P(x_{\frac{1-\alpha}2}\le X\le x_{\frac{1+\alpha}2})=\alpha.$$
+    \end{defin}
+\begin{block}{Пример}
+В 64 наблюдениях получено: $S_1=\sum x=600$, $S_2=\sum (x-\mean{x})^2=3800$. Вычислить 95\% доверительный
+интервал матожидания.
+
+Решение: $\sigma=\sqrt{S_2/(n-1)}=7.72$; $\aver{x}=S_1/n=9.375$. $F(0.975)=1.96$, отсюда найдем границы интервала
+$\aver{x}\pm F(0.975)\sigma/\sqrt{n}$: $\mean{x}\in[7.484, 11.266]$ с точностью 95\%.
+\end{block}
+}
+\only<3>{
+\begin{block}{Математическое ожидание}
+Если закон распределения неизвестен, то
+$$P\Bigl(\aver{X}-t_{1-\frac{\alpha}2, n-1}\frac{S}{\sqrt{n}} \le \mu \le
+	\aver{X}+t_{1-\frac{\alpha}2,n-1}\frac{S}{\sqrt{n}}\Bigr) = 1 - \alpha,$$
+где $S$~-- несмещенный RMS. Величина
+$$T=\frac{\aver{X}-\mu}{S/\sqrt{n}}$$ имеет распределение Стьюдента, а $t_{\alpha, n-1}$~-- его
+квантили.
+
+Пример: $\aver{X}=10$, $S_n=2$, $n=11$ (10~степеней свободы), по таблице для двухстороннего
+распределения Стьюдента с вероятностью~95\% $T_{10}^{95}=2.228$. Тогда доверительный интервал есть
+$\mean{X}\pm TS_n/\sqrt{n}$, т.е. $\mu\in(8.6565, 11.3440)$.
+
+В Octave \t{t=tinv(0.975, 10)}, т.к. $1-\alpha=0.95$ \Arr $\alpha=0.05$ \Arr $1-\frac{\alpha}{2}=0.975$.
+\end{block}
+}
+\only<4>{
+\begin{block}{Дисперсия}
+Если известно среднее, можно воспользоваться распределением $\chi^2$.
+$$
+P\Biggl(\frac{\displaystyle\sum_{i=1}^n (X_i-\mu)^2}{\chi^2_{(1+\alpha)/2,n}}\le\sigma^2\le
+\frac{\displaystyle\sum_{i=1}^n (X_i-\mu)^2}{\chi^2_{(1-\alpha)/2,n}}\Biggr)=\alpha.
+$$
+Если же среднее неизвестно, то
+$$
+P\Bigl(\frac{(n-1)S^2}{\chi^2_{(1+\alpha)/2,n-1}}\le\sigma^2\le
+\frac{(n-1)S^2}{\chi^2_{(1-\alpha)/2,n-1}}\Bigr)=\alpha.
+$$
+\end{block}
+}
+\end{frame}
+
+\begin{frame}{Алгоритм обработки результатов измерений}
+\only<1>{
+\begin{block}{Прямые измерения}
+    \begin{enumerate}
+        \item Заполнить  таблицу с результатами $N$~измерений $x_i$.
+        \item Вычислить среднее арифметическое измеренной величины: $\mean{x} = \dfrac{1}{n}\sum
+        x_i$.
+        \item Определить стандартный доверительный интервал:
+        $S_x=\sqrt{\dfrac{1}{n(n-1)}\sum(x_i-\mean{x})^2}$.
+        \item Задать значение коэффициента надежности~$\alpha$, и по нему определить значение
+        коэффициента Стьюдента~$t_{\alpha,N}$.
+        По паспортным данным определить абсолютную погрешность измерительного прибора, $\Delta
+        x_\text{пр}$. Если $\Delta x_\text{пр}>4t_{\alpha,N}S_x$, представить результат в виде
+        $x=\mean{x}\pm\Delta x_\text{пр}/2$, обработка окончена.
+        \item Если $\Delta x_\text{пр}<t_{\alpha,N}S_x$ считаем, что $\Delta x=t_{\alpha,N}S_x$;
+        иначе вычисляем результирующую среднеквадратичную погрешность как
+        $\Delta x = \sqrt{(t_{\alpha,N}S_x)^2+(\Delta x_\text{пр}/2)^2}$.
+        \item Результат записываем как $x=\mean{x}\pm\Delta x,\quad \alpha=\ldots$
+    \end{enumerate}
+\end{block}
+}\only<2>{
+\begin{block}{Косвенные измерения}
+    \begin{itemize}
+        \item Вычислить для всех измеряемых величин среднее значение и погрешность прямого
+        измерения. При этом для всех величин выбирается одно и то же значение доверительной
+        вероятности~$\alpha$.
+        \item По формуле вычислить среднее значение измеряемой величины: $\mean{w}=f(\mean{x},
+        \mean{y}, \cdots)$.
+        \item Оценить погрешность косвенно измеряемой величины:
+        $$(\Delta w)^2 =
+        \left.\Bigl(\partder{w}{x}\Bigr)^2\right|_{\tiny\begin{smallmatrix}
+        x=\mean{x};\\y=\mean{y};\\
+        \cdots\end{smallmatrix}}(\Delta x)^2 +
+        \left.\Bigl(\partder{w}{y}\Bigr)^2\right|_{\tiny\begin{smallmatrix}
+        x=\mean{x};\\y=\mean{y};\\
+        \cdots\end{smallmatrix}}(\Delta y)^2 +
+        \cdots.$$
+        \item Записать результат в виде $w=\mean{w}\pm\Delta w, \quad \alpha=\ldots$.
+    \end{itemize}
+\end{block}
+}
+\end{frame}
+
+\section{Метод наименьших квадратов}
+\begin{frame}{Метод наименьших квадратов}
+\begin{block}{}
+Пусть имеется функция $f(x|a)$, зависящая от аргумента $x$ и набора параметров~$a$. Данной функции
+соответствует набор пар данных $(x_n,y_n)$, причем $y_n=f(x_n|a)+\epsilon_n$, где $\epsilon_n$~--
+случайная ошибка. Математическое ожидание ошибки $\mean{\epsilon}=0$, ее среднеквадратическое
+отклонение равно~$\sigma_n$. Для оценки~$a$ (аппроксимации набора данных заданной функцией)
+необходимо минимизировать выражение
+$$\Phi=\sum_{n=1}^N\Bigl(\frac{y_n-f(x_n|a)}{\sigma^2_n}\Bigr)^2.$$
+При этом подразумевается, что  число измерений превышает число параметров~$a$.
+\end{block}
+\end{frame}
+
+\begin{frame}{Пример: линейная зависимость}
+\begin{block}{}
+Пусть $y=ax+b$, $x_n$ известны с пренебрежимо малой погрешностью, $y_n$~-- результаты измерений
+с нормальным распределением, $\mean{y_i}=ax_i+b$. Минимизируем величину $Y=\sum(y_i-\mean{y_i})^2$,
+$\partder{Y}{a}=0$, $\partder{Y}{b}=0$:
+$$
+a=\frac{n\sum x_iy_i-\sum x_i\sum y_i}{n\sum x^2_i-\Bigl(\sum x_i\Bigr)^2}=
+\frac{\mean{xy}-\mean{x}\,\mean{y}}{\mean{x^2}-(\mean{x})^2},
+$$
+$$
+b=\frac{\sum x_i^2\sum y_i-\sum x_i\sum x_i y_i}{n\sum x^2_i-\Bigl(\sum
+x_i\Bigr)^2}=
+\frac{\mean{x^2\strut}\,\mean{\strut
+y}-\mean{x}\,\mean{xy}}{\mean{x^2}-(\mean{x})^2}.
+$$
+$$
+\sigma^2=\frac{n}{n-2}\Bigl(\mean{y^2}-(\mean{y})^2-a^2\bigl[
+\mean{x^2}-(\mean{x})^2\bigr]\Bigr),\qquad
+\sigma^2_a=\frac{\sigma^2}{n\bigl(\mean{x^2}-(\mean{x})^2\bigr)},\quad
+\sigma_b^2=\sigma_a^2\mean{x^2}.
+$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Аппроксимация МНК}
+\only<1>{\img{lesssquare}}
+\only<2>{
+\begin{block}{}
+Некоторые зависимости, можно свести к линейным. Например, $y=\e^{ax+b}$ \so $\ln y=ax+b$.
+
+Возможно также сведение зависимостей к системам линейных уравнений $A\vec{x}=\vec{b}$, ранг матрицы
+$A$ должен быть больше количества искомых переменных. Минимизируем
+$(A\vec{x}-\vec{b})^T(A\vec{x}-\vec{b})$, что приводит к системе уравнений
+$$
+A^TA\vec{x}=A^T\vec{b}\quad\so\quad
+\vec{x}=(A^TA)^{-1}A^T\vec{b}.
+$$
+Или $\vec{x}=A^{+}\vec{b}$ (псевдообратная матрица), в Octave~--- <<левое деление>> $A\backslash
+b$.
+\end{block}
+}
+\end{frame}
+
+\begin{frame}[fragile]{}
+\begin{block}{Пример}
+Пусть некоторая величина изменяется по закону $y=a_0+a_1\e^{-t}+a_2te^{-t}$.
+В матричном виде $Y=TA$, где $T$~-- функциональная матрица, у которой в первом столбце
+размещены единицы (соответствует умножению на~$a_0$), во втором~--- функция
+$\e^{-t}$, а в третьем~--- $t\e^{-t}$. Коэффициенты~$A$ найдем при помощи МНК:
+$A=T\backslash Y$.
+\begin{verbatim}
+t = [0 0.3 0.8 1.1 1.6 2.3]';
+y = [0.6 0.67 1.01 1.35 1.47 1.25]';
+T = [ones(size(t))  exp(-t)  t.*exp(-t)];
+A = T\y
+\end{verbatim}
+\end{block}
+\end{frame}
+
+\section{Ошибка МНК}
+\begin{frame}{Ошибка МНК}
+\only<1>{
+\begin{block}{МНК для линейной зависимости}
+Пусть наблюдаемая $l$ имеет линейную зависимость от $a$, $b$ и~$c$:
+$$l(t) = x\cdot a(t) + y\cdot b(t) + z\cdot c(t).$$
+Из эксперимента получаем $N$ наборов данных $l_k$, $a_k$, $b_k$ и~$c_k$:
+$$l_k = xa_k + yb_k + zc_k + \Delta l_k.$$
+Найдем $x$, $y$ и $z$, минимизируя $S=\Delta l_k^2=\sum\bigl(l_k-(xa_k + yb_k + zc_k)\bigr)^2$:
+$$\partder{S}{\aleph}=\frac{\partial}{\partial\aleph} \sum\bigl(l_k-(xa_k + yb_k + zc_k)\bigr)^2 = 0$$
+\end{block}
+}\only<2>{
+\begin{block}{}
+Введем обозначения: $\sum_{k=1}^N \aleph_k\beth_k = [\aleph\beth]$. Тогда после дифференцирования получим систему
+из~трех уравнений для нахождения трех неизвестных:
+$$
+\left\{\begin{aligned}
+x[aa] + y[ab] + z[ac] & = [al], \\
+x[ba] + y[bb] + z[bc] & = [bl], \\
+x[ca] + y[cb] + z[cc] & = [cl]. \\
+\end{aligned}\right.\quad\text{или}\quad
+\begin{pmatrix}
+[aa] & [ab] & [ac]\\
+[ba] & [bb] & [bc]\\
+[ca] & [cb] & [cc]\\
+\end{pmatrix}
+\begin{pmatrix}
+x\\ y\\ z
+\end{pmatrix} =
+\begin{pmatrix}
+    [al]\\ [bl]\\ [cl]
+\end{pmatrix}.
+$$
+Или $MK=V$, следовательно, $K=M^{-1}V$ (\t{K=M\bsl V}).
+Аналогичную систему можно составить для погрешностей:
+$$
+\begin{pmatrix}
+    [aa] & [ab] & [ac]\\
+    [ba] & [bb] & [bc]\\
+    [ca] & [cb] & [cc]\\
+\end{pmatrix}
+\begin{pmatrix}
+    \Delta x\\ \Delta y\\ \Delta z
+\end{pmatrix} =
+\begin{pmatrix}
+    [a\Delta l]\\ [b\Delta l]\\ [c\Delta l]
+\end{pmatrix} \quad\text{или}\quad
+M \Delta K = \Delta V.
+$$
+\end{block}
+}\only<3>{
+\begin{block}{}
+Итак, для погрешностей имеем: $\Delta K=M^{-1}\Delta V$. Если наблюдения~--- равноточные и независимые,
+ковариационная матрица ошибок диагональна:
+$$
+C_L = \begin{pmatrix}
+\Delta l_1 \\ \Delta l_2 \\ \cdots \\ \Delta l_N
+\end{pmatrix}
+\Bigl(\Delta l_1\; \Delta l_2\; \ldots\; \Delta l_N \Bigr) = \sigma_0^2\begin{pmatrix}
+1 & 0 & 0 & \cdots & 0\\
+0 & 1 & 0 & \cdots & 0\\
+\hdotsfor{5}\\
+0 & 0 & 0 & \cdots & 1\\
+\end{pmatrix} = \sigma_0^2 E_N.
+$$
+Аналогично построим ковариационную матрицу ошибок неизвестных:
+$$
+C_K = \begin{pmatrix}
+\sigma^2_x & \sigma_{xy} & \sigma_{xz}\\
+\sigma_{yx} & \sigma^2_y & \sigma_{yz}\\
+\sigma_{zx} & \sigma_{zy} & \sigma^2_z
+\end{pmatrix} = \Delta K \cdot \Delta K^T = M^{-1}\Delta V\cdot \Delta V^T (M^{-1})^T
+$$
+Т.к. $[\aleph\beth]=[\beth\aleph]$, матрица $M$ симметрична ($M=M^T$).
+\end{block}
+}\only<4>{
+\begin{block}{}
+Члены ковариационной матрицы $\Delta V\cdot\Delta V^T$ на примере одного:
+$$
+\aver{[a\Delta l][a\Delta l]}=\aver{\sum a_i\Delta l_i\sum a_j\Delta l_j}=\aver{\sum\sum a_ia_j\Delta l_i\Delta l_j},
+$$
+т.е. $\Delta V\cdot\Delta V^T=\sum\sum a_ia_j\aver{\Delta l_i\Delta l_j}$, а т.к. $\aver{\Delta l_i\Delta l_j}$ равны нулю при $i\ne
+j$ и равны $\sigma_0^2$ при $i=j$, получим: $\sigma_0^2\sum a_k^2=\sigma_0^2[aa]$. И в итоге:
+$$C_K = M^{-1}\sigma_0^2 M M^{-1}=\sigma_0^2 M^{-1}!$$
+Вывод: обратная матрица нормальных уравнений является матрицей весов вектора неизвестных.
+
+Для получения несмещенной оценки $\sigma_0^2$ воспользуемся формулой:
+$$\sigma_0^2 = \frac{\sum \Bigl(l_k-(xa_k + yb_k + zc_k)\Bigr)^2}{N-M},$$
+где $M$~-- число неизвестных (в нашем случае~--- три).
+\end{block}
+}
+\end{frame}
+
+\begin{frame}[fragile]{}
+\parbox{0.4\textwidth}{По набору данных получить коэффициенты линейной зависимости и определить их погрешности.}
+\leavevmode\hspace{1em}
+\begin{tabular}{|c||c|c|c|c|c|c|c|c|}\hline
+\bf A & 1 &0& -1& 2& 3& -2& 0& 4\\
+\bf B & 0 &3& 2& -1& 2& -1& 3& 1\\
+\bf C & 2& -2& 0& 1& -2& 3& -2& 0\\ \hline
+\bf L & 7 &1& 3& 2& 1& 6& 1& 5\\ \hline
+\end{tabular}
+\small
+\begin{verbatim}
+A=[1 0 -1 2 3 -2 0 4]'; B=[0 3 2 -1 2 -1 3 1]'; C=[2 -2 0 1 -2 3 -2 0]';
+L=[7 1 3 2 1 6 1 5]'; T=[A B C]; % T - матрица данных, T*K=L
+K=T \ L % искомые коэффициенты
+V=T' * L; Mr=K/V; % M*K = V, Mr->M^(-1)
+v=L-T*K; sigma0 = sqrt(sum(v.^2)/(8-3));
+DK = sigma0 * sqrt(diag(Mr)) % искомые погрешности
+for i=1:3;
+printf("K%d=%.2f+-%.2f (%.1f%%)\n", i, K(i), DK(i), 100*DK(i)/K(i));
+endfor
+K1=0.72+-0.06 (7.7%)
+K2=2.29+-0.07 (3.3%)
+K3=3.06+-0.14 (4.5%)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{Спасибо за внимание!}
+    \centering
+    \begin{minipage}{5cm}
+        \begin{block}{mailto}
+            eddy@sao.ru\\
+            edward.emelianoff@gmail.com
+    \end{block}\end{minipage}
+\end{frame}
+\end{document}
+
+
+\section{Иррегулярно распределенные данные}
+\begin{frame}{}
+\begin{columns}
+\column{0.65\textwidth}
+\begin{block}{Иррегулярно распределенные данные}
+БПФ, корреляция, периодограммы и т.п.
+\begin{itemize}
+\item Resampling (если данные достаточно плотно расположены).
+\item Определение периода как расстояния между минимумами (максимумами) из аппроксимации.
+\item Auto Regressive Moving Average (ARMA).
+\item Фильтрация Калмана.
+\item Метод Ваничека (аппроксимация набора данных рядом синусоид).
+\item Периодограмма Ломба-Скаргла (ортогонализация пар синусоид введением задержки во времени,
+Scargle, 1981).
+\item Irregular Autoregressive Model (IAR).
+\item Complex IAR (CIAR).
+\end{itemize}
+\end{block}
+\column{0.32\textwidth}
+\vspace*{-2em}\img{irregular}
+\end{columns}
+\end{frame}
+

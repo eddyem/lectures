@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "Enter value"
+read val
+if [ $val -gt 100 ]; then
+	echo "value $val greater than 100";
+else
+	echo "value $val less than 100";
+fi
+
+echo "Enter filename"
+read f
+[ -d $f ] && echo "$f is a directory"
+[ -f $f ] && echo "$f is a file"
+[ ! -e $f ] && echo "Not exists"

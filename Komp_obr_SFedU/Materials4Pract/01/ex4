@@ -1,0 +1,22 @@
+#!/bin/sh
+
+if [ $# -ne 1 ]; then echo "Usage: $0 word"; exit 1; fi
+
+TOTAL=0
+miss=0; hit=0;
+
+while true; do
+	TOTAL=$((TOTAL+1))
+	ans=$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 100 | head -n1 | grep $1)
+	if [ -x$ans = -x ]; then
+		miss=$((miss+1))
+	else
+		echo "$ans"
+		hit=$((hit+1))
+	fi
+	[ $hit -ge 5 -o $TOTAL -ge 10000 ] && break
+done
+
+part=$(echo "$hit $TOTAL" | awk '{ printf "%.2f", $1*100/$2}')
+
+echo "Miss: $miss, Hit: $hit (${part}%)"

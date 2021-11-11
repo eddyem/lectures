@@ -1,0 +1,589 @@
+\documentclass[10pt,pdf,hyperref={unicode}]{beamer}
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage{lect}
+
+\title[Компьютерная обработка. Лекция 2.]{Компьютерная обработка результатов измерений}
+\subtitle{Лекция 2. Статистика и вероятность. Случайные величины и распределения}
+\date{}
+
+\begin{document}
+% Титул
+\begin{frame}{}
+\maketitle
+\end{frame}
+% Содержание
+\begin{frame}{}
+\tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{Случайные величины, вероятность}
+\begin{frame}{Случайные величины, вероятность}
+    \begin{defin}
+        \ж Случайной величиной\н называется величина~$X$, если все ее возможные значения образуют
+        конечную
+        или бесконечную последовательность чисел~$x_1,\ldots$, $x_N$, и если принятие ею каждого из
+        этих
+        значений есть случайное событие.
+    \end{defin}
+    \begin{defin}\begin{columns}\column{0.75\textwidth}
+            \ж Вероятностью\н наступления события называют предел относительной частоты
+            наступления  данного события~$n_k/N$:\column{0.25\textwidth}
+            $$P(x_k)=\lim_{N\to\infty}\frac{n_k}{N}.$$
+        \end{columns}
+    \end{defin}
+    \begin{block}{}
+        Если событие\ж невозможно\н ($\emptyset$), его вероятность равна нулю. Однако, обратное в
+        общем случае неверно (например, вероятность попасть в конкретную точку мишени равна нулю,
+        но это событие не является невозможным).
+
+        Вероятность\ж достоверного\н события равна 1.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Условная вероятность}
+    \begin{defin}\ж Условной вероятностью\н двух событий $A$ и $B$ (вероятность появления $A$ при
+    условии $B$) называют отношение числа опытов, в которых $A$ и $B$ появились вместе, к полному
+    числу  опытов, в которых появилось $B$:
+        $$P(A|B)=\frac{n_{AB}}{n_B}=\frac{n_{AB}/N}{n_B/N}=\frac{P(AB)}{P(B)}.$$
+    \end{defin}
+    \begin{block}{}
+        У\ж независимых\н событий $P(A|B)=P(A)$, $P(B|A)=P(B)$.
+        А т.к. $P(A|B)=\frac{P(AB)}{P(B)}$, получим для независимых событий:
+        $$P(AB)=P(A)\cdot P(B).$$
+    \end{block}
+    \begin{block}{Умножение вероятностей}
+        $$P(AB)=P(B)\cdot P(A|B)=P(A)\cdot P(B|A).$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Сложение вероятностей}
+    \begin{block}{Несовместные события}
+        $A_iA_j=\emptyset\quad \forall i\ne j$, $P(A_i+A_j)=P(A_i)+P(A_j)$.
+    \end{block}
+    \begin{block}{Совместные события}
+        $P(A_i+A_j)=P(A_i)+P(A_j)-P(A_iA_j)$.
+    \end{block}
+    \begin{block}{Независимые совместные события}
+        $$P(\overline{A}\,\overline{B}) = P(\overline{A})\cdot P(\overline{B}) =
+        (1-P(A))\cdot(1-P(B))=1-P(A)-P(B)+P(A)\cdot P(B)$$
+        $$P(A+B)=P(A)+P(B)-P(AB)\quad\Arr$$
+        $$1-P(A+B)=P(\overline{A}\,\overline{B})\quad\text{или}\quad
+        P(A+B)=1-P(\overline{A}\,\overline{B}).$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Полная вероятность}
+    \only<1>{
+    \begin{block}{}
+        \ж Полная вероятность\н (вероятность события, зависящего от условий опыта) является
+        следствием правил сложения и умножения вероятностей.
+    \end{block}
+    \begin{block}{}
+        $N$ условий опыта должны быть взаимоисключающими, т.е. несовместными: $P(H_iH_j)=0$ для
+        $j\ne j$. И они должны формировать\ж полную группу\н,  т.е. $\sum P(H_i)=1$. Тогда
+        $P(A)=\sum P(AH_i)$. А т.к. $P(AH_i)=P(H_i)\cdot P(A|H_i)$, получим:
+        $$P(A)=\sum_{i=1}^{N}P(H_i)\cdot P(A|H_i).$$
+        Здесь $P(H_i)$~---\ж априорная вероятность\н (известна до проведения опыта). Вероятность
+        $P(A|H_i)$ мы узнаем из опыта, ее называют\ж апостериорной\н.
+    \end{block}
+}\only<2>{
+    \begin{block}{Пример}
+        Среди наблюдаемых спиральных галактик 23\% имеют тип Sa, 31\%~-- тип Sb и 45\%~-- тип Sc.
+        Вероятность вспышки сверхновой в течение года в галактике Sa составляет $0.20\%$, в Sb~--
+        $0.35\%$, в Sc~-- $0.55\%$. Найти вероятность вспышки сверхновой в спиральной галактике,
+        тип которой не удается определить.
+
+        $P(S_a)=0.23$, $P(S_b)=0.31$, $P(S_c)=0.46$. Вероятность вспышки в галактике типа $X$ есть
+        $P(F|X)$. Тогда полная вероятность вспышки равна $P(F)=\sum P(X)P(F|X)$. То есть:
+        $$P(F)=0.23\cdot0.002+0.31\cdot0.0035+0.46\cdot0.0055=0.0041=41\%.$$
+    \end{block}
+}
+\end{frame}
+
+\begin{frame}{Формула (теорема) Байеса}
+    \only<1>{
+    \begin{block}{}
+        Как и для полной вероятности, гипотезы $H_i$ считаем несовместными, образующими полную
+        группу.
+        Событие $A$ считаем уже произошедшим. В этом случае можно пересчитать априорные
+        вероятности~$P(H_i)$ с учетом этого. Найдем $P(H_i|A)$. Известно, что $P(H_iA)=P(H_i)\cdot
+        P(A|H_i)$ или $P(H_iA)=P(A)\cdot P(H_i|A)$.
+        $$P(A)\cdot P(H_i|A)=P(H_i)\cdot P(A|H_i),\quad\Arr$$
+        \ж Формула Байеса\н
+        $$P(H_i|A)=\frac{P(H_i)P(A|H_i)}{P(A)},$$
+        где $P(A)=\sum P(H_i)P(A|H_i)$.
+    \end{block}
+}\only<2>{
+    \begin{block}{Пример}
+       В течение часа наблюдений была обнаружена вспышка сверхновой в спиральной галактике
+       неизвестного типа. Определить вероятность того, что галактика принадлежит каждому из
+       подтипов Sa, Sb или Sc.
+
+       По формуле Байеса, $P(X|F)=\dfrac{P(X)P(F|X)}{P(F)}$. В предыдущем примере мы уже нашли:
+       $P(F)=0.0041$, следовательно
+       $$P(S_a|F)=\frac{0.23\cdot 0.0020}{0.0041}=0.11,$$
+       $$P(S_b|F)=\frac{0.31\cdot 0.0035}{0.0041}=0.27,$$
+       $$P(S_c|F)=\frac{0.46\cdot 0.0055}{0.0041}=0.62.$$
+    \end{block}
+}
+\end{frame}
+
+\begin{frame}{Итог: свойства вероятности}
+    \begin{block}{}\def\arraystretch{1.5}
+        \centering\begin{tabular}{>{\centering}p{0.45\textwidth}l}
+            $P(\emptyset) = 0$ &\\
+            $\forall A\subset B \quad P(A) \le P(B)$ & $B$ включает в себя $A$\\
+            $0\le P(A) \le 1$ & \\
+            $\forall A\subset B\quad P(B \setminus A) = P(B) - P(A)$ & $B$ наступит без $A$\\
+            $P(\overline{A}) =1 - P(A)$ &\\
+            $P(A+B) = P(A) + P(B) - P(AB)$ & вероятность одного из событий\\
+            $P(A\vert B) = \frc{P(AB)}{P(B)}$ & условная вероятность ($A$ при $B$)
+            $\Longrightarrow$\\
+            $P(AB) = P(B)\cdot P(A\vert B)$ & или $P(AB) = P(A)\cdot P(B\vert A)$
+            $\Longrightarrow$\\
+            $P(A\vert B)=\dfrac{P(A)\cdot P(B\vert A)}{P(B)}$ & (теорема Байеса)\\[1em]
+            $P(AB) = P(A)\cdot P(B)$ & для независимых событий\\
+        \end{tabular}
+    \end{block}
+\end{frame}
+
+\section{Комбинаторика}
+\begin{frame}{Комбинаторика}
+    \only<1>{
+    \begin{block}{Размещение}
+        Количество способов, которыми можно разместить $n$ элементов по $k$ ячейкам.
+
+        Без повторений: $A_n^k=n(n-1)\cdots(n-k+1)=\dfrac{n!}{(n-k)!}=\binom{n}{k}k!$.
+
+        С повторениями (каждый предмет можно взять до $k$ раз): $\overline{A}_n^k=n^k$.
+
+        Размещение без повторений встречается в задачах на составление $k$-значных чисел из
+        $n$~цифр, причем, каждая цифра может использоваться лишь однократно. Размещение с
+        повторениями показывает все возможные комбинации $n$~цифр в $k$~разрядах (например,
+        количество чисел до $k$-го разряда по основанию $n$).
+    \end{block}
+}\only<2>{
+    \begin{block}{Перестановка}
+        Без повторений: $P_n=A_n^n=n!$.
+
+        С повторениями ($n$ элементов $m$ типов). $n_i$~-- количество элементов каждого типа (т.е.
+        $\sum n_i=n$). $P(n_1,\ldots,n_m)=\dfrac{n!}{\prod n_i!}$.
+
+        Задача на перестановки без повторений является частным случаем задачи размещения без
+        повторений, когда $k=n$.
+
+        Пример задачи на перестановки с повторениями~--- формирование разных слов (даже лишенных
+        смысла) из букв заданного слова. Например, из слова <<собака>> можно составить
+        $6!/(1!1!1!2!1!)=720/2=36$.
+    \end{block}
+}\only<3>{
+    \begin{block}{Сочетание}
+        Неупорядоченный набор из $k$ элементов $n$-элементного множества. Т.о. сочетание~--- это
+        такое размещение $n$ по $k$, где не учитывается порядок следования членов (напр.,
+        размещения 123, 213, 321 и т.д. считаются одним сочетанием).
+
+        Без повторений: $C_n^k=\binom{n}{k}=\dfrac{n!}{k!(n-k)!}$.
+
+        С повторениями:
+        $\overline{C}_n^m=\binom{n+k-1}{n-1}=\binom{n+k-1}{k}=\dfrac{(n+k-1)!}{k!(n-1)!}$.
+
+        Схема испытаний Бернулли: $P_n^k=C_n^kp^k(1-p)^{n-k}$ (вероятность, что событие наступит
+        $k$~раз в $n$~испытаниях). $1=(p+[1-p])^n=\sum C_n^k p^{n-k}(1-p)^k=\sum P_n^k$.
+    \end{block}
+}
+\end{frame}
+
+\begin{frame}{}
+    \begin{block}{}
+        Для непрерывных случайных величин, $X$, вводят понятия\ж Функции распределения\н, $F(x)$ и
+        \ж плотности вероятности\н, $\rho(x)$: $F(x)=P(X<x)$.
+        $$\rho(x)=\lim_{\Delta x\to 0}\frac{P(x<X<x+\Delta x)}{\Delta
+            x}=\frac{dF}{dx}.$$
+        $$P(x_1<X<x_2)=\Int_{x_1}^{x_2}\rho(x)\,dx=F(x_2)-F(x_1).$$
+    \end{block}
+    \begin{defin}
+        \ж Генеральная совокупность\н~--- набор всех возможных значений случайной величины.
+        \ж Выборка\н~--- конечное число значений (подвыборка генеральной совокупности).
+        \ж Энтропия\н выборки: $$E=-\sum_{k=1}^{n}p(x_k)\lg p(x_k).$$
+    \end{defin}
+\end{frame}
+
+\section{Характеристики случайных величин}
+\begin{frame}{Характеристики случайных величин}
+\begin{block}{Среднее арифметическое и математическое ожидание}
+    $$\aver{X}=\frc1{N}\sum_{n=1}^N x_n,$$
+    $$M(X)\equiv\mean{X}=\lim_{N\to\infty}\frac1{N}\sum_{n=1}^N x_n\quad\text{и}\quad
+    M(X)=\Infint x\phi(x)\,dx.$$
+\end{block}
+\begin{block}{Свойства математического ожидания}
+    \begin{itemize}\setlength{\itemsep}{2pt}
+        \item $\mean\const=\const$;
+        \item $\mean{\sum\C_n\cdot X_n}=\sum\C_n\cdot \mean{X_n}$,
+        где $\C_n$~-- постоянная величина;
+        \item $\mean{\prod X_n}=\prod \mean{X_n}$ (для независимых случайных величин);
+        \item $\mean{f(x)}=\Infint f(x)\phi(x)\,dx$ (для непрерывных случайных величин).
+    \end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{}
+    \begin{block}{Моменты}
+        Если $f(x)=(x-x_0)^n$, то $\mean{f(x)}$~--- момент порядка~$n$. Если $x_0=0$~---
+        начальный
+        момент, если $x_0=\mean{X}$--- центральный момент.
+
+        Центральный момент второго порядка называют\ж дисперсией\н:
+        $D(X)=\mean{(x-\mean{x})^2}\equiv
+        \mean{x^2}-\mean{x}^2$. \ж СКО\н:  $\sigma=\sqrt{D}$.
+
+        \smallskip
+
+        Свойства дисперсии:
+        \begin{itemize}
+            \item $D(\C)=0$;
+            \item $D(\C X)=\C^2 D(X)$, где $\C$~-- постоянная величина;
+            \item $D(\sum X_n)=\sum D(X_n)$ (для независимых величин).
+        \end{itemize}
+    \end{block}
+    \begin{block}{$\mean{X}\Leftrightarrow\aver{X}$? Закон больших чисел}
+        Неравенство Чебыш\"ева: $P(|X-\mean{X}|\ge\epsilon)\le
+        \frc{D(X)}{\epsilon^2}\quad\Rightarrow$
+        $P(|X-\mean{X}|<\epsilon)=1-P(|X-\mean{X}|\ge\epsilon)\ge1-\frc{D(X)}{\epsilon^2}$.
+        $$\lim_{n\to\infty} P\Bigl(\Bigl|\frac{\sum
+            X_n}{n}-\frac{\sum\mean{X_n}}{n}\Bigr|<\epsilon\Bigr)=1,\;\text{ т.к. }\;
+            D(\frc{\sum X_n}{n})=\frc{D(X)}{n}
+        $$
+        Теорема Бернулли: $\lim\limits_{n\to\infty} P(m/n-p|<\epsilon)=1$ ($m$ событий в $n$
+        испытаний).
+    \end{block}
+\end{frame}
+
+\begin{blueframe}{}
+\only<1>{
+\begin{defin}
+\ж Квантиль\н~-- значение, которое случайная величина не превышает с фиксированной вероятностью.
+$\alpha$-квантиль, $x_\alpha$: $P(X\le x_\alpha)=\alpha$, $P(X\ge x_\alpha)=1-\alpha$.
+\end{defin}
+\begin{block}{}
+$P(X\le x_\frac{1+\alpha}{2})=\frac{1+\alpha}{2}$, $P(X\le
+x_\frac{1-\alpha}{2})=\frac{1-\alpha}{2}$, следовательно, свойство:
+$$P(x_\frac{1-\alpha}{2}\le X\le
+x_\frac{1+\alpha}{2})=\frac{1+\alpha}{2}-\frac{1-\alpha}{2}=\alpha.$$
+\к Процентиль\н (перцентиль)~-- квартиль, выраженная в процентах. Например, <<70-й перцентиль>>
+(величина с вероятностью 70\% меньше этого значения). \к Квартиль\н~-- деление на четыре (первый,
+второй и третий квартили). \ж Медиана\н~-- второй квартиль. $IQR=x_{0.75}-x_{0.25}$~--
+интерквартильный интервал.
+\end{block}
+}\only<2>{
+\begin{columns}
+\column{0.6\textwidth}
+\begin{block}{Квантили нормального распределения}
+$P$~-- вероятность, $x_P$~-- квантиль (в~RMS от мат. ожидания), $P_c = P(-x_P\le X-\mean{X}\le
+x_P)$.
+
+\begin{tabular}{|c||c|c|c|c|c|}
+\hline
+$P$ & 99.99 & 99.90 & 99.00 & 97.72 & 97.50 \\
+\hline
+$x_P$ &  3.719 & 3.090 & 2.326 & 1.999 & 1.960\\
+\hline
+$P_c$ & 99.98 & 99.80 & 98.00 & 95.44 & 95.00 \\
+\hline
+\end{tabular}
+
+\begin{tabular}{|c||c|c|c|c|c|}
+\hline
+$P$ & 95.00 & 90.00 & 84.13 & 50.00 \\
+\hline
+$x_P$ & 1.645 & 1.282 & 1.000 & 0.000 \\
+\hline
+$P_c$ & 90.00000 & 80.00 & 68.27 & 0.00\\
+\hline
+\end{tabular}
+\end{block}
+\column{0.38\textwidth}\img{Boxplot_vs_PDF}
+\end{columns}
+}
+\end{blueframe}
+
+\begin{frame}[fragile]{}
+Octave: пакет \t{statistics}, функция \t{norminv}. Например:
+\begin{verbatim}
+    norminv([0.9 0.95 0.99 0.999 0.9999])
+    ans =
+    1.2816   1.6449   2.3263   3.0902   3.7190
+\end{verbatim}
+Можно также задать~$\mean{X}$ и $\sigma_X$ (скажем, квантиль 90\% при $\mean{X}=25$ и $\sigma_X=3$):
+\begin{verbatim}
+norminv(0.9, 25, 3)
+ans =  28.845
+\end{verbatim}
+Для расчета вероятности $P(X\le x_0)$ функция \t{normcdf} (интегральное распределение). Например,
+посчитаем вероятности нахождения в интервале $\mean{X}\pm k\sigma$:
+\begin{verbatim}
+k=[1:0.5:5];
+normcdf(k)-normcdf(-k)
+ans =
+0.68269   0.86639   0.95450   0.98758   0.99730   0.99953
+0.99994   0.99999   1.00000
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{Характеристические значения распределений}
+\begin{block}{Медиана и мода}
+    {\ж Мода}~--- наиболее часто встречающееся значение (но вполне могут быть
+    мультимодальные
+    распределения). {\ж Медиана} делит площадь распределения пополам.
+\end{block}
+\img[0.6]{mode_median}
+\begin{block}{Поиск медианы}
+Самый медленный~--- сортировкой ряда данных, $O(n\ln n)$. Quick Select, $O(n)$. Гистограмма (в т.ч.
+дерево гистограмм), $O(n)$. Для фиксированных $n$~--- opt\_med (,,Numerical Recipes in C``), $O(n)$.
+\end{block}
+\end{frame}
+
+\section{Законы распределения}
+\begin{frame}{Законы распределения}
+    \begin{defin}
+        \ж Закон распределения\н \к дискретной\н случайной величины~--- соответствие между
+        возможными значениями и их вероятностями.
+    \end{defin}
+    \begin{block}{Функция распределения}
+        $$F(x)\equiv P(X\le x)=\Int_{-\infty}^x\phi(x)\,dx, \qquad
+        \Infint\phi(x)\,dx=1.$$
+        $$P(a\le X\le b)=F(b)-F(a).$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Равномерное распределение}
+    \begin{columns}\column{0.45\textwidth}
+        \begin{block}{}
+            $$
+            \phi(x)=\begin{cases}\frac1{b-a}, & x\in [a,b] \\ 0, & x\not\in [a,b]
+            \end{cases}.
+            $$
+            $$F(x)= \begin{cases} 0, & x < a \\ \frac{x-a}{b-a}, & a \le x < b \\ 1, & x \ge
+                b \end{cases}.
+            $$
+        \end{block}\column{0.45\textwidth}
+        \begin{block}{}
+            $\mean{X}=\med(X)=(a+b)/2$, $\moda(X)=\forall x\in[a,b]$,
+            $\displaystyle\sigma^2_X = \frac{(b-a)^2}{12}$.
+        \end{block}
+    \end{columns}
+
+    \smimg[0.45]{Uniform_distribution_PDF}\hspace{3pt}
+    \smimg[0.45]{Uniform_distribution_CDF}
+\end{frame}
+
+\begin{lightframe}{Биномиальное распределение}
+    \vspace*{-0.8em}\begin{block}{}
+        \ж Формула Бернулли\н:
+        $\displaystyle P_n(k)=C_n^k p^k q^{n-k},\quad C_n^k=\frac{n!}{k!(n-k)!},\quad
+        q=1-p.$
+        $$(p+q)^n=C_n^n p^n+\cdots+C_n^k p^k q^{n-k}+\cdots+C_n^0 q^k.$$
+        Описывает вероятность наступления события~$k$
+        раз в~$n$ независимых испытаниях
+    \end{block}\vspace*{-1em}
+    \begin{columns}
+        \column{0.45\textwidth}
+        \img{Binomial_Distribution}
+        \column{0.55\textwidth}
+        \begin{block}{}
+            $$
+            F(k;n,p)=P(X\leq k)=\sum_{i=0}^\floor{k} C_n^i p^i(1-p)^{n-i}.$$
+            $\mean{X}=np$, $\moda(X)=\floor{(n+1)p}$, $\floor{np}\le\med(X)\le\ceil{np}$,
+            $\sigma^2_X = npq$.
+        \end{block}
+    \end{columns}
+\end{lightframe}
+
+\begin{frame}{Распределение Пуассона}
+    \vspace*{-2em}\begin{block}{}
+        Распределение вероятности\к редких событий\н. При $n\to\infty$ распределение Бернулли
+        преобразуется в распределение Пуассона
+        ($\lambda=np$):
+        $$P_n(k)=\frac{\lambda^k}{k!}\exp(-\lambda).$$
+    \end{block}
+    \begin{columns}\column{0.48\textwidth}
+        \begin{block}{}
+            $F(k, \lambda) = \displaystyle\frac{\Gamma(k+1,\lambda)}{k!}$,
+            $\mean{X} = \lambda$, $\moda(X) = \floor{\lambda}$,
+            $\med{X}\approx\floor{\lambda+1/3-0.02/\lambda}$,
+            $\sigma^2_X = \lambda$.
+
+            С ростом $\lambda$ распределение Пуассона стремится к распределению Гаусса.
+        \end{block}
+        \column{0.48\textwidth}
+        \img{poissonpdf}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Распределение Гаусса}
+    \vspace*{-2em}\begin{block}{}
+        $
+        \phi (x) = \dfrac 1 {\sigma \sqrt {2 \pi}} \exp \left( -\frac {(x -\mean{x})^2}{2
+            \sigma^2} \right)
+        $,
+        $F(x) = \displaystyle\frac 1{\sigma \sqrt {2 \pi}} \Int_{-\infty}^x \exp \left( -\frac{(t
+            -\mean{x})^2}{2 \sigma^2} \right)\, dt$,
+        $\moda(X) = \med{X} = \mean{X}$.
+        $P(\alpha < X < \beta) = \Phi\left(\frac{\beta - \mean{x}}{\sigma}\right) -
+            \Phi\left(\frac{\alpha - \mean{x}}{\sigma}\right)  $,\\
+        функция Лапласа $\Phi(x)=\frac{1}{\sqrt{2\pi}}\int_0^x \exp\left(-\frc{t^2}{2}\right)$.
+    \end{block}
+    \img[0.6]{normpdf}
+\end{frame}
+
+\begin{frame}{Показательное (экспоненциальное) распределение}
+    \vspace*{-1em}\begin{block}{}
+        Время между двумя последовательными свершениями события
+        $$f(x)=\begin{cases}
+            0,& x<0,\\
+            \lambda\exp(-\lambda x),& x\ge0;
+        \end{cases}\qquad
+        F(x)=\begin{cases}
+            0,& x<0,\\
+            1-\exp(-\lambda x),& x\ge0,
+        \end{cases}
+        $$
+    \end{block}
+    \vspace*{-1em}\begin{block}{}
+        $\mean{X} = \lambda^{-1}$,
+        $\moda(X) = 0$, $\med{X} = \ln(2)/\lambda$,
+        $\sigma^2_X = \lambda^{-2}$.
+    \end{block}
+    \vspace*{-1em}\img[0.5]{exppdf}
+\end{frame}
+
+\section{Корреляция и ковариация}
+\begin{frame}{Корреляция и ковариация}
+    \begin{defin}
+        \ж{}Ковариация\н является мерой линейной зависимости случайных величин и определяется
+        формулой:
+        $\mathrm{cov}(X,Y)=\mean{(X-\mean{X})(Y-\mean{Y})}$ $\Longrightarrow$ $\mathrm{cov}(X,X) =
+        \sigma^2_X$.
+        \к Ковариация независимых случайных величин равна нулю\н, обратное неверно.
+    \end{defin}
+    \begin{block}{}
+        Если ковариация положительна, то с ростом значений одной случайной величины, значения
+        второй имеют
+        тенденцию возрастать, а если знак отрицательный~--- убывать.
+
+        Масштаб зависимости величин пропорционален их дисперсиям $\Longrightarrow$ масштаб можно
+        отнормировать (\ж{}коэффициент корреляции\н Пирсона):
+        $$\rho_{X,Y}=\frac{\mathrm{cov}(X,Y)}{\sigma X\sigma Y}, \qquad \mathbf{r}\in[-1,1].$$
+    \end{block}
+\end{frame}
+
+\begin{frame}{}
+    \begin{block}{}
+        Коэффициент корреляции равен~$\pm1$ тогда и только тогда, когда~$X$ и~$Y$ линейно зависимы.
+        Если
+        они независимы, $\rho_{X,Y}=0$ (\ж{}обратное неверно!\н). Промежуточные значения
+        коэффициента
+        корреляции не позволяют однозначно судить о зависимости случайных величин, но позволяет
+        предполагать
+        степень их зависимости.
+    \end{block}
+    \begin{block}{Корреляционная функция}
+        Одна из разновидностей~---\ж автокорреляционная функция\н:
+        $$
+        \Psi(\tau) = \Int f(t) f(t-\tau)\, dt\equiv
+        \Int f(t+\tau) f(t)\,dt.
+        $$
+        Для дискретных случайных величин автокорреляционная функция имеет вид
+        $$
+        \Psi(\tau) = \aver{X(t)X(t-\tau)}\equiv\aver{X(t+\tau)X(t)}.
+        $$
+    \end{block}
+\end{frame}
+
+\begin{blueframe}{}
+\only<1>{
+    \begin{block}{Взаимно корреляционная функция}
+        Другая разновидность~---\ж кросс--корреляционная функция\н:
+        $$(f\star g)(t)\stackrel{\mathrm{def}}{=}\Infint f^{*}(\tau)g(t+\tau)\,d\tau$$
+        свертка:
+        $$ (f*g)(x)\stackrel{\mathrm{def}}{=}\Infint f(y)\,g(x-y)\,dy = \Infint f(x-y)\,g(y)\, dy.$$
+
+    \end{block}
+    \img[0.5]{convcorr}
+}\only<2>{
+    \begin{block}{}
+    Если $X$ и $Y$~--- две независимых случайных величины с функциями распределения вероятностей
+    $f$ и $g$, то $f\star g$ соответствует распределению вероятностей выражения $-X+Y$, а
+    $f*g$~---
+    распределению вероятностей суммы $X + Y$.
+
+    ВКФ часто используется для поиска в длинной последовательности более короткой заранее
+    известной,
+    определения сдвига (см.~рис).
+
+    Связь со сверткой: $f(t)\star g(t) = f^*(-t) * g(t)$, если $f$ и $g$ четны, то
+    $f(t)\star g(t) = f(t) * g(t)$. Через преобразование Фурье:
+    $\FT{f \star g} = \FT{f}^*\cdot\FT{g}$.
+\end{block}\img[0.6]{autocorr}
+}
+\end{blueframe}
+
+\begin{frame}{}
+\begin{block}{Применение корреляции}
+\begin{itemize}
+    \item Расчет спектральной плотности энергии и энергетического содержимого сигнала.
+    $\FT{\Psi(\tau)}=G_E(f)$~-- образ Фурье автокорреляционной функции есть спектральная плотность
+    энергии; $\Psi(0)=E$~-- полная энергия сигнала.
+    \item Детектирование и оценка периодических сигналов в шуме.
+    \item Корреляционное детектирование.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\section{Шум}
+\begin{frame}{Шум}
+    \begin{defin}
+        \ж Шум\н~--- беспорядочные колебания различной физической природы, отличающиеся сложной
+        временной и
+        спектральной структурой.
+    \end{defin}
+    \begin{block}{}
+        \ж Белый шум\н, $\xi(t)$, имеет время корреляции много меньше всех характерных времен
+        физической
+        системы;  $\mean{\xi(t)}=0$,
+        $\Psi(t,\tau)=\aver{\xi(t+\tau)\xi(t)}=\sigma^2(t)\delta(\tau)$.
+        Разновидность~--- AWGN.
+
+        \ж Дробовой шум\н имеет пуассонову статистику~\so $\sigma_X\propto\sqrt{x}$ и
+        $\SNR(N)\propto\sqrt{N}$. Суточные и вековые корреляции.
+
+        Шум вида \ж<<соль--перец>>\н обычно характерен для изображений, считываемых с ПЗС.
+    \end{block}
+\end{frame}
+\begin{frame}{SNR}
+    \begin{defin}
+        \ж SNR\н~--- безразмерная величина, равная отношению мощности полезного сигнала к мощности
+        шума.
+    \end{defin}
+    \begin{block}{}
+        $$\SNR = {P_\mathrm{signal} \over P_\mathrm{noise}} = \left ({A_\mathrm{signal} \over
+            A_\mathrm{noise} } \right )^2, \quad
+        \SNR(dB) = 10 \lg \left ( {P_\mathrm{signal} \over P_\mathrm{noise}}
+        \right )
+        = 20 \lg \left ( {A_\mathrm{signal} \over A_\mathrm{noise}} \right ).
+        $$
+    \end{block}
+
+    \img[0.6]{SNR}
+    \centerline{\tiny (10, 0, -10~дБ.)}
+\end{frame}
+
+
+\begin{frame}{Спасибо за внимание!}
+\centering
+\begin{minipage}{5cm}
+\begin{block}{mailto}
+eddy@sao.ru\\
+edward.emelianoff@gmail.com
+\end{block}\end{minipage}
+\end{frame}
+\end{document}
