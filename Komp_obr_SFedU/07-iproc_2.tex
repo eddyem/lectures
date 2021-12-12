@@ -1,0 +1,509 @@
+\documentclass[10pt,pdf,hyperref={unicode}]{beamer}
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage{lect}
+
+\title[Компьютерная обработка. Лекция 7.]{Компьютерная обработка результатов измерений}
+\subtitle{Лекция 7. Обработка изображений, часть 2}
+\date{}
+
+\def\pair#1#2{\ensuremath{\langle #1, #2\rangle}}
+
+\begin{document}
+% Титул
+\begin{frame}
+\maketitle
+\end{frame}
+% Содержание
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\section{Вейвлеты}
+\begin{frame}{Вейвлеты}
+\only<1>{ \begin{block}{Разложение функции по базису}
+Преобразование Фурье и любые другие преобразования $f(x)$ по базису $r(x,u)$ в 1-мерном варианте
+можно представить выражением
+$$T(u)=\sum_{x=0}^{N-1}f(x)r(x,u),\qquad
+f(x)=\sum_{u=0}^{N-1}T(u)s(x,u).$$
+В матричном виде: $\B{t}=\B{Rf}$ и $\B{f}=\B{St}$. Очевидно, что $\B{S}=\B{R}^{-1}$ и обратно.
+Если базис $\B{S}$ ортонормирован ($\B{S}^T\B{S}=\B{I}$), то $\B{R}=\B{S}^T$.
+
+В двумерном виде $s=s(x,y,u,v)$, положим, что ядро~--- разделяемое и симметричное, т.е.
+$s=s(x,y)\cdot s(u,v)$. В этом случае ядро можно записать в виде двумерной матрицы:
+$$\B{T}=\B{SFS}^T, \qquad \B{F}=\B{S}^T\B{FS}.$$
+\end{block}
+}\only<2>{
+\begin{block}{}
+Рассмотрим простейший базис:
+$$\B{s}_0=\frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix},\quad
+\B{s}_1=\frac{1}{\sqrt{2}}\begin{pmatrix}1\\-1\end{pmatrix};\qquad
+\B{A}=(\B{s}_0 \B{s}_1)^{T}=\frac{1}{\sqrt{2}}\begin{pmatrix}1 & 1\\ 1 & -1\end{pmatrix}.$$
+Можно проверить, что данный базис~--- ортонормальный.
+
+Для прямоугольных изображений размером $M\times N$ ($M$~строк и $N$~столбцов) пикселей ядра будут
+иметь размеры $M\times M$ и
+$N\times N$:
+$$\B{T}=\B{A}_M\B{FA}^T_N,\qquad \B{F}=\B{A}_M^T\B{TA}_N.$$
+
+В случае комплексного базиса $\B{T}=\B{AFA}^T$, но $\B{F}=\B{A}^{*T}\B{TA}^*$.
+\end{block}
+}\only<3>{
+\begin{block}{Локализация}
+Дельта-функция локализована по времени, но не имеет локализации по частоте; комплексная
+синусоида~--- наоборот.\ж Вейвлет\н имеет локализацию как по частоте, так и по времени.
+\end{block}
+\img{tfloc}
+}\only<4>{
+\begin{block}{Вейвлет}
+Имея\ж материнский вейвлет\н $\psi(t)$, зададим\ж базис вейвлетов\н как
+$$\psi_{s,\tau}=2^{s/2}\psi(2^st-\tau).$$
+Для дискретных изображений получаем набор\ж масштабирующих функций\н:
+$$\phi_{j,k}=2^{j/2}\phi(2^jx-k),$$
+$k$~задает смещение вейвлета, $j$~-- его масштаб.
+
+Базис вейвлетов и масштабирующих функций позволяет произвести декомпозицию изображений.
+
+Одномерный случай:
+$$f(x)=\frac{1}{2}\left\{T_\phi(0,0)\phi(x)+T_\psi(0,0)\psi_{0,0}(x)+T_\psi(1,0)\psi_{1,0}(x)\cdots\right\}.$$
+\end{block}
+}\only<5>{
+Масштабирующая функция Хаара: $\phi(x)=1$ при $0\le x\le 1$.
+\img{haarw}
+}\only<6>{
+Вейвлет Хаара:
+$$\psi(x)=\begin{cases}
+1, & 0\le x< 0.5;\\
+-1, & 0.5\le x < 1;\\
+0, & \text{в остальных случаях.}
+\end{cases}$$
+\img{haarx2}
+}\only<7>{
+Пирамида преобразований
+\img{wpiramid}
+}\only<8>{
+\img[0.6]{wpiram}
+}
+\end{frame}
+
+\begin{frame}{}
+\only<1>{\img[0.6]{pyramid}
+\begin{block}{Пирамида изображений}
+Пирамида приближений (аппроксимирующие коэффициенты), пирамида ошибок (детализирующие коэффициенты).
+Пирамида Лапласа (только пирамида ошибок, компрессия); гауссова пирамида (только приближения, синтез
+текстур).\end{block}}
+\only<2>{\img[0.7]{lappyramid}}
+\only<3>{\img[0.5]{orapple}\centerline{
+Объединение пирамид Лапласа.}}
+\end{frame}
+
+\begin{frame}{Вейвлеты}
+\only<1>{\img[0.6]{2d-haar-basis}}
+\only<2>{\img[0.8]{wvpyramid01}}
+\only<3>{\img[0.8]{wvpyramid02}}
+\only<4>{\img[0.8]{wvpyramid}}
+\only<5>{\img[0.8]{wvpyramid03}}
+\end{frame}
+
+\begin{frame}{Пакеты вейвлетов}
+\only<1>{\img[0.95]{wpack01}}
+\only<2>{\img[0.95]{wpack02}}
+\only<3>{\img[0.7]{wpack03}}
+\only<4>{\img[0.8]{wpack04}\tiny (a) normal brain; (b) 2-level DWT of normal brain; (c) 2-level
+DWPT of normal brain; (d) AD brain; (e) 2-level DWT of AD brain; (f) 2-level DWPT of AD brain.}
+\end{frame}
+
+\section{Морфологические операции}
+\begin{frame}{Морфологические операции}
+\only<1>{
+\begin{block}{Основные понятия}
+\begin{itemize}
+\item Пусть $A$~-- некоторая область на бинарном изображении, $a=(a_1,a_2)\in A$~-- точка, ей
+принадлежащая; интенсивность в точке $a$ обозначим как $v(a)$.
+\item {\bf Объект}: $A=\{a\;|\;v(a)==1, \forall a \text{ 4/8-connected}\}$.
+\item {\bf Фон}: $B=\{b\;|\;b==0 \cup b\text{ not connected}\}$.
+\item {\bf Сдвиг}: $A_x=\{c\;|\;c=a+x, \forall a\in A\}$.
+\item {\bf Отражение}: $\hat A=\{c \;|\; c=-a, \forall a\in A\}$.
+\item {\bf Дополнение}: $A^C=\{c \;|\; c\notin A\}$.
+\item {\bf Сумма}: $A+B=\{c \;|\; c\in (A\cup B)\}=A\cup B$.
+\item {\bf Разность}: $A-B=\{c \;|\; c\in A, c\notin B\}=A \cap B^C$.
+\item {\bf Структурный элемент}: подобъект, по которому проводятся морфологические операции.
+\end{itemize}
+\end{block}}
+\only<2>{\img[0.8]{baseimop}}
+\end{frame}
+
+\begin{frame}{Эрозия (усечение)}
+\begin{block}{}
+$$A\ominus B=\{x \;|\; B_x\subseteq A\}\text{ или }
+A\ominus B=\{x \;|\; B_x\cap A^C=\varnothing\}\text{ или }
+A\ominus B=\bigcap_{b\in B}A_b
+$$
+\end{block}
+\only<1>{\img[0.7]{erosion}}
+\only<2>{\img[0.7]{erosion01}}
+\only<3>{\img{erosion02}}
+\end{frame}
+
+\begin{frame}{Дилатация (наращивание)}
+\begin{block}{}
+$$A\oplus B = \{x \;|\; \hat B_z\cap A \ne\varnothing\} \text{ или }
+A\oplus B = \bigcup_{b\in B}A_b=\bigcup_{a\in A}B_a
+$$
+\end{block}
+\only<1>{\img[0.7]{dilation}}
+\only<2>{\img{dilation01}}
+\end{frame}
+
+\begin{frame}{Свойства}
+\begin{block}{}
+\centerline{Коммутативность:}
+$$A\oplus B = B\oplus A\qquad A\ominus B \ne B\ominus A$$
+\centerline{Ассоциативность:}
+$$A\oplus (B\cup C)=(A\oplus B)\cup(A\oplus C)\qquad A\ominus (B\cup C)=(A\ominus B)\cap(A\ominus
+C)$$
+$$(A\ominus B)\ominus C = A\ominus(B\oplus C)$$
+\centerline{Двойственность:}
+$$(A\ominus B)^C=A^C\oplus\hat B\qquad
+(A\oplus B)^C =A^C\ominus\hat B$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Открытие (размыкание)}
+\begin{block}{}$$A\circ B = (A\ominus B)\oplus B$$\end{block}
+\img{opening01}
+\end{frame}
+
+\begin{frame}{Закрытие (замыкание)}
+\begin{block}{}
+$$A\bullet B = (A\oplus B)\ominus B$$
+\img{closing01}
+\end{block}
+\end{frame}
+
+\begin{frame}{}
+\only<1>{\img{opclos}}
+\only<2>{\img{morph01}}
+\end{frame}
+
+\begin{frame}{<<Top hat>> и <<Bottom hat>>}
+\begin{block}{}
+$$A\hat\circ B = A\backslash (A\circ B), \qquad
+A\hat\bullet B = (A\bullet B)\backslash A$$
+\end{block}
+\only<1>{\img[0.8]{tophat}}
+\only<2>{\img[0.8]{bottomhat}}
+\end{frame}
+
+\begin{frame}{Hit-and-miss}
+\only<1,2>{\begin{block}{}$$A \circledast B = (A\ominus B_1)\cap(A^C\ominus B_2),\quad\text{где}$$
+$$B_1=\{b \;|\; b\in B, b=1\},\; B_2=\{\tilde b \;|\; b\in B, b=0\}$$
+\end{block}}
+\only<1>{\img[0.8]{hitamiss01}}
+\only<2>{\img[0.8]{hitamiss02}}
+\only<3>{\img[0.8]{hit_and_miss_skel}$$S=A\backslash \bigcup_{i}(A\circledast B_i)$$}
+\only<4>{\img{skel01}}
+\only<5>{\img{skel02}}
+\end{frame}
+
+\section{Сегментация изображений}
+\begin{frame}{Сегментация изображений}
+\begin{block}{Основы}
+\begin{itemize}
+\item Сегментация: $\cup_{i=1}^n R_i \,\cup\, \cup_{i=1}^n B_i= R$, все $R_i$ связные, $B_i$~--
+фон.
+\item $R_i\cap R_j=\varnothing$ $\forall i\ne j$.
+\item $Q(R_i) = 1$, $i=\overline{1,n}$, $Q$~-- логический предикат.
+\item $Q(R_i\cup R_j)=0$ $\forall i\ne j$.
+\end{itemize}
+\end{block}
+\begin{block}{Производные}
+\begin{itemize}
+\item $\partder{f}{x}\equiv f'_x=f(x+1)-f(x)$
+\item $\dpartder{f}{x}\equiv f''_x = f'_x(x+1)-f'_x(x)=f(x+2)+f(x)-2f(x+1)$
+\item $\nabla^2f(x,y) = f''_x(x,y)+f''_y(x,y) \Arr$
+ $\nabla^2 f(x,y)=f(x+1,y)+f(x-1,y)+f(x,y+1)+f(x,y-1)-4f(x,y)$
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Примеры (M13)}
+\only<1>{Оригинал:\\
+    \smimg[0.5]{origFull}\;\smimg[0.5]{origCrop}
+}
+\only<2>{Бинаризация по постоянному порогу:\\
+    \smimg[0.5]{binFull}\;\smimg[0.5]{binCrop}
+}
+\only<3>{Четырехкратная эрозия:\\
+    \smimg[0.5]{erosion4Full}\;\smimg[0.5]{erosion4Crop}
+}
+\only<4>{Четырехкратное размыкание:\\
+    \smimg[0.5]{opening4Full}\;\smimg[0.5]{opening4Crop}
+}
+\only<5>{Оригинал с предыдущей маской:\\
+    \smimg[0.5]{objE4D4Full}\;\smimg[0.5]{objE4D4Crop}
+}
+\only<6>{Двадцатипятикратная эрозия:\\
+    \smimg[0.5]{erosion25Full}\;\smimg[0.5]{erosion25Crop}
+}
+\only<7>{Маска (25 эрозий и 200 дилатаций):\\
+    \smimg[0.5]{opE25D200Full}\;\smimg[0.5]{opE25D200Crop}
+}
+\only<8>{Оригинал с предыдущей маской:\\
+    \smimg[0.5]{objE25D200Full}\;\smimg[0.5]{objE25D200Crop}
+}
+\only<9>{Выделенные объекты (размыкание х4 и х10; 237 и 9 объектов в поле соответственно):\\
+    \smimg[0.5]{count4}\;\smimg[0.5]{count10}
+}
+\end{frame}
+
+\begin{frame}{Обнаружение линий, точек и перепадов}
+\only<1>{\centerline{Точки --- лапласиан, линии, перепады --- градиент}\img[0.8]{prewitt}
+\centerline{Prewitt}}
+\only<2>{\img[0.7]{compmask}}
+\only<3>{\begin{block}{Градиент}
+$$\nabla \vec f = (f'_x, f'_y) = \bigl(f(x+1,y)-f(x,y), f(x,y+1)-f(x,y)\bigr)$$
+\end{block}\img[0.8]{imgrad}}
+\end{frame}
+
+\begin{frame}{Выделение границ}
+\only<1>{\begin{block}{Морфологический градиент}
+$$\beta(A)=A\backslash(A\ominus B)\qquad
+\beta'(A)=(A\oplus B)\backslash A\qquad
+\beta''(A)=(A\oplus B)\backslash(A\ominus B)$$
+\end{block}\img{morphgrad}}
+\only<2>{\begin{block}{Canny}
+\begin{enumerate}
+\item Размывание изображения гауссовым фильтром.
+\item Вычисление частных производных $I'_x$ и $I'_y$ (Робертс, Собель, Прюитт, LoG, DoG\dots) и
+компонентов градиента: $M=\sqrt{(I'_x)^2+(I'_y)^2}$, $\theta=\arctg\frc{I'_y}{I'_x}$.
+\item Пороговое преобразование $M$: $M_T = M$, если $M>T$, иначе $M_T=0$.
+\item Обнуление немаксимальных $M_T$ по направлению $\theta$ (по двум соседям).
+\item Получение двух пороговых значений: $M_{T_1}$ и $M_{T_2}$; $T_1<T_2$.
+\item Заполнение пропусков в $M_{T_2}$ по соседним значениям в $M_{T_1}$.
+\end{enumerate}
+\end{block}}
+\only<3>{\img[0.6]{canny01}\centerline{Образец}}
+\only<4>{\img[0.6]{canny02}\centerline{Sobel}}
+\only<5>{\img[0.6]{canny03}\centerline{Prewitt}}
+\only<6>{\img[0.6]{canny04}\centerline{DoG}}
+\only<7>{\img[0.6]{canny05}\centerline{Canny, $\sigma=5$, $T_1=0.8$, $T_2=0.95$}}
+\end{frame}
+
+\begin{frame}{Обнаружение прямых и окружностей}
+\only<1>{\begin{block}{Преобразование Хафа}
+$$r = x\cos\theta + y\sin\theta$$
+\end{block}
+\img[0.5]{R_theta_line}}
+\only<2>{\img{htdiagram}}
+\only<3>{\img[0.7]{htexample}}
+\only<4>{\img{htEx}}
+\only<5>{\includegraphics[width=0.48\textwidth]{h01}\hfil
+	\includegraphics[width=0.48\textwidth]{h02}}
+\only<6>{\begin{block}{Преобразование Хафа для поиска окружностей}
+$$(x-x_c)^2+(y-y_c)^2=r^2$$
+\end{block}\img{htcirc01}}
+\only<7>{\img{htcirc02}\centerline{Трехмерный массив в случае неизвестных центра и радиуса.}}
+\end{frame}
+
+\begin{frame}{Пример: датчик волнового фронта}
+\img{Hough_ex}
+\end{frame}
+
+\begin{frame}{Сегментация по морфологическим водоразделам}
+\only<1>{\begin{block}{}
+Бинарные изображения: итеративные дилатации с построением перегородок в местах
+образовавшихся пересечений.
+\end{block}}
+\only<2,3>{\begin{block}{}Бинарные изображения: преобразования расстояний\end{block}}
+\only<1>{\img[0.5]{watershed}}
+\only<2>{\img[0.4]{wat01}}
+\only<3>{\img[0.75]{wat02}}
+\only<4>{\begin{block}{}
+В общем случае: различные алгоритмы заполнения.
+\end{block}
+\img[0.7]{watershed01}}
+\end{frame}
+
+
+\section{Деконволюция}
+\begin{frame}{Деконволюция}
+    \only<1>{
+        \begin{block}{}
+            $$I(x,y) = P(x,y)*O(x,y)+N(x,y),\quad\text{$P$~-- PSF}\quad\text{или}$$
+            $$\FT{I}=\FT{O}\cdot\FT{P}+\FT{N}\quad\Arr\quad
+            \FT{O}=\frac{\FT{I} - \FT{N}}{\FT{P}}$$
+            $$\text{Наименьшие квадраты:}\quad
+            \FT{O}=\frac{\FT{P}^*\FT{I}}{|\FT{P}|^2}$$
+            $$\text{Регуляризация Тихонова, $\min(J_T)$ ($H$~-- HPF):}\quad
+            \quad J_T=||I-P*O|| - \lambda||H*O||,$$
+            $$\FT{O}=\frac{\FT{P}^*\FT{I}}{|\FT{P}|^2+\lambda|\FT{H}|^2}$$
+        \end{block}
+    }\only<2>{
+        \begin{block}{Регуляризация по Байесу}
+            $$p(O|I)=\frac{p(I|O)\cdot p(O)}{p(I)}$$
+            $$\text{Maximum likelihood:}\quad \mathrm{ML}(O)=\max_O p(I|O)$$
+            $$\text{Maximum-a-posteriori solution:}\quad
+            \mathrm{MAP}(O)=\max_O p(I|O)\cdot p(O)$$
+        \end{block}
+        \begin{block}{}
+            \begin{itemize}
+                \item Итерационная регуляризация
+                \item Вейвлет-регуляризация
+                \item \dots
+            \end{itemize}
+        \end{block}
+    }
+\end{frame}
+
+\begin{frame}{Функция рассеяния точки}
+    \only<1>{\img[0.6]{moffat}}
+    \only<2>{\begin{block}{}
+            \begin{itemize}
+                \item Гаусс: $f(x) = f_0\exp\Bigl(\dfrac{-(x-x_0)^2}{2\sigma^2}\Bigr)$,
+                $\FWHM\approx2.355\sigma$
+                \item Моффат: $f(x) = f_0\Bigl(1+\dfrac{(x-x_0)^2}{\alpha^2}\Bigr)^{-\beta}$,
+                $\FWHM\approx2\alpha\sqrt{2^{1/\beta}-1}$
+                \item Фрид: $\FT{f} \propto \exp\Bigl[-(bu)^{5/3}\Bigr]$,
+                $\FWHM\approx 2.921 b$ (Моффат с $\beta=4.765$, типичные же $\beta=2.5\cdots4.5$).
+            \end{itemize}
+        \end{block}
+    }
+\end{frame}
+
+\section{Обнаружение}
+\begin{frame}{Обнаружение}
+    \begin{block}{Простейший алгоритм}
+        \begin{enumerate}
+            \item Вычисление и вычитание фона
+            \item Свертка с маской и бинаризация
+            \item Обнаружение связных областей
+            \item Уточнение фона, goto 1
+            \item Классификация, фотометрия и т.п.
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{blueframe}{}
+    \img{objdet}
+\end{blueframe}
+
+\begin{blueframe}{Изофоты}
+    \only<1>{\begin{block}{Метод шагающих квадратов}
+            Бинаризуем изображение по заданному порогу. По соседям каждого пикселя вычисляем
+            битовую маску
+            ($0\div15$). От точки $1\div14$ строим изолинию, соответственно меняя значения в
+            пикселях маски. Каждый узел
+            изолинии~--- линейная или другая интерполяция интенсивности в пикселях оригинала.
+        \end{block}
+        \img[0.5]{isophotes}
+    }
+    \only<2>{\img{Marching_squares_algorithm}}
+\end{blueframe}
+
+\begin{frame}{WCS-привязка}
+    \only<1>{
+        \img[0.6]{WCS_triangles}
+        \centerline{A.~P\'al, G.\'A.~Bakos. PASP {\bf 118}: 1474--1483, 2006. }}
+    \only<2>{
+        \img[0.65]{WCS_quad}
+        \centerline{\url{astrometry.net}}}
+    \only<3>{\begin{block}{}
+            \begin{itemize}
+                \item Положение нескольких звезд характеризуется параметром, инвариантным к
+                зеркалированию, масштабированию,
+                вращению и переносу. Устойчивым к шуму.
+                \item Квадрату ABCD соответствует четырехмерный код в относительных координатах
+                точек C и D.
+                \item Проблема вырождения: при смене порядка A, B или C, D код <<отражается>>.
+                \item На небе строится сетка с масштабируемым шагом, по каталожным данным в ее
+                ячейках определяются квадраты
+                с ниспадающей яркостью звезд.
+                \item Полученный набор кодов позволяет идентифицировать участки неба вплоть до
+                самых мелких масштабов (нужны
+                хотя бы четыре звезды в кадре).
+                \item Чем больше звезд на кадре, тем надежней будет идентификация.
+            \end{itemize}
+        \end{block}
+    }
+\end{frame}
+
+\begin{blueframe}{Триангуляция Делоне}
+    \img[0.6]{delaunay}
+\end{blueframe}
+
+\begin{blueframe}{Диаграммы Вороного}
+    \only<1>{\img[0.6]{voronoi}}
+    \only<2>{\img[0.6]{delvor}}
+\end{blueframe}
+
+\begin{frame}{Свойства триангуляции Делоне}
+    \begin{block}{}
+        \begin{itemize}
+            \item ТД взаимно однозначно соответствует диаграмме Вороного для того же множества
+            точек.
+            Как следствие: если никакие четыре точки не лежат на одной окружности, ТД единственна.
+            \item ТД максимизирует минимальный угол среди всех углов всех построенных
+            треугольников, тем
+            самым избегаются <<тонкие>> треугольники.
+            \item ТД максимизирует сумму радиусов вписанных окружностей.
+            \item ТД минимизирует максимальный радиус минимального объемлющего шара.
+            \item ТД  на плоскости обладает минимальной суммой радиусов окружностей, описанных около
+            треугольников, среди всех возможных триангуляций.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{blueframe}{K-nearest}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \begin{block}{}
+            Классификация объекта по $k$~ближайшим соседям. В случае первой выборки~---
+            треугольник, в случае второй~---
+            квадрат.
+
+            $k$ может быть дробным, если применять взвешенные расстояния.
+        \end{block}
+        \column{0.5\textwidth}
+        \img{knearest}
+    \end{columns}
+\end{blueframe}
+
+\begin{frame}{Программное обеспечение}
+    \begin{block}{\url{http://heasarc.gsfc.nasa.gov/docs/heasarc/astro-update/}}
+        \begin{itemize}
+            \item ASTROPY: A single core package for Astronomy in Python
+            \item Aladin: An interactive software sky atlas
+            \item CFITSIO: FITS file access subroutine library
+            \item GSL: GNU Scientific Library
+            \item IDLAUL: IDL Astronomical Users Library
+            \item IRAF: Image Reduction and Analysis Facility
+            \item MIDAS: Munich Image Data Analysis System
+            \item PyRAF: Run IRAF tasks in Python
+            \item SAOImage ds9: FITS image viewer and analyzer
+            \item SEXTRACTOR: Builds catalogue of objects from an astronomical image
+            \item WCSLIB: World Coordinate System software library
+            \item \dots~\url{http://tdc-www.harvard.edu/astro.software.html}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Литература}
+    \begin{itemize}
+        \item W. Romanishin. An Introduction to Astronomical Photometry Using CCDs.
+        \item Jean-Luc Starck and Fionn Murtagh. Handbook of Astronomical Data Analysis.
+        \item Gonzalez \& Woods. Digital Image Processing, 4th edition. 2018. ISBN 10: 1-292-22304-9
+        \item Gonzalez \& Woods \& Eddins. Digital Image Processing Using MATLAB, 2nd edition. 2009.
+        \item \url{http://www.imageprocessingplace.com/root_files_V3/tutorials.htm}
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Спасибо за внимание!}
+\centering
+\begin{minipage}{5cm}
+\begin{block}{mailto}
+eddy@sao.ru\\
+edward.emelianoff@gmail.com
+\end{block}\end{minipage}
+\end{frame}
+\end{document}
