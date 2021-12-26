@@ -1,0 +1,482 @@
+\documentclass[10pt,pdf,hyperref={unicode}]{beamer}
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage{ed}
+\usepackage{lect}
+
+\title[Компьютерная обработка. Лекция 6.]{Компьютерная обработка результатов измерений}
+\subtitle{Лекция 6. Анализ временных рядов. Фурье-- и Вейвлет--анализ}
+\date{29 марта 2021 года}
+
+\begin{document}
+% Титул
+\begin{frame}
+\maketitle
+\end{frame}
+% Содержание
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\section{Аппроксимация и интерполяция}
+\begin{frame}{Аппроксимация и интерполяция}
+\only<1>{
+\begin{defin}
+\ж Аппроксимация\н. Некоторую функцию $f(x)$, $x\in(x_0, x_1)$ требуется приближенно заменить
+некоторой функцией~$g(x)$ так, чтобы отклонение~$g(x)$ от~$f(x)$ в заданной области было наименьшим.
+\end{defin}
+\begin{block}{}
+Точечная (интерполяция, среднеквадратичное приближение и т.п.) и непрерывная аппроксимации.
+\end{block}
+\begin{defin}
+\ж Интерполяция\н является частным случаем аппроксимации, позволяющем вычислить промежуточные
+значения дискретной функции.
+\end{defin}}
+\begin{block}{Ряд Тейлора}
+$$f(x)=f(x_0)+(x-x_0)f'(x_0)+\cdots+\frac{(x-x_0)^nf^{(n)}(x_0)}{n!}+R_n.$$
+\end{block}
+\only<2>{
+\begin{block}{}
+Выбирая первые $N$ членов ряда Тейлора получаем разные виды интерполяции. Линейная:
+$$f_n(x)\approx y_n+(x-x_n)\frac{y_{n+1}-y_n}{x_{n+1}-x_n}.$$
+Ньютона (для равноотстоящих $x$, $h=x_{n+1}-x_n$):
+$$f^k_n(x)\approx y_n + q\Delta y_n + \frac{1(1-q)}{2!}\Delta^2y_n + \cdots
++\frac{q(q-1)\cdots(q-k+1)}{k!}\Delta^ky_n,$$
+где  $q=\dfrac{x-x_n}{h}$, $\Delta^i$~-- конечные разности ($\Delta y_n = y_{n+1}-y_n$, \dots,
+$\Delta^k y_n = \Delta^{k-1}y_{n+1} - \Delta^{k-1}y_n$).
+\end{block}
+}
+\end{frame}
+
+\begin{frame}{}
+\begin{defin}
+\ж Сплайн\н~--- кусочная полиномиальная функция, которая на заданном отрезке может принимать очень
+простую форму, в то же время имея гибкость и гладкость.
+\end{defin}
+
+\begin{block}{Степенной сплайн}
+Набор полиномов степени $k$ со следующими ограничениями:
+\begin{itemize}
+\item сплайны должны совпадать в узловых точках с задающей функцией: $p_n(x_n) = f(x_n)$;
+\item предыдущий сплайн должен переходить в следующий в точках сшивания,
+$p_n(x_n)=p_{n+1}(x_n)$;
+\item все производные до $f^{(k-1)}$ должны быть непрерывными и гладкими:
+$p^i_n(x_n)=p^i_{n+1}(x_n)$ для $i=\overline{1,k-1}$;
+\end{itemize}
+$n-1$ полином степени $k$ имеют $(k+1)(n-1)=(k+1)n-k-1$ свободных коэффициентов. Данные ограничения
+дают нам
+$n+(n-2)\cdot k=(k+1)n-2k$ уравнений. Чтобы получить еще $k-1$ уравнений, нужны дополнительные
+условия. Чем больше $k$, тем тяжелей. Поэтому обычно дальше $k=3$ не идут.
+\end{block}
+\end{frame}
+
+\begin{frame}{}
+\only<1>{
+\begin{block}{B--сплайн}
+Базисные сплайны менее подвержены влиянию изменения отдельных точек данных (изменение одной вершины
+B--сплайна степени $k$ ведет к изменению лишь $k+1$ соседних сплайнов). При этом, однако, теряются
+точные интерполяционные свойства: $p_n(x_n)\ne f(x_n)$ \so снижается влияние шумов (B--сплайн
+проходит только через первый и последний узлы, повышаем степень~--- улучшаем сглаживание данных).
+Количество узлов: $n\ge k+1$.
+\end{block}
+\begin{block}{Сплайны Акимы}
+Также кубические. Устойчивы к осцилляциям. Локальность (окрестность из 5--6 точек) "--- существенно
+более быстрое разложение.
+\end{block}
+\begin{block}{Кривые Безье}
+Параметрические полиномиальны кривые, проходящие через опорны точки только в начале и конце области
+определения.
+\end{block}
+}
+\only<2>{
+\img[0.7]{1D_Inter_polation}
+}
+\only<3>{
+\img{bezier}
+\centering{Интерполяция кривой Безье}
+}
+\end{frame}
+
+\section{Модель ARMA}
+\begin{frame}{Модель ARMA (авторегрессия и скользящее среднее)}
+\only<1>{
+\begin{block}{Авторегрессия}
+Процесс авторегрессии выражается уравнением
+$$x_k=\C + \sum_{i=1}^{n}\phi_i x_{k-i} + \epsilon_k,\qquad\text{где $\C$~-- константа,
+$\epsilon$~--
+шум.}$$
+Процесс будет стационарным, лишь если $\phi_i$ заключены в определенном диапазоне, что не приведет
+к негораниченному росту~$x_k$.
+\end{block}
+\begin{block}{Скользящее среднее}
+$$x_k=\C + \epsilon_k - \sum_{i=1}^{n}\theta_i\epsilon_{k-i},\qquad\text{объект~-- сумма ошибок.}$$
+\end{block}}
+\only<2>{
+\begin{block}{ARMA}
+$$x_k=\C + \epsilon_k + \sum_{i=1}^{p}\phi_i x_{k-i} + \sum_{i=1}^{q}\theta_i\epsilon_{k-i}\qquad
+\text{--- процесс ARMA(p,q).}$$
+Для определения порядков $p$ и $q$ может применяться, например, автокорреляция и частичная
+автокорреляция, ЧАКФ. Для нахождения коэффициентов~--- метод наименьших квадратов и т.п.
+
+В ЧАКФ из переменных вычисляется их регрессия (удаляются линейные зависимости):
+$$PACF(k)=corr(x_{t+k}-x_{t+k}^{k-1}, x_t-x_{t}^{k-1}),$$
+$$x_{t}^{k-1}=\sum_{i=1}^{k-1}\beta_i x_{t+k-i}\qquad\text{--- СЛАУ.}$$
+\end{block}
+}
+\end{frame}
+
+\section{Преобразования Лапласа, Z--преобразования}
+\begin{frame}{Преобразование Лапласа}
+\only<1>{
+\begin{block}{}
+В линейной теории управления аналогами преобразований Фурье выступают
+преобразования Лапласа и Z--преобразования.
+
+Для комплексного переменного $s$ преобразование Лапласа определяется так:
+$$
+F(s)=\LT{f(t)}(s)=\Int_0^{\infty}f(t)\e^{-st}dt.
+\label{Laplas_transform}
+$$
+Использование преобразований Лапласа имеет тот смысл, что управляющая
+функция $f(t)$ чаще всего является чисто действительной, а ее
+состояние в момент времени $t<0$ не определено или же не
+интересует исследователя.
+
+$$f(t)=\ILT{F(s)}= \frac{1}{2\pi i}\lim_{\omega\to\infty}\Int_{\gamma-\omega}^{\gamma+\omega}
+\e^{st}F(s)\,ds,$$
+где $\gamma$ определяет область сходимости $F(s)$.
+\end{block}}
+\only<2>{
+\begin{block}{Связь с преобразованием Фурье}
+$$
+\FT{F}\equiv F(u)=\Infint f(x)\e^{-2\pi i ux}\,dx
+$$
+$$\LT{f(t)}(2\pi u)=\Int_0^{\infty}f(t)\e^{-2\pi iut}dt=\FT{f(t)},\qquad f(t)=0\when{t<0}.$$
+Лаплас \arr Фурье: $s \arr2\pi iu $ \Arr расширение свойств ПФ на ПЛ.
+
+Сведение линейных диф. уравнений к алгебраическим \Arr теория управления:
+$$\LT{\dfrac{df(t)}{dt}}(s)=s^{1}\LT{f(t)}(s)-f(0)\quad\Arr$$
+$$\quad\LT{f^{(n)}(t)}(s)=s^{n}\LT{f(t)}-\sum_{k=1}^n s^{n-k}f^{(k-1)}(0).$$
+\end{block}
+}
+\only<3>{
+\begin{block}{Передаточная функция}
+$i(t)$~--- входной сигнал управляющей системы, $o(t)$~---
+выходной сигнал; $I(s)=\LT{i}$, $O(s)=\LT{o}$.
+{\ж Передаточная функция} с нулевыми начальными условиями:
+$$
+T(s)=\frac{O(s)}{I(s)}.
+$$
+$T(s)$ описывает динамику системы, совершенно отвлекаясь от ее внутреннего функционирования.
+
+$$o(t)=\ILT{T\cdot I}.$$
+\end{block}
+
+}
+\end{frame}
+
+\begin{frame}{Преобразование Лапласа, примеры}
+\only<1>{
+\begin{block}{Функция Хевисайда}
+\begin{columns}
+\column{0.3\textwidth}
+$$\eta(t)=\left\{\begin{aligned}
+0,\quad t<0,\\
+1,\quad t\ge0.
+\end{aligned}\right.$$
+\column{0.7\textwidth}
+$$\displaystyle F(p)=\Int_0^\infty \eta(t)\,\e^{-st}dt=\Int_0^\infty\e^{-st}dt=\frac{1}{s},\quad\Re(
+s) > 0.$$
+\end{columns}
+\end{block}
+\begin{block}{Экспонента}
+$$\Int_0^\infty\e^t\e^{-st}dt=\Int_0^\infty\e^{-t(s-1)}dt=\left.\frac{\e^{-(s-1)t}}{-(s-1)}\right|_0^\infty=
+\frac{1}{s-1},\quad \Re(s)>1;$$
+$$\Int_0^\infty\e^{\lambda t}\e^{-st}dt=\frac{1}{s-\lambda},\quad \Re(s)>\lambda.$$
+\end{block}
+}
+\only<2>{
+\begin{block}{$\sin$, $\cos$}
+$$\Int_0^\infty \sin\alpha t\e^{-st}dt=\Int_0^\infty\frac{\e^{i\alpha t}-\e^{-i\alpha
+t}}{2i}\e^{-st}dt=\frac{\alpha}{s^2+\alpha^2},$$
+$$\Int_0^\infty \cos\alpha t\e^{-st}dt=\Int_0^\infty\frac{\e^{i\alpha t}+\e^{-i\alpha
+t}}{2i}\e^{-st}dt=\frac{s}{s^2+\alpha^2}.$$
+\end{block}
+\begin{block}{$\sh$, $\ch$}
+$$\Int_0^\infty \sh\alpha t\e^{-st}dt=\frac{\alpha}{s^2-\alpha^2},$$
+$$\Int_0^\infty \ch\alpha t\e^{-st}dt=\frac{s}{s^2-\alpha^2}.$$
+\end{block}
+}
+\only<3>{\begin{block}{Диф. уравнения}
+Решить задачу Коши $x'''+x'=1$, $x(0)=x'(0)=x''(0)=0$. Вычислим преобразование Лапласа (учитывая,
+что все н.у. нулевые):
+$$s^3F(s)+sF(s)=\frac{1}{s}\Arr F(s)=\frac{1}{s^2(s^2+1)}=\frac{1}{s^2}-\frac{1}{s^2+1},$$
+Обратное преобразование:
+$$x(t)=t-\sin t.$$
+\end{block}
+}
+\only<4>{
+\begin{block}{Конденсатор}
+Ток $i=C\frac{du}{dt}$, Лаплас: $I(s)=C(sU(s)-u(0))$. Отсюда $U(s)=\frac{I(s)}{sC}+\frac{u(0)}{s}$.
+Комплексное сопротивление $Z(s)=\left.\frac{U(s)}{I(s)}\right|_{u(0)=0}$. Импеданс
+конденсатора: $Z=\frac{1}{sC}$.
+\end{block}
+\begin{block}{Индуктивность}
+$u=L\frac{di}{dt}$, $U(s)=L(sI(s)-i(0))$, $Z(s)=\left.\frac{U(s)}{I(s)}\right|_{i(0)=0}$,
+$Z=sL$.
+\end{block}
+}
+\only<5>{
+\begin{block}{Общая передаточная функция}
+Рассмотрим диф. уравнение
+$$\sum_{i=0}^n a_i y^{(i)}(t)=\sum_{j=0}^m b_j x^{(j)}(t).$$
+При нулевых начальных условиях его преобразование Лапласа:
+$$Y(s)\sum a_i s^i = X(s)\sum b_j s^j,\quad\Arr\quad
+Y(s)=\frac{b_0 + b_1 s + \ldots + b_m s^m}{a_0 + a_1 s + \ldots + a_n s^n}X(s).$$
+\ж Передаточная функция\н:
+$$W(s)=\frac{Y(s)}{X(s)}=\frac{b_0 + b_1 s + \ldots + b_m s^m}{a_0 + a_1 s + \ldots + a_n s^n}.$$
+Корни $b_i$~-- \ж нули\н передаточной функции, корни $a_i$~-- ее\ж полюса\н.
+\end{block}
+}
+\only<6>{
+\begin{block}{Переходная характеристика}
+ПХ~--- реакция системы на ступенчатую функцию (Хевисайда): $$Y(s)=\dfrac{1}{s}W(s).$$
+Основные виды: апериодическая (монотонная)~-- плавное возрастание или затухание с постоянным знаком
+производной; периодическая колебательная~-- бесконечное количество раз смены знака производной с
+постоянным периодом; колебательная апериодическая~-- период смены знака производной непостоянен,
+его количество конечно.
+
+Для последовательных звеньев $W(s)=\prod_{i=1}^n W_i(s)$. У параллельных суммирующих звеньев
+$W(s)=\sum_{i=1}^n W_i(s)$.
+
+Обратная связь: $Y=W_1X_1$, $X_1=X\pm X_2=X\pm W_2 W_1 X_1$, $X_1=X\pm X_1 W_1 W_2$
+$$X_1 = \frac{X}{1\mp W_1 W_2},\quad Y=\frac{W_1 X}{1\mp W_1 W_2},\quad
+W=\frac{W_1}{1\mp W_1 W_2}.$$
+\end{block}
+}
+
+\end{frame}
+
+\begin{frame}{Z--преобразования (преобразования Лорана)}
+\begin{block}{}
+Являются дискретными аналогами преобразований Лапласа.
+
+Z--преобразование дискретного сигнала $\mathrm{i}={i_k}$, где
+$k=0,\ldots,\infty$,
+имеет следующий вид:
+$$
+I(z)\equiv\ZT{\mathrm{i}}=\sum_{k=0}^\infty i_k(t)z^{-k},
+$$
+$$
+i_n = \IZT{I}=
+\frac1{2\pi}\Oint_C I(z)z^{n}dz,
+$$
+где $C$~-- контур, охватывающий область сходимости $Z$.
+\end{block}
+\begin{block}{}
+Отклик на сдвиг:
+$$\ZT{\strut\mathrm{i}(t+n\Delta t)}=z^n\ZT{\strut\mathrm{i}(t)}.$$
+Связь с преобразованием Лапласа ($t\ll\Delta T$):
+$$\LT{\strut\mathrm{i}(t)}(s)=\ZT{\strut\mathrm{i}(t)}\e^{-st}.$$
+\end{block}
+\end{frame}
+
+\section{Фурье--анализ}
+\begin{frame}{Фурье--анализ}
+\only<1>{
+\begin{block}{Ряд Фурье}
+$$f(x)=\sum_{n=0}^\infty a'_n\cos(nx)+\sum_{n=1}^\infty b'_n\sin(nx).$$
+Коэффициенты $a_n$ и~$b_n$ рассчитываются по формулам
+$$a_n=\rev\pi\Int_{-\pi}^\pi f(x)\cos(nx)\,dx,\qquad
+b_n=\rev\pi\Int_{-\pi}^\pi f(x)\sin(nx)\,dx.$$
+
+$$\text{Если}\quad S_k(x) = \sum_{n=0}^k a'_n\cos(nx)+\sum_{n=1}^k b'_n\sin(nx),\quad\text{то}$$
+$$\lim_{n\to\infty}\Int_{-\pi}^\pi\Bigl(f(x)-S_k(x)\Bigr)dx = 0.$$
+\end{block}
+}
+\only<2>{
+\img{aliasing_fourier}
+\centering{Ложная синусоида (<<aliasing>>, муар).}
+}
+\only<3>{
+\begin{block}{Свойства}
+\begin{itemize}
+\item свертка: $\FT{f\cdot g}=\sqrt{2\pi}\FT{f}\cdot\FT{g}$,
+\item дифференцирование: $\FT{f^{n}} = (2\pi i\nu)^n\FT{f}$,
+\item сдвиг: $\FT{f(x-x_0)\strut}=\e^{-2\pi i\nu x_0}\FT{f}$,
+\item частотный сдвиг: $\FT{\e^{iat}f(t)}=F(2\pi\nu-a)$,
+\item масштабирование: $\FT{\C f}=\rev{|\C|}\FT{f}(\nu/a)$,
+\item $\FT{\delta(t)\strut}=\frac1{\sqrt{2\pi}}$,
+\item $\FT{1}=\sqrt{2\pi}\delta(2\pi\nu)$,
+\item $\FT{\e^{iat}}=\sqrt{2\pi}\delta(2\pi\nu-a)$.
+\end{itemize}
+\end{block}
+}
+\end{frame}
+
+\begin{frame}{}
+\only<1>{
+\img{FM-AM}
+\centering{Спектры ЧМ~(сверху) и АМ~(снизу) сигналов, образованных из двух
+одинаковых гармонических сигналов}
+}
+\only<2>{
+\img{Four-filter}
+\centering{Фурье-фильтрация. Точками обозначен оригинальный сигнал, линией~---
+зашумленный сигнал, кружками~--- отфильтрованный.}
+}
+\end{frame}
+
+\section{Вейвлет--анализ}
+\begin{frame}{Вейвлет--анализ}
+\only<1>{
+\begin{defin}
+\ж Вейвлеты\н~--- класс функций, использующихся для пространственной и масштабируемой локализации
+заданной функции. Семейство вейвлетов может быть образовано из функции~$\psi(x)$ (ее иногда
+называют <<материнским вейвлетом>>), ограниченной на конечном интервале. <<Дочерние>> вейвлеты
+$\psi^{a,b}(x)$ образуются из <<материнского>> путем сдвига и масштабирования.
+\end{defin}
+
+\begin{block}{}
+Отдельный вейвлет можно определить как
+$$\psi^{a,b}(x)=|a|^{-1/2}\psi\Bigl(\frac{x-b}{a}\Bigr).$$
+Тогда\ж базис вейвлетов\н (\it{}прямое вейвлет--преобразование\н),
+соответствующих функции~$f(x)$ определяется как
+$$W_\psi(f)(a,b)=\rev{\sqrt a}\Infint f(t)\psi^*\Bigl(\frac{t-b}{a}\Bigr)\,dt.
+\label{waveletb}$$
+где $a, b\in \mathbb{R}$, $a\ne0$.
+\end{block}
+}
+% \only<2>{
+% \begin{block}{Коэффициенты}
+% $$C_{j,k}=W_\psi(f)(2^{-j},k\cdot2^{-j}).$$
+%
+% \end{block}
+% }
+\only<2>{
+\begin{block}{Дискретное вейвлет--преобразование}
+$a=a_{0}^{m},\quad b=nb_{0}$, в этом случае
+$$\psi_{{m,n}}=a_{0}^{-m/2}\psi \left(\frac  {t-nb_0}{a_0^m}\right).$$
+
+$$W_{m,n}=\Int_{-\infty }^{\infty }x(t)\,\psi_{m,n}^{*}(t)\,dt.$$
+
+$$x(t)=K_\psi \Sum_{m=-\infty}^{\infty }\Sum_{n=-\infty }^\infty W_{m,n}\psi _{m,n}(t),$$
+где $K_\psi$~-- постоянная нормировки.
+\end{block}
+}
+% \only<2>{
+% \begin{block}{Свойства вейвлетов и требования}
+% \begin{itemize}
+% \item $\Infint\psi(t)\,dt=0$; $\Infint|\psi(t)|^2 dt<\infty$;
+% \item $\WT{af(t)+bg(t)}=a\WT{f(t)}+b\WF{g(t)}$;
+% \item $\WT{f(t-t_0)}=
+% \end{itemize}
+%
+% \end{block}
+% }
+\end{frame}
+
+\begin{frame}{}
+\only<1>{
+\img[0.9]{wavelet}
+\centering{Локализация}
+}
+\only<2>{
+\img[0.6]{scale}
+\centering{Масштабирование}
+}
+\only<3>{
+\img[0.8]{fourwav}
+\centering{Фурье и вейвлеты}
+}
+\only<4>{
+\img[0.5]{curvelet}
+\centering{Курвлеты}
+}
+\end{frame}
+
+
+
+
+%%%% ROBUST & UNEVEN %%%%
+
+\section{Анализ разреженных данных}
+\begin{frame}{Анализ разреженных данных}
+    \only<1>{
+        \begin{block}{Корреляция}
+            $$C(\tau)=\frac{[a(t)-\aver{a}][b(t+\tau)-\aver{b}]}{\sigma_a\sigma_b}$$
+            $$\text{Unbinned: } U_{ij}=\frac{(a_i-\aver{a})(b_j-\aver{b})}{
+                \sqrt{(\sigma_a^2-e^2_a)(\sigma_b^2-e^2_b)}},\qquad \Delta t_{ij}=t_j-t_i\qquad$$
+            $$C(\tau)=\frac1{N_\tau}U_{ij,\tau},\qquad
+            \tau-\Delta\tau/2\le\Delta t_{ij}\le\tau+\Delta\tau/2$$
+            Не нужна интерполяция!
+        \end{block}
+    }\only<2>{
+        \img[0.8]{scatter_corr}\centerline{Пунктир~--- корреляция через интерполяцию}}
+\end{frame}
+
+\begin{frame}{}
+    \only<1>{
+        \begin{block}{Периодограмма Ломба--Скаргла (Lomb--Scargle)}
+            $$P_{x}(\omega )={\frac  {1}{2}}\left({\frac  {\left[\sum _{j}X_{j}\cos \omega
+            (t_{j}-\tau
+                    )\right]^{2}}{\sum _{j}\cos ^{2}\omega (t_{j}-\tau )}}+{\frac  {\left[\sum
+                    _{j}X_{j}\sin \omega
+                    (t_{j}-\tau )\right]^{2}}{\sum _{j}\sin ^{2}\omega (t_{j}-\tau )}}\right)$$
+            $$\tg{2\omega \tau }={\frac  {\sum _{j}\sin 2\omega t_{j}}{\sum _{j}\cos 2\omega
+            t_{j}}}$$
+        \end{block}
+        \img{lombscargle}
+    }\only<2>{
+        \begin{block}{Преобразование Фурье}
+            $$ P_m=\Sum_{n=1}^N p_n\e^{-i\frac{2\pi}{N}mn}\quad\Arr\quad
+            P_m=\Sum_{n=1}^N p_n\e^{-i\frac{2\pi}{T}mt_n},\quad T=t_N-t_1$$
+            В octave: \tt{irsa\_dft(X,Y,freq)}:
+            $\displaystyle P(\nu)=\Sum_{n=1}^N p_n\e^{-i \nu_n\cdot t_n}$
+    \end{block}}
+    \only<3>{\img[0.8]{scat01}}
+    \only<4>{\img[0.8]{scatFFT}}
+    \only<3,4>{\centerline{$T=111.5\quad\Arr\quad \nu\approx0.00897$}}
+\end{frame}
+
+% \begin{frame}{}
+% \only<1>{
+% \begin{block}{}
+% \end{block}
+% }\only<2>{
+% \img[0.8]{}
+% }
+% \end{frame}
+
+
+
+\section{Робастные методы}
+\begin{frame}{Робастные методы}
+    \begin{block}{}
+        Робастная надежность МНК~--- 0!
+
+        Простейшая робастная оценка~--- медиана (можно <<засорить>> до 50\% данных!).
+        Оценка <<плохости>>: $MAD=\med(x_i-\med(x))$.
+
+        Группировка данных и метод усеченных квадратов.
+
+        Метод наименьших медиан квадратов: $\min\bigl(\med(x^2)\bigr)$.
+
+        Оценка дисперсии: $\med(|x_i-\med(x)|)\approx0.67\sigma$.
+
+        M-, R-, S-, Q- оценки.
+
+
+    \end{block}
+\end{frame}
+
+
+
+\begin{frame}{Спасибо за внимание!}
+\centering
+\begin{minipage}{5cm}
+\begin{block}{mailto}
+eddy@sao.ru\\
+edward.emelianoff@gmail.com
+\end{block}\end{minipage}
+\end{frame}
+\end{document}
