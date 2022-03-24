@@ -3,7 +3,7 @@
 \usepackage{lect}
 
 \title[Обработка FITS-файлов. Лекциия 1.]{Компьютерная обработка астрономических изображений}
-\subtitle{Получение изображений на ПЗС, базовые манипуляции. Фотометрия. Астрометрия.}
+\subtitle{Получение изображений на ПЗС, базовые манипуляции. }
 \date{}
 
 \def\e{{\overline{e}}}
@@ -285,133 +285,6 @@ $$\sigma^2 = S/G + R^2_{ADU},$$
 $R=G\cdot\sqrt{b}$.
 }
 \end{block}
-\end{frame}
-
-\section{Фотометрия}
-\begin{frame}{Фотометрия}
-\begin{columns}
-\column{0.45\textwidth}
-\begin{block}{Принципы фотометрии}
-Распределение света от звезды между пикселями неоднородное, зашумленное.
-Для измерения полного потока от звезды, необходимо:
-\begin{itemize}
-\item определить положение звезды на изображении;
-\item при помощи маски выбрать те пиксели, которые принадлежат изображению именно этой звезды;
-\item просуммировать сигнал за вычетом фона.
-\end{itemize}
-\end{block}
-\column{0.45\textwidth}
-\begin{block}{Центроид}
-$$\mean{x}=\frac{\sum x_i I_i}{\sum I_i},\quad \mean{y}=\frac{\sum y_i I_i}{\sum I_i}, \quad
-I_i = S_i - B.$$
-\end{block}
-\end{columns}
-\end{frame}
-
-\begin{frame}
-\begin{block}{Апертурная фотометрия}
-Проблема: определить радиусы апертур (звезды и фона).
-\end{block}
-\img[0.9]{apert}
-\end{frame}
-
-\begin{frame}
-\begin{columns}
-\column{0.45\textwidth}
-\img{starphotom}
-\column{0.52\textwidth}
-\begin{block}{Модель апертурной фотометрии}
-Параметры звезды: уровень сигнала, координаты центра, полуширина.
-
-Параметры фона: средний уровень сигнала, $B$.
-
-Параметры светоприемника: квантовая эффективность, шумы.
-
-Радиусы апертур: $r_1$, $r_2$, $r_3$.
-\end{block}
-\end{columns}
-\end{frame}
-
-\begin{frame}
-\begin{block}{Основные выражения}
-$S = F+B+Q+E$, где $S$~-- накопленный сигнал, $F$~-- сигнал от звезды, $B$~-- фон, $Q$~-- темновой
-ток, $E$~-- bias.
-
-Суммарный сигнал от звезды: $F_\Sigma = \sum F_i=\sum(S_i-[B_i+Q_i+E_i])$.
-
-Шум: $\sigma^2=F_\Sigma + N(\mean{B}+\mean{Q}+\sigma^2_{RO})+\sigma^2_{sky}$, $N$~-- количество
-пикселей маски звезды, $\sigma^2_{RO}$~-- шум считывания. Первый член отражает зависимость
-пуассоновского шума от уровня сигнала. $\sigma^2_{sky}=N(\mean{B}+\mean{Q}+\sigma^2_{RO})/N_{sky}$,
-$N_{sky}$~-- количество пикселей в маске фона.
-
-$\mathrm{SNR}=F_\Sigma/\sigma$. Чем слабее звезда, чем больше уровень фона, чем больше~$N$ и
-меньше~$N_{sky}$, тем худшим будет SNR.
-\end{block}
-\end{frame}
-
-\begin{frame}
-\begin{columns}
-\column{0.57\textwidth}
-\img{starprofile}
-\column{0.4\textwidth}
-\begin{block}{Профили звезд}
-Средний по изображению профиль позволяет оценить радиусы апертур. Также поможет при апертурной
-коррекции.
-
-Ошибка определения звездной величины: $\sigma_m=1.0857/\mathrm{SNR}$.
-\end{block}
-\end{columns}
-\end{frame}
-
-\section{Астрометрия}
-\begin{frame}{Астрометрия}
-\begin{columns}
-\column{0.57\textwidth}
-\img{diffastrometry}
-\column{0.4\textwidth}
-\begin{block}{}
-Астрометрия позволяет измерить точные координаты звезд на небе, а также определить их параллаксы и
-собственные движения. Первый каталог~--- Гиппарх, точность не выше~$1\degr$. Микросекундной
-точности достиг запущенный в 1989\,г. космический телескоп HIPPARCOS.
-
-Точность GAIA~--- $0.00002''$ ($20\mu as$)~--- толщина человеческого волоса с расстояния в 1000\,км!
-\end{block}
-\end{columns}
-\end{frame}
-
-\begin{frame}{}
-\begin{block}{Каталоги}
-\begin{enumerate}
-\item \textbf{HIPPARCOS}~--- звезды до $m_V=7.3^m$, точность астрометрии до $1\div3\,$mas.
-\item \textbf{TYCHO-2}~--- до $m_V=11^m$, точность $10\div100\,$mas.
-\item \textbf{USNO B 1.0}~--- до $m_V=21^m$, фотометрический каталог с точностью до $0^m.3$.
-\item \textbf{2MASS}~--- 470~миллионов объектов, точность до $70\,$mas.
-\item \textbf{SDSS}~--- фотометрический каталог четверти неба в пяти фильтрах, 287~миллионов
-объектов.
-\end{enumerate}
-\end{block}
-\end{frame}
-
-\begin{frame}{}
-\vspace*{-1em}
-\begin{columns}
-\column{0.5\textwidth}
-\img{WCSfits}
-\column{0.48\textwidth}
-\begin{block}{WCS}
-WCS~--- World Coordinate System. ICRS~--- International Celestial Reference System (привязка к
-барицентру Солнечной системы).
-Ключевые слова WCS в FITS--шапке позволяют осуществить однозначную привязку пиксельных координат к
-мировым (и обратно). Для линейных преобразований: \textbf{CTYPEi}~-- тип оси, \textbf{CRPIXi}~--
-опорный пиксель (в пиксельных координатах), \textbf{CRVALi}~-- значение мировых координат в этом
-пикселе (1~-- $\alpha$, 2~-- $\delta$), \textbf{CDi\_j}~-- матрица коэффициентов, описывающих
-поворот осей и масштаб, \textbf{CUNITi}~-- единицы измерения по данной оси.
-\end{block}
-\end{columns}
-\end{frame}
-
-\begin{frame}{astrometry.net}
-\img[0.6]{astrometrynet}
 \end{frame}
 
 \begin{frame}{Спасибо за внимание!}
