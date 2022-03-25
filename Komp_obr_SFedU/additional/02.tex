@@ -377,14 +377,15 @@ WCS~--- World Coordinate System. ICRS~--- International Celestial Reference Syst
 \begin{columns}
 \column{0.47\textwidth}
 \begin{block}{Простейший случай}
-Обозначим \textbf{CRPIX}~-- $p$, \textbf{CRVAL}~-- $v$, \textbf{CDELT}~-- $d$, \textbf{CROTA2}~--
+Обозначим \textbf{CRPIX}~-- $p$, \textbf{CRVAL}~-- $\alpha_0$ и $\delta_0$, \textbf{CDELT}~-- $d$,
+\textbf{CROTA2}~--
 $r$, \textbf{CD}~-- $c$, тогда
 $$\begin{cases}
-\alpha = d_1(x-p_1)\cos r - d_2(y-p_2)\sin r,\\
-\delta = d_1(x-p_1)\sin r + d_2(y-p_2)\cos r;\end{cases}$$
+\alpha - \alpha_0 = d_1(x-p_1)\cos r - d_2(y-p_2)\sin r,\\
+\delta -\delta_0 = d_1(x-p_1)\sin r + d_2(y-p_2)\cos r;\end{cases}$$
 
-$$\begin{cases}\alpha = c_{11}(x-p_1) - c_{12}(y-p_2),\\
-\delta = c_{21}(x-p_1) + c_{22}(y-p_2).\end{cases}$$
+$$\begin{cases}\alpha - \alpha_0 = c_{11}(x-p_1) - c_{12}(y-p_2),\\
+\delta -\delta_0 = c_{21}(x-p_1) + c_{22}(y-p_2).\end{cases}$$
 
 $$\begin{pmatrix}c_{11} & c_{12}\\ c_{21} & c_{22} \end{pmatrix} =
 \begin{pmatrix} d_1\cos r &-d_2\sin r\\ d_1\sin r & d_2\cos r\end{pmatrix}
