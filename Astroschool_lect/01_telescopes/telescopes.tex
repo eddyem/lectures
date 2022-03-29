@@ -1,28 +1,13 @@
-\documentclass[10pt,pdf,hyperref={unicode}]{beamer}
+\documentclass[10pt,pdf,hyperref={unicode},aspectratio=169]{beamer}
 \hypersetup{pdfpagemode=FullScreen}
 \usepackage{lect}
 
 \title[Телескопы]{Инструменты в приближениях геометрической и волновой оптики}
-\date{4 марта 2018 года}
+\date{7~апреля 2022~года}
 \def\ig#1{\includegraphics[width=\columnwidth]{#1}}
 \def\igh#1{\includegraphics[width=0.5\columnwidth]{#1}}
+\def\IG#1#2{\includegraphics[width=#1\columnwidth]{#2}}
 
-\setbeamertemplate{footline}
-        {
-      \leavevmode%
-      \hbox{%
-      \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
-        \usebeamerfont{author in head/foot}\insertshortauthor~~(\insertshortinstitute)
-      \end{beamercolorbox}%
-      \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
-        \usebeamerfont{title in head/foot}\insertshorttitle
-      \end{beamercolorbox}%
-      \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
-        \usebeamerfont{date in head/foot}\insertshortdate{}\hfill\insertframenumber\hspace{1em}
-      \end{beamercolorbox}
-      }%
-      \vskip0pt%
-    }
 \begin{document}
 % Титул
 \bgroup\setbeamercolor{normal text}{bg=black}
@@ -35,24 +20,79 @@
 \tableofcontents
 \end{frame}
 \section{Телескоп как концентратор энергии}
+\subsection{Зеркало}
+\begin{frame}{Телескоп как концентратор энергии. Зеркало}
+\vspace*{-1em}
+\only<1,2>{\begin{columns}\column{0.35\textwidth}\begin{block}{Архимед}
+<<Гиперболоид>> (212\,в до н.э.) "--- попытка сжечь осадивший римский флот под Сиракузами во время
+2~пунической войны (218--201\,гг до н.э.).
+\end{block}\column{0.6\textwidth}}
+\only<1>{\img{Giperboloid-Arhimeda}}
+\only<2>{\img{archimed}}
+\only<1,2>{\end{columns}}
+\only<3>{\begin{columns}\column{0.3\textwidth}\begin{block}{}
+Зажжение олимпийского огня. Игры~--- раньше 776~г. до~н.э. (до 394~г.\,н.э., возобновлены в
+1896~г.)!
+\end{block}\column{0.65\textwidth}\img{olympic_torch_lighting}\end{columns}}
+\end{frame}
 
+\subsection{Линза}
+\begin{frame}{Телескоп как концентратор энергии. Линза}
+\vspace*{-1em}\begin{columns}
+\column{0.45\textwidth}
+\begin{defin}\textbf{Линза} "--- от лат. <<lens>>~-- чечевица.\end{defin}
+\begin{block}{}
+Пьеса Аристофана <<Облака>> (424\,г. до н.э.) "--- добыча огня.
+
+Древний Рим. Плиний старший (23--79\,гг. н.э.) "--- добыча огня, коррекция зрения (император Нерон, вогнутый изумруд).
+
+Альхазен (965--1038\,гг. н.э.) "--- трактат по оптике, формирование изображения глазом.
+
+1280-е годы, Италия (Сальвино д'Армате) "--- очки.
+\end{block}
+\column{0.5\textwidth}\img[0.9]{Nimrud_lens_British_Museum}
+\vspace*{-1em}\begin{block}{}Линза Нимруда (750--710\,гг. до н.э.). Нимруд "--- одна из древних
+столиц Ассирии.\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Световая энергетика}
+\textbf{Слюсарев Г.Г.} О возможном и невозможном в оптике (1-е изд. 1944, 2-е изд. 1957).\\
+\textbf{Степанов Б.И.} Введение в современную оптику\ldots, 1989.\\[1em]
+Максимальный поток от Солнца: 2\,кал/(мин$\cdot$см${}^2$) (0.14\,Вт) $\Arr$ АЧТ нагреется не выше
+$120^\circ$C (0.16\,Вт/см$^2$). Воспламенение древесины "--- $500\div700^\circ$C
+($2\div5\,$Вт/см$^2$).
+\textbf{Альбедо}! $\Arr$ $20\div40\,$раз выше освещенности от Солнца (и десятки минут)! Мгновенное
+воспламенение "--- сотни ватт!
+
+Диаметр изображения Солнца $d=F/127$ $\Arr$ выигрыш в освещенности:
+$\dfrac{E}{E_0}=\bigl(\dfrac{127\cdot D}{F}\bigr)^2$ $\Arr$ светосила для 100\,Вт/см$^2$:
+$D/F\ge1/5$, т.е. диаметр <<зеркала>> лишь в 5 раз меньше расстояния!
+
+3000 <<зайчиков>> в одну точку! Но альбедо белой краски до 80\%!!!
+
+1747, фр. натуралист Бюффон построил зажигательный прибор из 168 зеркал $15\times20\,$см (с
+индивидуальными оправами). За несколько минут на расстоянии 47\,м загорелась смолистая доска (почти
+АЧТ). $E/E_0=36$. \\[1em]
+<<Знамя-2>> + <<Новый свет>>, 4 февраля 1993. Парус диаметром 20\,м (сектора). Диаметр пятна 8км,
+освещенность сравнима с полной Луной.
+\end{frame}
 
 \begin{frame}{Ход лучей в линзе}
-\only<1>{Идеальная (тонкая) линза. \img{thin_lens}}
-%\only<2>{Толстая линза, главные плоскости и точки. \img{pripl}}
+\only<1>{Идеальная (тонкая) линза. (О параксиальной оптике -- позже). \img[0.8]{thin_lens}}
+\only<2>{Толстая линза, главные плоскости и точки. \img[0.8]{pripl}}
 \end{frame}
 
 \begin{blueframe}{Конические сечения}
-\only<1>{\begin{block}{}Сфера. Сферическая аберрация.\end{block}\img[0.8]{spherical_mirror}}
-\only<2>{\begin{block}{}Парабола.\end{block}\img[0.8]{parabola_with_focus_and_arbitrary_line}}
-%\only<3>{\begin{block}{}Эллипс, гипербола, парабола.\end{block}\img{ell_par_hyp}}
-\only<3>{\begin{block}{}Каустика.\end{block}\img[0.8]{Miroir-cercle}}
+\only<1>{\black{Сфера. Сферическая аберрация.}\vspace*{-1em}\img[0.7]{spherical_mirror}}
+\only<2>{\black{Парабола.}\vspace*{-1em}\img[0.62]{parabola_with_focus_and_arbitrary_line}}
+\only<3>{\black{Эллипс, гипербола, парабола.}\img{ell_par_hyp}}
 \end{blueframe}
-
 
 \section{Формирование изображений линзами и зеркалами}
 \begin{blueframe}{Принцип Гюйгенса--Френеля}
-\only<1>{\begin{defin}Гипотеза: каждый элемент волнового фронта можно рассматривать как центр вторичного возмущения, порождающего вторичные сферические волны, а результирующее световое поле в каждой точке пространства будет определяться интерференцией этих волн.\end{defin}
+\vspace*{-1em}
+\only<1>{\begin{defin}Каждый элемент волнового фронта можно рассматривать как центр вторичного возмущения, порождающего вторичные сферические волны, а результирующее световое поле в каждой точке пространства будет определяться интерференцией этих волн.\end{defin}
 \begin{block}{}
 Густав Кирхгоф придал принципу Гюйгенса строгий математический вид, показав, что его можно считать приближенной формой теоремы, называемой интегральной теоремой Кирхгофа.
 
@@ -60,17 +100,21 @@
 
 Дальнейшим обобщением и развитием принципа Гюйгенса является формулировка через интегралы по траекториям, служащая основой современной квантовой механики. Принцип Ферма "--- наименьшее время распространения. Принцип наименьшего действия Гамильтона.
 \end{block}}
-\only<2>{\begin{block}{}Принцип Ферма.\end{block}\img[0.7]{Least_action_principle}}
-\only<3>{\begin{block}{}Рефракция. (Рота солдат, мяч). Зависимость скорости света от длины волны.\end{block}
-\img[0.7]{Refraction_-_Huygens-Fresnel_principle}}
-\only<4>{\begin{block}{}Дифракция на щели.\end{block}\img[0.8]{Refraction_on_an_aperture_-_Huygens-Fresnel_principle}}
-%\only<5>{\begin{block}{}Оптическая разность хода.\end{block}\img[0.8]{Huygens_Refracted_Waves}}
+\only<2>{\black{Принцип Ферма (принцип наименьшего времени).}\vspace*{-1em}
+\img[0.55]{Least_action_principle}}
+\only<3>{\black{Рефракция~--- изменение направления движения. (Рота солдат,
+мяч).} \vspace*{-1em}\img[0.55]{Refraction_-_Huygens-Fresnel_principle}}
+\only<4>{\black{Дифракция на
+щели: каждая точка~--- источник вторичных волн.}\vspace*{-1em}
+\img[0.65]{Refraction_on_an_aperture_-_Huygens-Fresnel_principle}}
+\only<5>{\black{Оптическая разность хода. Огибающая формирует волновой фронт.}
+    \img[0.6]{Huygens_Refracted_Waves}}
 \end{blueframe}
 
 \begin{frame}{Закон Снеллиуса}
 \begin{defin}Виллеброрд Снелль (голл), начало XVII~века:\hspace{1em}
 $\displaystyle\frac{\sin\theta_2}{\sin\theta_1}=\frac{v_2}{v_1}=\frac{n_1}{n_2}$\end{defin}
-\img[0.8]{snells_law}
+\img[0.7]{snells_law}
 (До Снелля закон описал перс. математик ибн Сахль, который к тому же занимался и асферической оптикой)
 \end{frame}
 
@@ -85,111 +129,238 @@ $\sin\theta\approx\theta$, $\tg\theta\approx\theta$ и $\cos\theta\approx 1$. При
 Для б\'ольших углов приходится различать меридиональные (плоскость <<основной луч+оптическая ось>>) и саггитальные лучи.
 \end{block}
 \column{0.6\textwidth}
-\img{saggmerid}
+\img[0.8]{saggmerid}
 \end{columns}
 \end{frame}
 
+\begin{blueframe}{Главные плоскости и кардинальные точки}
+\vspace*{-1em}\only<1>{\begin{columns}\column{0.6\textwidth}
+\begin{block}{}F/F'~-- передняя и задняя фокальные точки; P/P'~-- передняя и задняя главные точки; V/V'~--передний и задний края поверхности; H/H'~-- передняя и задняя главные плоскости.\end{block}
+\img[0.8]{Lens_shapes}
+\column{0.4\textwidth}
+\img[0.8]{Cardinal-points-1}
+\end{columns}}
+\only<2>{\begin{block}{}Построение изображений.\end{block}
+\begin{defin}\textbf{Главная плоскость} "--- каждая из двух плоскостей, перпендикулярных оптической оси системы, изображающихся одна в другой с линейным увеличением, равным единице. \textbf{Кардинальные точки} "--- две главные точки и две точки фокуса.\end{defin}
+\img{geolens1}}
+\end{blueframe}
+
 \begin{frame}{Формула тонкой линзы}
-\begin{block}{Формула тонкой линзы.}
+\only<1>{\begin{block}{}
+ $\displaystyle\frac1{f}=(n-1)\left[\frac1{R_1}-\frac1{R_2}+\frac{(n-1)d}{nR_1 R_2}\right]$,
+в приближении тонкой линзы: $\displaystyle\frac1{f}\approx(n-1)\left[\frac1{R_1}-\frac1{R_2}\right]$
+\end{block}
+\img[0.7]{Lens1}}
+\only<2>{\begin{block}{}
 $$\frac1{S_1}+\frac1{S_2}=\frac1{f}$$
 \end{block}
-\img{Lens3}
+\img[0.7]{Lens3}}
 \end{frame}
 
 \subsection{Волновая оптика}
-\begin{frame}{Дисперсия}
-\img{refdisp}
-\end{frame}
+\begin{blueframe}{Дисперсия}\vspace*{-0.6em}
+\only<1>{\begin{block}{Числа Аббе (по фраунгоферовым линиям)}
+$$V_d = \frac{n_d-1}{n_F-n_C},\quad V_e = \frac{n_e-1}{n_{F'}-n_{C'}}$$
+Показатель частной дисперсии (PgF): $Pg_F = \dfrac{n_g-n_F}{n_F-n_C}$.
+
+d~(He) -- 587.6\,нм, F~(H${}_\beta$) -- 486.1\нм, C~(H${}_\alpha$) -- 656.3\,нм,
+e~(Hg) -- 546.1\,нм, F'~(Cd) -- 480.0\,нм, C'~(Cd) -- 643.9\,нм, g~(H${}_\gamma$) -- 435.8\,нм.
+\end{block}\img[0.7]{CF}}
+\only<2>{\begin{columns}\column{0.2\textwidth}\begin{block}{}Диаграмма
+Аббе\end{block}\column{0.75\textwidth}\img[0.85]{Abbe-diagramm}\end{columns}}
+\only<3>{\img{refdisp}}
+\only<4>{\vspace{-1.4em}\begin{columns}\column{0.5\textwidth}
+\begin{block}{Схема образования радуги}
+1)~сферическая капля\\
+2)~внутреннее отражение\\
+3)~первичная радуга\\
+4)~преломление\\
+5)~вторичная радуга\\
+6)~входящий луч света\\
+7)~ход лучей при формировании первичной радуги\\
+8)~ход лучей при формировании вторичной радуги\\
+9)~наблюдатель\\
+10)~область формирования первичной радуги\\
+11)~область формирования вторичной радуги\\
+12)~облако капелек
+\end{block}
+\column{0.4\textwidth}
+\img[0.95]{Rainbow_formation}
+\end{columns}}
+\end{blueframe}
 
 \begin{frame}{Интерференция}
 \only<1,2>{\begin{defin}\textbf{Интерференция волн} "---
 взаимное увеличение или уменьшение результирующей амплитуды двух или нескольких когерентных волн при их наложении друг на друга.\end{defin}}
-\only<1>{\img[0.9]{interference3a}}
-\only<2>{\img[0.9]{interference3}}
-\only<3>{\begin{columns}\column{0.5\textwidth}
+\only<1>{\img[0.8]{interference3a}}
+\only<2>{\img[0.8]{interference3}}
+\only<3>{\vspace*{-1em}\begin{columns}\column{0.5\textwidth}
 \begin{block}{Опыт Юнга}
 Томас Юнг, 1803. Ширина щелей приблизительно равна длине волны излучаемого света.
 Доказательство волновой природы света.
 
-Интерференционная картина возникает на экране, когда ширина прорезей близка к длине волны излучаемого монохроматического света. Если ширину прорезей увеличивать, то освещённость экрана будет возрастать, но контраст интерференционной картины будет падать вплоть до полного её исчезновения.
+Интерференционная картина возникает на экране, когда ширина прорезей близка к длине волны
+излучаемого монохроматического света. Если ширину прорезей увеличивать, то освещенность экрана
+будет возрастать, но контраст интерференционной картины будет падать вплоть до полного её
+исчезновения.
 \end{block}
-\column{0.5\textwidth}\img{interference4}
+\column{0.45\textwidth}\img{interference4}
 \end{columns}}
 \end{frame}
 
-\begin{frame}{Дифракция}
-\begin{columns}
+\begin{blueframe}{Дифракция}
+\only<1>{\begin{columns}
 \column{0.6\textwidth}
-\begin{defin}\textbf{Дифракция} "--- явление отклонения волн от прямолинейного при взаимодействии с препятствием.\end{defin}
+\begin{defin}\textbf{Дифракция} "--- явление, которое проявляет себя как отклонение от законов геометрической оптики при распространении волн.\end{defin}
 \begin{block}{}
 $b\sin\phi=k\lambda$. Диск Эйри: $\sin \theta_{min1} \approx 1.22 \frac{\lambda}{d} $
 
 Формула Эйри: $s''=\frac{2.76}{a}$ ($a$ в дюймах).
 \end{block}\vspace*{-1.5em}
-\img[0.8]{Airy-pattern}
-\column{0.38\textwidth}\vspace{-1em}
-\img[0.9]{Wave_Diffraction_4Lambda_Slit}
+\img[0.7]{Airy-pattern}
+\column{0.3\textwidth}\vspace{-2em}
+\img[0.7]{Wave_Diffraction_4Lambda_Slit}
 \vspace*{-2em}\img{diff_slit}
-\end{columns}
-\end{frame}
-
-\section{Телескопы}
-\subsection{Рефракторы}
-\begin{frame}{Рефракторы}
-\only<1>{Галилея\\\vspace*{-2em}\img[0.6]{galileoscopes}\vspace*{-1em}\img[0.6]{galileo_rays}}
-\only<2>{Кеплера\img[0.9]{keplerian_ray}}
-\end{frame}
-
-\subsection{Рефлекторы}
-\begin{frame}{Рефлекторы}
-\begin{block}{}Ньютона (1668)\end{block}\begin{columns}
-\column{0.49\textwidth}\img{NewtonsTelescopeReplica}
-\column{0.49\textwidth}\blueimg{Newtonian_telescope}
-\end{columns}
-\end{frame}
+\end{columns}}
+\only<2>{\begin{block}{}
+Дифракция Фраунгофера (в дальней зоне):\\
+$\dfrac{W^{2}}{L\lambda }\ll 1$, W~-- ширина щели, $L$~--расстояние.
+$\Phi=\dfrac{W^{2}}{L\lambda }$~-- число Френеля.\\
+Дифракция Френеля: $\Phi>1$.\end{block}\img[0.47]{fresnel_zones}}
+\end{blueframe}
 
 \section{Аберрации}
 \begin{blueframe}{Хроматическая аберрация}
-\only<1>{\img{Chromatic_aberration_lens_diagram}}
-\only<2>{\img{achromatic}}
+\only<1>{\img[0.85]{Chromatic_aberration_lens_diagram}}
+\only<2>{\img[0.85]{achromatic}}
 \only<3>{\blue{Апохромат}\img{Apochromat}}
 \end{blueframe}
 
 \begin{blueframe}{Монохроматические аберрации}
-\only<1>{\blue{Сферическая аберрация, $\propto(D/F)^3$}\\
-\igh{Spherical_aberration_1}\igh{Spherical_aberration_2}}
-\only<2>{\vspace*{-1em}\vbox to 0pt{\blue{Кома, $\propto(D/F)^2$}}\img{Lens-coma}}
-\only<3>{\vspace*{-1em}\vbox to 0pt{\blue{Астигматизм, $\propto(D/F)$}}\img{meridional-sagittal-planes}}
-\only<4>{\vspace*{-1em}\vbox to 0pt{\blue{Дисторсия}}\img{distortion}}
+\only<1>{\begin{columns}\column{0.55\textwidth}\blue{Сферическая аберрация, $\propto(D/F)^3$}
+\img{Spherical_aberration_1}
+\column{0.4\textwidth}\img{Spherical_aberration_2}\end{columns}}
+\only<2>{\vspace*{-0.5em}\blue{Кома, $\propto(D/F)^2$}\vspace*{-0.5em}\img[0.8]{Lens-coma}}
+\only<3>{\vspace*{-0.5em}\blue{Астигматизм,
+$\propto(D/F)$}\vspace*{-0.5em}\img[0.9]{meridional-sagittal-planes}}
+\only<4>{\vspace*{-0.5em}\blue{Дисторсия}\vspace*{-0.5em}\img[0.95]{distortion}}
 \only<5>{\blue{Кривизна поля "--- фокальная плоскость <<Кеплера>>}\\
     \igh{Field_curvature}\igh{Keplerspacecraft-FocalPlane-cutout}}
 \end{blueframe}
 
-
-\subsection{Измерение аберраций}
-\begin{frame}{Тест Фуко}
-\cols{\col{0.6}
-\begin{block}{}
-1858,  L\'eon Foucault. Изначально "--- из центра кривизны зеркала при его шлифовании.
-\end{block}\img{Foucault-Test_1}
-\col{0.4}\img{Foucault_test}}
+\begin{frame}{Полиномы Цернике}
+\only<1>{\begin{block}{}Четные полиномы Цернике:
+$Z_n^m(\rho, \varphi)=R_n^m(\rho )\,\cos(m\varphi)$,\\
+Нечетные:
+$Z_n^{-m}(\rho, \varphi)=R_n^m(\rho)\,\sin(m\,\varphi)$,\\
+где $m$ и $n$~-- положительные целые, $n\ge m$;\\
+$\varphi$~-- угловая координата;
+$\rho$~-- радиус-вектор ($0\le\rho\le1$);
+$R^m_n$~-- радиальные полиномы.\\
+Полиномы Цернике ортонормальны, $|Z_n^m(\rho, \varphi)|\leq 1$.\\
+$\displaystyle R^m(\rho)=\sum_{k=0}^{\tfrac{n-m}{2}}\frac{(-1)^{k}\,(n-k)!}{k!\left(\tfrac {n+m}{2}-k\right)!\left(\tfrac {n-m}{2}-k\right)!}\;\rho^{n-2\,k}$ для четных $n-m$,\\
+$R_n^m\equiv 0$ для нечетных $n-m$.
+\end{block}
+}
+\only<2>{\begin{columns}\column{0.6\textwidth}
+\begin{table}\begin{tabular}{|c|c|c|}\hline
+\bf Z& $\mathbf{Z_j}$ & \bf Name \\\hline
+$Z_0^0$ & 1& Смещение \\\hline
+$Z_1^{-1}$ & $2\rho\sin\varphi$ & Вертикальный наклон \\\hline
+$Z_1^1$  & $2\rho\cos\varphi$ & Горизонтальный наклон \\\hline
+$Z_2^{-2}$ & $\sqrt6\rho^2\sin2\varphi$ & Астигматизм (косой)\\\hline
+$Z_2^{0}$ & $\sqrt3(2\rho^2-1)$ & Дефокус\\\hline
+$Z_3^{-1}$ & $\sqrt8(3\rho^3-2\rho)\sin\varphi$ & Вертикальная кома\\\hline
+$Z_3^1$ & $\sqrt8(3\rho^3-2\rho)\cos\varphi$ & Горизонтальная кома\\\hline
+$Z_4^0$ & $\sqrt5(6\rho^4-6\rho^2+1)$ & Сферическая аберрация\\\hline
+\end{tabular}\end{table}
+\column{0.37\textwidth}\img{Zernike_polynomials2}
+\end{columns}}
 \end{frame}
 
-
+\subsection{Измерение аберраций}
 \begin{frame}{Метод Гартманна}
-\img[0.9]{hartmann}
+\only<1>{\vspace*{-0.5em}Суть методики \vspace*{-0.5em}\img[0.73]{hartmann}}
+\only<2>{\vspace*{-0.5em}Экран 3.5-м телескопа (WIYN, Китт-Пик)
+\vspace*{-0.5em}\img[0.7]{WIYN_HartmanScreen_10-91_b}}
+\only<3>{\vspace*{-0.5em}Экран БТА \vspace*{-0.5em}\img[0.9]{BTA_hartm}}
+\only<4>{\vspace*{-0.5em}\vbox to 0pt{Волновой фронт}\vspace*{-0.5em}
+    \img[0.5]{mirr_BTA_h}}
 \end{frame}
 
 \begin{frame}{Метод Шака-Гартманна}
-\img{shag}
+\only<1>{\img[0.83]{shag}}
+\only<2,3,4>{\begin{columns}\column{0.48\textwidth}
+\begin{block}{Шак-Гартманн на БТА}
+ООО <<Визионика>>, ИПЛИТ РАН.
+Применяется с 2015 года.\\
+Имеет более высокое разрешение.\\
+Единственный доступный для БТА метод.\\
+Растр $60\times60$ APO-Q-P1000-F40 ($61\times61\,$мм).
+\end{block}
+\column{0.5\textwidth}
+\only<2>{\img{mlm_MonolithicLensletModule}}
+\only<3>{\img[0.7]{SHA_BTA}}
+\only<4>{\img[0.7]{favaris01}}\end{columns}}
 \end{frame}
 
 \begin{frame}{Метод Роддье}
-\img[0.8]{Roddiergrab}
+\img[0.65]{Roddiergrab}
 \end{frame}
+
+\begin{frame}{Zemax}
+\vspace*{-1em}
+\only<1>{\img[0.7]{mirr_Coma}}
+\only<2>{\img[0.7]{fft-mtf}}
+\only<3>{\img[0.7]{matrix-spot}}
+\only<4>{\img[0.7]{ray-fan}}
+\end{frame}
+
+
+\section{Телескопы}
+\subsection{Рефракторы}
+\begin{frame}{Рефракторы}
+    \only<1>{Галилея\vspace*{-1.5em}\img[0.42]{galileoscopes}\vspace*{-1em}\img[0.42]{galileo_rays}}
+    \only<2>{Кеплера\vspace*{-2em}\img[0.8]{keplerian_ray}}
+    \only<3>{Яна Гевелия (1641, 46м фокус)\\\vspace*{-0.4em}\img[0.52]{hevelius_scope}}
+    \only<4>{\begin{columns}\column{0.55\textwidth}
+            \vspace{-1em}\img[0.7]{Huygens_broths_scope}
+            \column{0.35\textwidth}\begin{block}{}
+                Гюйгенса (вторая половина XVII~века, 37м)\\
+                1655 "--- кольца Сатурна, Титан;\\
+                1657 "--- маятниковые часы;\\
+                1659 "--- туманность Ориона;\\
+                1675 "--- часовая спираль.
+    \end{block}\end{columns}}
+    \only<5>{Francois Deloncle, 1.25м "--- парижская выставка 1900\,г,
+        $F=57\,$м.\img[0.6]{Great_Ex_Telescope_Telescope}}
+\end{frame}
+
+\subsection{Рефлекторы}
+\begin{blueframe}{Рефлекторы}
+    \only<1>{\begin{columns}
+            \column{0.49\textwidth}\img{NewtonsTelescopeReplica}
+            \column{0.49\textwidth}\begin{block}{}Ньютона (1668)\end{block}\img{Newtonian_telescope}
+    \end{columns}}
+    \only<2>{\begin{columns}\column{0.49\textwidth}\img{early-herschel-40ft}
+            \column{0.49\textwidth}\begin{block}{}Гершеля--Ломоносова (1772/1762)\end{block}
+            \img{Herschel-Lomonosov_reflecting_telescope}
+    \end{columns}}
+    \only<3>{\begin{columns}\column{0.49\textwidth}\img{Gregorian_telescope}
+            \column{0.49\textwidth}
+            \begin{block}{}Грегори (предложена, но не построена в 1663: парабола +
+            эллипс)\end{block}
+            \img{Gregorian_telescopes}\end{columns}}
+    \only<4>{\begin{block}{}Кассегрена (1672, вариация "--- Ритчи--кретьен, 1910, 2
+    гиперболы)\end{block}
+        \img{Cassegrain_telescope}}
+    \only<5>{\begin{block}{}Шмидт--Кассегрен (1950-е "--- гигантские размеры
+            поля)\end{block}\img[0.9]{schmidt}}
+\end{blueframe}
 
 \section{Основные характеристики телескопов}
 \begin{frame}{Основные характеристики телескопов}
+\vspace*{-1em}
 \begin{columns}\column{0.6\textwidth}
 \begin{block}{}
 \textbf{Разрешение} $\theta =1.220\dfrac\lambda{D}=\dfrac{16.4}{D}$ $''/$см для 650\,нм.\\
@@ -200,17 +371,18 @@ $b\sin\phi=k\lambda$. Диск Эйри: $\sin \theta_{min1} \approx 1.22 \frac{\lambda}
 \textbf{Проницающая сила} $m$~-- наиболее слабые звезды (в зените) над фоном.\\
 \textbf{Масштаб} $u=\dfrac {206265}{F}''/$мм.
 \end{block}
-\column{0.37\textwidth}
+\column{0.33\textwidth}
 \img{Airy_disk_spacing_near_Rayleigh_criterion}
 \end{columns}
 \end{frame}
 
 \begin{frame}{Маска Бахтинова}
-\only<1>{\img[0.6]{Bahtinov_mask}}
-\only<2>{\img{Bahtinov_mask_example}}
+\only<1>{\img[0.5]{Bahtinov_mask}}
+\only<2>{\img[0.9]{Bahtinov_mask_example}}
 \end{frame}
 
 \begin{frame}{Преимущества рефлекторов над рефракторами}
+\vspace*{-1em}
 \begin{columns}
 \column{0.5\textwidth}
 \begin{block}{Рефлектор}
@@ -227,25 +399,25 @@ $b\sin\phi=k\lambda$. Диск Эйри: $\sin \theta_{min1} \approx 1.22 \frac{\lambda}
 Не нужна коллимация элементов.\\
 Закрытая труба "--- меньше грязи.\\
 \end{block}
-\column{0.48\textwidth}\img{refrVSrefl}
+\column{0.4\textwidth}\img[0.9]{refrVSrefl}
 \end{columns}
 \end{frame}
 
 \section{Монтировка телескопа}
 \begin{frame}{Экваториальная монтировка}
 \only<1>{\begin{columns}
-        \column{0.6\textwidth}\vspace*{-1.4em}\img[0.9]{fraunh_tel}
-        \column{0.4\textwidth}\begin{block}{1824, Йозеф фон Фраунгофер}
-            Телескоп обсерватории Тарту. Германская монтировка.
+\column{0.6\textwidth}\vspace*{-1.4em}\img[0.75]{fraunh_tel}
+\column{0.4\textwidth}\begin{block}{1824, Йозеф фон Фраунгофер}
+Телескоп обсерватории Тарту. Германская монтировка.
 
-            В 1853 г. Юстус фон Либих предложил метод выделения металлического серебра из раствора
-            нитрата серебра для серебрения стекла. В 1856-57~гг. Карл Август фон Штайнхейль и Леон
-            Фуко
-            (независимо) впервые использовали этот метод.
+В 1853 г. Юстус фон Либих предложил метод выделения металлического серебра из раствора
+нитрата серебра для серебрения стекла. В 1856-57~гг. Карл Август фон Штайнхейль и Леон
+Фуко
+(независимо) впервые использовали этот метод.
 \end{block}\end{columns}}
 \only<2>{\begin{columns}
 \column{0.5\textwidth}\vspace*{-1.4em}
-\img{100_inch_Hooker_Telescope}
+\img[0.8]{100_inch_Hooker_Telescope}
 \column{0.4\textwidth}
 \begin{block}{Телескоп Хукера}
 100 дюймов, 1917~г. Английская монтировка <<с ярмом>>.
@@ -257,7 +429,7 @@ $b\sin\phi=k\lambda$. Диск Эйри: $\sin \theta_{min1} \approx 1.22 \frac{\lambda}
 \end{frame}
 
 \begin{frame}{Альт-азимутальная монтировка}
-\img[0.9]{bta_telescope}
+\img[0.7]{bta_telescope}
 \end{frame}
 
 \begin{frame}{Альт-альт}
@@ -272,15 +444,20 @@ $b\sin\phi=k\lambda$. Диск Эйри: $\sin \theta_{min1} \approx 1.22 \frac{\lambda}
 \end{frame}
 
 \begin{frame}{Одно- и многоэлементные инструменты}
-\only<1>{Пассивные разгрузки БТА.\img[0.9]{btamir0}}
-\only<2>{Активная  разгрузка 1-м зеркала ESO (1987, NTT)\img[0.9]{1-m}}
-\only<3>{Большой Магелланов Телескоп (GMT, Лас-Кампанас, Чили). \img[0.9]{GMT-3}}
-\only<4>{Центральное зеркало GMT. \img[0.9]{gmt_Central}}
-\only<5>{\img[0.9]{Telescope-mount-detail}}
-\only<6>{39-м телескоп E-ELT (гора Армасонес, Чили).
-\img[0.9]{AAS-TMT-calendar-800}}
-\only<7>{Сегменты E-ELT (798 сегментов по 1.45\,м)\img[0.9]{eelt_seg}}
-\only<8>{Сегменты Keck\img[0.9]{keck_segment}}
+\only<1>{\vspace*{-0.5em}Пассивные разгрузки БТА.\vspace*{-0.5em}\img[0.9]{btamir0}}
+\only<2>{\vspace*{-0.5em}Активная  разгрузка 1-м зеркала ESO (1987, NTT)
+    \vspace*{-0.5em}\img[0.8]{1-m}}
+\only<3>{\vspace*{-0.5em}Большой Магелланов Телескоп (GMT, Лас-Кампанас, Чили).
+    \vspace*{-0.5em}\img[0.8]{GMT-3}}
+\only<4>{\vspace*{-0.5em}Центральное зеркало GMT.
+    \vspace*{-0.5em}\img[0.8]{gmt_Central}}
+\only<5>{\vspace*{-1em}\img[0.8]{Telescope-mount-detail}}
+\only<6>{\vspace*{-0.5em}39-м телескоп E-ELT (гора Армасонес, Чили).
+    \vspace*{-0.5em}\img[0.8]{AAS-TMT-calendar-800}}
+\only<7>{\vspace*{-0.5em}Сегменты E-ELT (798 сегментов по 1.45\,м)
+    \vspace*{-0.5em}\img[0.8]{eelt_seg}}
+\only<8>{\vspace*{-0.5em}Сегменты Keck
+    \vspace*{-0.3em}\img[0.8]{keck_segment}}
 \end{frame}
 
 \section{Сходства и различия оптических и радиотелескопов}
@@ -293,17 +470,18 @@ $b\sin\phi=k\lambda$. Диск Эйри: $\sin \theta_{min1} \approx 1.22 \frac{\lambda}
 \end{blueframe}
 
 \begin{frame}{Интерферометрия}
+\vspace*{-1em}
 \only<1>{\begin{block}{}\textbf{Астрономический интерферометр} ~--- совокупность отдельных
 телескопов, сегментов зеркал или антенн, формирующих единое целое для повышения углового разрешения.
 Получение высоких разрешений на малых телескопах.\end{block}
-\img{Interferometer}}
-\only<2>{\img[0.9]{keck_inter}}
-\only<3>{\img[0.9]{keck}}
-\only<4>{VLT. \img[0.65]{VLT_inter}}
+\img[0.85]{Interferometer}}
+\only<2>{\img[0.7]{keck_inter}}
+\only<3>{\img[0.8]{keck}}
+\only<4>{\vspace*{-0.5em}\vbox to 0pt{VLT.}\vspace*{-0.5em}\img[0.5]{VLT_inter}}
 \end{frame}
 
 \begin{blueframe}{}
-\begin{columns}\column{0.5\textwidth}\img{Astronomical_interferometer_line_geometry}
+\begin{columns}\column{0.5\textwidth}\img[0.8]{Astronomical_interferometer_line_geometry}
 \column{0.48\textwidth}
 \begin{block}{}Разрешение (до $0.001^m$) компонент двойных звезд, поиск экзопланет. Измерение
 движения звезд (сдвиги полос) или непосредственно планет (<<обнуляющая>> интерферометрия,
@@ -311,12 +489,21 @@ Keck).
 \end{block}\end{columns}
 \end{blueframe}
 
+\begin{frame}{Радиоинтерферометрия}
+\vspace*{-1em}
+\begin{columns}
+\column{0.5\textwidth}\img{cross_cor}\column{0.48\textwidth}
+\begin{block}{Сверхдлинная база}РСДБ--интерферометр. Данные собираются независимо. Далее
+осуществляется корреляционная обработка. Квазар--КВО (координатно-временное обеспечение).
+\end{block}\end{columns}\img[0.6]{quasar}
+\end{frame}
+
 \section{Границы возможностей наземных инструментов}
 \begin{blueframe}{Земная атмосфера}
-\begin{block}{Земная атмосфера}
+\begin{block}{}
 Наземная астрофизика сильно сжата в спектральном диапазоне земной атмосферой.
 \end{block}
-\img{Atmospheric_electromagnetic_opacity}
+\img[0.95]{Atmospheric_electromagnetic_opacity}
 \end{blueframe}
 
 \begin{frame}{Качество изображения (seeing)}
@@ -325,16 +512,17 @@ Keck).
 \small\begin{itemize}
 \item Полуширина (FWHM) изображения звезды.
 \item $r_0$ (типичный размер неоднородности "--- параметр Фрида) и $t_0$ (<<время заморозки>>).
-\item Профиль $C_{N^2}$ (может измеряться напрямую, напр. MASS).
+\item Профиль $C_{N^2}$ (может измеряться напрямую, напр. MASS~--Multi Aperture Scintillation
+Sensor).
 \end{itemize}
-\end{block}\vspace{-1.5em}\img{seeing3}\vspace{-0.5em}\hbox to 0pt{{\small Наилучшее место "---
-горы посреди океана.}}
+\end{block}\vspace{-1em}\img[0.85]{seeing3}\vspace*{-1em}
+{\small Наилучшее место "--- горы посреди океана.}
 \column{0.49\textwidth}\vspace{-1em}\begin{block}{}\small
 Вариация фазы ВФ на входной апертуре: $\sigma^2=1.0299\bigl(\dfrac{d}{r_0}\bigr)^{5/3}$.\\
 $$r_0=\left(\frac{16.7\lambda^{-2}}{\cos Z}\int_0^\infty
     C_{N}^2(h)\,dh\right)^{-3/5}$$
 
-\end{block}\vspace{-1em}\img[0.8]{mass_idea}
+\end{block}\vspace{-1em}\img[0.65]{mass_idea}
 \end{columns}
 \end{frame}
 
@@ -345,7 +533,7 @@ $$r_0=\left(\frac{16.7\lambda^{-2}}{\cos Z}\int_0^\infty
 
 \def\FT#1{\mathcal{F}(#1)}
 \begin{frame}{Спекл--интерферометрия}
-\only<1>{\img{speckles}}
+\only<1>{\img[0.95]{speckles}}
 \only<2>{\begin{columns}\column{0.5\textwidth}\begin{block}{}
 1970, Antoine Labeyrie "--- математические основы СИ (методы Фурье-анализа).\\
 \textbf{Спектр мощности}~-- БПФ полуинварианта 2 порядка (напр. автокорреляции).
@@ -357,18 +545,20 @@ $B(f_1,f_2)=\mathcal{F}^{*}(f_1+f_2)\cdot\FT{f_1}\cdot\FT{f_2}$.
 \end{frame}
 
 \begin{blueframe}{Адаптивная оптика}
+\vspace*{-0.5em}
 \only<1>{\begin{block}{}
 Horace W. Babcock, 1953 "--- теория АО. Бурное развитие в 90-х в рамках холодной войны.
 Искусственная звезда, tip-tilt зеркало, деформируемое зеркало, делитель пучка, датчик волнового
 фронта.
-\end{block}\img[0.8]{Adaptive_optics_system_full}}
-\only<2>{\smimg[0.5]{VLTdefmir}\smimg[0.5]{Ferrofluid_Deformable_mirror}}
-\only<3>{\vspace*{-1em}\begin{block}{}
+\end{block}\vspace*{-0.5em}\img[0.7]{Adaptive_optics_system_full}}
+\only<2>{\begin{columns}\column{0.5\textwidth}\img{VLTdefmir}
+    \column{0.5\textwidth}\img{Ferrofluid_Deformable_mirror}\end{columns}}
+\only<3>{\begin{block}{}
     $30\div60\,$mas. Искусственные звезды: звезды Рэлея (ближний ИК, $15\div25$~км) и
     натриевые ($80\div100$~км, 589~нм).
-\end{block}
-\img{cfht_adaptive_optics}\textcolor{black}{Только для ярких объектов!}}
-\only<4>{\img[0.85]{VLT_artif_star}}
+\end{block}\vspace*{-0.5em}
+\img[0.83]{cfht_adaptive_optics}\vspace*{-1em}\textcolor{black}{Только для ярких объектов!}}
+\only<4>{\img[0.8]{VLT_artif_star}}
 \end{blueframe}
 
 \begin{frame}{Lucky-imaging, Superresolution}
@@ -389,29 +579,29 @@ Horace W. Babcock, 1953 "--- теория АО. Бурное развитие в 90-х в рамках холодной
 \end{frame}
 
 \begin{frame}{}
-\img[0.85]{optelcomp}
+\vspace*{-0.5em}\img[0.63]{optelcomp}
 \end{frame}
 
 \section{Космические телескопы}
 \begin{frame}{Космические телескопы}
-\begin{columns}
-    \column{0.6\textwidth}
-    \img{Hipparcos-testing-estec}
-    \column{0.4\textwidth}
-    \begin{block}{}
-        1989--1993, Hipparcos "--- High Precision Parallax Collecting Satellite. 29-см телескоп!
+\vspace*{-1em}\begin{columns}
+\column{0.55\textwidth}
+\img[0.8]{Hipparcos-testing-estec}
+\column{0.4\textwidth}
+\begin{block}{}
+1989--1993, Hipparcos "--- High Precision Parallax Collecting Satellite. 29-см телескоп!
 
-        1mas. Каталоги Hipparcos (>118\,тыс, 1997), Tycho (1\,млн, 1997) и Tycho-2 (2.5\,млн, 2000,
-        более точный).
+1mas. Каталоги Hipparcos (>118\,тыс, 1997), Tycho (1\,млн, 1997) и Tycho-2 (2.5\,млн, 2000,
+более точный).
 
-        Следующая "--- миссия Gaia (2013, $1.45\times0.5\,$м).s
-    \end{block}
+Следующая "--- миссия Gaia (2013, $1.45\times0.5\,$м).s
+\end{block}
 \end{columns}
 \end{frame}
 
 \begin{frame}{}
 \vspace*{-1em}
-\img[0.6]{HST-SM4}\vspace*{-1em}
+\img[0.5]{HST-SM4}\vspace*{-2em}
 \begin{block}{Телескоп им.~Хаббла}
 2.4~м зеркало.
 
@@ -433,8 +623,8 @@ Horace W. Babcock, 1953 "--- теория АО. Бурное развитие в 90-х в рамках холодной
 
 \begin{frame}{}
 \begin{columns}
-\column{0.6\textwidth}\vspace*{-2em}
-\img{Kepler_Space_Telescope}
+\column{0.55\textwidth}\vspace*{-2em}
+\img[0.85]{Kepler_Space_Telescope}
 \column{0.4\textwidth}
 \begin{block}{Телескоп Кеплера}
 2009--2013, 2013--, поиск экзопланет и переменных звезд. 0.95~м апертура, зеркало 1.4~м (камера
@@ -448,20 +638,41 @@ $\sim0.5$~млрд.длр.
 на поиски экзопланет.
 
 К маю 2016 обнаружено 1284 планеты (из них 550 каменных, 9 в обитаемой зоне).
+
+30~октября 2018\,г миссия завершена. Отключили в день смерти И.~Кеплера: 15~ноября.
+Изучено 530506 звезд, обнаружено 2662 экзопланеты. На смену пришел TESS.
 \end{block}
 \end{columns}
 \end{frame}
 
-\begin{frame}{}
-\img[0.6]{Space_telescopes}
+\begin{frame}{JWST}
+\vspace*{-1em}
+\only<1>{\begin{columns}\column{0.6\textwidth}\img[0.8]{JWST0}
+\column{0.37\textwidth}\begin{block}{}25~декабря 2021~года. $D=6.5\,$м, $F=131.4\,$м. Инструменты:
+MIRI (камера среднего ИК), NIRCam (камера ближнего ИК), NIRSpec (спектрограф ближнего ИК), FGS
+\slash NIRISS (датчик точного наведения с бесщелевым спектрографом ближнего ИК).
+
+Орбита в $L_2$  Земля--Солнце (1.5\,млн. км. от Земли).
+Позволяет частично экранировать излучение Солнца.
+\end{block}
+\end{columns}}
+\only<2>{\img[0.5]{JWST1}}
+\only<3>{\img[0.75]{JWST2}}
 \end{frame}
+
+\if0
+\begin{frame}{}
+\img[0.5]{Space_telescopes}
+\end{frame}
+\fi
 
 \begin{frame}{Оптические небылицы}
 <<Гиперболоид инженера Гарина>> "--- сведение потока излучения в сверхтонкий пучок: нулевой размер
 осветителя, отсутствие аберраций, отсутствие дифракции.
 
 За большое поле зрения приходится платить малым усилением. Закон Лагранжа--Гельмгольца: $\alpha
-yn=\alpha' y'n'$.
+yn=\alpha' y'n'$ ($\alpha$~-- угл. размер апертуры из точки объекта, $y$~-- линейный размер
+объекта, $n$~-- показатель преломления).
 
 Необратимые явления: дифракция, рассеяние, поглощение.
 
@@ -469,11 +680,11 @@ yn=\alpha' y'n'$.
 $$\frac{L}{L_0}=\left(\frac{D}{D_{out}}\right)^2\left(\frac{D_{out}}{\Delta}\right)^2=
 \left(\frac{D}{\Delta}\right)^2.$$
 Однако, качество изображения: seeing$\,\sim1''$ $\Arr$ $1'$. Нет смысла в увеличении больше
-$\times120$.
+$\times120$. Для визуальных наблюдений нет смысла использовать телескоп более
+$8\cdot120\approx1\,$м!!!
 
-Планеты и туманности: при равных увеличениях яркость пропорциональна $D^2$.
-
-Для визуальных наблюдений нет смысла использовать телескоп более 0.5\,м!!!
+Планеты и туманности: освещенность пропорциональна $(D/F)^2$ \Arr при равных светосилах
+освещенность не меняется!  У звезд же (при условии согласования масштаба) $\propto D^2$.
 
 А можно ли увидеть следы американцев на Луне? 50-метровый телескоп с идеальной оптикой на орбите
 "--- запросто!
@@ -487,213 +698,6 @@ $\times120$.
         edward.emelianoff@gmail.com
 \end{block}\end{minipage}
 \end{frame}
-
-\section{Разное}
-\begin{frame}{Телескоп как концентратор энергии. Зеркало}
-\only<1,2>{\begin{block}{Архимед}
-<<Гиперболоид>> (212\,в до н.э.) "--- попытка сжечь осадивший римский флот под Сиракузами во время 2~пунической войны (218--201\,гг до н.э.).
-\end{block}}
-\only<1>{\img[0.7]{Giperboloid-Arhimeda}}
-\only<2>{\img[0.85]{archimed}}
-\only<3>{\begin{block}{}
-Зажжение олимпийского огня.
-\end{block}\img[0.76]{olympic_torch_lighting}}
-\end{frame}
-
-\begin{frame}{Телескоп как концентратор энергии. Линза}
-\begin{columns}
-\column{0.45\textwidth}
-\begin{defin}\textbf{Линза} "--- от лат. <<lens>>~-- чечевица.\end{defin}
-\begin{block}{}
-Пьеса Аристофана <<Облака>> (424\,г. до н.э.) "--- добыча огня.
-
-Древний Рим. Плиний старший (23--79\,гг. н.э.) "--- добыча огня, коррекция зрения (император Нерон, вогнутый изумруд).
-
-Альхазен (965--1038\,гг. н.э.) "--- трактат по оптике, формирование изображения глазом.
-
-1280-е годы, Италия (Сальвино д'Армате) "--- очки.
-\end{block}
-\column{0.5\textwidth}\img{Nimrud_lens_British_Museum}
-\begin{block}{}Линза Нимруда (750--710\,гг. до н.э.). Нимруд "--- одна из древних столиц Ассирии.\end{block}
-\end{columns}
-\end{frame}
-
-\begin{frame}{Световая энергетика}
-\textbf{Слюсарев Г.Г.} О возможном и невозможном в оптике (1-е изд. 1944, 2-е изд. 1957).\\
-\textbf{Степанов Б.И.} Введение в современную оптику\ldots, 1989.\\[1em]
-Максимальный поток от Солнца: 2\,кал/(мин$\cdot$см${}^2$) (0.14\,Вт) $\Arr$ АЧТ нагреется не выше
-$120^\circ$C (0.16\,Вт/см$^2$). Воспламенение древесины "--- $500\div700^\circ$C ($2\div5\,$Вт).
-\textbf{Альбедо}! $\Arr$ $20\div40\,$раз выше освещенности от Солнца (и десятки минут)! Мгновенное
-воспламенение "--- сотни ватт!
-
-Диаметр изображения Солнца $d=F/110$ $\Arr$ выигрыш в освещенности:
-$\dfrac{E}{E_0}=\bigl(\dfrac{110\cdot D}{F}\bigr)^2$ $\Arr$ светосила $D/F\ge1/2$!
-
-3000 <<зайчиков>> в одну точку! Но альбедо белой краски до 80\%!!!
-
-1747, фр. натуралист Бюффон построил зажигательный прибор из 168 зеркал $15\times20/,$см (с
-индивидуальными оправами). За несколько минут на расстоянии 47\,м загорелась смолистая доска (почти
-АЧТ). $E/E_0=36$. \\[1em]
-<<Знамя-2>> + <<Новый свет>>, 4 февраля 1993. Парус диаметром 20\,м (сектора). Диаметр пятна 8км,
-освещенность сравнима с полной Луной.
-\end{frame}
-
-\begin{blueframe}{Главные плоскости и кардинальные точки}
-\only<1>{\vspace{-1em}
-\begin{columns}\column{0.6\textwidth}
-\begin{block}{}F/F'~-- передняя и задняя фокальные точки; P/P'~-- передняя и задняя главные точки; V/V'~--передний и задний края поверхности; H/H'~-- передняя и задняя главные плоскости.\end{block}
-\img{Lens_shapes}
-\column{0.4\textwidth}
-\img{Cardinal-points-1}
-\end{columns}}
-\only<2>{\begin{block}{}Построение изображений.\end{block}
-\begin{defin}\textbf{Главная плоскость} "--- каждая из двух плоскостей, перпендикулярных оптической оси системы, изображающихся одна в другой с линейным увеличением, равным единице. \textbf{Кардинальные точки} "--- две главные точки и две точки фокуса.\end{defin}
-\img{geolens1}}
-\end{blueframe}
-
-\begin{frame}{Формула тонкой линзы}
-\begin{block}{}
- $\displaystyle\frac1{f}=(n-1)\left[\frac1{R_1}-\frac1{R_2}+\frac{(n-1)d}{nR_1 R_2}\right]$,
-в приближении тонкой линзы: $\displaystyle\frac1{f}\approx(n-1)\left[\frac1{R_1}-\frac1{R_2}\right]$
-\end{block}
-\img[0.8]{Lens1}
-\end{frame}
-
-\begin{blueframe}{Дисперсия}
-\only<1>{\begin{block}{Числа Аббе (по фраунгоферовым линиям)}
-$$V_d = \frac{n_d-1}{n_F-n_C},\quad V_e = \frac{n_e-1}{n_{F'}-n_{C'}}$$
-Показатель частной дисперсии (PgF): $Pg_F = \dfrac{n_g-n_F}{n_F-n_C}$.
-
-d~(He) -- 587.6\,нм, F~(H${}_\beta$) -- 486.1\нм, C~(H${}_\alpha$) -- 656.3\,нм,
-e~(Hg) -- 546.1\,нм, F'~(Cd) -- 480.0\,нм, C'~(Cd) -- 643.9\,нм, g~(Hg) -- 435.8\,нм.
-\end{block}\img[0.7]{CF}}
-\only<2>{\begin{block}{}Диаграмма Аббе\end{block}\img[0.8]{Abbe-diagramm}}
-\only<3>{\vspace{-1.4em}\begin{columns}\column{0.5\textwidth}
-\begin{block}{Схема образования радуги}
-1)~сферическая капля\\
-2)~внутреннее отражение\\
-3)~первичная радуга\\
-4)~преломление\\
-5)~вторичная радуга\\
-6)~входящий луч света\\
-7)~ход лучей при формировании первичной радуги\\
-8)~ход лучей при формировании вторичной радуги\\
-9)~наблюдатель\\
-10)~область формирования первичной радуги\\
-11)~область формирования вторичной радуги\\
-12)~облако капелек
-\end{block}
-\column{0.48\textwidth}
-\img{Rainbow_formation}
-\end{columns}}
-\end{blueframe}
-
-\begin{blueframe}{Дифракция}
-\begin{block}{}
-Дифракция Фраунгофера (в дальней зоне):\\
-$\dfrac{W^{2}}{L\lambda }\ll 1$, W~-- ширина щели, $L$~--расстояние.
-$\Phi=\dfrac{W^{2}}{L\lambda }$~-- число Френеля.\\
-Дифракция Френеля: $\Phi>1$.\end{block}\img[0.69]{fresnel_zones}
-\end{blueframe}
-
-\begin{frame}{Рефракторы}
-\only<1>{Галилея\\\vspace*{-2em}\img[0.6]{galileoscopes}\vspace*{-1em}\img[0.6]{galileo_rays}}
-\only<2>{Кеплера\img[0.9]{keplerian_ray}}
-\only<3>{Яна Гевелия (1641, 46м фокус)\\\vspace*{-0.4em}\img[0.75]{hevelius_scope}}
-\only<4>{\begin{columns}\column{0.6\textwidth}
-\vspace{-1em}\img[0.9]{Huygens_broths_scope}
-\column{0.4\textwidth}\begin{block}{}
-Гюйгенса (вторая половина XVII~века, 37м)\\
-1655 "--- кольца Сатурна, Титан;\\
-1657 "--- маятниковые часы;\\
-1659 "--- туманность Ориона;\\
-1675 "--- часовая спираль.
-\end{block}\end{columns}}
-\only<5>{Francois Deloncle, 1.25м "--- парижская выставка 1900\,г, $F=57\,$м.\img[0.8]{Great_Ex_Telescope_Telescope}}
-\end{frame}
-
-\begin{blueframe}{Рефлекторы}
-\only<1>{\begin{block}{}Ньютона (1668)\end{block}\begin{columns}
-\column{0.49\textwidth}\img{NewtonsTelescopeReplica}
-\column{0.49\textwidth}\img{Newtonian_telescope}
-\end{columns}}
-\only<2>{\begin{block}{}Гершеля--Ломоносова (1772/1762)\end{block}\begin{columns}\column{0.49\textwidth}
-\img{early-herschel-40ft}\column{0.49\textwidth}\img{Herschel-Lomonosov_reflecting_telescope}
-\end{columns}}
-\only<3>{\begin{block}{}Грегори (предложена, но не построена в 1663: парабола + эллипс)\end{block}
-\begin{columns}\column{0.49\textwidth}\img{Gregorian_telescope}
-\column{0.49\textwidth}\img{Gregorian_telescopes}\end{columns}}
-\only<4>{\begin{block}{}Кассегрена (1672, вариация "--- Ритчи--кретьен, 1910, 2 гиперболы)\end{block}
-\img{Cassegrain_telescope}}
-\only<5>{\begin{block}{}Шмидт--Кассегрен (1950-е "--- гигантские размеры поля)\end{block}\img{schmidt}}
-\end{blueframe}
-
-\begin{frame}{Полиномы Цернике}
-\only<1>{\begin{block}{}Четные полиномы Цернике:
-$Z_n^m(\rho, \varphi)=R_n^m(\rho )\,\cos(m\varphi)$,\\
-Нечетные:
-$Z_n^{-m}(\rho, \varphi)=R_n^m(\rho)\,\sin(m\,\varphi)$,\\
-где $m$ и $n$~-- положительные целые, $n\ge m$;\\
-$\varphi$~-- угловая координата;
-$\rho$~-- радиус-вектор ($0\le\rho\le1$);
-$R^m_n$~-- радиальные полиномы.\\
-Полиномы Цернике ортонормальны, $|Z_n^m(\rho, \varphi)|\leq 1$.\\
-$\displaystyle R^m(\rho)=\sum_{k=0}^{\tfrac{n-m}{2}}\frac{(-1)^{k}\,(n-k)!}{k!\left(\tfrac {n+m}{2}-k\right)!\left(\tfrac {n-m}{2}-k\right)!}\;\rho^{n-2\,k}$ для четных $n-m$,\\
-$R_n^m\equiv 0$ для нечетных $n-m$.
-\end{block}
-}
-\only<2>{\img[0.6]{Zernike_polynomials2}}
-\only<3>{\begin{table}\begin{tabular}{|c|c|c|}\hline
-\bf Z& $\mathbf{Z_j}$ & \bf Name \\\hline
-$Z_0^0$ & 1& Смещение \\\hline
-$Z_1^{-1}$ & $2\rho\sin\varphi$ & Вертикальный наклон \\\hline
-$Z_1^1$  & $2\rho\cos\varphi$ & Горизонтальный наклон \\\hline
-$Z_2^{-2}$ & $\sqrt6\rho^2\sin2\varphi$ & Астигматизм (косой)\\\hline
-$Z_2^{0}$ & $\sqrt3(2\rho^2-1)$ & Дефокус\\\hline
-$Z_3^{-1}$ & $\sqrt8(3\rho^3-2\rho)\sin\varphi$ & Вертикальная кома\\\hline
-$Z_3^1$ & $\sqrt8(3\rho^3-2\rho)\cos\varphi$ & Горизонтальная кома\\\hline
-$Z_4^0$ & $\sqrt5(6\rho^4-6\rho^2+1)$ & Сферическая аберрация\\\hline
-\end{tabular}\end{table}}
-\end{frame}
-
-\begin{frame}{Метод Гартманна}
-\only<1>{Суть методики \img[0.9]{hartmann}}
-\only<2>{Экран 3.5-м телескопа (WIYN, Китт-Пик)\img[0.9]{WIYN_HartmanScreen_10-91_b}}
-\only<3>{Экран БТА \img[0.9]{BTA_hartm}}
-\only<4>{Волновой фронт \img[0.6]{mirr_BTA_h}}
-\end{frame}
-
-\begin{frame}{Метод Шака-Гартманна}
-\only<1>{\img{shag}}
-\only<2,3,4>{\begin{columns}\column{0.48\textwidth}
-\begin{block}{Шак-Гартманн на БТА}
-ООО <<Визионика>>, ИПЛИТ РАН.
-Применяется с 2015 года.\\
-Имеет более высокое разрешение.\\
-Единственный доступный для БТА метод.\\
-Растр $60\times60$ APO-Q-P1000-F40 ($61\times61\,$мм).
-\end{block}
-\column{0.5\textwidth}
-\only<2>{\img{mlm_MonolithicLensletModule}}
-\only<3>{\img{SHA_BTA}}
-\only<4>{\img{favaris01}}\end{columns}}
-\end{frame}
-
-\begin{frame}{Zemax}
-\only<1>{\img{mirr_Coma}}
-\only<2>{\img{fft-mtf}}
-\only<3>{\img{matrix-spot}}
-\only<4>{\img{ray-fan}}
-\end{frame}
-
-\begin{frame}{Радиоинтерферометрия}
-\begin{columns}
-\column{0.5\textwidth}\img{cross_cor}\column{0.48\textwidth}
-\begin{block}{Сверхдлинная база}РСДБ--интерферометр. Данные собираются независимо. Далее
-осуществляется корреляционная обработка. Квазар--КВО.
-\end{block}\end{columns}\img[0.9]{quasar}
-\end{frame}
-
 %
 \end{document}
 %
