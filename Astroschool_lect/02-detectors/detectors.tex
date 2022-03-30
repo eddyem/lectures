@@ -1,9 +1,9 @@
-\documentclass[10pt,pdf,hyperref={unicode}]{beamer}
+\documentclass[10pt,pdf,hyperref={unicode},aspectratio=169]{beamer}
 \hypersetup{pdfpagemode=FullScreen}
 \usepackage{lect}
 
 \title{Физические основы регистрации излучения}
-\date{21 марта 2018 года}
+\date{8~апреля 2022~года}
 
 \begin{document}
 % Титул
@@ -17,9 +17,10 @@
 \end{frame}
 
 \section{Человеческий глаз}
-\begin{frame}{Человеческий глаз}
-\cols{\col{0.5}\centerline{\graph[0.5]{galileo_planets}~~\graph[0.38]{Dunhuang_star}}
-\begin{block}{Глаз}
+\begin{frame}{Человеческий глаз}\vspace*{-1em}
+\cols{\col{0.5}
+\centerline{\graph[0.5]{galileo_planets}~~\graph[0.38]{Dunhuang_star}}
+\vspace*{-1.5em}\begin{block}{Глаз}
 \begin{itemize}
 \item Маленькая апертура ($\le8\,$мм)
 \item Низкая чувствительность
@@ -30,28 +31,51 @@
 \item Цветочувствительность только при больших интенсивностях
 \end{itemize}
 \end{block}\col{0.5}
-\img[0.8]{humaneye}\vspace{-1.5em}
-\img[0.5]{galileojupiter}
+\img[0.6]{humaneye}\vspace{-1.5em}
+\img[0.4]{galileojupiter}
 }\end{frame}
 
-\begin{frame}{}\cols{\col{0.6}
+\begin{lightframe}{}\cols{\col{0.55}
 \begin{block}{}
 Диапазон: $400\div750\,$нм (низкая чувствительность в УФ из-за материала хрусталика, защищающего сетчатку).\\
 Высокочувствительные палочки и менее чувствительные колбочки.\\
 $100\div200$ фотонов ($\lambda=510\div525\,$нм) в секунду для палочек!\\
 Дальтонизм "--- схожесть или отсутствие светочувствительных белков.\\
-Трёхсоставную теорию цветового зрения впервые высказал в 1756 году М.В.\,Ломоносов. Параллельно существовала оппонентная теория цвета Эвальда Геринга (ее развили Дэвид Хьюбел и Торстен Визел "--- нобелевская премия 1981\,г): в мозг поступает информация о разнице яркости (white-black, G-R, B-Y, Y=R+G).\\
+Трёхсоставную теорию цветового зрения впервые высказал в 1756 году М.В.\,Ломоносов. Параллельно
+существовала оппонентная теория цвета Эвальда Геринга (ее развили Дэвид Хьюбел и Торстен Визел "---
+нобелевская премия 1981\,г): в мозг поступает информация о разнице яркости (white-black, G-R, B-Y,
+Y=R+G). У некоторых женщин~--- тетрахроматизм.\\
 Бинокулярное зрение "--- оценка расстояния и размеров.
-\end{block}\col{0.4}\img{Spectre_absorption_des_cones}}
+\end{block}\col{0.4}\hspace*{-2em}\smimg[1.2]{Spectre_absorption_des_cones}}
+\end{lightframe}
+
+\begin{frame}{}
+\cols{\col{0.5}
+\begin{block}{Анатомия глаза}
+Cornea~-- роговица, первая <<линза>>.\\
+Pupil~-- зрачок, диафрагма (iris).\\
+Lens~-- зрачок, вторая <<линза>>.\\
+Ciliary body~-- цилиарное тело.\\
+Vitreous body~-- стекловидное тело, третья <<линза>>.\\
+Choroid~-- сосудистая оболочка.\\
+Retina~-- сетчатка.\\
+Macula~-- центральная ямка.\\[1em]
+$6\div7\,$млн колбочек, $\sim120\,$млн палочек.\\
+Мозг <<переворачивает>> и <<дорисовывает>> изображение.
+\end{block}
+\col{0.48}\img{eye-anatomy}
+}
 \end{frame}
 
 \begin{frame}{}
-	\img{M51}Зарисовки М51: а) Джон Гершель, 1833; b) и c) Уильям Парсонс (третий граф 
-	Росс); d) современное изображение (Canada-France-Hawaii Telescope).
+\only<1>{\img[0.8]{saturn-lassel}\vspace*{-1em} Зарисовка Сатурна Уильямом Ласселом (1799--1880).}
+\only<2>{\img[0.85]{schr_sspot}\vspace*{-1em}
+    Солнечные пятна (1785--1795). Hieronymus Schroeter (1745--1816).}
+\only<3>{\img{M51}Зарисовки М51: а) Джон Гершель, 1833; b) и c) Уильям Парсонс (третий граф Росс); d) современное изображение (Canada-France-Hawaii Telescope).}
 \end{frame}
 
 \section{Типы детекторов и диапазоны}
-\begin{frame}{}
+\begin{frame}{Диапазоны длин волн}\vspace*{-0.5em}
 \begin{block}{Регистрируемые формы энергии}
 \begin{itemize}
 \item Электромагнитное излучение (от гамма-- до радиоволн).
@@ -59,15 +83,14 @@ $100\div200$ фотонов ($\lambda=510\div525\,$нм) в секунду для палочек!\\
 \item Нейтрино.
 \item Гравитационные волны.
 \end{itemize}
-\end{block}
+\end{block}\vspace*{-0.8em}
 \begin{block}{Детектирование}
 \begin{itemize}
 \item События (фотоны, частицы) "--- детекторы частиц, счетчики фотонов
 \item Создаваемое тепло "--- болометры
 \item Волновые характеристики "--- радиометры
-\item Энергия "--- фотопластинки, ПЗС и т.д.
 \end{itemize}
-\end{block}
+\end{block}\vspace*{-0.8em}
 \begin{block}{Измеряемые параметры}
 \begin{itemize}
 \item Направление и время прибытия излучения.
@@ -79,12 +102,11 @@ $100\div200$ фотонов ($\lambda=510\div525\,$нм) в секунду для палочек!\\
 \end{frame}
 
 \begin{blueframe}{Электромагнитный спектр}
-\img{EM_Spectrum}
+\img[0.85]{EM_Spectrum}
 \end{blueframe}
 
 \begin{frame}{Источники излучения}
-\small
-\begin{tabular}{|p{1.5cm}|c|c|p{4cm}|p{2cm}|}
+\centerline{\begin{tabular}{|p{1.5cm}|c|c|p{4cm}|p{2cm}|}
 \hline
 \bf Диапазон & \bf $\pmb\lambda$, нм & \bf $\pmb{T}$, K &\bf Тепловые
 источники &\bf Нетепловые \\ \hline
@@ -96,19 +118,41 @@ $100\div200$ фотонов ($\lambda=510\div525\,$нм) в секунду для палочек!\\
 ИК & $700$--$10^6$& $10$--$10^3$& Холодные облака газа и пыли, планеты, спутники& SR\\
 Радио& $>10^6$ & $<10$& Темные пылевые облака& SR\\
 \hline
-\end{tabular}
-
+\end{tabular}}
 ppI~-- протон-протонные столкновения, IC~-- обратное комптоновское рассеяние, DR~-- тормозное
-излучение, SR~-- синхротронное излучение
+излучение, SR~-- синхротронное излучение.
 \end{frame}
+
+\begin{frame}{Всеволновой космос}
+\vspace*{-1em}
+\only<1>{\img[0.7]{allwavesky}}
+\only<2>{\img[0.9]{MWA-whirlpool-galaxy}}
+\end{frame}
+
+\begin{frame}
+\img[0.75]{multiwave_galaxy}
+\end{frame}
+
 
 \begin{frame}{Атмосферное пропускание}
-\only<1>{\img{atm_trans}}
-%\only<2>{\img{MWA-Observatories}}
+\vspace*{-0.8em}
+\only<1>{\img[0.9]{atm_trans}}
+\only<2>{\img[0.9]{MWA-Observatories}}
 \end{frame}
 
+\if0
+\begin{frame}{Типы подложек светоприемников}
+\img{detector_wavelengths}
+\end{frame}
+\fi
+
+\begin{frame}{}
+\img[0.85]{Observatories_across_spectrum_labeled_full}
+\end{frame}
+
+
 \begin{frame}{Инфракрасный диапазон}
-\only<1>{\cols{\col{0.6}\begin{block}{}
+\vspace*{-1em}\only<1>{\cols{\col{0.6}\begin{block}{}
 1800~--- открытие ИК излучения Уильямом Гершелем.
 
 1838~--- измерение солнечной постоянной Клодом Пулье (1.23\,кВт/м$^2$, современное значение
@@ -116,7 +160,7 @@ ppI~-- протон-протонные столкновения, IC~-- обратное комптоновское рассеяние, DR
 
 1880~--- болометр Лэнгли. 1875~--- радиометр Крукса. Термопары.
 
-1957~--- открытие свойств халькогенидов.
+1957~--- открытие свойств HgCdTe.
 
 1962~--- фотометрическая система Джонсона, измерения фотоэлектрическими ячейками на PbS и InSb.
 
@@ -125,8 +169,8 @@ ppI~-- протон-протонные столкновения, IC~-- обратное комптоновское рассеяние, DR
 2000е~--- различные виды FPA.
 \ldots
 \end{block}
-\col{0.4}\img{herschel}}}
-\only<2>{\img[0.7]{IR_atm}
+\col{0.35}\img{herschel}}}
+\only<2>{\img[0.6]{IR_atm}\vspace*{-1em}
 \begin{block}{Диапазоны}
 \begin{itemize}
 \item $0.75\div1.4\,$мкм~--- ближний ИК, ПЗС;
@@ -136,67 +180,42 @@ ppI~-- протон-протонные столкновения, IC~-- обратное комптоновское рассеяние, DR
 \item $15\div1000\,$мкм~--- дальний ИК и субмиллиметровый диапазон.
 \end{itemize}
 \end{block}}
-%\only<3>{
-%\centering\begin{tabular}{|c|c|c|c|}
-%\hline\ж $\pmb\lambda,\,$мкм & \ж Полоса &\ж Прозрачность неба & \ж Яркость неба\\\hline
-%$1.1$--$1.4$ & J & высокая & низкая\\
-%$1.5$--$1.8$ & H & высокая & очень низкая\\
-%$2.0$--$2.4$ & K & высокая & очень низкая\\
-%$3.0$--$4.0$ & L & достаточно высокая& низкая\\
-%$4.6$--$5.0$ & M & низкая & высокая \\
-%$7.5$--$14.5$& N & \multicolumn{1}{p{3.5cm}|}{низкая (кроме 8--9 и 10--12\,мкм, где средняя)} &
-%очень высокая\\
-%$17$--$25$   & Q & очень низкая & очень высокая \\
-%$28$--$40$   & Z & очень низкая & очень высокая \\
-%$330$--$370$ & & очень низкая & низкая\\\hline
-%\end{tabular}
-%}
-\only<3>{\begin{block}{Телескопы}
+\only<3>{
+\centering\begin{tabular}{|c|c|c|c|}
+\hline\ж $\pmb\lambda,\,$мкм & \ж Полоса &\ж Прозрачность неба & \ж Яркость неба\\\hline
+$1.1$--$1.4$ & J & высокая & низкая\\
+$1.5$--$1.8$ & H & высокая & очень низкая\\
+$2.0$--$2.4$ & K & высокая & очень низкая\\
+$3.0$--$4.0$ & L & достаточно высокая& низкая\\
+$4.6$--$5.0$ & M & низкая & высокая \\
+$7.5$--$14.5$& N & \multicolumn{1}{p{3.5cm}|}{низкая (кроме 8--9 и 10--12\,мкм, где средняя)} &
+очень высокая\\
+$17$--$25$   & Q & очень низкая & очень высокая \\
+$28$--$40$   & Z & очень низкая & очень высокая \\
+$330$--$370$ & & очень низкая & низкая\\\hline
+\end{tabular}
+}
+\only<4>{\begin{block}{Телескопы}
 {\ж Наземные}: {\ж VISTA} (4.1\,м), UKIRT (3.8\,м), IRTF (3\,м), и др.
 
 {\ж На борту самолета}: {\ж SOFIA} (2.5\,м).
 
-{\ж Космические}: JWST (6.5\,м, в планах), {\ж Herschel} (3.5\,м), Spitzer (0.85\,м) и др.
+{\ж Космические}: JWST (6.5\,м), {\ж Herschel} (3.5\,м), Spitzer (0.85\,м) и др.
 \end{block}
 \centering
 \graph[0.3]{VISTA}\hspace{1em}
 \graph[0.35]{SOFIA}\hspace{1em}
-\graph[0.25]{HERSCHEL}
+\graph[0.25]{HERSCHELS}
 }
 \end{frame}
 
-\begin{blueframe}{Болометр}
-	\only<1>{\cols{
-			\col{0.5}\img{Bolometer_conceptual_schematic}\col{0.4}
-			\begin{block}{}
-				1878~г. Сэмюэль Лэнгли изобрел болометр: две платиновые полоски, зачерненные 
-				ламповой сажей,
-				включенные по схеме моста Уитсона и подключенные к чувствительному гальванометру.
-				
-				Болометр Лэнгли чувствовал корову за милю!
-				
-				Расширение диапазона до ИК.
-	\end{block}}}
-	\only<2>{\cols{\col{0.4}\img{Wheatstonebridge}
-			\col{0.6}\begin{block}{}
-				Мост Уитстона: $\dfrac{R_2}{R_1}=\dfrac{R_x}{R_3}$ \Arr $R_x=\dfrac{R_2}{R_1}R_3$.
-				
-				$$V_{G}=\left(\frac{R_2}{R_{1}+R_{2}}-\frac{R_x}{R_{x}+R_{3}}\right)V_{s}$$
-				$\dfrac{R_x}{R_3}=\dfrac{V_s-2V_G}{V_s+2V_G}$~--- если $V_s=10\,$В, то при 
-				$V_G=1\,$мВ
-				относительное изменение сопротивления составит $4\cdot10^{-4}$.
-				
-				$R_3$ и $R_x$~--- зачерненные платиновые полоски. Точность измерений~--- до 
-				$10^{-5}{}\degr C$.
-	\end{block}}}
-\end{blueframe} 
-
 \begin{frame}{Оптический диапазон}
+\vspace*{-1em}
 \only<1>{Световое загрязнение\img{light_pollution}}
-%\only<2>{\img[0.5]{lpchange}}
-\only<2>{Расположение\img{largest_scopes}}
+\only<2>{\img[0.4]{lpchange}}
+\only<3>{Расположение\img{largest_scopes}}
 \end{frame}
- 
+
 \begin{frame}{Ультрафиолетовый диапазон}
 Только космические телескопы: UVIT на Astrosat (40\,см), HST (2.4\,м), UVOT на SWIFT (30\,см) и
 многие другие.
@@ -207,9 +226,19 @@ ppI~-- протон-протонные столкновения, IC~-- обратное комптоновское рассеяние, DR
 \graph[0.25]{SWIFT}
 \end{frame}
 
+\section{Характеристики детекторов}
+\begin{frame}{Характеристики детекторов}
+\begin{block}{}
+Размер, количество пикселей (каналов), чувствительность в зависимости от длины волны (квантовая эффективность) и доступный спектральный диапазон, динамический диапазон, линейность, накопление сигнала, временн\'ое разрешение, шумовые характеристики, стабильность, цена.
+\end{block}
+\begin{block}{Эволюция детекторов}
+Историческая эволюция: глаз \Arr фотопластинка \Arr одноканальные фотоэлектрические приемники \Arr сканеры фотопластинок \Arr телевизионные сканеры \Arr полупроводниковые устройства (фотодиоды, ПЗС, композитные ИК приемники, болометры, лавинные фотодиоды, КМОП) \Arr устройства, измеряющие энергию фотона (STJ "--- на сверхпроводящих туннельных переходах, transition-edge sensor "--- повышение сопротивления свехпроводящего перехода).
+\end{block}
+\end{frame}
+
 \section{Аналоговая регистрация и счет фотонов}
 \begin{frame}{Фотографические пластинки}\only<1>{
-1826, Нисефор Ньепс, гелиография (полимеризация битума).\img[0.8]{Nieps}}
+1826, Нисефор Ньепс, гелиография (полимеризация битума).\img[0.75]{Nieps}}
 \only<2>{
 \cols{\col{0.5}
 \begin{block}{}
@@ -220,7 +249,7 @@ ppI~-- протон-протонные столкновения, IC~-- обратное комптоновское рассеяние, DR
 \item Нелинейность, сложность калибровки
 \end{itemize}
 \end{block}\img[0.8]{ISO6speedMethod}
-\col{0.5}\img{Orion-Nebula_A_A_Common}
+\col{0.4}\img{Orion-Nebula_A_A_Common}\vspace*{-1em}
 \begin{block}{}
 Andrew Ainslie Common, 1883~г. "--- туманность Ориона.
 \end{block}}}
@@ -229,23 +258,48 @@ Edward Charles Pickering, 1881. Привлечение женщин для обработки растущей коллек
 Гарвардской обсерватории. The Henry Draper Catalogue. Обнаружение переменных звезд, изучение
 спектров, классификация галактик.
 \end{block}\vspace*{-0.5em}
-\img[0.5]{annie_jump_cannon_with_plate}
+\img[0.45]{annie_jump_cannon_with_plate}
 Annie Jump Cannon, 1896.}
 \end{frame}
 
-%\begin{blueframe}{Термопара}
-%\cols{\col{0.5}\begin{block}{Эффект Зеебека}
-%Величина возникающей термо-ЭДС в первом приближении зависит только от материала проводников и
-%температур горячего ($T_1$) и холодного ($T_2$) контактов:
-%$$\mathcal {E}=\Int_{T_{1}}^{T_{2}}\alpha_{12}(T)dT.$$
-%
-%Объясняется совокупностью трех эффектов: зависимостью  от температуры скорости электронов и
-%энергии Ферми (контактная разность потенциалов) и фононным увлечением электронов.
-%\end{block}
-%\col{0.5}\img{Zeebek}\black{Термоэлектрический генератор на элементах Пельтье}}
-%\end{blueframe}
+\begin{blueframe}{Болометр}
+\only<1>{\cols{
+\col{0.4}\img[0.8]{Bolometer_conceptual_schematic}\col{0.4}
+\begin{block}{}
+1878~г. Сэмюэль Лэнгли изобрел болометр: две платиновые полоски, зачерненные ламповой сажей,
+включенные по схеме моста Уитсона и подключенные к чувствительному гальванометру.
+
+Болометр Лэнгли чувствовал корову за милю!
+
+Расширение диапазона до ИК.
+\end{block}}}
+\only<2>{\cols{\col{0.4}\img{Wheatstonebridge}
+\col{0.6}\begin{block}{}
+Мост Уитстона: $\dfrac{R_2}{R_1}=\dfrac{R_x}{R_3}$ \Arr $R_x=\dfrac{R_2}{R_1}R_3$.
+
+$$V_{G}=\left(\frac{R_2}{R_{1}+R_{2}}-\frac{R_x}{R_{x}+R_{3}}\right)V_{s}$$
+$\dfrac{R_x}{R_3}=\dfrac{V_s-2V_G}{V_s+2V_G}$~--- если $V_s=10\,$В, то при $V_G=1\,$мВ
+относительное изменение сопротивления составит $4\cdot10^{-4}$.
+
+$R_3$ и $R_x$~--- зачерненные платиновые полоски. Точность измерений~--- до $10^{-5}{}\degr C$.
+\end{block}}}
+\end{blueframe}
+
+\begin{blueframe}{Термопара}
+\cols{\col{0.5}\begin{block}{Эффект Зеебека}
+Величина возникающей термо-ЭДС в первом приближении зависит только от материала проводников и
+температур горячего ($T_1$) и холодного ($T_2$) контактов:
+$$\mathcal {E}=\Int_{T_{1}}^{T_{2}}\alpha_{12}(T)dT.$$
+
+Объясняется совокупностью трех эффектов: зависимостью  от температуры скорости электронов и
+энергии Ферми (контактная разность потенциалов) и фононным увлечением электронов.
+\end{block}
+\col{0.5}\img{Zeebek}\vspace*{-6em}
+\black{Термоэлектрический генератор на элементах Пельтье}}
+\end{blueframe}
 
 \begin{blueframe}{Фотоэффект}
+    \vspace*{-1em}
 \only<1>{\cols{\col{0.5}
 \begin{block}{Внешний фотоэффект}
 $$h\nu =A+\frac{mv^2}{2}$$
@@ -268,7 +322,7 @@ $W_{min}$~--- ширина запрещенной зоны. $W_{max}$~--- энергия выхода.
 
 Фотодиоды, ПЗС, CMOS.
 \end{block}
-\col{0.5}\img[0.9]{PhotovoltaicEffect}}}
+\col{0.4}\img{PhotovoltaicEffect}}}
 \end{blueframe}
 
 \begin{frame}{Ускорение и размножение электронов}
@@ -280,7 +334,7 @@ $W_{min}$~--- ширина запрещенной зоны. $W_{max}$~--- энергия выхода.
 
 \section{Многоканальные светоприемники}
 \begin{blueframe}{ЭЛТ}
-\vspace*{-2em}\begin{block}{}
+\vspace*{-1em}\begin{block}{}
 1964, E. Luedicke, A. D. Cope, and L. E. Flory. Astronomical Image-Integration System Using a
 Television Camera Tube.
 
@@ -302,11 +356,10 @@ Television Camera Tube.
 \img{Gen3-Image-Tube}}
 \end{frame}
 
-\begin{frame}{МКП + КПА}
-\begin{block}{}
-Конец 1970-х "--- микроканальные пластины.
 
-1979, Lampton, M. and Carlson. C; 1982, Firmani, C. et. al.
+\begin{frame}{МКП + КПА}
+\vspace*{-1em}\begin{block}{}
+Конец 1970-х "--- микроканальные пластины.
 
 1983, Siegmund, O.H.W. et al. "Application of the wedge and strip anode to position sensing with
 microchannel plates and  proportional counters".
@@ -315,7 +368,7 @@ microchannel plates and  proportional counters".
 in space astronomy".
 \end{block}
 \begin{columns}
-\column{0.5\textwidth}
+\column{0.45\textwidth}
 \img{MCP}
 \column{0.4\textwidth}
 \img[0.8]{WSA}
@@ -323,8 +376,9 @@ in space astronomy".
 \end{frame}
 
 \begin{frame}{ПЗС}
+    \vspace*{-1em}
 \begin{columns}
-\column{0.5\textwidth}
+\column{0.4\textwidth}
 \img{ccdintro}
 \column{0.5\textwidth}
 \begin{block}{}
@@ -333,22 +387,93 @@ in space astronomy".
 1975 "--- первая ПЗС 100x100 (Steven Sasson, Kodak).
 
 1976 "--- запуск спутника--шпиона с ПЗС 800x800.
-\end{block}
+\end{block}\vspace*{-1em}
+\img[0.7]{ccdanatomy}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Электронное умножение на кремнии}
-\vspace*{-1em}\begin{block}{Лавинные фотодиоды и EMCCD}
-Лавинный фотодиод "--- ударная ионизация при больших напряжениях смещения. (лавинные стабилитроны).	
-
-Electron-Multiplying CCD содержат <<регистр умножения>> (аналогия с лавинным диодом). 
-Неопределенность уровня усиления "--- предпочтительна работа с одиночными фотонами (короткие 
-экспозиции).
-\end{block}
-\img[0.7]{EMCCD}
+\begin{frame}{Квантовая эффективность ПЗС}
+    \only<1>{QE "--- отношение количества падающих фотонов к детектируемым.\img[0.92]{QE_PTGrey}}
+    \only<2>{\img[0.6]{quantumefficiencyfigure1}}
 \end{frame}
 
-\begin{frame}{КМОП}
+\begin{frame}{Линейность}
+    Линейность ПЗС-камеры Apogee Alta 16M-HC (Kodak KAF-16803).
+    \img[0.6]{Apogee_linearity}
+    $\pm0.5\%$  ($2000\div40000$ ADU) $\pm1.0\%$ ($0\div45000$ ADU).
+\end{frame}
+
+\begin{frame}{Динамический диапазон}
+    \cols{\col{0.4}\begin{block}{}
+            Максимальный размах уровней сигнала, при котором он регистрируется без потерь.\\
+            Идеал "--- бесконечный динамический диапазон.
+        \end{block}
+        \col{0.6}\img{bloomingfigure4}}
+\end{frame}
+
+\begin{frame}{Временн\'ое разрешение}
+    \begin{block}{}
+        Минимальный интервал времени, в течение которого можно обнаружить изменение потока
+        излучения.\\
+        Потери времени на считывание и сохранение.
+    \end{block}
+    \img{TauOphPicsD}
+\end{frame}
+
+\begin{frame}{Пространственное разрешение}
+    \vspace*{-0.7em}
+    \begin{block}{}Степень детализации изображения зависит от условий наблюдения, оптики телескопа
+    и прибора, размера пикселя.
+    \end{block}\vspace*{-0.4em}
+    \img[0.75]{digitalimagingfigure2}
+\end{frame}
+
+\begin{blueframe}{Выбор светоприемника под масштаб}
+    \centering\begin{minipage}{0.6\textwidth}
+        \begin{block}{Масштаб изображения}\centering
+            $5a\ge\Delta x \ge 2a,\qquad S_{tel}=\dfrac{F_{tel}}{206265}$, $m =
+            \dfrac{S_{cam}}{S_{tel}}=\dfrac{F_{cam}}{F_{coll}}$.
+
+            БТА: $1/S=8.6''/$мм, $\Delta x_{1''}=116.36\,$мкм
+
+            $a_{opt}=13\,$мкм. Нужен редуктор $\sim2.5\,$раз!
+
+    \end{block}\end{minipage}
+    \img[0.9]{focal_reducer}
+\end{blueframe}
+
+\begin{frame}{Шумы}\vspace*{-1em}
+    \only<1>{
+        \begin{block}{}
+            Выходной сигнал всегда отличается от входного: пуассонова статистика фотонов, фон неба,
+            тепловой (темновой) шум, космические частицы, шум считывания и т.п.
+        \end{block}\vspace*{-0.5em}
+        \img[0.6]{Kodak_dark}}
+    \only<2>{
+        \begin{block}{}
+            Если пуассонов шум фотонов плоского поля превышает шум считывания, гистограмма имеет
+            почти
+            гауссову
+            форму.
+            $$\sigma\ind{ADU}=\frac{\sqrt{\mean{F}\cdot G}}{G}$$
+            $\sigma\ind{ADU}$~-- полуширина гистограммы плоского поля, $\mean F$~-- средний уровень
+            плоского,
+            $G$~-- gain (коэффициент преобразования фотоэлектронов в ADU).
+
+            Два кадра bias ($B$) и плоского ($F$):
+            $$
+            G = \frac{(\mean{F_1}+\mean{F_2}) -
+                (\mean{B_1}+\mean{B_2})}{\sigma^2_{F_1-F_2}-\sigma^2_{B_1-B_2}}
+            $$
+            Шум считывания:
+            $$
+            RN = \frac{G\cdot\sigma_{B_1-B_2}}{\sqrt2}
+            $$
+        \end{block}
+    }
+\end{frame}
+
+\begin{frame}{КМОП}\vspace*{-1em}
 \begin{columns}
 \column{0.7\textwidth}
 \only<1>{\img{CCD-VS-CMOS}}
@@ -363,7 +488,7 @@ Electron-Multiplying CCD содержат <<регистр умножения>> (аналогия с лавинным дио
 \end{columns}
 \end{frame}
 
-\begin{blueframe}{Гибридные матрицы (Focal Plane Array)}
+\begin{blueframe}{Гибридные матрицы (Focal Plane Array)}\vspace*{-1em}
 \only<1>{\cols{\col{0.6}\begin{block}{}
 В n-канальном полупроводнике легируются p-канальные площадки "--- пиксели.
 
@@ -377,7 +502,7 @@ Electron-Multiplying CCD содержат <<регистр умножения>> (аналогия с лавинным дио
 \end{block}
 \col{0.4}\img{hgcdte1}}}
 \only<2>{\cols{\col{0.6}\begin{block}{}
-На силиконе "--- считывающая схема (ReadOut Integrated Circuit).
+На кремнии "--- считывающая схема (ReadOut Integrated Circuit).
 
 Регистрирующая структура прижимается к считывающей.
 
@@ -389,12 +514,38 @@ Electron-Multiplying CCD содержат <<регистр умножения>> (аналогия с лавинным дио
 <<Плохие>> пиксели не влияют на окружение!
 \end{block}
 \col{0.4}\img{hgcdte2}}}
+\only<3>{\cols{\col{0.47}\begin{block}{}
+$V_{reset}$~--- уровень смещения (bias), $V_{read}\propto q$.
+
+Усилитель на МОП позволяет практически свести к нулю утечки при недеструктивном считывании.
+
+$\Phi_{read}$ подается через элемент <<2И>> на двух МОП (адресация столбца и строки).
+\end{block}
+\col{0.5}\img{hgcdte3}}}
+\only<4>{\cols{\col{0.5}\begin{block}{}
+Hawaii HgCdTe 1024x1024.\par Пиксель 18.5\,мкм.\par Gain 5.4\,e/ADU.\par RON 2.1\,ADU.\par Около
+10000 плохих пикселей.\par Нелинейность меньше 1.5\% от 0 до 10000\,ADU.\par Темновой ток при
+T=78\,K меньше 0.1\,e/s.
+\end{block}
+\col{0.5}\img{hawqe}}
+\vspace{1em}
+\black{\small https://www.eso.org/sci/facilities/lasilla/instruments/sofi/inst/HawaiiDetector.html}}
+\only<5>{\cols{\col{0.4}\begin{block}{}
+Высокий шум InSb при $T>60\,$К определяется большим уровнем генерационно-рекомбинационных токов.
+
+У HgCdTe в этом диапазоне г-р токи практически нулевые, шум определяется в основном диффузными
+токами.
+
+$$T_{max}=\frac{200\,K}{\lambda_c\text{\,$\mu$m}}$$
+\end{block}
+\col{0.5}\img[0.8]{irdark}}\vspace*{-1em}
+\black{\small OPTO--ELECTRONICS REVIEW \textbf{20}\,(3), 279--308.}}
 \end{blueframe}
 
 \section{Примеры детекторов}
 \begin{frame}{}
 \begin{columns}
-\column{0.5\textwidth}
+\column{0.4\textwidth}
 \only<1>{\img{SDSSFaceplate}}
 \only<2>{\img{frame_transfer_CCD}}
 \column{0.5\textwidth}
@@ -413,12 +564,12 @@ Electron-Multiplying CCD содержат <<регистр умножения>> (аналогия с лавинным дио
 Алюминий (1.2К), ниобий (4.2К).
 
 100..1000ГГц "--- радиоастрономия. Счетчик фотонов в широком диапазоне.
-\end{block}\img[0.6]{Josephson}}
+\end{block}\img[0.5]{Josephson}}
 \only<2>{
 \begin{block}{TES}
 Transition-edge sensor "--- криогенный датчик, в основе работы которого используется зависимость от температуры сопротивления на границе фазового перехода в сверхпроводящее состояние.
 \end{block}
-\img[0.5]{NIST_Tungsten_Transition_Edge_Sensor}}
+\img[0.4]{NIST_Tungsten_Transition_Edge_Sensor}}
 \end{frame}
 
 \begin{frame}{OTCCD}
@@ -426,110 +577,98 @@ Transition-edge sensor "--- криогенный датчик, в основе работы которого использу
 \begin{block}{arXiv:astro-ph/9705165, 1997}
 The Orthogonal Transfer CCD позволяет переносить заряд в любом из четырех направлений. Отслеживание атмосферных наклонов волнового фронта с частотой до 100\,Гц. Проще tip-tilt систем.
 \end{block}
-\col{0.35}\img{OTCCD}}
+\col{0.3}\img{OTCCD}}
 \end{frame}
 
-\begin{frame}{Обработка снимков}
-\cols{\col{0.57}\begin{block}{Последовательность обработки}
+\begin{frame}{ПЗС, итоги}\vspace*{-0.5em}
+\begin{block}{}
+\begin{itemize}
+ \item Для повышения эффективности толщина рабочего слоя ПЗС должна быть не больше подложки n-типа,
+	back-illuminated. Усложнение техпроцесса, удорожание.
+ \item Глубокое охлаждение чипа: при $-80\degr$C с ростом температуры на $\sim7\degr$C темновой шум
+	увеличивается в два раза.
+ \item Кремниевая подложка имеет красную границу на $\sim1.1\,$мкм, в ИК светоприемники с
+	кремниевыми подложками не будут работать.
+ \item Утончение чипа приводит к росту прозрачности для больших длин волн и появлению фрингов.
+ \item Большой проблемой является растекание заряда с переэкспонированных пикселей.
+ \item ПЗС невозможно оснастить <<электронным>> затвором, их затвор механический.
+ \item Дефекты подложки приводят к появлению <<горячих>> и <<плохих>> пикселей.
+ \item Постоянное воздействие космических частиц вызывает необратимую деградацию.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{blueframe}{CMOS, итоги}\vspace*{-1em}
+\only<1>{\cols{\col{0.5}\begin{block}{}
+Сканирование производится построчно.
+
+<<Медленная>> шина "--- строки (Y). <<Быстрая>> "--- столбцы (X).
+
+Тактирование сдвигового регистра X поочередно адресует пиксели в строке.
+
+Подключение сброса: индивидуально, построчно или глобально.
+
+Если считывание не завершается сбросом, накопление продолжается "--- недеструктивное считывание.
+\end{block}
+\col{0.4}\img{hawlcc}}}
+\only<2>{\cols{\col{0.47}\begin{block}{Двойная коррелированная выборка}
+$V_b$~--- начальный уровень смещения.\par
+$V_1$~--- уровень при считывании сразу после сброса.\par
+$V_2$~--- считывание в конце экспозиции.
+
+$V_2-V_1$~--- двойная коррелированная выборка.
+\end{block}
+\col{0.5}\img{cds}}}
+
+\only<3>{\cols{\col{0.57}\begin{block}{Недеструктивное считывание}
+Fowler (F) and Follow-Up-the-Ramp (FUR, отслеживание наклона) sampling.\par
+$\SNR_{FUR}=\SNR_{DC}\sqrt{\dfrac{n(n+1)}{6(n-1)}}$.\par
+Для $n\gg1$\par
+$t=nT_{read}$: $\SNR_{F} = \SNR_{DC}\sqrt{\frc{n}{8}}\approx\SNR_{FUR}\sqrt{\frc68}$
+$t\gg nT_{read}$: $\SNR_{F} = \SNR_{DC}\sqrt{\frc{n}{2}}\approx\SNR_{FUR}\sqrt{3}$!
+
+Однако, FUR более применим в космосе: восстановление изображений, поврежденных космикой!
+\end{block}
+\col{0.4}\img{nondestr}}}
+\end{blueframe}
+
+\begin{frame}{Обработка ИК-снимков}\vspace*{-1em}
+\only<1>{\cols{\col{0.47}\begin{block}{Яркость неба}
+Высокий уровень шумов от самого телескопа.\par
+В дальнем ИК небо ярче объектов!\par
+Фон неба зависит от положения объекта.\par
+<<Nodding>> "--- небольшие перемещения телескопа между экспозициями для получения снимков неба.
+\end{block}
+\col{0.4}\img{irsky}}}
+\only<2>{\cols{\col{0.57}\begin{block}{Последовательность обработки}
 \begin{enumerate}
-\item Темновые, <<плоские поля>>, bias'ы.
 \item Медианное усреднение снимков неба.
-\item Вычитание из рабочих кадров темновых.
 \item Вычитание неба из снимков объекта.
 \item Деление результата на плоское поле.
 \item Обработка результата.
 \end{enumerate}
 Переполненные поля требуют б\'ольших перемещений телескопа для формирования изображения неба.
 \end{block}
-\col{0.4}\img{irframe}}
-\end{frame}
-
-\section{Характеристики детекторов}
-\begin{frame}{Квантовая эффективность ПЗС}
-	\only<1>{QE "--- отношение количества падающих фотонов к детектируемым.\img{QE_PTGrey}}
-	\only<2>{\img[0.8]{quantumefficiencyfigure1}}
-\end{frame}
-
-\begin{frame}{Линейность}
-	Линейность ПЗС-камеры Apogee Alta 16M-HC (Kodak KAF-16803).
-	\img[0.7]{Apogee_linearity} 
-	$\pm0.5\%$  ($2000\div40000$ ADU) $\pm1.0\%$ ($0\div45000$ ADU).
-\end{frame}
-
-\begin{frame}{Динамический диапазон}
-	\cols{\col{0.4}\begin{block}{}
-			Максимальный размах уровней сигнала, при котором он регистрируется без потерь.\\
-			Идеал "--- бесконечный динамический диапазон.
-		\end{block}
-		\col{0.6}\img{bloomingfigure4}}
-\end{frame}
-
-\begin{frame}{Временн\'ое разрешение}
-	\begin{block}{}
-		Характерное время изменения состояния светоприемника, определяющее предельные экспозиции.\\
-		Потери времени на считывание и сохранение.
-	\end{block}
-	\img{TauOphPicsD}
+\col{0.34}\img{irframe}}}
+\only<3,4>{\cols{\col{0.47}\begin{block}{Mid IR: Chopping + Nodding}
+В среднем ИК фон неба быстро меняется. Экспозиции "--- не более 50\,мс!
+\begin{enumerate}
+\item{} <<Chopping>> \Arr on$_i$/off$_i$.
+\item $\Sum_{i=0}^{i=xxxxx}$ \Arr On$^1$-Off$^1$.
+\item{} <<Nodding>>, repeat \Arr On$^2$-Off$^2$.
+\item Sky=On$^1$-Off$^1$+On$^2$-Off$^2$.
+\item Accumulated=On$^1$-Off$^1$-(On$^2$-Off$^2$).
+\item Совмещение \Arr Shift+add.
+\end{enumerate}
+\end{block}
+\col{0.5}\only<3>{\img{irdemob}}
+\only<4>{\img{chopnod}}}}
 \end{frame}
 
 
-\begin{frame}{Пространственное разрешение}
-	\begin{block}{}Степень детализации изображения зависит от условий наблюдения, оптики телескопа 
-	и прибора, размера пикселя.
-	\end{block}
-	\img[0.85]{digitalimagingfigure2}
-\end{frame}
-
-\begin{blueframe}{Выбор светоприемника под масштаб}
-	\centering\begin{minipage}{0.6\textwidth}
-		\begin{block}{Масштаб изображения}\centering
-			$5a\ge\Delta x \ge 2a,\qquad S_{tel}=\dfrac{F_{tel}}{206265}$
-			
-			БТА: $1/S=8.6''/$мм, $\Delta x_{1''}=116.36\,$мкм
-			
-			$a_{opt}=23.3\,$мкм. Нужен редуктор $\sim2.5\,$раз!
-			
-			$m = \dfrac{S_{cam}}{S_{tel}}=\dfrac{F_{cam}}{F_{coll}}<1$
-	\end{block}\end{minipage}
-	\img[0.9]{focal_reducer}
-\end{blueframe}
-
-\begin{frame}{Шумы}\vspace*{-0.5em}
-	\begin{block}{}
-		Выходной сигнал всегда отличается от входного: пуассонова статистика фотонов, фон неба, 
-		тепловой (темновой) шум, космические частицы, шум считывания и т.п. Мультипликативный и 
-		аддитивный шумы.
-	\end{block}\vspace*{-0.5em}
-	\img[0.7]{Kodak_dark}
-\end{frame}
-
-\begin{frame}{Характеристики детекторов}
-	\begin{block}{}
-		Размер, количество пикселей (каналов), чувствительность в зависимости от длины волны 
-		(квантовая эффективность) и доступный спектральный диапазон, динамический диапазон, 
-		линейность, накопление сигнала, временн\'ое разрешение, шумовые характеристики, 
-		стабильность, цена.
-	\end{block}
-	\begin{block}{Эволюция детекторов}
-		Историческая эволюция: глаз \Arr фотопластинка \Arr одноканальные фотоэлектрические 
-		приемники \Arr сканеры фотопластинок \Arr телевизионные сканеры \Arr полупроводниковые 
-		устройства (фотодиоды, ПЗС, композитные ИК приемники, болометры, лавинные фотодиоды, КМОП) 
-		\Arr устройства, измеряющие энергию фотона (STJ "--- на сверхпроводящих туннельных 
-		переходах, transition-edge sensor "--- повышение сопротивления свехпроводящего перехода).
-	\end{block}
-\end{frame}
-
-\begin{frame}{Типы подложек светоприемников}
-	\img{detector_wavelengths}
-\end{frame}
-
-\begin{frame}{}
-	\img{Observatories_across_spectrum_labeled_full}
-\end{frame}
-
-\begin{blueframe}{Закон Мура}
-\vspace*{-1em}\img[0.7]{moorelaw}
-\vspace*{-2\baselineskip}\vbox to 0pt{\black{Удвоение числа транзисторов на ИС каждые 2 года.}}
+\begin{blueframe}{Закон Мура}\vspace*{-1em}
+\vspace*{-1em}\img[0.5]{moorelaw}
+\vspace*{-1em}\vbox to 0pt{\black{Удвоение числа транзисторов на ИС каждые 2 года.}}
 \end{blueframe}
 
 
@@ -541,148 +680,4 @@ eddy@sao.ru\\
 edward.emelianoff@gmail.com
 \end{block}\end{minipage}
 \end{frame}
-
-
-\begin{frame}{}
-	\cols{\col{0.5}
-		\begin{block}{Анатомия глаза}
-			Cornea~-- роговица, первая <<линза>>.\\
-			Pupil~-- зрачок, диафрагма (iris).\\
-			Lens~-- зрачок, вторая <<линза>>.\\
-			Ciliary body~-- цилиарное тело.\\
-			Vitreous body~-- стекловидное тело, третья <<линза>>.\\
-			Choroid~-- сосудистая оболочка.\\
-			Retina~-- сетчатка.\\
-			Macula~-- центральная ямка.\\[1em]
-			$6\div7\,$млн колбочек, $\sim120\,$млн палочек.\\
-			Мозг <<переворачивает>> и <<дорисовывает>> изображение.
-		\end{block}
-		\col{0.48}\img{eye-anatomy}
-	}
-\end{frame}
-
-\begin{frame}{}
-	\only<1>{\img[0.8]{saturn-lassel}Зарисовка Сатурна Уильямом Ласселом (1799--1880).}
-	\only<2>{\img{schr_sspot}Солнечные пятна (1785--1795). Hieronymus Schroeter (1745--1816).}
-	\only<3>{\img{M51}Зарисовки М51: а) Джон Гершель, 1833; b) и c) Уильям Парсонс (третий граф 
-	Росс); d) современное изображение (Canada-France-Hawaii Telescope).}
-\end{frame}
-
-\begin{blueframe}{Гибридные матрицы (Focal Plane Array)}
-	\only<1>{\cols{\col{0.6}\begin{block}{}
-				$V_{reset}$~--- уровень смещения (bias), $V_{read}\propto q$.
-				
-				Усилитель на МОП позволяет практически свести к нулю утечки при недеструктивном 
-				считывании.
-				
-				$\Phi_{read}$ подается через элемент <<2И>> на двух МОП (адресация столбца и 
-				строки).
-			\end{block}
-			\col{0.4}\img{hgcdte3}}}
-	\only<2>{\cols{\col{0.5}\begin{block}{}
-				Hawaii HgCdTe 1024x1024.\par Пиксель 18.5\,мкм.\par Gain 5.4\,e/ADU.\par RON 
-				2.1\,ADU.\par Около
-				10000 плохих пикселей.\par Нелинейность меньше 1.5\% от 0 до 10000\,ADU.\par 
-				Темновой ток при
-				T=78\,K меньше 0.1\,e/s.
-			\end{block}
-			\col{0.5}\img{hawqe}}
-		\vspace{1em}
-		\black{\small 
-		https://www.eso.org/sci/facilities/lasilla/instruments/sofi/inst/HawaiiDetector.html}}
-	\only<3>{\cols{\col{0.47}\begin{block}{}
-				Высокий шум InSb при $T>60\,$К определяется большим уровнем 
-				генерационно-рекомбинационных токов.
-				
-				У HgCdTe в этом диапазоне г-р токи практически нулевые, шум определяется в основном 
-				диффузными
-				токами.
-				
-				$$T_{max}=\frac{200\,K}{\lambda_c\text{\,$\mu$m}}$$
-			\end{block}
-			\col{0.5}\img{irdark}}
-		\black{\small OPTO--ELECTRONICS REVIEW \textbf{20}\,(3), 279--308.}}
-\end{blueframe}
-
-
-\begin{frame}{ПЗС, итоги}\vspace*{-0.5em}
-	\begin{block}{}
-		\begin{itemize}
-			\item Для повышения эффективности толщина рабочего слоя ПЗС должна быть не больше 
-			подложки n-типа,
-			back-illuminated. Усложнение техпроцесса, удорожание.
-			\item Глубокое охлаждение чипа: при $-80\degr$C с ростом температуры на $\sim7\degr$C 
-			темновой шум
-			увеличивается в два раза.
-			\item Кремниевая подложка имеет красную границу на $\sim1.1\,$мкм, в ИК светоприемники с
-			кремниевыми подложками не будут работать.
-			\item Утончение чипа приводит к росту прозрачности для больших длин волн и появлению 
-			фрингов.
-			\item Большой проблемой является растекание заряда с переэкспонированных пикселей.
-			\item ПЗС невозможно оснастить <<электронным>> затвором, их затвор механический.
-			\item Дефекты подложки приводят к появлению <<горячих>> и <<плохих>> пикселей.
-			\item Постоянное воздействие космических частиц вызывает необратимую деградацию.
-		\end{itemize}
-	\end{block}
-\end{frame}
-
-\begin{blueframe}{CMOS, итоги}
-	\only<1>{\cols{\col{0.5}\begin{block}{}
-				Сканирование производится построчно.
-				
-				<<Медленная>> шина "--- строки (Y). <<Быстрая>> "--- столбцы (X).
-				
-				Тактирование сдвигового регистра X поочередно адресует пиксели в строке.
-				
-				Подключение сброса: индивидуально, построчно или глобально.
-				
-				Если считывание не завершается сбросом, накопление продолжается "--- 
-				недеструктивное считывание.
-			\end{block}
-			\col{0.5}\img{hawlcc}}}
-	\only<2>{\cols{\col{0.47}\begin{block}{Двойная коррелированная выборка}
-				$V_b$~--- начальный уровень смещения.\par
-				$V_1$~--- уровень при считывании сразу после сброса.\par
-				$V_2$~--- считывание в конце экспозиции.
-				
-				$V_2-V_1$~--- двойная коррелированная выборка.
-			\end{block}
-			\col{0.5}\img{cds}}}
-	
-	\only<3>{\cols{\col{0.57}\begin{block}{Недеструктивное считывание}
-				Fowler (F) and Follow-Up-the-Ramp (FUR, отслеживание наклона) sampling.\par
-				$\SNR_{FUR}=\SNR_{DC}\sqrt{\dfrac{n(n+1)}{6(n-1)}}$.\par
-				Для $n\gg1$\par
-				$t=nT_{read}$: $\SNR_{F} = \SNR_{DC}\sqrt{\frc{n}{8}}\approx\SNR_{FUR}\sqrt{\frc68}$
-				$t\gg nT_{read}$: $\SNR_{F} = \SNR_{DC}\sqrt{\frc{n}{2}}\approx\SNR_{FUR}\sqrt{3}$!
-				
-				Однако, FUR более применим в космосе: восстановление изображений, поврежденных 
-				космикой!
-			\end{block}
-			\col{0.4}\img{nondestr}}}
-\end{blueframe}
-
-\begin{frame}{Обработка снимков}
-	\only<1>{\cols{\col{0.47}\begin{block}{Яркость неба}
-	Высокий уровень шумов от самого телескопа.\par
-	В дальнем ИК небо ярче объектов!\par
-	Фон неба зависит от положения объекта.\par
-	<<Nodding>> "--- небольшие перемещения телескопа между экспозициями для получения снимков неба.
-	\end{block}
-	\col{0.5}\img{irsky}}}
-	\only<2,3>{\cols{\col{0.47}\begin{block}{Mid IR: Chopping + Nodding}
-	В среднем ИК фон неба быстро меняется. Экспозиции "--- не более 50\,мс!
-	\begin{enumerate}
-	\item{} <<Chopping>> \Arr on$_i$/off$_i$.
-	\item $\Sum_{i=0}^{i=xxxxx}$ \Arr On$^1$-Off$^1$.
-	\item{} <<Nodding>>, repeat \Arr On$^2$-Off$^2$.
-	\item Sky=On$^1$-Off$^1$+On$^2$-Off$^2$.
-	\item Accumulated=On$^1$-Off$^1$-(On$^2$-Off$^2$).
-	\item Совмещение \Arr Shift+add.
-	\end{enumerate}
-	\end{block}
-	\col{0.5}\only<2>{\img{irdemob}}
-	\only<3>{\img{chopnod}}}}
-\end{frame}
-
 \end{document}
