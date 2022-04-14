@@ -1,0 +1,423 @@
+\documentclass[10pt,pdf,hyperref={unicode},aspectratio=169]{beamer}
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage{lect}
+
+\title{Регистрация излучения и информация, в нем содержащаяся}
+\date{8~апреля 2022~года}
+
+\begin{document}
+% Титул
+\bgroup\setbeamercolor{normal text}{bg=black}
+\begin{frame}
+\maketitle
+\end{frame}\egroup\logo{}
+% Содержание
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\section{<<Декомпозиция>> излучения: 3D, 4D данные}
+\begin{frame}{<<Декомпозиция>> излучения: 3D, 4D данные}
+\only<1>{\cols{\col{0.3}\begin{block}{}
+Излучение: 4 степени свободы (координаты на изображении, частота, время).
+3D data cubes (FITS-files): слайсы по времени (быстропеременные объекты, lucky images, 
+speckle\dots) или по частоте (VPHG, IFP, средне- и широкополосные фильтры).
+\end{block}\col{0.65}\img{lucky_stack}}}
+\only<2>{\img{speckleflow}}
+\only<3>{\cols{\col{0.37}\vspace*{-1em}\img[0.85]{IFPstack}\col{0.57}\img{VPHGstack}}}
+\end{frame}
+
+\section{Диспергирующие системы}
+\begin{frame}{Диспергирующие системы: призмы}
+\vspace*{-1em}
+\only<1>{\img[0.55]{Fraunhofer_spectroscope}\vspace*{-0.8em}
+	1814, спектроскоп Йозефа фон Фраунгофера}
+\only<2>{\img[0.75]{prism_spectrometer}}
+\only<3>{\img[0.7]{prism_spectrometer_sch}}
+\only<4>{\img[0.85]{prism_monochr}}
+\end{frame}
+
+\begin{frame}{}
+\begin{block}{}
+    1872, первый спектр Веги на фотопластинке. С 1918 по 1924~г. вышел каталог HD в честь Дрэпера 
+    (изначально 225300 звезд, Эдвард Пикеринг сотоварищи, наблюдения в гарвардской обсерватории с 
+    объективной призмой).
+\end{block}
+\img{Drapers_spectra}
+\end{frame}
+
+\begin{frame}{Бесщелевые спектры}\vspace*{-0.8em}
+\only<1>{Николас Мейол, 1930-е.
+\img[0.94]{slitless_schematic}}
+\only<2>{\img[0.88]{slitless}}
+\end{frame}
+
+\begin{frame}{Дифракционная решетка}\vspace*{-0.8em}
+\only<1>{\img[0.6]{Fraunhofer_grating}\vspace*{-0.8em}Нитяная решетка Фраунгофера}
+\only<2>{\img[0.75]{Diffraction_Grating_Equation}}
+\only<3>{\img[0.67]{diffraction_image006}}
+\only<4>{\img[0.85]{Large_Diffraction_grating}}
+\only<5>{\img[0.8]{Czerny-turner_monochr}Монохроматор Черни--Т\"ернера}
+\only<6>{\img[0.52]{Fastie-Ebert_Monochromator}\vspace*{-0.8em} Монохроматор Фасти--Эберта}
+\end{frame}
+
+\begin{frame}{Длиннощелевые спектры}\vspace*{-0.8em}
+\only<1>{\img[0.4]{slit_spectr}}
+\only<2>{\img[0.6]{gmoslongslit_galaxy}}
+\only<3>{\img{gmoslongslit_galext}}
+\end{frame}
+
+\begin{frame}{Integral field spectrograph}\vspace*{-0.7em}
+\only<1>{\img[0.8]{integral_field_spectr_designs}}
+\only<2>{\img[0.6]{Hectospec_focal_plane}\vspace*{-0.8em}
+	Hectospec --- сложный спектрограф 6.5-м телескопа MMT}
+\only<3>{\img[0.65]{ifs_data_cube}}
+\end{frame}
+
+\begin{frame}{Эшелле--спектрограф}\vspace*{-0.7em}
+\only<1>{\cols{\col{0.47}\begin{block}{}Конфигурация Литтрова синим.\\
+Угол блеска $\theta_B>45\degr$.\end{block}
+\col{0.47}\begin{block}{}$$\theta _{B}=\arcsin\frac{m\lambda}{2d}.$$\end{block}}
+\img[0.52]{Blazed_grating}}
+\only<2>{\img[0.7]{Echelle_dispersion}}
+\only<3>{\img[0.7]{echelle_inst}}
+\only<4>{\img[0.7]{echelle_spect}}
+\end{frame}
+
+\begin{frame}{Гризма}\vspace*{-0.7em}
+\only<1>{\img[0.7]{grism_light}}
+\only<2>{\img{FOCAS_grisms}\vspace*{-0.7em}
+	Набор гризм The Faint Object Camera and Spectrograph (FOCAS Subaru).}
+\only<3>{\img[0.65]{FOCAS_subaru}}
+\only<4>{\img[0.67]{Grism1}}
+\only<5>{\img[0.67]{Grism2}}
+\end{frame}
+
+\begin{frame}{VPHG}\vspace*{-0.7em}
+\only<1>{\img[0.57]{VPHG_ex}}
+\only<2>{\cols{\col{0.27}\begin{block}{}
+$$Q=\frac{2\pi\lambda d}{n_g\Lambda^2\cos\alpha}.$$
+$$\frac{d\theta}{d\lambda}=\frac{m}{\Lambda\cos\theta}.$$
+The phase grating is called  "thin" for Q < 1 and "thick" for Q > 10.
+\end{block}\col{0.7}\img{VPGfig2}}}
+\only<3>{\img[0.6]{VPHG}}
+\only<4>{\img[0.7]{VP_HolographicGratings_eff_vs_wavelength3}}
+\end{frame}
+
+\begin{frame}{Интерферометр Фабри--Перо}\vspace*{-0.8em}
+\only<1>{\img[0.6]{ifp_theor}}
+\only<2>{\cols{\col{0.65}\begin{block}{}Кубы данных при сканировании ИФП. 
+А.В.~Моисеев\footnote{\url{https://www.sao.ru/hq/lsfvo/devices/scorpio/scorpio.html}}.
+\end{block}\vspace*{-0.8em}
+\img[0.7]{ifp_theor2}\col{0.25}\img{IFP_datacube}}}
+\end{frame}
+
+\begin{frame}{Калибровки}\vspace*{-0.8em}
+\only<1>{\blueimg{Integr_sphere_principle}}
+\only<2>{\img[0.45]{Commercial_Integrating_Sphere}}
+\only<3>{\img[0.75]{ar_ne600}}
+\only<4>{Th/Ar\vspace*{-1.5em}\img[0.5]{thorium}}
+\end{frame}
+
+\section{Поляризация и анализаторы поляризации}
+\begin{blueframe}{Поляризация}\vspace*{-0.8em}
+\begin{block}{}$I=k_{a}I_{0}\cos^{2}\varphi$. 1810, Этьен Луи Малюс "--- количественная
+корпускулярная теория поляризации света. 1821, Френель "--- волновая теория поляризации.
+\end{block}
+\only<1>{\img{Electromagnetic_wave}}
+\only<2>{\img[0.6]{Malus_law-ru}}
+\end{blueframe}
+
+\begin{frame}{Параметры Стокса}
+\only<1>{\vspace*{-0.7em}\begin{block}{}
+\cols{\col{0.35}$$\begin{aligned}
+S_0&=I=E_{a}^2+E_{b}^2\\
+S_1&=Q=I\cos2\psi\cos2\chi\\
+S_2&=U=I\sin2\psi\cos2\chi\\
+S_3&=V=I\sin2\chi 
+\end{aligned}$$\col{0.65}
+$E_a$, $E_b$~-- большая и малая полуоси поляризационного эллипса, $\psi$~-- угол поворота
+поляризационного эллипса относительно произвольной лабораторной системы координат, $\chi$~-- 
+вспомогательный угол, определяемый из условия $\tg\chi=E_a/E_b$.}\end{block}
+\vspace*{-0.7em}\cols{\col{0.5}\begin{block}{}
+Три независимых параметра: $I^2=Q^2+U^2+V^2$.
+Пусть $E_1$ и $E_2$~-- ортогональные проекции~$\vec{E}$, $\delta$~-- разность фаз в проекциях. 
+Тогда:
+$$\begin{aligned}
+S_0&=I=E_1^2 + E_2^2\\
+S_1&=Q=E_1^2 - E_2^2\\
+S_2&=U=2 E_1 E_2\cos\delta\\
+S_3&=V=2 E_1 E_2\sin\delta
+\end{aligned}$$
+\end{block}
+\col{0.4}\img{Polarization_ellipse}}}
+\only<2>{\begin{block}{}
+Вращаем поляризатор на 0, 60 и 120 градусов, вычисляем параметры Стокса.\\
+Две волны, линейно поляризованные под прямым углом друг к другу, не интерферируют!
+\end{block}
+\img{stokes_calc}}
+\end{frame}
+
+\begin{frame}{Угол Брюстера}\vspace*{-0.8em}
+\only<1>{$$\tg\theta_B=n,\quad\text{угол падения $\theta_B$}$$
+\blueimg[0.6]{Brewster_window}}
+\only<2>{\img[0.9]{brewster_polarizer_small}}
+\end{frame}
+
+\begin{blueframe}{Двойное лучепреломление}\vspace*{-0.8em}
+\only<1>{\begin{block}{}
+1969, Расмус Бартолин, кристалл исландского шпата. $\Delta n=n_{e}-n_{o}$.
+\end{block}
+\img[0.45]{Positively_birefringent_material}}
+\only<2>{\cols{\col{0.67}\img{LCD_layers}\col{0.3}
+\begin{block}{}
+    1,5~-- поляризаторы,\\
+    2,4~-- прозрачные электроды,\\
+    3~-- ЖК (оптически активное вещество),\\
+    6~-- отражатель или подсветка.
+\end{block}}}
+\only<3>{\img{Nicol_prism}\black{Призма Николя}}
+\only<4>{\img[0.7]{Wollaston-prism}\black{Призма Волластона}}
+\end{blueframe}
+
+\begin{frame}{Волновые пластинки}\vspace*{-0.8em}
+\only<1>{\img[0.65]{Waveplate}\vspace*{-0.8em}
+	Полуволновая пластинка}
+\only<2>{\blueimg{CircularPolarization}\vspace*{-0.8em}
+	Четвертьволновая пластинка}
+\end{frame}
+
+\begin{frame}{Поляризация в астрофизике}
+\begin{block}{}
+Когерентные источники (гидроксильные или метаноловые мазеры).\\
+Рассеяние на межзвездной пыли.\\
+Вращение плоскости поляризации в магнитных полях (эффект Фарадея).\\
+Поляризация CMB "--- изучение физики ранней Вселенной.\\
+Поляризация синхротронного излучения.\\
+Возможно, астрономические источники повлияли на селекцию хиральности белков и прочих органических 
+молекул на Земле.
+\end{block}
+\end{frame}
+
+\section{Методы астрофизики}
+\begin{frame}{Астрофизика}
+\begin{defin}\textbf{Астрофизика} "--- раздел астрономии, тесно переплетенный с химией и физикой. 
+<<It seeks to ascertain the nature of the heavenly bodies, rather than their positions or motions 
+in space~--- what they are, rather than where they are>> (1897, Джеймс Килер).
+\vspace{1em}
+
+Основоположники "--- Вильям Хайд Волластон и Йозеф фон Фраунгофер. 
+
+Сам термин <<астрофизика>> предложен Иоганном Карлом Фридрихом Ц\"eлльнером (известен по точной 
+фотометрии) в 1865~г. 
+
+Астрофизика делится на наблюдательную и теоретическую, находящиеся в тесной взаимосвязи.
+\end{defin}
+\end{frame}
+
+
+\section{Фотометрия}
+\begin{frame}{Фотометрия}\vspace*{-0.7em}
+\begin{block}{Фотометр Ц\"елльнера}
+    1861~г. "--- первый фотометр с эталонным источником. Газовая горелка, призмы Волластона, 
+    плоскопараллельная пластинка.
+\end{block}\vspace*{-0.7em}
+\img{zollner_photometer}
+\end{frame}
+
+\begin{frame}
+\frametitle{Область применения фотометрии}\vspace*{-2em}
+\begin{columns}
+    \column{0.35\textwidth}
+    \begin{block}{}
+        \begin{itemize}
+            \item Определение светимости объекта или расстояния до него.
+            \item Астрометрические задачи.
+            \item Классификация объекта (и предположение о его свойствах).
+            \item<2-> Космология: массы и движения галактик.
+            \item<3-> Определение параметров переменных объектов.
+            \item<3-> Поиск крупных экзопланет.
+            \item<4-> Изучение сверхновых.
+        \end{itemize}
+    \end{block}    
+    \column{0.62\textwidth}
+    \begin{pict}
+            \only<1>{\includegraphics[width=0.65\columnwidth]{HRDiagram}}
+            \only<2>{\includegraphics[width=0.85\columnwidth]{hubble}}
+            \only<3>{\includegraphics[width=\columnwidth]{exoplanet}}
+            \only<4>{\includegraphics[width=\columnwidth]{supernova}}
+    \end{pict}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Фотометрические диапазоны}\vspace*{-0.8em}
+\only<1>{\img[0.85]{Filter-optics-1}}
+\only<2>{\begin{block}{}Стр\"емгрен, 1960-е гг.: широкополосные; среднеполосные и узкополосные фотометрические системы.
+Критерий "--- полуширина: широкополосные $>300\Ang$, узкополосные $<100\Ang$.
+\end{block}\img[0.75]{interf_filterIR}}
+\only<3>{\img[0.75]{bands}}
+\end{frame}
+
+\section{Спектроскопия}
+\begin{frame}{Область применения спектроскопии}\vspace*{-0.8em}
+	\begin{columns}
+		\column{0.4\textwidth}
+		\begin{block}{}
+			\begin{itemize}
+				\item Эквивалентные ширины: расстояние до звезд, их возраст,
+					скорость потери масс и многие другие параметры.
+				\item Спектрополяриметрия.
+				\item<2-> Определение химического состава звезд.
+				\item<3-> Строгая спектральная классификация.
+				\item<4-> Определение скорости движения объектов.
+				\item<5-> Космология.
+			\end{itemize}
+		\end{block}
+
+		\column{0.57\textwidth}
+			\begin{pict}
+				\only<1>{\includegraphics[width=\columnwidth]{equiv_width}}
+				\only<2>{\includegraphics[width=\columnwidth]{solar_spectra}}
+				\only<3>{\includegraphics[width=0.7\columnwidth]{SpectralLines}}
+				\only<4>{\includegraphics[width=\columnwidth]{doppler}}
+				\only<5>{\includegraphics[width=\columnwidth]{galaxy_doppler}}
+			\end{pict}
+	\end{columns}
+\end{frame}
+
+\section{Учет шумов детекторов}
+\begin{frame}{Учет шумов детекторов}\vspace*{-0.8em}
+\only<1>{\begin{block}{}
+Глубокое охлаждение для снижения темнового тока. 
+\end{block}
+\img[0.55]{signaltonoisefigure2}}
+\only<2>{\begin{block}{}Попиксельная неоднородность, виньетирование, пыль "---
+калибровка на <<плоское поле>>.\\
+\textbf{Дробовой шум} $N_s=\sqrt{S}$ наиболее существенен при малых интенсивностях, либо увеличить
+экспозицию, либо суммировать кадры. Шум считывания (суммировать кадры).\\
+$$SNR=PQ_et/\sqrt{(P+B)Q_et+Dt+N_R^2}$$
+$P$~-- поток (фотонов на пиксель в секунду), $Q_e$~-- квантовая эффективность, $t$~-- время экспозиции,
+$B$~-- фон, $D$~-- темновой ток, $N_r$~-- шум считывания.
+\end{block}
+\img[0.9]{signaltonoisefigure1}}
+\only<3>{\begin{block}{}
+Шум сброса $N_{reset}=\sqrt{kTC}/q$, $T$~-- температура (К), $C$~-- емкость ячейки (Ф), 
+$q$~-- накопленный заряд (Кл).\\
+Белый шум $N_{white}=\sqrt{4kT\nu R_{out}}\cdot A_{amp}/S_{amp}$,
+$\nu$~-- частота считывания (Гц), $R_{out}$~-- выходное сопротивление усилителя (Ом),
+$S$~-- чувствительность усилителя (В/электрон), $A$~-- коэффициент усиления.\\
+Темновой ток: $D = 2.5\cdot10^{15} S I_d T^{1.5} \exp{-E_g/(2kT)}$,
+$S$~-- площадь пикселя (см$^2$), $I_d$~-- измеренный на 300\,К темновой ток (нА/см$^2$),
+$E_g$~-- ширина запрещенной зоны (эВ).
+\end{block}}
+\end{frame}
+
+\begin{frame}{Конвейер обработки данных}
+\begin{block}{}
+\begin{enumerate}
+\item Получение снимка объекта ($O$) и нескольких bias, dark и flat ($b_i$, $d_i$, $f_i$).
+\item Медианное усреднение: $X=\med(x)$ \Arr $B$, $D$, $F$.
+\item Если экспозиции $D$ и $O$ различаются, получаем <<master dark>>: $D_m=(D-B)/t_{exp}$.
+\item Удаление шумов: $O_{clean}=O-D$, $F_{clean}=F-D$ (или $X-B-D_m\cdot t_{exp}$).
+\item Нормирование $F_{clean}$: $F_{norm}=F_{clean}/F_{clean,max}$.
+\item Коррекция на <<плоское поле>>: $O_{corr} = O_{clean}/F_{clean}$.
+\end{enumerate}
+Для спектрофотометрии после экстракции спектра необходимо также выполнить нормировку на <<плоский спектр>>.
+\end{block}
+\end{frame}
+
+% наш с Тимуром отчет
+\begin{frame}{Определение характеристик новой ПЗС}\vspace*{-0.8em}
+\begin{block}{}
+\only<1>{\textbf{Электронный ноль} (bias). Снимки bias позволяют определить уровень шума считывания
+(RON). Для уменьшения влияния дефектов, используем разности:
+$I_{diff}=I_1-I_2.$ Тогда $\sigma{RON}=\sigma{I}/\sqrt{2}$.
+}
+\only<2>{\textbf{Линейность} получается из линейной аппроксимации зависимости $I=\alpha t$ при получении
+<<плоских>> снимков с разной экспозицией.
+}
+\only<3>{\textbf{Коэффициент усиления} (gain) определяет, сколько ADU будет получено на один фотоэлектрон.
+Строим зависимость $\sigma^2_I(\mean{I})$ (дисперсия интенсивности в кадре от ее среднего значения).
+Однако, дефекты ПЗС внесут неточность, надежней вычислять разности изображений.\\
+Пусть $I$ и $\sigma^2$~-- средний сигнал в пикселе (после вычитания <<темновых>>) и его дисперсия,
+$R^2$, $\sigma^2_{ph}$ и $\sigma^2_{ff}=kI$~-- дисперсии шумов считывания, дробового (фотонного) шума и
+неоднородность чувствительности пикселей ПЗС. Тогда общий шум:
+$$\sigma^2=R^2+\sigma^2_{ph}+\sigma^2_{ff}=R^2+I+k^2I^2.$$
+$$\sigma^2/g^2=R^2/g^2+I/g+k^2I^2/g^2\quad\text{или}\quad
+\sigma^2=R^2+gI+k^2I^2.$$
+Для разности изображений <<исправленный шум>> $\sigma^2=\dfrac{\Sum I_{diff}^2}{2(N-1)}$. Все
+вычисления проводим в нескольких участках изображения (не по всему кадру) для усреднения результатов.\\
+Линейная интерполяция зависимости интенсивности от шума дает результирующий $g$.
+}
+\only<4>{\textbf{Темновой ток} необходимо исследовать на зависимость от времени экспозиции и 
+температуры.}
+\only<5>{\textbf{Квантовая эффективность} определяется в лабораторных условиях: монохроматор и
+калиброванный светоприемник.}
+\end{block}\vspace*{-0.8em}
+\only<1>{\img[0.5]{bias_t}}
+\only<2>{\img[0.5]{ccd_lin}}
+\only<4>{\img[0.55]{dark_cur}}
+\only<5>{\img[0.55]{apoqe}}
+\end{frame}
+
+\section{Кодирование и хранение информации}
+\begin{frame}{Кодирование и хранение информации}
+\begin{block}{FITS-формат}
+FITS (англ. Flexible Image Transport System) "--- цифровой формат файлов, используемый в науке для
+хранения, передачи и редактирования изображений и их метаданных (электронных таблиц).\\
+Метаданные изображения хранятся в удобочитаемом заголовке формата ASCII.\\
+Каждый файл FITS имеет один или несколько заголовков, содержащих ASCII-строки (фиксированной длины в 80
+символов) из пар ключ\slash значение, перемежающихся между блоками данных.
+\end{block}\tiny
+\begin{tabular}{llllll}
+(blank)  &CROTAn   &EQUINOX  &NAXISn   &TBCOLn   &TUNITn\\
+AUTHOR   &CRPIXn   &EXTEND   &OBJECT   &TDIMn    &TZEROn\\
+BITPIX   &CRVALn   &EXTLEVEL &OBSERVER &TDISPn   &XTENSION\\
+BLANK    &CTYPEn   &EXTNAME  &ORIGIN   &TELESCOP&\\
+BLOCKED  &DATAMAX  &EXTVER   &PCOUNT   &TFIELDS&\\
+BSCALE   &DATAMIN  &GCOUNT   &PSCALn   &TFORMn&\\
+BUNIT    &DATE     &GROUPS   &PTYPEn   &THEAP&\\
+BZERO    &DATE-OBS &HISTORY  &PZEROn   &TNULLn&\\
+CDELTn   &END      &INSTRUME &REFERENC &TSCALn&\\
+COMMENT  &EPOCH    &NAXIS    &SIMPLE   &TTYPEn&\\
+\end{tabular}
+\end{frame}
+
+\begin{frame}{WCS-привязка}\vspace*{-1em}
+\only<1>{\begin{block}{Параметры WCS}
+\begin{description}
+\item[CRVALi] значение мировых координат опорного пикселя
+\item[CRPIXi] координаты опорного пикселя на изображении
+\item[CDELTi] инкремент координат
+\item[CTYPEi] тип матрицы преобразования
+\item[CROTAi] угол поворота систем координат
+\item[PCij] немасштабированная матрица преобразований
+\item[CDij] PC с масштабом
+\item[Qi] $=\sum_{j=1}^N CD_{ij} (x_j - CRPIX_j)
+= \sum_{j=1}^N CDELT_j \cdot PC_{ij} (x_j - CRPIX_j)$.
+\end{description}
+\end{block}
+}
+\only<2>{\img[0.55]{out}}
+\only<3>{\img[0.55]{out_cat}}
+\end{frame}
+
+
+\if0
+\begin{frame}{}
+\begin{block}{}
+\end{block}
+\only<1>{\img{}}
+\cols{\col{0.5}
+\col{0.5}}
+\end{frame}
+\fi
+\begin{frame}{Спасибо за внимание!}
+\centering
+\begin{minipage}{5cm}
+\begin{block}{mailto}
+eddy@sao.ru\\
+edward.emelianoff@gmail.com
+\end{block}\end{minipage}
+\end{frame}
+\end{document}

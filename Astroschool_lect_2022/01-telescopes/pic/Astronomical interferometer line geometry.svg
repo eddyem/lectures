@@ -1,0 +1,75 @@
+<svg width="100%" height="100%" viewBox="0 0 220 299" xmlns="http://www.w3.org/2000/svg">
+ <title>Astronomical interferometer line geometry</title>
+ <defs>
+  <linearGradient x2="0" x1="1" spreadMethod="pad" id="svg_6">
+   <stop offset="0" stop-color="#cccccc"/>
+   <stop offset="1" stop-color="#333333"/>
+  </linearGradient>
+  <linearGradient y2="0" y1="0" x2="0.2" x1="1" spreadMethod="pad" id="svg_7">
+   <stop offset="0" stop-color="#cccccc"/>
+   <stop offset="1" stop-color="#333333"/>
+  </linearGradient>
+  <linearGradient y2="0.01172" y1="0" x2="0" x1="0.48828" spreadMethod="pad" id="svg_8">
+   <stop offset="0" stop-color="#cccccc"/>
+   <stop offset="1" stop-color="#333333"/>
+  </linearGradient>
+  <marker refY="50" refX="50" markerHeight="5" markerWidth="5" viewBox="0 0 100 100" orient="auto" markerUnits="strokeWidth" id="se_marker_end_svg_40">
+   <path stroke-width="10" stroke="#000000" fill="#000000" d="m100,50l-100,40l30,-40l-30,-40l100,40z" id="svg_41"/>
+  </marker>
+  <marker refY="50" refX="50" markerHeight="5" markerWidth="5" viewBox="0 0 100 100" orient="auto" markerUnits="strokeWidth" id="se_marker_start_svg_40">
+   <path stroke-width="10" stroke="#000000" fill="#000000" d="m0,50l100,40l-30,-40l30,-40l-100,40z" id="svg_43"/>
+  </marker>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <g stroke="black" stroke-width="4" fill="none">
+  <line x1="2" y1="96.763494" x2="32" y2="96.763494" id="svg_2"/>
+  <line id="svg_1" y2="96.763494" x2="112" y1="96.763494" x1="42"/>
+  <line id="svg_3" x1="122" y1="96.763494" x2="152" y2="96.763494"/>
+  <ellipse ry="11" rx="75" id="svg_4" cy="124.763494" cx="77" stroke-width="0" fill="url(#svg_8)"/>
+  <line opacity="0.5" id="svg_9" y2="284.763494" x2="77" y1="4.763494" x1="77" stroke-width="0.5"/>
+  <line id="svg_13" y2="24.763494" x2="42" y1="24.763494" x1="77"/>
+  <line id="svg_14" y2="24.763494" x2="39" y1="24.763494" x1="12"/>
+  <line id="svg_18" y2="96.763494" x2="77" y1="24.763494" x1="40.5" opacity="0.5" stroke-width=".5"/>
+  </g>
+  <path stroke="#000000" id="svg_20" d="m62.321522,68.162163c-3.738022,-6.53595 15.699688,-7.189541 15.101597,-7.581661" opacity="0.5" fill="none"/>
+  <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="18" id="theta" y="55.783084" x="67.5294" stroke-width="0" fill="#000000" stroke="#000000">θ</text>
+  <path fill-opacity="0" id="bulb" d="m45.18243,9.360834c0.00687,-1.56461 -0.38818,-3.25725 -1.658531,-4.276361c-0.93647,-0.79375 -1.930618,-1.62882 -3.184669,-1.81144c-2.214989,-0.41117 -4.55835,-0.39118 -6.719429,0.28909c-1.073162,0.39407 -1.84919,1.30579 -2.84156,1.8554c-1.039108,0.72617 -2.302231,1.06951 -3.561728,0.97323c0,1.91849 0,3.837 0,5.75537c1.88353,0.00629 3.432409,1.1864 4.896048,2.237982c0.861099,0.734288 1.90435,1.20939 3.01973,1.376907c1.999191,0.323591 4.13858,0.39711 6.055611,-0.352077c1.466728,-0.71127 3.076271,-1.582901 3.632149,-3.248631c0.323383,-0.89331 0.377861,-1.85709 0.362381,-2.79946l0,0l0,-0.00001zm-17.836861,-2.93471c0,1.93182 0,3.86376 0,5.79571c-0.703329,-0.34663 -1.474449,-0.78637 -2.27297,-0.54306c-0.69429,-0.32214 -1.385599,0.090342 -2.02096,-0.43999c-0.87075,-0.19523 -0.93857,-1.30689 -0.962379,-2.051478c-0.08853,-0.80465 0.132879,-1.69904 0.963869,-2.00593c0.44437,-0.63849 0.985691,0.13104 1.48525,-0.3637c0.61381,0.57043 0.93479,-0.42423 1.60113,-0.07048c0.455141,-0.09713 0.667631,-0.45501 1.20606,-0.32105l0,0l0,-0.00001l0,-0.00001l0,0zm-0.00197,-0.01259c0,1.93182 0,3.86376 0,5.795701c-0.683369,-0.14558 -1.32939,-0.77511 -2.017149,-0.53578c-0.571001,0.13625 -1.038391,-0.43055 -1.64135,-0.09049c-0.723351,-0.25904 -1.540421,-0.777531 -1.538071,-1.659451c-0.00145,-0.851769 -0.281771,-2.00823 0.56008,-2.53604c0.50728,-0.19958 0.811481,-0.84425 1.36194,-0.34928c0.456261,-0.61364 1.13195,0.41153 1.432671,-0.37714c0.720169,0.37496 1.13456,-0.40451 1.84185,-0.24754l0,0l0,0l0,0.00001l0.000029,0.00001zm0.0151,-0.02434c0,1.93194 0,3.86388 0,5.795821c-0.68335,-0.14558 -1.32937,-0.77523 -2.017149,-0.53577c-0.570971,0.13625 -1.038361,-0.43055 -1.641312,-0.09049c-0.52676,-0.33511 -1.386761,-0.69384 -1.448582,-1.39592c-0.009029,-0.77063 -0.01808,-1.541121 -0.027069,-2.31173c0.561111,-0.52792 1.216011,-1.28111 1.964159,-0.86728c0.40546,-0.58373 1.06171,0.45804 1.328131,-0.34697c0.72015,0.374959 1.134521,-0.40462 1.841789,-0.247661l0,0l0.000032,0l0,0.00001l0,-0.00001zm-5.040051,1.58386c0,0.8187 0,1.637401 0,2.45611c-0.190189,-0.26522 -0.633129,-0.42582 -0.536869,-0.80985c0.030609,-0.39494 -0.045851,-0.83831 0.050369,-1.203351c0.16217,-0.147619 0.32431,-0.295259 0.486481,-0.442899l0.000019,-0.00001zm5.077391,0.8915c4.13048,-0.28316 5.881552,-0.572249 8.38114,-1.63837c2.499592,-1.066 1.665592,-0.22914 1.935989,2.15285c0.270351,2.381979 -0.779449,1.06904 -2.709278,1.07c-1.929821,0.000959 -2.897232,0.13879 -4.571812,0.29368c-1.62159,-0.15307 -1.63266,0.1429 -2.931271,-0.221511" fill="#000000" stroke="#000000"/>
+  <g id="svg_15">
+   <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="10" y="295.763494" x="97" opacity="0.7" stroke-width="0" stroke="#000000" fill="#000000" id="svg_16">2</text>
+   <rect fill="#000000" stroke="#000000" stroke-width="1" fill-opacity="0" x="89.5" y="284.763494" width="15" height="14" id="svg_17"/>
+  </g>
+  <g id="svg_24">
+   <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="10" id="svg_10" y="295.763494" x="77" opacity="0.7" stroke-width="0" stroke="#000000" fill="#000000">1</text>
+   <rect fill="#000000" stroke="#000000" stroke-width="1" fill-opacity="0" x="69.5" y="284.763494" width="15" height="14" id="svg_5"/>
+  </g>
+  <g id="svg_25">
+   <text id="svg_12" xml:space="preserve" text-anchor="middle" font-family="serif" font-size="10" y="295.763494" x="117" opacity="0.7" stroke-width="0" stroke="#000000" fill="#000000">3</text>
+   <rect id="svg_19" fill="#000000" stroke="#000000" stroke-width="1" fill-opacity="0" x="109.5" y="284.763494" width="15" height="14"/>
+  </g>
+  <g id="svg_26">
+   <text id="svg_22" xml:space="preserve" text-anchor="middle" font-family="serif" font-size="10" y="295.763494" x="137" opacity="0.7" stroke-width="0" stroke="#000000" fill="#000000">4</text>
+   <rect id="svg_23" fill="#000000" stroke="#000000" stroke-width="1" fill-opacity="0" x="129.5" y="284.763494" width="15" height="14"/>
+  </g>
+  <g id="svg_11" fill="none" stroke-dasharray="2,2" opacity="0.75" stroke="#000000">
+   <path d="m47,79.763489l-20,45l49,160" id="svg_28"/>
+   <path d="m45,79.763489l-16,45l68,160" id="svg_29"/>
+   <path d="m43,79.763489l-12,45l86,160" id="svg_30"/>
+   <path d="m41,79.763489l-8,45l104,160" id="svg_31"/>
+   <path id="svg_36" d="m116,79.763489l8,45l-47,160"/>
+   <path id="svg_37" d="m114,79.763489l12,45l-29,160"/>
+   <path id="svg_38" d="m112,79.763489l16,45l-11,160"/>
+   <path id="svg_39" d="m110,79.763489l20,45l7,160"/>
+  </g>
+  <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="12" id="svg_21" y="129.263494" x="172" opacity="0.75" stroke-dasharray="2,2" stroke-width="0" stroke="#000000" fill="#000000">Lens</text>
+  <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="12" id="svg_27" y="29.263494" x="121" opacity="0.75" stroke-width="0" stroke="#000000" fill="#000000">Point source</text>
+  <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="12" id="svg_32" y="101.263494" x="174" opacity="0.75" stroke-width="0" stroke="#000000" fill="#000000">Mask</text>
+  <text fill="#000000" stroke="#000000" stroke-width="0" x="28.83333" y="78.999994" id="svg_33" font-size="24" font-family="serif" text-anchor="middle" xml:space="preserve"/>
+  <text fill="#000000" stroke="#000000" stroke-width="0" x="27.5" y="82.333324" id="svg_34" font-size="15" font-family="serif" text-anchor="middle" xml:space="preserve">O</text>
+  <text fill="#000000" stroke="#000000" stroke-width="0" x="136.16667" y="82.666664" id="svg_35" font-size="15" font-family="serif" text-anchor="middle" xml:space="preserve">O'</text>
+  <line marker-start="url(#se_marker_start_svg_40)" marker-end="url(#se_marker_end_svg_40)" opacity="0.5" id="svg_40" y2="109.999994" x2="118" y1="109.999994" x1="40" stroke="#000000" fill="none"/>
+  <text stroke="#000000" xml:space="preserve" text-anchor="middle" font-family="serif" font-size="15" id="svg_42" y="107.166664" x="80" stroke-width="0" fill="#000000">x</text>
+  <text opacity="0.75" fill="#000000" stroke="#000000" stroke-width="0" x="184.5" y="282.499994" id="svg_44" font-size="12" font-family="serif" text-anchor="middle" xml:space="preserve">Photodiode</text>
+  <text xml:space="preserve" text-anchor="middle" font-family="serif" font-size="12" id="svg_45" y="295" x="178.5" opacity="0.75" stroke-width="0" stroke="#000000" fill="#000000">detectors</text>
+ </g>
+</svg>

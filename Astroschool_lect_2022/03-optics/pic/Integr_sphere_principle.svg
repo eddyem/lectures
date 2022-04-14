@@ -1,0 +1,86 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="-405 -185 800 320">
+ <title>Simplified principle of the use of an integrating sphere to measure reflectance and transmittance</title>
+ <desc>Simplified principle of the use of an integrating sphere to measure the reflectance and transmittance of a test sample, drawn by CMG Lee.</desc>
+ <defs>
+  <radialGradient id="grad_sphere" cx="50%" cy="50%" r="100%" fx="67%" fy="67%">
+   <stop offset="10%" stop-color="#ffffff"/>
+   <stop offset="90%" stop-color="#999999"/>
+  </radialGradient>
+  <radialGradient id="grad_light" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+   <stop offset="10%" stop-color="#ffcccc"/>
+   <stop offset="60%" stop-color="#ff0000"/>
+  </radialGradient>
+
+  <rect id="corner_clip" x="15" y="15" width="100" height="100"/>
+  <clipPath id="clip_sphere">
+   <use xlink:href="#corner_clip"/>
+   <use xlink:href="#corner_clip" transform="rotate(90)"/>
+   <use xlink:href="#corner_clip" transform="rotate(180)"/>
+   <use xlink:href="#corner_clip" transform="rotate(270)"/>
+  </clipPath>
+  <g id="sphere">
+   <circle cx="0" cy="0" r="100" stroke-width="4" stroke="#cccccc" fill="url(#grad_sphere)"/>
+   <circle cx="0" cy="0" r="100" stroke-width="4" stroke="#000000" fill="none" clip-path="url(#clip_sphere)"/>
+  </g>
+  <g id="light">
+   <g transform="translate(0,-130)">
+    <path d="M 0,-10 Q 0,0 7,-7 Q 0,0 10,0 Q 0,0 7,7 Q 0,0 0,10 Q 0,0 -7,7 Q 0,0 -10,0 Q 0,0 -7,-7 Q 0,0 0,-10" fill="url(#grad_light)"/>
+    <text x="15" y="0" dy="0.6ex" text-anchor="start">Light source</text>
+   </g>
+   <g stroke-linecap="round" stroke="#ff0000" fill="none">
+    <path d="M 0,-128 V 100" stroke-width="4"/>
+    <path d="M -90,-40 L 0,100 L 90,-40 M -90,40 L 0,100 L 90,40" stroke-width="2"/>
+    <use xlink:href="#arrows" transform="translate( 90,-40) rotate(-105)"/>
+    <use xlink:href="#arrows" transform="translate(-90,-40) rotate( 105)"/>
+    <use xlink:href="#arrows" transform="translate( 90, 40) rotate( -75)"/>
+    <use xlink:href="#arrows" transform="translate(-90, 40) rotate(  75)"/>
+   </g>
+  </g>
+  <g id="common">
+   <use xlink:href="#sphere"/>
+   <path d="M -69,-69 L -40,-40" stroke-width="8" stroke="#666666"/>
+   <rect x="-107" y="-15" width="10" height="30" stroke="#cc9900" fill="#ffcc00"/>
+   <rect x="97" y="-15" width="5" height="30" stroke="#333333" fill="#999999"/>
+   <use xlink:href="#light"/>
+   <text x="-35" y="-30" dy="0.6ex">Baffle</text>
+   <text x="-110" y="0" dy="0.6ex" text-anchor="end">Detector</text>
+   <text transform="translate(105,0)" x="0" y="-1em" dy="0.6ex" text-anchor="start"><tspan>Unused</tspan><tspan x="0" dy="1em">port</tspan><tspan x="0" dy="1em">plugged</tspan></text>
+  </g>
+  <g id="sample">
+   <rect x="-20" y="-5" width="40" height="10" stroke="#0033cc" fill="#0066ff" fill-opacity="0.5"/>
+   <text x="-30" y="0" dy="0.6ex" text-anchor="end">Test sample</text>
+  </g>
+  <g id="standard">
+   <rect x="-15" y="97" width="30" height="10" stroke="#006600" fill="#00ff00"/>
+   <text x="0" y="120" dy="0.6ex">Reflectance standard</text>
+  </g>
+  <path id="arrow" d="M 0,0 v -25 l -2,5 l 2,-5 l 2,5"/>
+  <g id="arrows">
+   <use xlink:href="#arrow" transform="rotate(-60)"/>
+   <use xlink:href="#arrow" transform="rotate(-30)"/>
+   <use xlink:href="#arrow"/>
+   <use xlink:href="#arrow" transform="rotate(30)"/>
+   <use xlink:href="#arrow" transform="rotate(60)"/>
+  </g>
+ </defs>
+
+ <g font-family="sans-serif" font-size="24" letter-spacing="-2" text-anchor="middle" stroke="none" stroke-linejoin="round" fill="#000000">
+  <g transform="translate(-200,0)">
+   <text x="0" y="-170" dy="0.6ex" font-weight="bold">1. Measuring transmittance</text>
+   <use xlink:href="#common"/>
+   <g stroke-linecap="round" stroke="#ff0000" fill="none">
+    <path d="M -50,-55 L 0,-110 L 97,0" stroke-width="2"/>
+    <use xlink:href="#arrows" transform="translate(-50,-55) rotate(  55)"/>
+    <use xlink:href="#arrows" transform="translate( 97,  0) rotate( -90)"/>
+   </g>
+   <use xlink:href="#sample" transform="translate(0,-106)"/>
+   <use xlink:href="#standard"/>
+  </g>
+  <g transform="translate(200,0)">
+   <text x="0" y="-170" dy="0.6ex" font-weight="bold">2. Measuring reflectance</text>
+   <use xlink:href="#common"/>
+   <use xlink:href="#sample" transform="translate(0,106)"/>
+  </g>
+ </g>
+</svg>
