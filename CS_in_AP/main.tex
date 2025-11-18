@@ -1,0 +1,815 @@
+\documentclass[10pt,pdf,hyperref={unicode},aspectratio=169]{beamer}
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage{lect}
+
+\title{Информационные технологии в астрофизике}
+\date{}
+
+\begin{document}
+
+% Титул
+\begin{frame}
+\maketitle
+\end{frame}
+% Содержание
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\section{Астрофизика и ее методы}
+\begin{frame}{Астрофизика}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{defin}\textbf{Астрофизика} "--- раздел астрономии, тесно переплетенный с химией и физикой.
+    <<It seeks to ascertain the nature of the heavenly bodies, rather than their positions or motions
+    in space~--- what they are, rather than where they are>> (1897, Джеймс Килер).
+    \vspace{1em}
+
+    Основоположники "--- Вильям Хайд Волластон и Йозеф фон Фраунгофер.
+
+    Сам термин <<астрофизика>> предложен Иоганном Карлом Фридрихом Ц\"eлльнером (известен по точной
+    фотометрии) в 1865~г.
+
+    Астрофизика делится на наблюдательную и теоретическую, находящиеся в тесной взаимосвязи.
+\end{defin}
+\column{0.5\textwidth}
+\smimg{Fraunhofer_spectroscope}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Методы астрофизики}
+\begin{columns}
+\column{0.48\textwidth}
+\begin{block}{Фотометрия}
+    1861, первый фотометр (Ц\"eлльнер) с эталонным источником.
+
+    1878, Сэмюэль Лэнгли изобрел болометр.
+
+    1969, Уиллард Бойл и Джордж Смит изобрели ПЗС.
+
+    1990, запуск телескопа имени Хаббла.
+\end{block}
+\smimg{zollner_photometer}
+\column{0.48\textwidth}
+\begin{block}{Спектроскопия}
+    Спектральные наблюдения с использованием призмы проводил еще Исаак Ньютон в 1666--1672, он и
+    предложил термин <<спектр>>.
+
+    1860, Густав Кирхгофф и Роберт Бунзен сопоставили фраунгоферовы линии с эмиссиями металлов.
+
+    1863, Анджелло Секки первым доказал, что Солнце "---  звезда, предложил спектральную классификацию.
+
+    С 1918 по 1924 вышел каталог HD в честь Дрэпера.
+\end{block}
+\smimg{Drapers_spectra}
+\end{columns}
+\end{frame}
+
+\begin{frame}{}
+    \only<1>{
+    \begin{columns}
+        \column{0.48\textwidth}
+         \begin{block}{}ПЗС с переносом заряда позволяют уменьшить воздействие посторонней засветки во время экспозиции.\end{block}
+        \smimg{frame_transfer_CCD}
+        \column{0.48\textwidth}
+        \begin{block}{}Слоановский обзор SDSS, 30 ПЗС 2048x2048 в сканирующем режиме.\end{block}
+        \img[0.7]{SDSSFaceplate}
+    \end{columns}
+    }
+    \only<2>{\smimg[0.49]{CCDqe}\hfil\smimg[0.5]{CCDsp}}
+    \only<3>{
+        \begin{block}{Дифракционная решетка}
+            Середина 18 века, Джеймс Грегори "--- принцип построения дифракционной решетки.
+
+            1785, Дэвид Риттенхаус (Филадельфия) "--- первая дифракционная решетка (почти 4 линии на мм).
+            Аналог "--- Йозеф Фраунгофер, 1821~г.
+
+            Нарезные решетки.  Предел "--- около 4.7/мм (1899, Генри Джозеф Грейсон).
+        \end{block}
+        \img[0.5]{Blazed_grating}
+    }
+    \only<4>{
+        \begin{block}{}
+            Спектр галактики NGC\,5750 (SDSS) и полосы пропускания фильтров SDSS.
+        \end{block}
+        \img[0.7]{spectrum}
+    }
+    \only<5>{
+        \begin{columns}
+            \column{0.6\textwidth}
+            \img[0.8]{JWST}
+            \column{0.37\textwidth}
+            \begin{block}{JWST}25~декабря 2021~года. $D=6.5\,$м, $F=131.4\,$м. Инструменты:
+                MIRI (камера среднего ИК), NIRCam (камера ближнего ИК), NIRSpec (спектрограф ближнего ИК), FGS
+                \slash NIRISS (датчик точного наведения с бесщелевым спектрографом ближнего ИК).
+
+                Орбита в $L_2$  Земля--Солнце (1.5\,млн. км. от Земли).
+                Позволяет частично экранировать излучение Солнца.
+            \end{block}
+        \end{columns}
+    }
+\end{frame}
+
+
+\section{Ресурсоемкие задачи}
+% РАДИОИНТЕРФЕРОМЕТРИЯ
+\begin{frame}{Радиоинтерферометрия}
+\begin{columns}
+    \column{0.58\textwidth}
+    \begin{block}{}
+        В оригинале~--- физическая интерференция. Фазосдвигатели.
+
+        Современные радиометры и накопители данных: зависимость фазы от времени.
+
+        РСДБ, например, "Квазар". Обработка данных с N телескопов на одном суперкомпьютере~--- \textit{корреляторе}.
+    \end{block}
+    \img[0.6]{RSDBq}
+    \column{0.4\textwidth}
+    \smimg{ri_schem}
+\end{columns}
+\end{frame}
+
+\begin{frame}{}
+    \begin{columns}
+        \column{0.4\textwidth}
+        \begin{block}{EHT}
+            <<Телескоп горизонта событий>>.
+
+            Изображения СМЧД в центре М87 и Млечного пути.
+        \end{block}
+        \img[0.8]{EHT}
+        \column{0.58\textwidth}
+        \img{EHT-M87_polarized}\vspace*{-1em}
+        \img{EHT_MilkyWay}
+    \end{columns}
+\end{frame}
+
+% РЕЛИКТ
+\begin{frame}{Реликт}
+    \begin{columns}
+        \column{0.48\textwidth}
+        \begin{block}{}
+            COBE, WMAP, Planck. Активное участие РАТАН-600 (проекты <<Холод>>, <<Генетический код Вселенной>>).
+
+            Спектр АЧТ с температурой 2.725\,К, однако имеет флуктуации.
+        \end{block}
+        \vspace*{-1em}
+        \img[0.8]{Cmbr}
+        \column{0.48\textwidth}
+        \img{COBE_WMAP_Planck}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{}
+    \begin{columns}
+        \column{0.48\textwidth}
+        \img{CMB_by_PlanckMission}
+        \begin{block}{}
+            <<Мультипольность>> реликта. Диполь~--- <<ось зла>> (нарушение принципа относительности).
+
+            Первый пик на графике характеризует кривизну Вселенной.
+            Отношение интенсивностей нечетных пиков к четным~--- начальную барионную плотность.
+            Третий пик характеризует плотность <<скрытой материи>>.
+        \end{block}
+        \column{0.48\textwidth}
+        \img{CMB_PowerSpectrumExt}
+    \end{columns}
+\end{frame}
+
+
+% СПЕКЛ
+\begin{frame}{Спекл--интерферометрия}
+\only<1>{\vspace*{-6pt}\img[0.8]{speckles}}
+\only<2>{\begin{columns}
+    \column{0.63\textwidth}
+    \begin{block}{}
+        1970, Антуан Лабейри: использование фурье-анализа. Реализация на паломарском телескопе.
+
+        Почти дифракционное качество изображения.
+
+        Огромнейшая вычислительная нагрузка.
+    \end{block}
+    \img[0.5]{WR_speckle_restored}
+    \column{0.3\textwidth}
+    \img{speckle}
+\end{columns}}
+\end{frame}
+
+\begin{frame}{Lucky-imaging, Superresolution}
+\smimg[0.33]{Lucky_Single_Exposure_Strehl_16Percent}\hfil
+\smimg[0.33]{Lucky_sum_all}\hfil
+\smimg[0.33]{Lucky_best_1percent_averaging}
+\begin{block}{}
+    Куб данных с экспозициями $10\div50\,$мс.
+
+    Совмещение снимков с наименьшим числом Штреля.
+
+    Усреднение.
+
+    Итог: было 900\,mas, стало 40!
+
+    Superresolution: небольшое смещение изображения от кадра к кадру.
+\end{block}
+\end{frame}
+
+% АДАПТИВНАЯ ОПТИКА
+\begin{blueframe}{Адаптивная оптика}
+    \vspace*{-0.5em}
+    \begin{block}{}
+            Horace W. Babcock, 1953 "--- теория АО. Бурное развитие в 90-х в рамках холодной войны.
+            Искусственная звезда, tip-tilt зеркало, деформируемое зеркало, делитель пучка, датчик волнового
+            фронта.
+        \end{block}
+        \vspace*{-0.5em}\img[0.7]{Adaptive_optics_system_full}
+\end{blueframe}
+
+\begin{frame}
+\only<1>{\begin{columns}\column{0.5\textwidth}\img{VLTdefmir}
+        \column{0.5\textwidth}\img{Ferrofluid_Deformable_mirror}\end{columns}}
+\only<2>{\begin{block}{}
+        $30\div60\,$mas. Искусственные звезды: Рэлея (ближний ИК, $15\div25$~км) и
+        натриевые ($80\div100$~км, 589~нм).
+    \end{block}\vspace*{-0.5em}
+    \img[0.83]{cfht_adaptive_optics}}
+\only<3>{\img[0.8]{VLT_artif_star}}
+\end{frame}
+
+% BIG DATA
+\begin{frame}{Big Data}
+    \only<1>{
+            \begin{columns}
+                \column{0.6\textwidth}
+                \begin{block}{Big data в астрофизике}
+                    \begin{itemize}
+                        \item объем данных (архивы сырых и обработанных данных в виде текстов, таблиц, изображений и пр.)
+                        \item скорость, т.е. возможность доступа к данным как можно более приближенным к текущему моменту времени, а
+                            также время, затрачиваемое на обработку
+                        \item широкое разнообразие данных и их форматов (всеволновая астрофизика: от радио и до гамма)
+                        \item качество данных (объективность, точность, угловое и временн\'ое разрешение)
+                    \end{itemize}
+                \end{block}
+                \column{0.38\textwidth}
+                \img{datarate}
+            \end{columns}}
+    \only<2>{
+    \begin{columns}
+        \column{0.38\textwidth}
+        \begin{block}{Задачи}
+            \begin{itemize}
+                \item быстрая фотометрия
+                \item поиск экзопланет
+                \item кросс-идентификация
+                \item кросс-корреляция
+                \item прочие исследование больших объемов данных
+            \end{itemize}
+        \end{block}
+        \column{0.58\textwidth}
+        \smimg{InfoGrowth}
+    \end{columns}}
+\end{frame}
+
+
+\begin{frame}{}
+\begin{columns}
+    \column{0.4\textwidth}
+    \begin{block}{Млечный путь}
+    \begin{enumerate}
+        \item радио континуум 408\,МГц (73.5\,см)
+        \item атомарный водород (21\,см)
+        \item радио континуум $2.4\div2.7\,$ГГц ($11.1\div12.5\,$см)
+        \item молекулярный водород (2.6\,мкм)
+        \item ИК (12, 60 и 100\,мкм)
+        \item средний ИК ($6.8\div10.8\,$мкм)
+        \item ближний ИК (1.25, 2.2 и 3.5\,мкм)
+        \item оптика ($400\div600\,$нм)
+        \item рентген (0.25, 0.75 и 1.5\,кэВ)
+        \item гамма (больше 300\,мэВ)
+    \end{enumerate}
+    \end{block}
+    \column{0.58\textwidth}
+    \img{multiwave}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Data mining}
+    \img[0.9]{DataMining}
+\end{frame}
+
+\begin{frame}{}
+    \only<1>{
+        \begin{columns}
+            \column{0.48\textwidth}
+            \begin{block}{Методы классификаций}
+                \begin{itemize}
+                    \item Искусственные нейросети
+                    \item Математика опорных векторов
+                    \item Квантование векторов обучения
+                    \item Деревья решений
+                    \item Случайный лес
+                    \item Метод К-ближайших соседей
+                    \item Наивные байесовские сети
+                    \item Сеть радиальных базисных функций
+                    \item Гауссовский процесс
+                    \item Таблица решений
+                    \item ADTree (альтернативное дерево решений)
+                \end{itemize}
+            \end{block}
+            \column{0.48\textwidth}
+            \begin{block}{Применение в астрофизике}
+                \begin{itemize}
+                    \item Спектральная классификация (звезды, галактики, квазары, сверхновые, \dots)
+                    \item Фотометрическая классификация (звезды \slash галактики, звезды \slash квазары, сверхновые, \dots)
+                    \item Морфологическая классификация галактик
+                    \item Солнечная активность
+                \end{itemize}
+            \end{block}
+            \vspace*{-1em}\img[0.7]{Hubble_sequence_photo}
+        \end{columns}
+    }
+    \only<2>{
+        \begin{columns}
+            \column{0.48\textwidth}
+            \begin{block}{Методы регрессий}
+                \begin{itemize}
+                    \item Искусственные нейросети
+                    \item Регрессии опорных векторов
+                    \item Квантование векторов обучения
+                    \item Деревья решений
+                    \item Случайный лес
+                    \item Регрессии К-ближайших соседей
+                    \item Ядерная регрессия
+                    \item Регрессия главных компонент
+                    \item Гауссовский процесс
+                    \item Регрессия наименьшими квадратами
+                    \item Случайный лес
+                    \item Частичные наименьшие квадраты
+                \end{itemize}
+            \end{block}
+            \column{0.48\textwidth}
+            \begin{block}{Применение в астрофизике}
+                \begin{itemize}
+                    \item Фотометрические красные смещения (галактики, квазары)
+                    \item Определение фундаментальных параметров физики звезд (металличность, температура и пр.)
+                \end{itemize}
+            \end{block}
+            \vspace*{-1em}\img[0.77]{Redshifted_Vega_spectra_and_SDSS_bands}
+        \end{columns}
+    }
+    \only<3>{
+        \begin{columns}
+            \column{0.55\textwidth}
+            \vspace*{-1em}\begin{block}{Методы кластеризации}
+                \begin{itemize}
+                    \item Анализ главных компонент
+                    \item DBScan (основанный на плотности)
+                    \item Методом K-средних
+                    \item OPTICS (упорядочивание точек для определения структуры кластеризации)
+                    \item CobWeb (построение иерархического дерева классификации)
+                    \item Самоорганизующаяся карта (нейросеть без учителя)
+                    \item Максимизация ожидания
+                    \item Иерархическая кластеризация
+                    \item AutoClass (упрощенный байесовский)
+                    \item Модели гауссовских смесей (считаем точки сгенерированными из конечного числа гауссиан)
+                \end{itemize}
+            \end{block}
+            \column{0.42\textwidth}
+            \begin{block}{Применение в астрофизике}
+                \begin{itemize}
+                    \item Многочисленные задачи классификации
+                    \item Обнаружение особых или редких объектов
+                \end{itemize}
+            \end{block}
+            \vspace*{-1em}\img{Four-photos-of-supernova}
+        \end{columns}
+    }
+    \only<4>{
+        \begin{columns}
+            \column{0.48\textwidth}
+            \begin{block}{Методы поиска объектов}
+                \begin{itemize}
+                    \item Анализ главных компонент
+                    \item Методом K-средних
+                    \item Максимизация ожидания
+                    \item Иерархическая кластеризация
+                    \item Одноклассовая машина опорных векторов (One-class SVM)
+                \end{itemize}
+            \end{block}
+            \column{0.48\textwidth}
+            \begin{block}{Применение в астрофизике}
+                \begin{itemize}
+                    \item Обнаружение особых или редких объектов
+                \end{itemize}
+            \end{block}
+            \img{anomaly}
+        \end{columns}
+    }
+    \only<5>{
+        \begin{columns}
+            \column{0.45\textwidth}
+            \vspace*{-1em}\img{lombscargle}
+            \vspace*{-1em}\begin{block}{Методы анализа временн\'ых рядов}
+                \begin{itemize}
+                    \item Фурье-анализ
+                    \item Вейвлет-анализ
+                    \item Периодограмма Ломба-Скаргла
+                    \item Искусственные нейронные сети
+                    \item Математика опорных векторов
+                    \item Случайный лес
+                \end{itemize}
+            \end{block}
+            \column{0.5\textwidth}
+            \vspace*{-1em}\begin{block}{Применение в астрофизике}
+                \begin{itemize}
+                    \item Обнаружение новых явлений: переменности, экзопланет, солнечной активности \dots
+                    \item Построение прогнозов
+                \end{itemize}
+            \end{block}
+            \vspace*{-1em}\img{18_Del_b_rv}
+        \end{columns}
+    }
+\end{frame}
+
+% ЭКЗОПЛАНЕТЫ
+\begin{frame}{Экзопланеты}
+    \begin{block}{}
+        Поиск по колебаниям лучевых скоростей, затменным (транзитным) способом, по модуляциям светимости звезды (если не в плоскости транзита),
+        аномалии в периодах пульсаров (планеты около пульсара!), гравитационное микролинзирование, прямые снимки космическими телескопами и АО.
+    \end{block}
+    \img[0.8]{exotransits}
+\end{frame}
+
+\begin{frame}{}
+    \only<1>{
+    \begin{columns}
+            \column{0.4\textwidth}\vspace*{-2em}
+            \img{Kepler_Space_Telescope}
+            \column{0.5\textwidth}
+            \begin{block}{Телескоп Кеплера}
+                2009, поиск экзопланет. 0.95~м апертура, зеркало 1.4~м.
+
+                42 ПЗС 2200x1024.
+
+                $\sim0.5$~млрд.длр.
+            \end{block}
+            \img{Kepler_CCD_matrix}
+    \end{columns}
+    }\only<2>{
+    \begin{columns}
+        \column{0.4\textwidth}
+        Барицентр Солнца
+        \vspace*{-1em}\img[0.8]{solarBaricenter}
+        \column{0.4\textwidth}
+        Прямое изображение экзопланеты (VLT )
+        \vspace*{-1em}\img[0.7]{VLTexo}
+    \end{columns}
+        \vspace*{-.8em}\img[0.8]{gravUL}
+    }
+\end{frame}
+
+% БАЗЫ ДАННЫХ
+\begin{frame}{Базы данных}
+    \begin{columns}
+        \column{0.48\textwidth}
+        \vspace*{-1em}\begin{block}{}
+            \begin{itemize}
+                \item The Astrophysics Data System (ADS)
+                \item The Sloan Digital Sky Survey (SDSS)
+                \item SIMBAD (The Set of Identifications, Measurements and Bibliography for Astronomical Data)
+                \item  VizieR
+                \item  The Virtual Observatory (VO)
+                \item  ESO Online Digitized Sky Survey (DSS)
+                \item \dots
+            \end{itemize}
+        \end{block}
+        \vspace*{-2em}\img[0.8]{BTAar}
+        \column{0.48\textwidth}
+        \img{ADS}
+    \end{columns}
+\end{frame}
+
+\section{Инструментарий}
+\begin{frame}{Фотометрия и астрометрия}
+    \begin{block}{Апертурная фотометрия}
+        Проблема: определить радиусы апертур (звезды и фона).
+    \end{block}
+    \img[0.9]{apert}
+\end{frame}
+
+\begin{frame}{}
+    \only<1>{
+        \begin{columns}\column{0.6\textwidth}
+            \img{airy}
+            \column{0.4\textwidth}
+            \begin{block}{}
+                Диск Эйри~--- идеальная ФРТ вне атмосферы.
+                Эйри (сплошная) и гауссиана (пунктир).
+            \end{block}
+            \begin{light}\img{Airy_vs_gaus}\end{light}
+        \end{columns}
+    }
+    \only<2>{
+        SExtractor (Source-Extractor)\footnote{\url{https://sextractor.readthedocs.io/}}~--- утилита поиска
+        объектов на астрономическом изображении (Emmanuel Bertin). Позволяет
+        выявлять звездоподобные и протяженные объекты, проводить простую фотометрию. Работает с умеренно
+        переполненными полями. Синтаксис:
+
+            \t{sex Image1 [Image2] -c configuration-file [-Parameter1 Value1 -Parameter2 Value2 ...]}
+
+        Конфигурация по умолчанию: \t{'sex -d > default.sex'} (или \t{dd} для более интенсивного дампа).
+        Простая команда \t{sex} выведет краткую (очень) справку.
+
+        Измерения: барицентры по изофотам, апертурная фотометрия, аппроксимация модельной функции для
+        поиска источников.
+
+        Обязательно к прочтению: <<Source Extractor for Dummies>> by Dr.~Benne W.~Holverda.
+    }
+    \only<3>{
+        \begin{columns}
+            \column{0.45\textwidth}
+            \vspace*{-1em}
+            \img{sexalgo}
+            \column{0.5\textwidth}
+            \begin{block}{Алгоритм}
+                \begin{itemize}
+                    \item Измерение фона и его RMS.
+                    \item Извлечение фона.
+                    \item Применение заданных фильтров.
+                    \item Поиск объектов (по порогу).
+                    \item Разделение <<слившихся>> объектов.
+                    \item Измерение их форм и положений.
+                    \item Выделение индивидуальных объектов.
+                    \item Фотометрия.
+                    \item Классификация (звезда или нет?).
+                    \item Формирование выходных файлов.
+                \end{itemize}
+            \end{block}
+        \end{columns}
+    }
+    \only<4>{
+        \begin{columns}
+            \column{0.57\textwidth}
+            \img{diffastrometry}
+            \column{0.4\textwidth}
+            \begin{block}{}
+                Астрометрия позволяет измерить точные координаты звезд на небе, а также определить их параллаксы и
+                собственные движения. Первый каталог~--- Гиппарх, точность не выше~$1\degr$.
+                XVI~век~--- Тихо Браге, $1'$. XVII~век~-- точность в единицы секунд в очень малом поле.
+                Параллаксы до Бесселя~--- 0!
+                Микросекундной точности достиг запущенный в 1989\,г. космический телескоп HIPPARCOS.
+
+                Точность GAIA~--- $0.00002''$ ($20\mu as$)~--- толщина человеческого волоса с расстояния в 1000\,км!
+            \end{block}
+        \end{columns}
+    }
+    \only<5>{
+        \begin{block}{Каталоги}
+            \begin{enumerate}
+                \item \textbf{HIPPARCOS}~--- звезды до $m_V=7.3^m$, точность астрометрии до $1\div3\,$mas
+                (J1991.25). Полосы B и~V для 188~тыс звезд.  Собственные движения (PM) $\sim1\div2\,$mas/y.
+                \item \textbf{TYCHO-2}~--- до $m_V=11^m$, точность $10\div100\,$mas. 2.5~млн. звезд, PM
+                $\sim1\div3\,$mas/y.
+                \item \textbf{USNO B 1.0}~--- до $m_V=21^m$, фотометрический каталог с точностью до $0^m.3$. Свыше
+                миллиарда объектов.
+                \item \textbf{2MASS}~--- 470~миллионов объектов, точность до $70\,$mas. Полосы J, H и K.  Без PM.
+                \item \textbf{SDSS}~--- фотометрический каталог четверти неба в пяти фильтрах, 287~миллионов
+                объектов. Включает спектры галактик и квазаров.
+
+                Библиотеки SOFA и ERFA (одно и то же с разными лицензиями) позволяют преобразовывать координаты
+                между эпохами и вычислять видимое место.
+            \end{enumerate}
+        \end{block}
+    }
+\end{frame}
+
+\begin{frame}{Спектроскопия}
+    \begin{columns}
+        \column{0.64\textwidth}
+        \begin{block}{Обработка спектров}
+            \begin{enumerate}
+                \item Стандартная коррекция на dark, удаление космики, обработка калибровочных спектров (flat, thar).
+                \item Экстракция спектральных порядков объекта, flat и thar.
+                \item Нормализация спектров объекта и thar на flat.
+                \item Калибровка thar по каталогу.
+                \item Совмещение спектра объекта с калибровкой.
+                \item Получение единого спектра в заданном диапазоне.
+            \end{enumerate}
+        \end{block}
+        \img[0.6]{echelle}
+        \column{0.32\textwidth}
+        \vspace*{-1em}\img{scorp}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{FITS-формат}
+    \begin{block}{}
+        FITS (англ. Flexible Image Transport System) "--- цифровой формат файлов, используемый в науке для
+        хранения, передачи и редактирования изображений и их метаданных (электронных таблиц).\\
+        Метаданные изображения хранятся в удобочитаемом заголовке формата ASCII.\\
+        Каждый файл FITS имеет один или несколько заголовков, содержащих ASCII-строки (фиксированной длины в 80
+        символов) из пар ключ\slash значение, перемежающихся между блоками данных.
+    \end{block}\tiny
+    \begin{tabular}{llllll}
+        (blank)  &CROTAn   &EQUINOX  &NAXISn   &TBCOLn   &TUNITn\\
+        AUTHOR   &CRPIXn   &EXTEND   &OBJECT   &TDIMn    &TZEROn\\
+        BITPIX   &CRVALn   &EXTLEVEL &OBSERVER &TDISPn   &XTENSION\\
+        BLANK    &CTYPEn   &EXTNAME  &ORIGIN   &TELESCOP&\\
+        BLOCKED  &DATAMAX  &EXTVER   &PCOUNT   &TFIELDS&\\
+        BSCALE   &DATAMIN  &GCOUNT   &PSCALn   &TFORMn&\\
+        BUNIT    &DATE     &GROUPS   &PTYPEn   &THEAP&\\
+        BZERO    &DATE-OBS &HISTORY  &PZEROn   &TNULLn&\\
+        CDELTn   &END      &INSTRUME &REFERENC &TSCALn&\\
+        COMMENT  &EPOCH    &NAXIS    &SIMPLE   &TTYPEn&\\
+    \end{tabular}
+\end{frame}
+
+\begin{frame}{}
+    \only<1>{
+        \vspace*{-1em}
+        \begin{columns}
+            \column{0.5\textwidth}
+            \img{WCSfits}
+            \column{0.48\textwidth}
+            \begin{block}{WCS}
+                WCS~--- World Coordinate System. ICRS~--- International Celestial Reference System (привязка к
+                барицентру Солнечной системы).
+                Ключевые слова WCS в FITS--шапке позволяют осуществить однозначную привязку пиксельных координат к
+                мировым (и обратно). Для линейных преобразований: \textbf{CTYPEi}~-- тип оси, \textbf{CRPIXi}~--
+                опорный пиксель (в пиксельных координатах), \textbf{CRVALi}~-- значение мировых координат в этом
+                пикселе (1~-- $\alpha$, 2~-- $\delta$), \textbf{CDELTi}~-- масштаб по соответствующей оси,
+                \textbf{CROTA2}~-- угол поворота, \textbf{CDi\_j}~-- матрица коэффициентов, описывающих поворот
+                осей и масштаб, \textbf{CUNITi}~-- единицы измерения по данной оси.
+            \end{block}
+        \end{columns}
+    }\only<2>{
+        \begin{columns}
+            \column{0.47\textwidth}
+            \begin{block}{Простейший случай}
+                Обозначим \textbf{CRPIX}~-- $p$, \textbf{CRVAL}~-- $\alpha_0$ и $\delta_0$, \textbf{CDELT}~-- $d$,
+                \textbf{CROTA2}~--
+                $r$, \textbf{CD}~-- $c$, тогда
+                $$\begin{cases}
+                    \alpha - \alpha_0 = d_1(x-p_1)\cos r - d_2(y-p_2)\sin r,\\
+                    \delta -\delta_0 = d_1(x-p_1)\sin r + d_2(y-p_2)\cos r;\end{cases}$$
+
+                $$\begin{cases}\alpha - \alpha_0 = c_{11}(x-p_1) - c_{12}(y-p_2),\\
+                    \delta -\delta_0 = c_{21}(x-p_1) + c_{22}(y-p_2).\end{cases}$$
+
+                $$\begin{pmatrix}c_{11} & c_{12}\\ c_{21} & c_{22} \end{pmatrix} =
+                \begin{pmatrix} d_1\cos r &-d_2\sin r\\ d_1\sin r & d_2\cos r\end{pmatrix}
+                $$
+            \end{block}
+            \column{0.47\textwidth}
+            \begin{block}{}
+                Пакет \t{wcstools}. Утилиты \t{xy2sky} и \t{sky2xy}. Полный список: \t{man wcstools} или
+                утилита \t{wcstools}. \t{imcat} отображает объекты из каталогов (каталоги необходимо сохранить в
+                поддиректории \t{/data/astrocat/}). \t{imhead}~-- отобразить шапку. И множество других утилит для
+                работы с WCS и шапкой файлов.
+
+                Утилита \t{ds9} имеет возможность отображать объекты из различных каталогов.
+            \end{block}
+        \end{columns}
+    }
+\end{frame}
+
+\begin{frame}{astrometry.net}
+    \only<1>{
+        \begin{block}{}
+            Построение базы данных.
+            \begin{enumerate}
+                \item Используя астрометрические каталоги построить базу данных особого вида признаков (хешей).
+                \item Хеши должны быть масштабируемыми для ускорения поиска по разным изображениям.
+                \item Функция сравнения хешей должна учитывать погрешности каталогов, шум и аберрации изображений.
+                \item На изображениях вполне могут находиться звезды, которых нет в каталогах и обратно: часть
+                звезд может отсутствовать.
+                \item Функция сравнения хешей должна быть устойчивой и однозначной.
+                \item Вначале на снимке ищутся эти самые признаки, по ним определяются масштаб, ориентация и
+                координаты изображения. Далее происходит собственно астрометрия.
+                \savei
+            \end{enumerate}
+        \end{block}
+    }\only<2>{
+        \begin{enumerate}
+            \conti
+            \item Хешами служит набор чисел, определяющих относительные координаты внутренних двух звезд внутри
+            квадрата, сформированного внешними двумя. В результате образуется четырехмерный код,
+            характеризующий данный признак. Зеркалирование изображения приводит к зеркалированию кода, приводя
+            к вырождению признака относительно зеркалирования, однако, хеш инвариантен к масштабированию,
+            переносу и повороту.
+            \item Для равномерно распределенных в пространстве звезд хеши равномерно распределены в 4D.
+            \item Хеш строится лишь по таким четверкам примерно одинаковой яркости, где~C и~D внутри круга AB.
+            \item Каталоги: USNO-B (миллиард объектов) и TYCHO-2 (2.5~млн ярчайших звезд).
+            \item Небесная сфера последовательно масштабируется, для каждого масштаба отбирается несколько
+            ярчайших признаков соответствующих масштабу размеров.
+            \item Объекты каждой ячейки кодируются и образуют четырехмерное дерево.
+        \end{enumerate}
+    }\only<3>{\img[0.6]{astrometrynet}
+    }\only<4>{
+        Процедура астрометрии.
+        \begin{enumerate}
+            \item Идентификация объектов на изображении и определение координат звезд (например, используя
+            SExtractor).
+            \item Обнаружение всех подходящих квадратов и вычисление соответствующих им хешей.
+            \item Поиск совпадений (с заданной точностью) в базе данных.
+            \item Если пара квадратов отождествлена, по остальным проводится уточнение ориентации положения и
+            масштаба кадра.
+            \item Если отождествлен лишь один квадрат, поиск считается неудачным.
+            \item Для ускорения поиска желательно указать диапазон масштабов изображения, примерные координаты
+            центра и допуск на радиус поиска.
+        \end{enumerate}
+    }
+\end{frame}
+
+\begin{frame}{Применение CS в САО РАН}
+    \begin{columns}
+        \column{0.48\textwidth}
+        \vspace*{-1em}\begin{block}{Ваши знания и умения:}
+            \begin{itemize}
+                \item Английский язык.
+                \item<1> GNU/Linux на уровне разработчика с элементами администрирования.
+                \item<2> Уверенный уровень \LaTeX{} с базовым \TeX.
+                \item<3> Языки программирования: С, С++ и прочие.
+                \item<4> Разработка клиент-серверных приложений (backend, frontend).
+                \item<5> Математический аппарат, системы обработки данных.
+                \item<6,7> Основы автоматических систем управления.
+                \item<8> Основы аналоговой и цифровой схемотехники.
+            \end{itemize}
+        \end{block}
+        \column{0.48\textwidth}
+       \begin{block}{}
+            \begin{itemize}
+                \item<9,10> Системы проектирования и разработки: KiCAD, LibreCAD, FreeCAD, \dots
+            \end{itemize}
+        \end{block}
+        \vspace*{-1em}
+        \vbox to 0.77\textheight{
+        \only<1>{\img[0.6]{Gentoo}}
+        \only<2>{\img{texstudio}}
+        \only<3>{\img{qtcre}}
+        \only<4>{\img{term}}
+        \only<5>{\img{gnuplot}}
+        \only<6>{\img{astrom0}}
+        \only<7>{\img{MMPPonZ}}
+        \only<8>{\img{8stepper}}
+        \only<9>{\img{kicad}}
+        \only<10>{\img[0.9]{btarl}}}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{}
+    \begin{columns}
+        \column{0.48\textwidth}
+        %\vspace*{-1em}
+        \begin{block}{Ваша деятельность:}
+            \begin{itemize}
+                \item<1> Поддержка и пополнение архивов; разработка методик оптимизации работы с данными в архивах.
+                \item<2> Обработка наблюдательных данных и совершенствование радиотелескопа.
+                \item<3> Разработка новых  программно-аппаратных решений для повышения качества наблюдений.
+                \item<4> Исследование астроклимата и микроклимата.
+                \item<5> Развитие систем и методов широкоугольного оптического мониторинга неба.
+                \item<6> Распределенные системы управления астрофизическим экспериментом.
+            \end{itemize}
+        \end{block}
+        \column{0.48\textwidth}
+        \begin{block}{}
+            \begin{itemize}
+                \item<7> Исследование оптических телескопов и аппаратуры.
+                \item<8,9> Поддержка и модернизация АСУ телескопом и аппаратурой.
+            \end{itemize}
+        \end{block}
+        %\vspace*{-1em}
+        \vbox to 0.7\textheight{
+            \only<1>{\img{CATS}}
+            \only<2>{\img{ratan_geo}}
+            \only<3>{\img{ADLAB}}
+            \only<4>{\img{BTAmeteo}}
+            \only<5>{\img{MMT}}
+            \only<6>{\img{Mirtemp}}
+            \only<7>{\vspace*{-1em}\img[0.9]{teaBTA}}
+            \only<8>{\img{GPU}}
+            \only<9>{\img{astrom}}
+            }
+    \end{columns}
+\end{frame}
+
+
+\begin{frame}{Спасибо за внимание!}
+    \centering
+    \begin{minipage}{5cm}
+        \begin{block}{mailto}
+            eddy@sao.ru\\
+            edward.emelianoff@gmail.com
+    \end{block}\end{minipage}
+\end{frame}
+
+\end{document}
+
+\begin{frame}{}
+\begin{columns}
+    \column{0.48\textwidth}
+        \begin{block}{}
+        \end{block}
+    \column{0.48\textwidth}
+        \smimg{}
+\end{columns}
+\end{frame}

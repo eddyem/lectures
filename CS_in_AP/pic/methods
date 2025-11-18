@@ -1,0 +1,31 @@
+Fast astronomical photometry of variable stars
+
+Super-resolution of astronomical images
+
+Artificial intelligence in the analysis of astronomical data
+The newly discovered Kepler-90i (a sizzling hot, rocky planet that orbits its star once every 14.4 days) was found using machine
+learning from Google during searching through archived Kepler data - an approach to artificial intelligence in which
+computers learn to identify planets
+
+Data mining in astronomy
+Cross--identification solves the problem of connecting the source list in observational data to the source
+list in data archives and catalogs
+Cross-correlation which makes new discoveries possible based on the analysis of already existing data
+Nearest- Neighbor Identification which is estimating the photometric redshifts of galaxies or quasars by
+application of clustering algorithms in a multi-dimensional parameter space
+Systematic Data Exploration which is the- application of specific queries to a database to make a discovery
+of new objects or a new class of objects
+
+Visualization of astronomical data
+Data is being collected increasingly often during a single observation, which creates new
+challenges for data interpretation.
+
+
+Selected large astronomical databases
+- The Astrophysics Data System (ADS)
+- The Sloan Digital Sky Survey (SDSS)
+- SIMBAD (The Set of Identifications, Measurements and Bibliography for Astronomical Data)
+- VizieR
+- The Virtual Observatory (VO)
+- ESO Online Digitized Sky Survey (DSS)
+
